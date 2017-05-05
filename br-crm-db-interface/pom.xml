@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br-crm-db-manager</groupId>
+		<artifactId>br-crm-db-manager</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>br-crm-db-interface</groupId>
+	<artifactId>br-crm-db-interface</artifactId>
+	<!-- 依赖pojo -->
+	<dependencies>
+		<dependency>
+			<groupId>br-crm-db-pojo</groupId>
+			<artifactId>br-crm-db-pojo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>br-order-user-pojo</groupId>
+			<artifactId>br-order-user-pojo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- common -->
+		<dependency>
+			<groupId>br-crm</groupId>
+			<artifactId>br-crm-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- 分页相关 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+		</dependency>
+	</dependencies>
+</project>

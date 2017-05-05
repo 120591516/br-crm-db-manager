@@ -9,10 +9,11 @@
   <artifactId>br-crm-db-manager</artifactId>
   <packaging>pom</packaging>
   <modules>
-  	<module>br-crm-db-dao</module>
+  	
   	<module>br-crm-db-interface</module>
   	<module>br-crm-db-pojo</module>
   	<module>br-crm-db-service</module>
+  	<module>br-crm-db-dao</module>
   </modules>
   <!-- 依赖common -->
   <dependencies>
