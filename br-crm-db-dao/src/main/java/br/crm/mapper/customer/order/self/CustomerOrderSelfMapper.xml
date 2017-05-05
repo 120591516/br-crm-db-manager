@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.customer.order.self.CustomerOrderSelfMapper">
+	<resultMap type="br.crm.vo.customer.order.CustomerOrderVo" id="BaseResultMap">
+		<id column="customer_order_id" property="customerOrderId" jdbcType="VARCHAR"/>
+		<result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+	    <result column="pay_way_id" property="payWayId" jdbcType="INTEGER" />
+	    <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR" />
+	    <result column="order_status" property="orderStatus" jdbcType="INTEGER" />
+	    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+	    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />	    
+	    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+	    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+	    <result column="customer_order_status" property="customerOrderStatus" jdbcType="INTEGER" />
+	    <result column="customer_order_create_time" property="customerOrderCreateTime" jdbcType="TIMESTAMP" />
+	    
+	   
+	    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+	    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+	    <result column="branch_id" property="branchId" jdbcType="VARCHAR" />
+	    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+	    <result column="exam_suite_id" property="examSuiteId" jdbcType="VARCHAR" />
+   		<result column="exam_suite_name" property="examSuiteName" jdbcType="VARCHAR" />
+	    <result column="cart_status" property="cartStatus" jdbcType="INTEGER" />
+   		<result column="exam_time" property="examTime" jdbcType="TIMESTAMP" />
+   		<result column="single_price" property="singlePrice" jdbcType="DECIMAL" />
+   		<result column="examType" property="examType" jdbcType="VARCHAR" />
+   		<result column="refund" property="refund" jdbcType="VARCHAR" />
+   		
+   		<result column="customer_order_status_name" property="customerOrderStatusName" jdbcType="VARCHAR" /> 
+   		  		
+   		<result column="startExamTime" property="startExamTime" jdbcType="TIMESTAMP" />
+   		<result column="endExamTime" property="endExamTime" jdbcType="TIMESTAMP" />
+   		
+   		<result column="customer_patient_name" property="customerPatientName" jdbcType="VARCHAR" />
+	    <result column="customer_patient_phone" property="customerPatientPhone" jdbcType="VARCHAR" />
+	    <result column="customer_patient_id_card" property="customerPatientIdCard" jdbcType="VARCHAR" />
+	    
+	    <result column="ReceiptType_Name" property="receipttypeName" jdbcType="VARCHAR" />
+    	<result column="ReceiptType_Code" property="receipttypeCode" jdbcType="VARCHAR" />
+    	<result column="patient_receipt_type" property="patientReceiptType" jdbcType="INTEGER" />
+    	<result column="patient_receipt_name" property="patientReceiptName" jdbcType="VARCHAR" />
+   		<result column="patient_receipt_content" property="patientReceiptContent" jdbcType="VARCHAR" />
+    	<result column="patient_receipt_price" property="patientReceiptPrice" jdbcType="DECIMAL" />
+	    
+	</resultMap>
+	<select id="selectByParam" parameterType="br.crm.vo.customer.order.CustomerOrderVo" resultMap="BaseResultMap">
+	SELECT DISTINCT
+			co.customer_order_id as customer_order_id,
+			co.order_no as order_no,			
+			cc.org_id as org_id,
+			cc.org_name as org_name,
+			cc.branch_id as branch_id,
+			cc.branch_name as branch_name,
+			cc.exam_suite_id as exam_suite_id,
+			cc.exam_suite_name as exam_suite_name,
+			co.customer_id as customer_id,
+			co.customer_name as customer_name,
+			co.enterprise_id as enterprise_id,
+			co.enterprise_name as enterprise_name,
+			cc.exam_time as exam_time,
+			cc.single_price as single_price,
+			co.order_status as order_status,
+			co.order_refund_status,
+			co.customer_order_create_time as customer_order_create_time,
+			cp.customer_patient_name as customer_patient_name,
+			cp.customer_patient_phone as customer_patient_phone,
+			cp.customer_patient_id_card as customer_patient_id_card,
+			coss.customer_order_status_name as customer_order_status_name,
+			cor.patient_receipt_type as patient_receipt_type,
+			cor.patient_receipt_name as patient_receipt_name,
+      		cor.patient_receipt_content as patient_receipt_content,
+			cor.patient_receipt_price as patient_receipt_price,
+      		drt.ReceiptType_Code as ReceiptType_Code,
+			drt.ReceiptType_Name as ReceiptType_Name, 
+			CASE
+		WHEN co.pay_way_id = 2
+		AND co.order_status = 33
+		AND co.order_no = corr.order_no THEN
+			'0'
+		ELSE
+			'1'
+		END AS refund,     				
+			CASE
+		WHEN cc.enterprise_id IS NOT NULL THEN
+			'团体'
+		ELSE
+			'个人'
+		END AS examType
+		FROM
+			customer_order_cart coc
+		LEFT JOIN customer_order co ON co.order_no = coc.customer_order_no
+		LEFT JOIN customer_cart cc ON cc.cart_id = coc.customer_cart_id
+		LEFT JOIN customer_patient cp ON cc.cart_id = cp.cart_id
+		LEFT JOIN customer_order_status coss ON co.order_status = coss.customer_order_status_id
+		LEFT JOIN customer_order_receipt cor ON cor.order_no=co.order_no
+		LEFT JOIN DictReceiptType drt ON cor.ID_ReceiptType = drt.ID_ReceiptType
+		LEFT JOIN customer_order_refund corr ON co.order_no = corr.order_no
+		<where>
+		<if test="customerOrderVo.orderNo!=null">
+		 and co.order_no = #{customerOrderVo.orderNo}
+		</if >
+		<if test = "customerOrderVo.orgId != null">
+		 and cc.org_id = #{customerOrderVo.orgId}
+		</if>
+		<if test= "customerOrderVo.branchId !=null">
+		 and cc.branch_id =#{customerOrderVo.branchId}
+		</if>
+		<if test = "customerOrderVo.examSuiteId!=null">
+		and cc.exam_suite_id = #{customerOrderVo.examSuiteId}
+		</if>
+		<if test = "customerOrderVo.customerPatientName !=null">
+		and cp.customer_patient_name like concat(concat('%', #{customerOrderVo.customerPatientName}), '%')
+		</if> 
+		<if test = "customerOrderVo.customerName !=null">
+		and co.customer_name like concat(concat('%', #{customerOrderVo.customerName}), '%')
+		</if> 
+		<if test = "customerOrderVo.startExamTime !=null">
+		<![CDATA[
+		and cc.exam_time >= #{customerOrderVo.startExamTime}
+		]]>
+		</if>
+		<if test = "customerOrderVo.endExamTime !=null">
+		<![CDATA[
+		and cc.exam_time <= #{customerOrderVo.endExamTime}
+		]]>
+		</if>
+		<if test = "customerOrderVo.utilPriceStart!=null">
+		<![CDATA[
+		and cc.single_price >= #customerOrderVo.utilPriceStart}
+		]]>		
+		</if>
+		<if test = "customerOrderVo.utilPriceEnd!=null">
+		<![CDATA[
+		and cc.single_price <= #{customerOrderVo.utilPriceEnd}
+		]]>		
+		</if>
+		<if test = "customerOrderVo.customerPatientIdCard">
+		and cp.customer_patient_id_card = #{customerOrderVo.customerPatientIdCard }
+		</if>
+		<if test ="customerOrderVo.customerPatientPhone">
+		and cp.customer_patient_phone=#{customerOrderVo.customerPatientPhone}
+		</if>
+		<if test ="customerOrderVo.orderStatus">
+		and co.order_status = #{customerOrderVo.orderStatus}
+		</if>
+		<if test = "customerOrderVo.customerId">
+		and co.customer_id = #{customerOrderVo.customerId}
+		</if>
+		<if test = "customerOrderVo.enterpriseId">
+		and co.enterprise_id = #{customerOrderVo.enterpriseId}
+		</if>
+		</where>
+		ORDER BY cc.exam_time DESC
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap">
+	   SELECT DISTINCT
+			co.customer_order_id,
+			co.order_no,
+			cc.org_id,
+			cc.org_name,
+			cc.branch_id,
+			cc.branch_name,
+			cc.exam_suite_id,
+			cc.exam_suite_name,
+			co.customer_id,
+			co.customer_name,
+			co.enterprise_id,
+			co.enterprise_name,
+			cc.exam_time,
+			cc.single_price,
+			co.order_status,
+			co.customer_order_create_time,
+			cp.customer_patient_name,
+			cp.customer_patient_phone,
+			cp.customer_patient_id_card,
+			coss.customer_order_status_name,
+			cor.patient_receipt_type ,
+			cor.patient_receipt_name,
+     		cor.patient_receipt_content,
+			cor.patient_receipt_price,
+            drt.ReceiptType_Code,
+			drt.ReceiptType_Name ,		
+			CASE
+		WHEN cc.enterprise_id IS NOT NULL THEN
+			'团体'
+		ELSE
+			'个人'
+		END AS examType
+		FROM
+			customer_order_cart coc
+		LEFT JOIN customer_order co ON co.customer_order_id = coc.customer_order_id
+		LEFT JOIN customer_cart cc ON cc.cart_id = coc.customer_cart_id
+		LEFT JOIN customer_patient cp ON cc.cart_id = cp.cart_id
+		LEFT JOIN customer_order_status coss ON co.order_status = coss.customer_order_status_id
+		LEFT JOIN customer_order_receipt cor ON cor.order_no=co.order_no
+		LEFT JOIN DictReceiptType drt ON cor.ID_ReceiptType = drt.ID_ReceiptType
+		WHERE
+			co.customer_order_status = 1
+		AND	cp.customer_patient_name = #{customerPatientName}
+		AND cc.exam_time = #{examTime}
+		AND cc.exam_suite_id = #{examSuiteId}
+	</select>
+
+</mapper>

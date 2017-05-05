@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.registerSheet.PatientRegisterSheetDetailMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetail" >
+    <id column="reg_detail_id" property="regDetailId" jdbcType="VARCHAR" />
+    <result column="reg_id" property="regId" jdbcType="VARCHAR" />
+    <result column="reg_virtual_item" property="regVirtualItem" jdbcType="BIT" />
+    <result column="patient_fee_item_id" property="patientFeeItemId" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_id" property="patientExamItemId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_code" property="examFeeItemCode" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name" property="examFeeItemName" jdbcType="VARCHAR" />
+    <result column="reg_unit_price" property="regUnitPrice" jdbcType="DECIMAL" />
+    <result column="reg_qty" property="regQty" jdbcType="INTEGER" />
+    <result column="reg_work_inner_modify" property="regWorkInnerModify" jdbcType="BIT" />
+    <result column="reg_detail_create_time" property="regDetailCreateTime" jdbcType="TIMESTAMP" />
+    <result column="reg_detail_edit_time" property="regDetailEditTime" jdbcType="TIMESTAMP" />
+    <result column="reg_detail_status" property="regDetailStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    reg_detail_id, reg_id, reg_virtual_item, patient_fee_item_id, patient_exam_item_id, 
+    exam_fee_item_code, exam_fee_item_name, reg_unit_price, reg_qty, reg_work_inner_modify, 
+    reg_detail_create_time, reg_detail_edit_time, reg_detail_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_register_sheet_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from patient_register_sheet_detail
+    where reg_detail_id = #{regDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_register_sheet_detail
+    where reg_detail_id = #{regDetailId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetailExample" >
+    delete from patient_register_sheet_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetail" >
+    insert into patient_register_sheet_detail (reg_detail_id, reg_id, reg_virtual_item, 
+      patient_fee_item_id, patient_exam_item_id, exam_fee_item_code, 
+      exam_fee_item_name, reg_unit_price, reg_qty, 
+      reg_work_inner_modify, reg_detail_create_time, 
+      reg_detail_edit_time, reg_detail_status)
+    values (#{regDetailId,jdbcType=VARCHAR}, #{regId,jdbcType=VARCHAR}, #{regVirtualItem,jdbcType=BIT}, 
+      #{patientFeeItemId,jdbcType=VARCHAR}, #{patientExamItemId,jdbcType=VARCHAR}, #{examFeeItemCode,jdbcType=VARCHAR}, 
+      #{examFeeItemName,jdbcType=VARCHAR}, #{regUnitPrice,jdbcType=DECIMAL}, #{regQty,jdbcType=INTEGER}, 
+      #{regWorkInnerModify,jdbcType=BIT}, #{regDetailCreateTime,jdbcType=TIMESTAMP}, 
+      #{regDetailEditTime,jdbcType=TIMESTAMP}, #{regDetailStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetail" >
+    insert into patient_register_sheet_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="regDetailId != null" >
+        reg_detail_id,
+      </if>
+      <if test="regId != null" >
+        reg_id,
+      </if>
+      <if test="regVirtualItem != null" >
+        reg_virtual_item,
+      </if>
+      <if test="patientFeeItemId != null" >
+        patient_fee_item_id,
+      </if>
+      <if test="patientExamItemId != null" >
+        patient_exam_item_id,
+      </if>
+      <if test="examFeeItemCode != null" >
+        exam_fee_item_code,
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name,
+      </if>
+      <if test="regUnitPrice != null" >
+        reg_unit_price,
+      </if>
+      <if test="regQty != null" >
+        reg_qty,
+      </if>
+      <if test="regWorkInnerModify != null" >
+        reg_work_inner_modify,
+      </if>
+      <if test="regDetailCreateTime != null" >
+        reg_detail_create_time,
+      </if>
+      <if test="regDetailEditTime != null" >
+        reg_detail_edit_time,
+      </if>
+      <if test="regDetailStatus != null" >
+        reg_detail_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="regDetailId != null" >
+        #{regDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="regId != null" >
+        #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="regVirtualItem != null" >
+        #{regVirtualItem,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemId != null" >
+        #{patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemId != null" >
+        #{patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemCode != null" >
+        #{examFeeItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="regUnitPrice != null" >
+        #{regUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="regQty != null" >
+        #{regQty,jdbcType=INTEGER},
+      </if>
+      <if test="regWorkInnerModify != null" >
+        #{regWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="regDetailCreateTime != null" >
+        #{regDetailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regDetailEditTime != null" >
+        #{regDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regDetailStatus != null" >
+        #{regDetailStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetailExample" resultType="java.lang.Integer" >
+    select count(*) from patient_register_sheet_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_register_sheet_detail
+    <set >
+      <if test="record.regDetailId != null" >
+        reg_detail_id = #{record.regDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regId != null" >
+        reg_id = #{record.regId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regVirtualItem != null" >
+        reg_virtual_item = #{record.regVirtualItem,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemId != null" >
+        patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemId != null" >
+        patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemCode != null" >
+        exam_fee_item_code = #{record.examFeeItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemName != null" >
+        exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regUnitPrice != null" >
+        reg_unit_price = #{record.regUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.regQty != null" >
+        reg_qty = #{record.regQty,jdbcType=INTEGER},
+      </if>
+      <if test="record.regWorkInnerModify != null" >
+        reg_work_inner_modify = #{record.regWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="record.regDetailCreateTime != null" >
+        reg_detail_create_time = #{record.regDetailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regDetailEditTime != null" >
+        reg_detail_edit_time = #{record.regDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regDetailStatus != null" >
+        reg_detail_status = #{record.regDetailStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_register_sheet_detail
+    set reg_detail_id = #{record.regDetailId,jdbcType=VARCHAR},
+      reg_id = #{record.regId,jdbcType=VARCHAR},
+      reg_virtual_item = #{record.regVirtualItem,jdbcType=BIT},
+      patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      exam_fee_item_code = #{record.examFeeItemCode,jdbcType=VARCHAR},
+      exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      reg_unit_price = #{record.regUnitPrice,jdbcType=DECIMAL},
+      reg_qty = #{record.regQty,jdbcType=INTEGER},
+      reg_work_inner_modify = #{record.regWorkInnerModify,jdbcType=BIT},
+      reg_detail_create_time = #{record.regDetailCreateTime,jdbcType=TIMESTAMP},
+      reg_detail_edit_time = #{record.regDetailEditTime,jdbcType=TIMESTAMP},
+      reg_detail_status = #{record.regDetailStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetail" >
+    update patient_register_sheet_detail
+    <set >
+      <if test="regId != null" >
+        reg_id = #{regId,jdbcType=VARCHAR},
+      </if>
+      <if test="regVirtualItem != null" >
+        reg_virtual_item = #{regVirtualItem,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemId != null" >
+        patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemId != null" >
+        patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemCode != null" >
+        exam_fee_item_code = #{examFeeItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="regUnitPrice != null" >
+        reg_unit_price = #{regUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="regQty != null" >
+        reg_qty = #{regQty,jdbcType=INTEGER},
+      </if>
+      <if test="regWorkInnerModify != null" >
+        reg_work_inner_modify = #{regWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="regDetailCreateTime != null" >
+        reg_detail_create_time = #{regDetailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regDetailEditTime != null" >
+        reg_detail_edit_time = #{regDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regDetailStatus != null" >
+        reg_detail_status = #{regDetailStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where reg_detail_id = #{regDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.registerSheet.PatientRegisterSheetDetail" >
+    update patient_register_sheet_detail
+    set reg_id = #{regId,jdbcType=VARCHAR},
+      reg_virtual_item = #{regVirtualItem,jdbcType=BIT},
+      patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR},
+      patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR},
+      exam_fee_item_code = #{examFeeItemCode,jdbcType=VARCHAR},
+      exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      reg_unit_price = #{regUnitPrice,jdbcType=DECIMAL},
+      reg_qty = #{regQty,jdbcType=INTEGER},
+      reg_work_inner_modify = #{regWorkInnerModify,jdbcType=BIT},
+      reg_detail_create_time = #{regDetailCreateTime,jdbcType=TIMESTAMP},
+      reg_detail_edit_time = #{regDetailEditTime,jdbcType=TIMESTAMP},
+      reg_detail_status = #{regDetailStatus,jdbcType=INTEGER}
+    where reg_detail_id = #{regDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

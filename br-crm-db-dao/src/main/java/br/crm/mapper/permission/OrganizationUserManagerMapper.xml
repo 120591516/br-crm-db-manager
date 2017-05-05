@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.permission.OrganizationUserManagerMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.permission.OrganizationUserManager" >
+    <id column="user_manager_id" property="userManagerId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="branch_id" property="branchId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_manager_obj_id" property="userManagerObjId" jdbcType="VARCHAR" />
+    <result column="user_manager_obj_name" property="userManagerObjName" jdbcType="VARCHAR" />
+    <result column="user_manager_type" property="userManagerType" jdbcType="INTEGER" />
+    <result column="user_manager_status" property="userManagerStatus" jdbcType="INTEGER" />
+    <result column="user_manager_create_time" property="userManagerCreateTime" jdbcType="TIMESTAMP" />
+    <result column="user_manager_edit_time" property="userManagerEditTime" jdbcType="TIMESTAMP" />
+    <result column="user_manager_edit_plat" property="userManagerEditPlat" jdbcType="INTEGER" />
+    <result column="user_manager_edit_person_id" property="userManagerEditPersonId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_manager_id, org_id, branch_id, user_id, user_manager_obj_id, user_manager_obj_name, 
+    user_manager_type, user_manager_status, user_manager_create_time, user_manager_edit_time, 
+    user_manager_edit_plat, user_manager_edit_person_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.permission.OrganizationUserManagerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_user_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_user_manager
+    where user_manager_id = #{userManagerId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_user_manager
+    where user_manager_id = #{userManagerId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.permission.OrganizationUserManagerExample" >
+    delete from organization_user_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.permission.OrganizationUserManager" >
+    insert into organization_user_manager (user_manager_id, org_id, branch_id, 
+      user_id, user_manager_obj_id, user_manager_obj_name, 
+      user_manager_type, user_manager_status, user_manager_create_time, 
+      user_manager_edit_time, user_manager_edit_plat, 
+      user_manager_edit_person_id)
+    values (#{userManagerId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR}, #{userManagerObjId,jdbcType=VARCHAR}, #{userManagerObjName,jdbcType=VARCHAR}, 
+      #{userManagerType,jdbcType=INTEGER}, #{userManagerStatus,jdbcType=INTEGER}, #{userManagerCreateTime,jdbcType=TIMESTAMP}, 
+      #{userManagerEditTime,jdbcType=TIMESTAMP}, #{userManagerEditPlat,jdbcType=INTEGER}, 
+      #{userManagerEditPersonId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.permission.OrganizationUserManager" >
+    insert into organization_user_manager
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userManagerId != null" >
+        user_manager_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userManagerObjId != null" >
+        user_manager_obj_id,
+      </if>
+      <if test="userManagerObjName != null" >
+        user_manager_obj_name,
+      </if>
+      <if test="userManagerType != null" >
+        user_manager_type,
+      </if>
+      <if test="userManagerStatus != null" >
+        user_manager_status,
+      </if>
+      <if test="userManagerCreateTime != null" >
+        user_manager_create_time,
+      </if>
+      <if test="userManagerEditTime != null" >
+        user_manager_edit_time,
+      </if>
+      <if test="userManagerEditPlat != null" >
+        user_manager_edit_plat,
+      </if>
+      <if test="userManagerEditPersonId != null" >
+        user_manager_edit_person_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userManagerId != null" >
+        #{userManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userManagerObjId != null" >
+        #{userManagerObjId,jdbcType=VARCHAR},
+      </if>
+      <if test="userManagerObjName != null" >
+        #{userManagerObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="userManagerType != null" >
+        #{userManagerType,jdbcType=INTEGER},
+      </if>
+      <if test="userManagerStatus != null" >
+        #{userManagerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userManagerCreateTime != null" >
+        #{userManagerCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userManagerEditTime != null" >
+        #{userManagerEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userManagerEditPlat != null" >
+        #{userManagerEditPlat,jdbcType=INTEGER},
+      </if>
+      <if test="userManagerEditPersonId != null" >
+        #{userManagerEditPersonId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.permission.OrganizationUserManagerExample" resultType="java.lang.Integer" >
+    select count(*) from organization_user_manager
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_user_manager
+    <set >
+      <if test="record.userManagerId != null" >
+        user_manager_id = #{record.userManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userManagerObjId != null" >
+        user_manager_obj_id = #{record.userManagerObjId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userManagerObjName != null" >
+        user_manager_obj_name = #{record.userManagerObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userManagerType != null" >
+        user_manager_type = #{record.userManagerType,jdbcType=INTEGER},
+      </if>
+      <if test="record.userManagerStatus != null" >
+        user_manager_status = #{record.userManagerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userManagerCreateTime != null" >
+        user_manager_create_time = #{record.userManagerCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userManagerEditTime != null" >
+        user_manager_edit_time = #{record.userManagerEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userManagerEditPlat != null" >
+        user_manager_edit_plat = #{record.userManagerEditPlat,jdbcType=INTEGER},
+      </if>
+      <if test="record.userManagerEditPersonId != null" >
+        user_manager_edit_person_id = #{record.userManagerEditPersonId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_user_manager
+    set user_manager_id = #{record.userManagerId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      branch_id = #{record.branchId,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      user_manager_obj_id = #{record.userManagerObjId,jdbcType=VARCHAR},
+      user_manager_obj_name = #{record.userManagerObjName,jdbcType=VARCHAR},
+      user_manager_type = #{record.userManagerType,jdbcType=INTEGER},
+      user_manager_status = #{record.userManagerStatus,jdbcType=INTEGER},
+      user_manager_create_time = #{record.userManagerCreateTime,jdbcType=TIMESTAMP},
+      user_manager_edit_time = #{record.userManagerEditTime,jdbcType=TIMESTAMP},
+      user_manager_edit_plat = #{record.userManagerEditPlat,jdbcType=INTEGER},
+      user_manager_edit_person_id = #{record.userManagerEditPersonId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.permission.OrganizationUserManager" >
+    update organization_user_manager
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userManagerObjId != null" >
+        user_manager_obj_id = #{userManagerObjId,jdbcType=VARCHAR},
+      </if>
+      <if test="userManagerObjName != null" >
+        user_manager_obj_name = #{userManagerObjName,jdbcType=VARCHAR},
+      </if>
+      <if test="userManagerType != null" >
+        user_manager_type = #{userManagerType,jdbcType=INTEGER},
+      </if>
+      <if test="userManagerStatus != null" >
+        user_manager_status = #{userManagerStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userManagerCreateTime != null" >
+        user_manager_create_time = #{userManagerCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userManagerEditTime != null" >
+        user_manager_edit_time = #{userManagerEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userManagerEditPlat != null" >
+        user_manager_edit_plat = #{userManagerEditPlat,jdbcType=INTEGER},
+      </if>
+      <if test="userManagerEditPersonId != null" >
+        user_manager_edit_person_id = #{userManagerEditPersonId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_manager_id = #{userManagerId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.permission.OrganizationUserManager" >
+    update organization_user_manager
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_manager_obj_id = #{userManagerObjId,jdbcType=VARCHAR},
+      user_manager_obj_name = #{userManagerObjName,jdbcType=VARCHAR},
+      user_manager_type = #{userManagerType,jdbcType=INTEGER},
+      user_manager_status = #{userManagerStatus,jdbcType=INTEGER},
+      user_manager_create_time = #{userManagerCreateTime,jdbcType=TIMESTAMP},
+      user_manager_edit_time = #{userManagerEditTime,jdbcType=TIMESTAMP},
+      user_manager_edit_plat = #{userManagerEditPlat,jdbcType=INTEGER},
+      user_manager_edit_person_id = #{userManagerEditPersonId,jdbcType=VARCHAR}
+    where user_manager_id = #{userManagerId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.customer.order.CustomerOrderPayInfoMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.customer.order.CustomerOrderPayInfo" >
+    <id column="customer_order_pay_info_id" property="customerOrderPayInfoId" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="pay_way_id" property="payWayId" jdbcType="INTEGER" />
+    <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR" />
+    <result column="order_pay_amount" property="orderPayAmount" jdbcType="DECIMAL" />
+    <result column="order_pay_callback" property="orderPayCallback" jdbcType="VARCHAR" />
+    <result column="order_pay_notify" property="orderPayNotify" jdbcType="VARCHAR" />
+    <result column="order_pay_result" property="orderPayResult" jdbcType="INTEGER" />
+    <result column="order_pay_order_no" property="orderPayOrderNo" jdbcType="VARCHAR" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="customer_order_pay_info_create_time" property="customerOrderPayInfoCreateTime" jdbcType="TIMESTAMP" />
+    <result column="customer_order_pay_info_edit_time" property="customerOrderPayInfoEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_order_pay_info_id, order_no, pay_type, pay_way_id, pay_way_name, order_pay_amount, 
+    order_pay_callback, order_pay_notify, order_pay_result, order_pay_order_no, enterprise_id, 
+    customer_id, customer_order_pay_info_create_time, customer_order_pay_info_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_order_pay_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_order_pay_info
+    where customer_order_pay_info_id = #{customerOrderPayInfoId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer_order_pay_info
+    where customer_order_pay_info_id = #{customerOrderPayInfoId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfoExample" >
+    delete from customer_order_pay_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfo" >
+    insert into customer_order_pay_info (customer_order_pay_info_id, order_no, 
+      pay_type, pay_way_id, pay_way_name, 
+      order_pay_amount, order_pay_callback, order_pay_notify, 
+      order_pay_result, order_pay_order_no, enterprise_id, 
+      customer_id, customer_order_pay_info_create_time, 
+      customer_order_pay_info_edit_time)
+    values (#{customerOrderPayInfoId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{payType,jdbcType=INTEGER}, #{payWayId,jdbcType=INTEGER}, #{payWayName,jdbcType=VARCHAR}, 
+      #{orderPayAmount,jdbcType=DECIMAL}, #{orderPayCallback,jdbcType=VARCHAR}, #{orderPayNotify,jdbcType=VARCHAR}, 
+      #{orderPayResult,jdbcType=INTEGER}, #{orderPayOrderNo,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=VARCHAR}, 
+      #{customerId,jdbcType=VARCHAR}, #{customerOrderPayInfoCreateTime,jdbcType=TIMESTAMP}, 
+      #{customerOrderPayInfoEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfo" >
+    insert into customer_order_pay_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerOrderPayInfoId != null" >
+        customer_order_pay_info_id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="payWayId != null" >
+        pay_way_id,
+      </if>
+      <if test="payWayName != null" >
+        pay_way_name,
+      </if>
+      <if test="orderPayAmount != null" >
+        order_pay_amount,
+      </if>
+      <if test="orderPayCallback != null" >
+        order_pay_callback,
+      </if>
+      <if test="orderPayNotify != null" >
+        order_pay_notify,
+      </if>
+      <if test="orderPayResult != null" >
+        order_pay_result,
+      </if>
+      <if test="orderPayOrderNo != null" >
+        order_pay_order_no,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerOrderPayInfoCreateTime != null" >
+        customer_order_pay_info_create_time,
+      </if>
+      <if test="customerOrderPayInfoEditTime != null" >
+        customer_order_pay_info_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerOrderPayInfoId != null" >
+        #{customerOrderPayInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payWayId != null" >
+        #{payWayId,jdbcType=INTEGER},
+      </if>
+      <if test="payWayName != null" >
+        #{payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPayAmount != null" >
+        #{orderPayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPayCallback != null" >
+        #{orderPayCallback,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPayNotify != null" >
+        #{orderPayNotify,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPayResult != null" >
+        #{orderPayResult,jdbcType=INTEGER},
+      </if>
+      <if test="orderPayOrderNo != null" >
+        #{orderPayOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayInfoCreateTime != null" >
+        #{customerOrderPayInfoCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerOrderPayInfoEditTime != null" >
+        #{customerOrderPayInfoEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfoExample" resultType="java.lang.Integer" >
+    select count(*) from customer_order_pay_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_order_pay_info
+    <set >
+      <if test="record.customerOrderPayInfoId != null" >
+        customer_order_pay_info_id = #{record.customerOrderPayInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.payWayId != null" >
+        pay_way_id = #{record.payWayId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payWayName != null" >
+        pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderPayAmount != null" >
+        order_pay_amount = #{record.orderPayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderPayCallback != null" >
+        order_pay_callback = #{record.orderPayCallback,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderPayNotify != null" >
+        order_pay_notify = #{record.orderPayNotify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderPayResult != null" >
+        order_pay_result = #{record.orderPayResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderPayOrderNo != null" >
+        order_pay_order_no = #{record.orderPayOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseId != null" >
+        enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerOrderPayInfoCreateTime != null" >
+        customer_order_pay_info_create_time = #{record.customerOrderPayInfoCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customerOrderPayInfoEditTime != null" >
+        customer_order_pay_info_edit_time = #{record.customerOrderPayInfoEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_order_pay_info
+    set customer_order_pay_info_id = #{record.customerOrderPayInfoId,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      pay_way_id = #{record.payWayId,jdbcType=INTEGER},
+      pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      order_pay_amount = #{record.orderPayAmount,jdbcType=DECIMAL},
+      order_pay_callback = #{record.orderPayCallback,jdbcType=VARCHAR},
+      order_pay_notify = #{record.orderPayNotify,jdbcType=VARCHAR},
+      order_pay_result = #{record.orderPayResult,jdbcType=INTEGER},
+      order_pay_order_no = #{record.orderPayOrderNo,jdbcType=VARCHAR},
+      enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=VARCHAR},
+      customer_order_pay_info_create_time = #{record.customerOrderPayInfoCreateTime,jdbcType=TIMESTAMP},
+      customer_order_pay_info_edit_time = #{record.customerOrderPayInfoEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfo" >
+    update customer_order_pay_info
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="payWayId != null" >
+        pay_way_id = #{payWayId,jdbcType=INTEGER},
+      </if>
+      <if test="payWayName != null" >
+        pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPayAmount != null" >
+        order_pay_amount = #{orderPayAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderPayCallback != null" >
+        order_pay_callback = #{orderPayCallback,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPayNotify != null" >
+        order_pay_notify = #{orderPayNotify,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPayResult != null" >
+        order_pay_result = #{orderPayResult,jdbcType=INTEGER},
+      </if>
+      <if test="orderPayOrderNo != null" >
+        order_pay_order_no = #{orderPayOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayInfoCreateTime != null" >
+        customer_order_pay_info_create_time = #{customerOrderPayInfoCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerOrderPayInfoEditTime != null" >
+        customer_order_pay_info_edit_time = #{customerOrderPayInfoEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_order_pay_info_id = #{customerOrderPayInfoId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.customer.order.CustomerOrderPayInfo" >
+    update customer_order_pay_info
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      pay_way_id = #{payWayId,jdbcType=INTEGER},
+      pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      order_pay_amount = #{orderPayAmount,jdbcType=DECIMAL},
+      order_pay_callback = #{orderPayCallback,jdbcType=VARCHAR},
+      order_pay_notify = #{orderPayNotify,jdbcType=VARCHAR},
+      order_pay_result = #{orderPayResult,jdbcType=INTEGER},
+      order_pay_order_no = #{orderPayOrderNo,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      customer_order_pay_info_create_time = #{customerOrderPayInfoCreateTime,jdbcType=TIMESTAMP},
+      customer_order_pay_info_edit_time = #{customerOrderPayInfoEditTime,jdbcType=TIMESTAMP}
+    where customer_order_pay_info_id = #{customerOrderPayInfoId,jdbcType=VARCHAR}
+  </update>
+</mapper>

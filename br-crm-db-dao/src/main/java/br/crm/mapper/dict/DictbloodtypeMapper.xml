@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictbloodtypeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictbloodtype" >
+    <id column="ID_BloodType" property="idBloodtype" jdbcType="INTEGER" />
+    <result column="KeyBloodType" property="keybloodtype" jdbcType="VARCHAR" />
+    <result column="BloodType_Name" property="bloodtypeName" jdbcType="VARCHAR" />
+    <result column="BloodType_Code" property="bloodtypeCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="BloodTypeCodeX" property="bloodtypecodex" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="BloodType_createtime" property="bloodtypeCreatetime" jdbcType="TIMESTAMP" />
+    <result column="BloodType_updatetime" property="bloodtypeUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="BloodType_Status" property="bloodtypeStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_BloodType, KeyBloodType, BloodType_Name, BloodType_Code, Input_Code, BloodTypeCodeX, 
+    Note, BloodType_createtime, BloodType_updatetime, BloodType_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictbloodtypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictBloodType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictBloodType
+    where ID_BloodType = #{idBloodtype,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictBloodType
+    where ID_BloodType = #{idBloodtype,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictbloodtypeExample" >
+    delete from DictBloodType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictbloodtype" >
+    insert into DictBloodType (ID_BloodType, KeyBloodType, BloodType_Name, 
+      BloodType_Code, Input_Code, BloodTypeCodeX, 
+      Note, BloodType_createtime, BloodType_updatetime, 
+      BloodType_Status)
+    values (#{idBloodtype,jdbcType=INTEGER}, #{keybloodtype,jdbcType=VARCHAR}, #{bloodtypeName,jdbcType=VARCHAR}, 
+      #{bloodtypeCode,jdbcType=VARCHAR}, #{inputCode,jdbcType=VARCHAR}, #{bloodtypecodex,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{bloodtypeCreatetime,jdbcType=TIMESTAMP}, #{bloodtypeUpdatetime,jdbcType=TIMESTAMP}, 
+      #{bloodtypeStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictbloodtype" useGeneratedKeys="true" keyProperty="idBloodtype">
+    insert into DictBloodType
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idBloodtype != null" >
+        ID_BloodType,
+      </if>
+      <if test="keybloodtype != null" >
+        KeyBloodType,
+      </if>
+      <if test="bloodtypeName != null" >
+        BloodType_Name,
+      </if>
+      <if test="bloodtypeCode != null" >
+        BloodType_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="bloodtypecodex != null" >
+        BloodTypeCodeX,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="bloodtypeCreatetime != null" >
+        BloodType_createtime,
+      </if>
+      <if test="bloodtypeUpdatetime != null" >
+        BloodType_updatetime,
+      </if>
+      <if test="bloodtypeStatus != null" >
+        BloodType_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idBloodtype != null" >
+        #{idBloodtype,jdbcType=INTEGER},
+      </if>
+      <if test="keybloodtype != null" >
+        #{keybloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypeName != null" >
+        #{bloodtypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypeCode != null" >
+        #{bloodtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypecodex != null" >
+        #{bloodtypecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypeCreatetime != null" >
+        #{bloodtypeCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bloodtypeUpdatetime != null" >
+        #{bloodtypeUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bloodtypeStatus != null" >
+        #{bloodtypeStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictbloodtypeExample" resultType="java.lang.Integer" >
+    select count(*) from DictBloodType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictBloodType
+    <set >
+      <if test="record.idBloodtype != null" >
+        ID_BloodType = #{record.idBloodtype,jdbcType=INTEGER},
+      </if>
+      <if test="record.keybloodtype != null" >
+        KeyBloodType = #{record.keybloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodtypeName != null" >
+        BloodType_Name = #{record.bloodtypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodtypeCode != null" >
+        BloodType_Code = #{record.bloodtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodtypecodex != null" >
+        BloodTypeCodeX = #{record.bloodtypecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodtypeCreatetime != null" >
+        BloodType_createtime = #{record.bloodtypeCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bloodtypeUpdatetime != null" >
+        BloodType_updatetime = #{record.bloodtypeUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bloodtypeStatus != null" >
+        BloodType_Status = #{record.bloodtypeStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictBloodType
+    set ID_BloodType = #{record.idBloodtype,jdbcType=INTEGER},
+      KeyBloodType = #{record.keybloodtype,jdbcType=VARCHAR},
+      BloodType_Name = #{record.bloodtypeName,jdbcType=VARCHAR},
+      BloodType_Code = #{record.bloodtypeCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      BloodTypeCodeX = #{record.bloodtypecodex,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      BloodType_createtime = #{record.bloodtypeCreatetime,jdbcType=TIMESTAMP},
+      BloodType_updatetime = #{record.bloodtypeUpdatetime,jdbcType=TIMESTAMP},
+      BloodType_Status = #{record.bloodtypeStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictbloodtype" >
+    update DictBloodType
+    <set >
+      <if test="keybloodtype != null" >
+        KeyBloodType = #{keybloodtype,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypeName != null" >
+        BloodType_Name = #{bloodtypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypeCode != null" >
+        BloodType_Code = #{bloodtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypecodex != null" >
+        BloodTypeCodeX = #{bloodtypecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodtypeCreatetime != null" >
+        BloodType_createtime = #{bloodtypeCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bloodtypeUpdatetime != null" >
+        BloodType_updatetime = #{bloodtypeUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bloodtypeStatus != null" >
+        BloodType_Status = #{bloodtypeStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_BloodType = #{idBloodtype,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictbloodtype" >
+    update DictBloodType
+    set KeyBloodType = #{keybloodtype,jdbcType=VARCHAR},
+      BloodType_Name = #{bloodtypeName,jdbcType=VARCHAR},
+      BloodType_Code = #{bloodtypeCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      BloodTypeCodeX = #{bloodtypecodex,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      BloodType_createtime = #{bloodtypeCreatetime,jdbcType=TIMESTAMP},
+      BloodType_updatetime = #{bloodtypeUpdatetime,jdbcType=TIMESTAMP},
+      BloodType_Status = #{bloodtypeStatus,jdbcType=INTEGER}
+    where ID_BloodType = #{idBloodtype,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictmarriageMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictmarriage" >
+    <id column="ID_Marriage" property="idMarriage" jdbcType="INTEGER" />
+    <result column="Marriage_Name" property="marriageName" jdbcType="VARCHAR" />
+    <result column="Marriage_Code" property="marriageCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="MarriageCodeX" property="marriagecodex" jdbcType="VARCHAR" />
+    <result column="F_HasMarried" property="fHasmarried" jdbcType="BIT" />
+    <result column="Marriage_createtime" property="marriageCreatetime" jdbcType="TIMESTAMP" />
+    <result column="Marriage_updatetime" property="marriageUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="Marriage_Status" property="marriageStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Marriage, Marriage_Name, Marriage_Code, Input_Code, Note, MarriageCodeX, F_HasMarried, 
+    Marriage_createtime, Marriage_updatetime, Marriage_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictmarriageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictMarriage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictMarriage
+    where ID_Marriage = #{idMarriage,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictMarriage
+    where ID_Marriage = #{idMarriage,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictmarriageExample" >
+    delete from DictMarriage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictmarriage" >
+    insert into DictMarriage (ID_Marriage, Marriage_Name, Marriage_Code, 
+      Input_Code, Note, MarriageCodeX, 
+      F_HasMarried, Marriage_createtime, Marriage_updatetime, 
+      Marriage_Status)
+    values (#{idMarriage,jdbcType=INTEGER}, #{marriageName,jdbcType=VARCHAR}, #{marriageCode,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{marriagecodex,jdbcType=VARCHAR}, 
+      #{fHasmarried,jdbcType=BIT}, #{marriageCreatetime,jdbcType=TIMESTAMP}, #{marriageUpdatetime,jdbcType=TIMESTAMP}, 
+      #{marriageStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictmarriage"  useGeneratedKeys="true" keyProperty="idMarriage" >
+    insert into DictMarriage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idMarriage != null" >
+        ID_Marriage,
+      </if>
+      <if test="marriageName != null" >
+        Marriage_Name,
+      </if>
+      <if test="marriageCode != null" >
+        Marriage_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="marriagecodex != null" >
+        MarriageCodeX,
+      </if>
+      <if test="fHasmarried != null" >
+        F_HasMarried,
+      </if>
+      <if test="marriageCreatetime != null" >
+        Marriage_createtime,
+      </if>
+      <if test="marriageUpdatetime != null" >
+        Marriage_updatetime,
+      </if>
+      <if test="marriageStatus != null" >
+        Marriage_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idMarriage != null" >
+        #{idMarriage,jdbcType=INTEGER},
+      </if>
+      <if test="marriageName != null" >
+        #{marriageName,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageCode != null" >
+        #{marriageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="marriagecodex != null" >
+        #{marriagecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="fHasmarried != null" >
+        #{fHasmarried,jdbcType=BIT},
+      </if>
+      <if test="marriageCreatetime != null" >
+        #{marriageCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marriageUpdatetime != null" >
+        #{marriageUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marriageStatus != null" >
+        #{marriageStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictmarriageExample" resultType="java.lang.Integer" >
+    select count(*) from DictMarriage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictMarriage
+    <set >
+      <if test="record.idMarriage != null" >
+        ID_Marriage = #{record.idMarriage,jdbcType=INTEGER},
+      </if>
+      <if test="record.marriageName != null" >
+        Marriage_Name = #{record.marriageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriageCode != null" >
+        Marriage_Code = #{record.marriageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriagecodex != null" >
+        MarriageCodeX = #{record.marriagecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fHasmarried != null" >
+        F_HasMarried = #{record.fHasmarried,jdbcType=BIT},
+      </if>
+      <if test="record.marriageCreatetime != null" >
+        Marriage_createtime = #{record.marriageCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.marriageUpdatetime != null" >
+        Marriage_updatetime = #{record.marriageUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.marriageStatus != null" >
+        Marriage_Status = #{record.marriageStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictMarriage
+    set ID_Marriage = #{record.idMarriage,jdbcType=INTEGER},
+      Marriage_Name = #{record.marriageName,jdbcType=VARCHAR},
+      Marriage_Code = #{record.marriageCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      MarriageCodeX = #{record.marriagecodex,jdbcType=VARCHAR},
+      F_HasMarried = #{record.fHasmarried,jdbcType=BIT},
+      Marriage_createtime = #{record.marriageCreatetime,jdbcType=TIMESTAMP},
+      Marriage_updatetime = #{record.marriageUpdatetime,jdbcType=TIMESTAMP},
+      Marriage_Status = #{record.marriageStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictmarriage" >
+    update DictMarriage
+    <set >
+      <if test="marriageName != null" >
+        Marriage_Name = #{marriageName,jdbcType=VARCHAR},
+      </if>
+      <if test="marriageCode != null" >
+        Marriage_Code = #{marriageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="marriagecodex != null" >
+        MarriageCodeX = #{marriagecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="fHasmarried != null" >
+        F_HasMarried = #{fHasmarried,jdbcType=BIT},
+      </if>
+      <if test="marriageCreatetime != null" >
+        Marriage_createtime = #{marriageCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marriageUpdatetime != null" >
+        Marriage_updatetime = #{marriageUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="marriageStatus != null" >
+        Marriage_Status = #{marriageStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_Marriage = #{idMarriage,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictmarriage" >
+    update DictMarriage
+    set Marriage_Name = #{marriageName,jdbcType=VARCHAR},
+      Marriage_Code = #{marriageCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      MarriageCodeX = #{marriagecodex,jdbcType=VARCHAR},
+      F_HasMarried = #{fHasmarried,jdbcType=BIT},
+      Marriage_createtime = #{marriageCreatetime,jdbcType=TIMESTAMP},
+      Marriage_updatetime = #{marriageUpdatetime,jdbcType=TIMESTAMP},
+      Marriage_Status = #{marriageStatus,jdbcType=INTEGER}
+    where ID_Marriage = #{idMarriage,jdbcType=INTEGER}
+  </update>
+</mapper>

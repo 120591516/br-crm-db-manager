@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictoccupationMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictoccupation" >
+    <id column="ID_Occupation" property="idOccupation" jdbcType="INTEGER" />
+    <result column="Occupation_Name" property="occupationName" jdbcType="VARCHAR" />
+    <result column="Occupation_Code" property="occupationCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="OccupationCodeX" property="occupationcodex" jdbcType="VARCHAR" />
+    <result column="Occupation_createtime" property="occupationCreatetime" jdbcType="TIMESTAMP" />
+    <result column="Occupation_updatetime" property="occupationUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="Occupation_Status" property="occupationStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Occupation, Occupation_Name, Occupation_Code, Input_Code, Note, OccupationCodeX, 
+    Occupation_createtime, Occupation_updatetime, Occupation_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictoccupationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictOccupation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictOccupation
+    where ID_Occupation = #{idOccupation,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictOccupation
+    where ID_Occupation = #{idOccupation,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictoccupationExample" >
+    delete from DictOccupation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictoccupation" >
+    insert into DictOccupation (ID_Occupation, Occupation_Name, Occupation_Code, 
+      Input_Code, Note, OccupationCodeX, 
+      Occupation_createtime, Occupation_updatetime, 
+      Occupation_Status)
+    values (#{idOccupation,jdbcType=INTEGER}, #{occupationName,jdbcType=VARCHAR}, #{occupationCode,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{occupationcodex,jdbcType=VARCHAR}, 
+      #{occupationCreatetime,jdbcType=TIMESTAMP}, #{occupationUpdatetime,jdbcType=TIMESTAMP}, 
+      #{occupationStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictoccupation" >
+    insert into DictOccupation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idOccupation != null" >
+        ID_Occupation,
+      </if>
+      <if test="occupationName != null" >
+        Occupation_Name,
+      </if>
+      <if test="occupationCode != null" >
+        Occupation_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="occupationcodex != null" >
+        OccupationCodeX,
+      </if>
+      <if test="occupationCreatetime != null" >
+        Occupation_createtime,
+      </if>
+      <if test="occupationUpdatetime != null" >
+        Occupation_updatetime,
+      </if>
+      <if test="occupationStatus != null" >
+        Occupation_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idOccupation != null" >
+        #{idOccupation,jdbcType=INTEGER},
+      </if>
+      <if test="occupationName != null" >
+        #{occupationName,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationCode != null" >
+        #{occupationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationcodex != null" >
+        #{occupationcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationCreatetime != null" >
+        #{occupationCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="occupationUpdatetime != null" >
+        #{occupationUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="occupationStatus != null" >
+        #{occupationStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictoccupationExample" resultType="java.lang.Integer" >
+    select count(*) from DictOccupation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictOccupation
+    <set >
+      <if test="record.idOccupation != null" >
+        ID_Occupation = #{record.idOccupation,jdbcType=INTEGER},
+      </if>
+      <if test="record.occupationName != null" >
+        Occupation_Name = #{record.occupationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupationCode != null" >
+        Occupation_Code = #{record.occupationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupationcodex != null" >
+        OccupationCodeX = #{record.occupationcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupationCreatetime != null" >
+        Occupation_createtime = #{record.occupationCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.occupationUpdatetime != null" >
+        Occupation_updatetime = #{record.occupationUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.occupationStatus != null" >
+        Occupation_Status = #{record.occupationStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictOccupation
+    set ID_Occupation = #{record.idOccupation,jdbcType=INTEGER},
+      Occupation_Name = #{record.occupationName,jdbcType=VARCHAR},
+      Occupation_Code = #{record.occupationCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      OccupationCodeX = #{record.occupationcodex,jdbcType=VARCHAR},
+      Occupation_createtime = #{record.occupationCreatetime,jdbcType=TIMESTAMP},
+      Occupation_updatetime = #{record.occupationUpdatetime,jdbcType=TIMESTAMP},
+      Occupation_Status = #{record.occupationStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictoccupation" >
+    update DictOccupation
+    <set >
+      <if test="occupationName != null" >
+        Occupation_Name = #{occupationName,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationCode != null" >
+        Occupation_Code = #{occupationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationcodex != null" >
+        OccupationCodeX = #{occupationcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="occupationCreatetime != null" >
+        Occupation_createtime = #{occupationCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="occupationUpdatetime != null" >
+        Occupation_updatetime = #{occupationUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="occupationStatus != null" >
+        Occupation_Status = #{occupationStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_Occupation = #{idOccupation,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictoccupation" >
+    update DictOccupation
+    set Occupation_Name = #{occupationName,jdbcType=VARCHAR},
+      Occupation_Code = #{occupationCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      OccupationCodeX = #{occupationcodex,jdbcType=VARCHAR},
+      Occupation_createtime = #{occupationCreatetime,jdbcType=TIMESTAMP},
+      Occupation_updatetime = #{occupationUpdatetime,jdbcType=TIMESTAMP},
+      Occupation_Status = #{occupationStatus,jdbcType=INTEGER}
+    where ID_Occupation = #{idOccupation,jdbcType=INTEGER}
+  </update>
+</mapper>

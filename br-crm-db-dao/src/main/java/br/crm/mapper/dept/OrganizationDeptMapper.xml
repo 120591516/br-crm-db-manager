@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dept.OrganizationDeptMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dept.OrganizationDept" >
+    <id column="org_dept_id" property="orgDeptId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="branch_id" property="branchId" jdbcType="VARCHAR" />
+    <result column="depart_name" property="departName" jdbcType="VARCHAR" />
+    <result column="depart_name_abr" property="departNameAbr" jdbcType="VARCHAR" />
+    <result column="depart_name_eng" property="departNameEng" jdbcType="VARCHAR" />
+    <result column="depart_name_eng_abr" property="departNameEngAbr" jdbcType="VARCHAR" />
+    <result column="depart_code" property="departCode" jdbcType="VARCHAR" />
+    <result column="depart_type" property="departType" jdbcType="VARCHAR" />
+    <result column="depart_his_type" property="departHisType" jdbcType="VARCHAR" />
+    <result column="depart_manager_id" property="departManagerId" jdbcType="VARCHAR" />
+    <result column="depart_parent_id" property="departParentId" jdbcType="VARCHAR" />
+    <result column="f_un_list" property="fUnList" jdbcType="INTEGER" />
+    <result column="f_guide_depart_only" property="fGuideDepartOnly" jdbcType="INTEGER" />
+    <result column="queue_site_id" property="queueSiteId" jdbcType="BIGINT" />
+    <result column="pacs_type" property="pacsType" jdbcType="VARCHAR" />
+    <result column="disp_order" property="dispOrder" jdbcType="INTEGER" />
+    <result column="direction_guide" property="directionGuide" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_dept_id, org_id, branch_id, depart_name, depart_name_abr, depart_name_eng, depart_name_eng_abr, 
+    depart_code, depart_type, depart_his_type, depart_manager_id, depart_parent_id, f_un_list, 
+    f_guide_depart_only, queue_site_id, pacs_type, disp_order, direction_guide, note, 
+    status, createtime, edittime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dept.OrganizationDeptExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_dept
+    where org_dept_id = #{orgDeptId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_dept
+    where org_dept_id = #{orgDeptId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dept.OrganizationDeptExample" >
+    delete from organization_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dept.OrganizationDept" >
+    insert into organization_dept (org_dept_id, org_id, branch_id, 
+      depart_name, depart_name_abr, depart_name_eng, 
+      depart_name_eng_abr, depart_code, depart_type, 
+      depart_his_type, depart_manager_id, depart_parent_id, 
+      f_un_list, f_guide_depart_only, queue_site_id, 
+      pacs_type, disp_order, direction_guide, 
+      note, status, createtime, 
+      edittime)
+    values (#{orgDeptId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, 
+      #{departName,jdbcType=VARCHAR}, #{departNameAbr,jdbcType=VARCHAR}, #{departNameEng,jdbcType=VARCHAR}, 
+      #{departNameEngAbr,jdbcType=VARCHAR}, #{departCode,jdbcType=VARCHAR}, #{departType,jdbcType=VARCHAR}, 
+      #{departHisType,jdbcType=VARCHAR}, #{departManagerId,jdbcType=VARCHAR}, #{departParentId,jdbcType=VARCHAR}, 
+      #{fUnList,jdbcType=INTEGER}, #{fGuideDepartOnly,jdbcType=INTEGER}, #{queueSiteId,jdbcType=BIGINT}, 
+      #{pacsType,jdbcType=VARCHAR}, #{dispOrder,jdbcType=INTEGER}, #{directionGuide,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{edittime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dept.OrganizationDept" >
+    insert into organization_dept
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgDeptId != null" >
+        org_dept_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="departName != null" >
+        depart_name,
+      </if>
+      <if test="departNameAbr != null" >
+        depart_name_abr,
+      </if>
+      <if test="departNameEng != null" >
+        depart_name_eng,
+      </if>
+      <if test="departNameEngAbr != null" >
+        depart_name_eng_abr,
+      </if>
+      <if test="departCode != null" >
+        depart_code,
+      </if>
+      <if test="departType != null" >
+        depart_type,
+      </if>
+      <if test="departHisType != null" >
+        depart_his_type,
+      </if>
+      <if test="departManagerId != null" >
+        depart_manager_id,
+      </if>
+      <if test="departParentId != null" >
+        depart_parent_id,
+      </if>
+      <if test="fUnList != null" >
+        f_un_list,
+      </if>
+      <if test="fGuideDepartOnly != null" >
+        f_guide_depart_only,
+      </if>
+      <if test="queueSiteId != null" >
+        queue_site_id,
+      </if>
+      <if test="pacsType != null" >
+        pacs_type,
+      </if>
+      <if test="dispOrder != null" >
+        disp_order,
+      </if>
+      <if test="directionGuide != null" >
+        direction_guide,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgDeptId != null" >
+        #{orgDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null" >
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="departNameAbr != null" >
+        #{departNameAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="departNameEng != null" >
+        #{departNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="departNameEngAbr != null" >
+        #{departNameEngAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="departCode != null" >
+        #{departCode,jdbcType=VARCHAR},
+      </if>
+      <if test="departType != null" >
+        #{departType,jdbcType=VARCHAR},
+      </if>
+      <if test="departHisType != null" >
+        #{departHisType,jdbcType=VARCHAR},
+      </if>
+      <if test="departManagerId != null" >
+        #{departManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="departParentId != null" >
+        #{departParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="fUnList != null" >
+        #{fUnList,jdbcType=INTEGER},
+      </if>
+      <if test="fGuideDepartOnly != null" >
+        #{fGuideDepartOnly,jdbcType=INTEGER},
+      </if>
+      <if test="queueSiteId != null" >
+        #{queueSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="pacsType != null" >
+        #{pacsType,jdbcType=VARCHAR},
+      </if>
+      <if test="dispOrder != null" >
+        #{dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="directionGuide != null" >
+        #{directionGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dept.OrganizationDeptExample" resultType="java.lang.Integer" >
+    select count(*) from organization_dept
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_dept
+    <set >
+      <if test="record.orgDeptId != null" >
+        org_dept_id = #{record.orgDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departName != null" >
+        depart_name = #{record.departName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departNameAbr != null" >
+        depart_name_abr = #{record.departNameAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departNameEng != null" >
+        depart_name_eng = #{record.departNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departNameEngAbr != null" >
+        depart_name_eng_abr = #{record.departNameEngAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departCode != null" >
+        depart_code = #{record.departCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departType != null" >
+        depart_type = #{record.departType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departHisType != null" >
+        depart_his_type = #{record.departHisType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departManagerId != null" >
+        depart_manager_id = #{record.departManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departParentId != null" >
+        depart_parent_id = #{record.departParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fUnList != null" >
+        f_un_list = #{record.fUnList,jdbcType=INTEGER},
+      </if>
+      <if test="record.fGuideDepartOnly != null" >
+        f_guide_depart_only = #{record.fGuideDepartOnly,jdbcType=INTEGER},
+      </if>
+      <if test="record.queueSiteId != null" >
+        queue_site_id = #{record.queueSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pacsType != null" >
+        pacs_type = #{record.pacsType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispOrder != null" >
+        disp_order = #{record.dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.directionGuide != null" >
+        direction_guide = #{record.directionGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_dept
+    set org_dept_id = #{record.orgDeptId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      branch_id = #{record.branchId,jdbcType=VARCHAR},
+      depart_name = #{record.departName,jdbcType=VARCHAR},
+      depart_name_abr = #{record.departNameAbr,jdbcType=VARCHAR},
+      depart_name_eng = #{record.departNameEng,jdbcType=VARCHAR},
+      depart_name_eng_abr = #{record.departNameEngAbr,jdbcType=VARCHAR},
+      depart_code = #{record.departCode,jdbcType=VARCHAR},
+      depart_type = #{record.departType,jdbcType=VARCHAR},
+      depart_his_type = #{record.departHisType,jdbcType=VARCHAR},
+      depart_manager_id = #{record.departManagerId,jdbcType=VARCHAR},
+      depart_parent_id = #{record.departParentId,jdbcType=VARCHAR},
+      f_un_list = #{record.fUnList,jdbcType=INTEGER},
+      f_guide_depart_only = #{record.fGuideDepartOnly,jdbcType=INTEGER},
+      queue_site_id = #{record.queueSiteId,jdbcType=BIGINT},
+      pacs_type = #{record.pacsType,jdbcType=VARCHAR},
+      disp_order = #{record.dispOrder,jdbcType=INTEGER},
+      direction_guide = #{record.directionGuide,jdbcType=VARCHAR},
+      note = #{record.note,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dept.OrganizationDept" >
+    update organization_dept
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null" >
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="departNameAbr != null" >
+        depart_name_abr = #{departNameAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="departNameEng != null" >
+        depart_name_eng = #{departNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="departNameEngAbr != null" >
+        depart_name_eng_abr = #{departNameEngAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="departCode != null" >
+        depart_code = #{departCode,jdbcType=VARCHAR},
+      </if>
+      <if test="departType != null" >
+        depart_type = #{departType,jdbcType=VARCHAR},
+      </if>
+      <if test="departHisType != null" >
+        depart_his_type = #{departHisType,jdbcType=VARCHAR},
+      </if>
+      <if test="departManagerId != null" >
+        depart_manager_id = #{departManagerId,jdbcType=VARCHAR},
+      </if>
+      <if test="departParentId != null" >
+        depart_parent_id = #{departParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="fUnList != null" >
+        f_un_list = #{fUnList,jdbcType=INTEGER},
+      </if>
+      <if test="fGuideDepartOnly != null" >
+        f_guide_depart_only = #{fGuideDepartOnly,jdbcType=INTEGER},
+      </if>
+      <if test="queueSiteId != null" >
+        queue_site_id = #{queueSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="pacsType != null" >
+        pacs_type = #{pacsType,jdbcType=VARCHAR},
+      </if>
+      <if test="dispOrder != null" >
+        disp_order = #{dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="directionGuide != null" >
+        direction_guide = #{directionGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_dept_id = #{orgDeptId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dept.OrganizationDept" >
+    update organization_dept
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=VARCHAR},
+      depart_name = #{departName,jdbcType=VARCHAR},
+      depart_name_abr = #{departNameAbr,jdbcType=VARCHAR},
+      depart_name_eng = #{departNameEng,jdbcType=VARCHAR},
+      depart_name_eng_abr = #{departNameEngAbr,jdbcType=VARCHAR},
+      depart_code = #{departCode,jdbcType=VARCHAR},
+      depart_type = #{departType,jdbcType=VARCHAR},
+      depart_his_type = #{departHisType,jdbcType=VARCHAR},
+      depart_manager_id = #{departManagerId,jdbcType=VARCHAR},
+      depart_parent_id = #{departParentId,jdbcType=VARCHAR},
+      f_un_list = #{fUnList,jdbcType=INTEGER},
+      f_guide_depart_only = #{fGuideDepartOnly,jdbcType=INTEGER},
+      queue_site_id = #{queueSiteId,jdbcType=BIGINT},
+      pacs_type = #{pacsType,jdbcType=VARCHAR},
+      disp_order = #{dispOrder,jdbcType=INTEGER},
+      direction_guide = #{directionGuide,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP}
+    where org_dept_id = #{orgDeptId,jdbcType=VARCHAR}
+  </update>
+</mapper>

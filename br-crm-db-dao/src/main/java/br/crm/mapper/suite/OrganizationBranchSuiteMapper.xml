@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.suite.OrganizationBranchSuiteMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.suite.OrganizationBranchSuite" >
+    <id column="branch_suite_id" property="branchSuiteId" jdbcType="VARCHAR" />
+    <result column="branch_id" property="branchId" jdbcType="VARCHAR" />
+    <result column="suite_id" property="suiteId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+    <result column="edit_person_id" property="editPersonId" jdbcType="BIGINT" />
+    <result column="edit_person_name" property="editPersonName" jdbcType="VARCHAR" />
+    <result column="edit_person_plat" property="editPersonPlat" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    branch_suite_id, branch_id, suite_id, status, createtime, edittime, edit_person_id, 
+    edit_person_name, edit_person_plat
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.suite.OrganizationBranchSuiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_branch_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_branch_suite
+    where branch_suite_id = #{branchSuiteId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_branch_suite
+    where branch_suite_id = #{branchSuiteId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.suite.OrganizationBranchSuiteExample" >
+    delete from organization_branch_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.suite.OrganizationBranchSuite" >
+    insert into organization_branch_suite (branch_suite_id, branch_id, suite_id, 
+      status, createtime, edittime, 
+      edit_person_id, edit_person_name, edit_person_plat
+      )
+    values (#{branchSuiteId,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, #{suiteId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}, 
+      #{editPersonId,jdbcType=BIGINT}, #{editPersonName,jdbcType=VARCHAR}, #{editPersonPlat,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.suite.OrganizationBranchSuite" >
+    insert into organization_branch_suite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="branchSuiteId != null" >
+        branch_suite_id,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="suiteId != null" >
+        suite_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+      <if test="editPersonId != null" >
+        edit_person_id,
+      </if>
+      <if test="editPersonName != null" >
+        edit_person_name,
+      </if>
+      <if test="editPersonPlat != null" >
+        edit_person_plat,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="branchSuiteId != null" >
+        #{branchSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="suiteId != null" >
+        #{suiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editPersonId != null" >
+        #{editPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="editPersonName != null" >
+        #{editPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="editPersonPlat != null" >
+        #{editPersonPlat,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.suite.OrganizationBranchSuiteExample" resultType="java.lang.Integer" >
+    select count(*) from organization_branch_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_branch_suite
+    <set >
+      <if test="record.branchSuiteId != null" >
+        branch_suite_id = #{record.branchSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.suiteId != null" >
+        suite_id = #{record.suiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.editPersonId != null" >
+        edit_person_id = #{record.editPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="record.editPersonName != null" >
+        edit_person_name = #{record.editPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editPersonPlat != null" >
+        edit_person_plat = #{record.editPersonPlat,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_branch_suite
+    set branch_suite_id = #{record.branchSuiteId,jdbcType=VARCHAR},
+      branch_id = #{record.branchId,jdbcType=VARCHAR},
+      suite_id = #{record.suiteId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      edit_person_id = #{record.editPersonId,jdbcType=BIGINT},
+      edit_person_name = #{record.editPersonName,jdbcType=VARCHAR},
+      edit_person_plat = #{record.editPersonPlat,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.suite.OrganizationBranchSuite" >
+    update organization_branch_suite
+    <set >
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="suiteId != null" >
+        suite_id = #{suiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editPersonId != null" >
+        edit_person_id = #{editPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="editPersonName != null" >
+        edit_person_name = #{editPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="editPersonPlat != null" >
+        edit_person_plat = #{editPersonPlat,jdbcType=INTEGER},
+      </if>
+    </set>
+    where branch_suite_id = #{branchSuiteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.suite.OrganizationBranchSuite" >
+    update organization_branch_suite
+    set branch_id = #{branchId,jdbcType=VARCHAR},
+      suite_id = #{suiteId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP},
+      edit_person_id = #{editPersonId,jdbcType=BIGINT},
+      edit_person_name = #{editPersonName,jdbcType=VARCHAR},
+      edit_person_plat = #{editPersonPlat,jdbcType=INTEGER}
+    where branch_suite_id = #{branchSuiteId,jdbcType=VARCHAR}
+  </update>
+</mapper>

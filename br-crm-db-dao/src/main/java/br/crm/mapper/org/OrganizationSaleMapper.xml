@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationSaleMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationSale" >
+    <id column="org_sale_id" property="orgSaleId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_sale_person_id" property="orgSalePersonId" jdbcType="BIGINT" />
+    <result column="org_sale_person_name" property="orgSalePersonName" jdbcType="VARCHAR" />
+    <result column="org_sale_status" property="orgSaleStatus" jdbcType="INTEGER" />
+    <result column="org_sale_create_time" property="orgSaleCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_sale_edit_time" property="orgSaleEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_sale_id, org_id, org_sale_person_id, org_sale_person_name, org_sale_status, org_sale_create_time, 
+    org_sale_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationSaleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_sale
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_sale
+    where org_sale_id = #{orgSaleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_sale
+    where org_sale_id = #{orgSaleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationSaleExample" >
+    delete from organization_sale
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationSale" >
+    insert into organization_sale (org_sale_id, org_id, org_sale_person_id, 
+      org_sale_person_name, org_sale_status, org_sale_create_time, 
+      org_sale_edit_time)
+    values (#{orgSaleId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgSalePersonId,jdbcType=BIGINT}, 
+      #{orgSalePersonName,jdbcType=VARCHAR}, #{orgSaleStatus,jdbcType=INTEGER}, #{orgSaleCreateTime,jdbcType=TIMESTAMP}, 
+      #{orgSaleEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationSale" useGeneratedKeys="true" keyProperty="orgSaleId"  >
+    insert into organization_sale
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgSaleId != null" >
+        org_sale_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgSalePersonId != null" >
+        org_sale_person_id,
+      </if>
+      <if test="orgSalePersonName != null" >
+        org_sale_person_name,
+      </if>
+      <if test="orgSaleStatus != null" >
+        org_sale_status,
+      </if>
+      <if test="orgSaleCreateTime != null" >
+        org_sale_create_time,
+      </if>
+      <if test="orgSaleEditTime != null" >
+        org_sale_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgSaleId != null" >
+        #{orgSaleId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSalePersonId != null" >
+        #{orgSalePersonId,jdbcType=BIGINT},
+      </if>
+      <if test="orgSalePersonName != null" >
+        #{orgSalePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSaleStatus != null" >
+        #{orgSaleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgSaleCreateTime != null" >
+        #{orgSaleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgSaleEditTime != null" >
+        #{orgSaleEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationSaleExample" resultType="java.lang.Integer" >
+    select count(*) from organization_sale
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_sale
+    <set >
+      <if test="record.orgSaleId != null" >
+        org_sale_id = #{record.orgSaleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgSalePersonId != null" >
+        org_sale_person_id = #{record.orgSalePersonId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgSalePersonName != null" >
+        org_sale_person_name = #{record.orgSalePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgSaleStatus != null" >
+        org_sale_status = #{record.orgSaleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgSaleCreateTime != null" >
+        org_sale_create_time = #{record.orgSaleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgSaleEditTime != null" >
+        org_sale_edit_time = #{record.orgSaleEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_sale
+    set org_sale_id = #{record.orgSaleId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_sale_person_id = #{record.orgSalePersonId,jdbcType=BIGINT},
+      org_sale_person_name = #{record.orgSalePersonName,jdbcType=VARCHAR},
+      org_sale_status = #{record.orgSaleStatus,jdbcType=INTEGER},
+      org_sale_create_time = #{record.orgSaleCreateTime,jdbcType=TIMESTAMP},
+      org_sale_edit_time = #{record.orgSaleEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationSale" >
+    update organization_sale
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSalePersonId != null" >
+        org_sale_person_id = #{orgSalePersonId,jdbcType=BIGINT},
+      </if>
+      <if test="orgSalePersonName != null" >
+        org_sale_person_name = #{orgSalePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSaleStatus != null" >
+        org_sale_status = #{orgSaleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgSaleCreateTime != null" >
+        org_sale_create_time = #{orgSaleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgSaleEditTime != null" >
+        org_sale_edit_time = #{orgSaleEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_sale_id = #{orgSaleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationSale" >
+    update organization_sale
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_sale_person_id = #{orgSalePersonId,jdbcType=BIGINT},
+      org_sale_person_name = #{orgSalePersonName,jdbcType=VARCHAR},
+      org_sale_status = #{orgSaleStatus,jdbcType=INTEGER},
+      org_sale_create_time = #{orgSaleCreateTime,jdbcType=TIMESTAMP},
+      org_sale_edit_time = #{orgSaleEditTime,jdbcType=TIMESTAMP}
+    where org_sale_id = #{orgSaleId,jdbcType=BIGINT}
+  </update>
+</mapper>

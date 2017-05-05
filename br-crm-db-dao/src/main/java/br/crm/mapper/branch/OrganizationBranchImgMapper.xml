@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.branch.OrganizationBranchImgMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.branch.OrganizationBranchImg" >
+    <id column="org_branch_img_id" property="orgBranchImgId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_branch_id" property="orgBranchId" jdbcType="VARCHAR" />
+    <result column="dict_img_id" property="dictImgId" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+    <result column="org_branch_img_type" property="orgBranchImgType" jdbcType="INTEGER" />
+    <result column="org_branch_img_note" property="orgBranchImgNote" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_branch_img_id, org_id, org_branch_id, dict_img_id, create_time, edit_time, org_branch_img_type, 
+    org_branch_img_note
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.branch.OrganizationBranchImgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_branch_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_branch_img
+    where org_branch_img_id = #{orgBranchImgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_branch_img
+    where org_branch_img_id = #{orgBranchImgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.branch.OrganizationBranchImgExample" >
+    delete from organization_branch_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.branch.OrganizationBranchImg" >
+    insert into organization_branch_img (org_branch_img_id, org_id, org_branch_id, 
+      dict_img_id, create_time, edit_time, 
+      org_branch_img_type, org_branch_img_note)
+    values (#{orgBranchImgId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{orgBranchId,jdbcType=VARCHAR}, 
+      #{dictImgId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{orgBranchImgType,jdbcType=INTEGER}, #{orgBranchImgNote,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.branch.OrganizationBranchImg" >
+    insert into organization_branch_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgBranchImgId != null" >
+        org_branch_img_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgBranchId != null" >
+        org_branch_id,
+      </if>
+      <if test="dictImgId != null" >
+        dict_img_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="editTime != null" >
+        edit_time,
+      </if>
+      <if test="orgBranchImgType != null" >
+        org_branch_img_type,
+      </if>
+      <if test="orgBranchImgNote != null" >
+        org_branch_img_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgBranchImgId != null" >
+        #{orgBranchImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBranchId != null" >
+        #{orgBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictImgId != null" >
+        #{dictImgId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgBranchImgType != null" >
+        #{orgBranchImgType,jdbcType=INTEGER},
+      </if>
+      <if test="orgBranchImgNote != null" >
+        #{orgBranchImgNote,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.branch.OrganizationBranchImgExample" resultType="java.lang.Integer" >
+    select count(*) from organization_branch_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_branch_img
+    <set >
+      <if test="record.orgBranchImgId != null" >
+        org_branch_img_id = #{record.orgBranchImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgBranchId != null" >
+        org_branch_id = #{record.orgBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictImgId != null" >
+        dict_img_id = #{record.dictImgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.editTime != null" >
+        edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgBranchImgType != null" >
+        org_branch_img_type = #{record.orgBranchImgType,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgBranchImgNote != null" >
+        org_branch_img_note = #{record.orgBranchImgNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_branch_img
+    set org_branch_img_id = #{record.orgBranchImgId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_branch_id = #{record.orgBranchId,jdbcType=VARCHAR},
+      dict_img_id = #{record.dictImgId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      org_branch_img_type = #{record.orgBranchImgType,jdbcType=INTEGER},
+      org_branch_img_note = #{record.orgBranchImgNote,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.branch.OrganizationBranchImg" >
+    update organization_branch_img
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBranchId != null" >
+        org_branch_id = #{orgBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictImgId != null" >
+        dict_img_id = #{dictImgId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        edit_time = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgBranchImgType != null" >
+        org_branch_img_type = #{orgBranchImgType,jdbcType=INTEGER},
+      </if>
+      <if test="orgBranchImgNote != null" >
+        org_branch_img_note = #{orgBranchImgNote,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where org_branch_img_id = #{orgBranchImgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.branch.OrganizationBranchImg" >
+    update organization_branch_img
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_branch_id = #{orgBranchId,jdbcType=VARCHAR},
+      dict_img_id = #{dictImgId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      edit_time = #{editTime,jdbcType=TIMESTAMP},
+      org_branch_img_type = #{orgBranchImgType,jdbcType=INTEGER},
+      org_branch_img_note = #{orgBranchImgNote,jdbcType=VARCHAR}
+    where org_branch_img_id = #{orgBranchImgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

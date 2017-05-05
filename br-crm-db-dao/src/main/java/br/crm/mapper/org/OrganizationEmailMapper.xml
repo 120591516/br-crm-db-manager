@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationEmailMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationEmail" >
+    <id column="org_email_id" property="orgEmailId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="dict_email_id" property="dictEmailId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_email_id, org_id, dict_email_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationEmailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_email
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_email
+    where org_email_id = #{orgEmailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_email
+    where org_email_id = #{orgEmailId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationEmailExample" >
+    delete from organization_email
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationEmail" >
+    insert into organization_email (org_email_id, org_id, dict_email_id
+      )
+    values (#{orgEmailId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{dictEmailId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationEmail" >
+    insert into organization_email
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgEmailId != null" >
+        org_email_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="dictEmailId != null" >
+        dict_email_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgEmailId != null" >
+        #{orgEmailId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailId != null" >
+        #{dictEmailId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationEmailExample" resultType="java.lang.Integer" >
+    select count(*) from organization_email
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_email
+    <set >
+      <if test="record.orgEmailId != null" >
+        org_email_id = #{record.orgEmailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEmailId != null" >
+        dict_email_id = #{record.dictEmailId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_email
+    set org_email_id = #{record.orgEmailId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      dict_email_id = #{record.dictEmailId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationEmail" >
+    update organization_email
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailId != null" >
+        dict_email_id = #{dictEmailId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where org_email_id = #{orgEmailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationEmail" >
+    update organization_email
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      dict_email_id = #{dictEmailId,jdbcType=BIGINT}
+    where org_email_id = #{orgEmailId,jdbcType=BIGINT}
+  </update>
+</mapper>

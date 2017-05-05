@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictEmailRecordMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.DictEmailRecord" >
+    <id column="dict_email_id" property="dictEmailId" jdbcType="BIGINT" />
+    <result column="dict_email_title" property="dictEmailTitle" jdbcType="VARCHAR" />
+    <result column="dict_email_content" property="dictEmailContent" jdbcType="VARCHAR" />
+    <result column="dict_email_to" property="dictEmailTo" jdbcType="VARCHAR" />
+    <result column="dict_email_attachment" property="dictEmailAttachment" jdbcType="VARCHAR" />
+    <result column="dict_email_create_time" property="dictEmailCreateTime" jdbcType="TIMESTAMP" />
+    <result column="dict_email_status" property="dictEmailStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dict_email_id, dict_email_title, dict_email_content, dict_email_to, dict_email_attachment, 
+    dict_email_create_time, dict_email_status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictEmailRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Dict_EMAIL_Record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from Dict_EMAIL_Record
+    where dict_email_id = #{dictEmailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from Dict_EMAIL_Record
+    where dict_email_id = #{dictEmailId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictEmailRecordExample" >
+    delete from Dict_EMAIL_Record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictEmailRecord" >
+    insert into Dict_EMAIL_Record (dict_email_id, dict_email_title, dict_email_content, 
+      dict_email_to, dict_email_attachment, dict_email_create_time, 
+      dict_email_status)
+    values (#{dictEmailId,jdbcType=BIGINT}, #{dictEmailTitle,jdbcType=VARCHAR}, #{dictEmailContent,jdbcType=VARCHAR}, 
+      #{dictEmailTo,jdbcType=VARCHAR}, #{dictEmailAttachment,jdbcType=VARCHAR}, #{dictEmailCreateTime,jdbcType=TIMESTAMP}, 
+      #{dictEmailStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictEmailRecord" useGeneratedKeys="true" keyProperty="dictEmailId" >
+    insert into Dict_EMAIL_Record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictEmailId != null" >
+        dict_email_id,
+      </if>
+      <if test="dictEmailTitle != null" >
+        dict_email_title,
+      </if>
+      <if test="dictEmailContent != null" >
+        dict_email_content,
+      </if>
+      <if test="dictEmailTo != null" >
+        dict_email_to,
+      </if>
+      <if test="dictEmailAttachment != null" >
+        dict_email_attachment,
+      </if>
+      <if test="dictEmailCreateTime != null" >
+        dict_email_create_time,
+      </if>
+      <if test="dictEmailStatus != null" >
+        dict_email_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictEmailId != null" >
+        #{dictEmailId,jdbcType=BIGINT},
+      </if>
+      <if test="dictEmailTitle != null" >
+        #{dictEmailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailContent != null" >
+        #{dictEmailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailTo != null" >
+        #{dictEmailTo,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailAttachment != null" >
+        #{dictEmailAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailCreateTime != null" >
+        #{dictEmailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictEmailStatus != null" >
+        #{dictEmailStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictEmailRecordExample" resultType="java.lang.Integer" >
+    select count(*) from Dict_EMAIL_Record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Dict_EMAIL_Record
+    <set >
+      <if test="record.dictEmailId != null" >
+        dict_email_id = #{record.dictEmailId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dictEmailTitle != null" >
+        dict_email_title = #{record.dictEmailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEmailContent != null" >
+        dict_email_content = #{record.dictEmailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEmailTo != null" >
+        dict_email_to = #{record.dictEmailTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEmailAttachment != null" >
+        dict_email_attachment = #{record.dictEmailAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictEmailCreateTime != null" >
+        dict_email_create_time = #{record.dictEmailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dictEmailStatus != null" >
+        dict_email_status = #{record.dictEmailStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Dict_EMAIL_Record
+    set dict_email_id = #{record.dictEmailId,jdbcType=BIGINT},
+      dict_email_title = #{record.dictEmailTitle,jdbcType=VARCHAR},
+      dict_email_content = #{record.dictEmailContent,jdbcType=VARCHAR},
+      dict_email_to = #{record.dictEmailTo,jdbcType=VARCHAR},
+      dict_email_attachment = #{record.dictEmailAttachment,jdbcType=VARCHAR},
+      dict_email_create_time = #{record.dictEmailCreateTime,jdbcType=TIMESTAMP},
+      dict_email_status = #{record.dictEmailStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictEmailRecord" >
+    update Dict_EMAIL_Record
+    <set >
+      <if test="dictEmailTitle != null" >
+        dict_email_title = #{dictEmailTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailContent != null" >
+        dict_email_content = #{dictEmailContent,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailTo != null" >
+        dict_email_to = #{dictEmailTo,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailAttachment != null" >
+        dict_email_attachment = #{dictEmailAttachment,jdbcType=VARCHAR},
+      </if>
+      <if test="dictEmailCreateTime != null" >
+        dict_email_create_time = #{dictEmailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictEmailStatus != null" >
+        dict_email_status = #{dictEmailStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dict_email_id = #{dictEmailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.DictEmailRecord" >
+    update Dict_EMAIL_Record
+    set dict_email_title = #{dictEmailTitle,jdbcType=VARCHAR},
+      dict_email_content = #{dictEmailContent,jdbcType=VARCHAR},
+      dict_email_to = #{dictEmailTo,jdbcType=VARCHAR},
+      dict_email_attachment = #{dictEmailAttachment,jdbcType=VARCHAR},
+      dict_email_create_time = #{dictEmailCreateTime,jdbcType=TIMESTAMP},
+      dict_email_status = #{dictEmailStatus,jdbcType=INTEGER}
+    where dict_email_id = #{dictEmailId,jdbcType=BIGINT}
+  </update>
+</mapper>

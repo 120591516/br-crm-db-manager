@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictPatientClassMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.DictPatientClass" >
+    <id column="customer_class_id" property="customerClassId" jdbcType="VARCHAR" />
+    <result column="customer_class_name" property="customerClassName" jdbcType="VARCHAR" />
+    <result column="customer_class_name_eng" property="customerClassNameEng" jdbcType="VARCHAR" />
+    <result column="customer_class_code" property="customerClassCode" jdbcType="VARCHAR" />
+    <result column="customer_class_input_code" property="customerClassInputCode" jdbcType="VARCHAR" />
+    <result column="customer_class_note" property="customerClassNote" jdbcType="VARCHAR" />
+    <result column="customer_class_status" property="customerClassStatus" jdbcType="INTEGER" />
+    <result column="customer_class_create_time" property="customerClassCreateTime" jdbcType="TIMESTAMP" />
+    <result column="customer_class_edit_time" property="customerClassEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_class_id, customer_class_name, customer_class_name_eng, customer_class_code, 
+    customer_class_input_code, customer_class_note, customer_class_status, customer_class_create_time, 
+    customer_class_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictPatientClassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dict_patient_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dict_patient_class
+    where customer_class_id = #{customerClassId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dict_patient_class
+    where customer_class_id = #{customerClassId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictPatientClassExample" >
+    delete from dict_patient_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictPatientClass" >
+    insert into dict_patient_class (customer_class_id, customer_class_name, 
+      customer_class_name_eng, customer_class_code, 
+      customer_class_input_code, customer_class_note, 
+      customer_class_status, customer_class_create_time, 
+      customer_class_edit_time)
+    values (#{customerClassId,jdbcType=VARCHAR}, #{customerClassName,jdbcType=VARCHAR}, 
+      #{customerClassNameEng,jdbcType=VARCHAR}, #{customerClassCode,jdbcType=VARCHAR}, 
+      #{customerClassInputCode,jdbcType=VARCHAR}, #{customerClassNote,jdbcType=VARCHAR}, 
+      #{customerClassStatus,jdbcType=INTEGER}, #{customerClassCreateTime,jdbcType=TIMESTAMP}, 
+      #{customerClassEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictPatientClass" >
+    insert into dict_patient_class
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerClassId != null" >
+        customer_class_id,
+      </if>
+      <if test="customerClassName != null" >
+        customer_class_name,
+      </if>
+      <if test="customerClassNameEng != null" >
+        customer_class_name_eng,
+      </if>
+      <if test="customerClassCode != null" >
+        customer_class_code,
+      </if>
+      <if test="customerClassInputCode != null" >
+        customer_class_input_code,
+      </if>
+      <if test="customerClassNote != null" >
+        customer_class_note,
+      </if>
+      <if test="customerClassStatus != null" >
+        customer_class_status,
+      </if>
+      <if test="customerClassCreateTime != null" >
+        customer_class_create_time,
+      </if>
+      <if test="customerClassEditTime != null" >
+        customer_class_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerClassId != null" >
+        #{customerClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassName != null" >
+        #{customerClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassNameEng != null" >
+        #{customerClassNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassCode != null" >
+        #{customerClassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassInputCode != null" >
+        #{customerClassInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassNote != null" >
+        #{customerClassNote,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassStatus != null" >
+        #{customerClassStatus,jdbcType=INTEGER},
+      </if>
+      <if test="customerClassCreateTime != null" >
+        #{customerClassCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerClassEditTime != null" >
+        #{customerClassEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictPatientClassExample" resultType="java.lang.Integer" >
+    select count(*) from dict_patient_class
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dict_patient_class
+    <set >
+      <if test="record.customerClassId != null" >
+        customer_class_id = #{record.customerClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerClassName != null" >
+        customer_class_name = #{record.customerClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerClassNameEng != null" >
+        customer_class_name_eng = #{record.customerClassNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerClassCode != null" >
+        customer_class_code = #{record.customerClassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerClassInputCode != null" >
+        customer_class_input_code = #{record.customerClassInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerClassNote != null" >
+        customer_class_note = #{record.customerClassNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerClassStatus != null" >
+        customer_class_status = #{record.customerClassStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerClassCreateTime != null" >
+        customer_class_create_time = #{record.customerClassCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customerClassEditTime != null" >
+        customer_class_edit_time = #{record.customerClassEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dict_patient_class
+    set customer_class_id = #{record.customerClassId,jdbcType=VARCHAR},
+      customer_class_name = #{record.customerClassName,jdbcType=VARCHAR},
+      customer_class_name_eng = #{record.customerClassNameEng,jdbcType=VARCHAR},
+      customer_class_code = #{record.customerClassCode,jdbcType=VARCHAR},
+      customer_class_input_code = #{record.customerClassInputCode,jdbcType=VARCHAR},
+      customer_class_note = #{record.customerClassNote,jdbcType=VARCHAR},
+      customer_class_status = #{record.customerClassStatus,jdbcType=INTEGER},
+      customer_class_create_time = #{record.customerClassCreateTime,jdbcType=TIMESTAMP},
+      customer_class_edit_time = #{record.customerClassEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictPatientClass" >
+    update dict_patient_class
+    <set >
+      <if test="customerClassName != null" >
+        customer_class_name = #{customerClassName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassNameEng != null" >
+        customer_class_name_eng = #{customerClassNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassCode != null" >
+        customer_class_code = #{customerClassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassInputCode != null" >
+        customer_class_input_code = #{customerClassInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassNote != null" >
+        customer_class_note = #{customerClassNote,jdbcType=VARCHAR},
+      </if>
+      <if test="customerClassStatus != null" >
+        customer_class_status = #{customerClassStatus,jdbcType=INTEGER},
+      </if>
+      <if test="customerClassCreateTime != null" >
+        customer_class_create_time = #{customerClassCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerClassEditTime != null" >
+        customer_class_edit_time = #{customerClassEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_class_id = #{customerClassId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.DictPatientClass" >
+    update dict_patient_class
+    set customer_class_name = #{customerClassName,jdbcType=VARCHAR},
+      customer_class_name_eng = #{customerClassNameEng,jdbcType=VARCHAR},
+      customer_class_code = #{customerClassCode,jdbcType=VARCHAR},
+      customer_class_input_code = #{customerClassInputCode,jdbcType=VARCHAR},
+      customer_class_note = #{customerClassNote,jdbcType=VARCHAR},
+      customer_class_status = #{customerClassStatus,jdbcType=INTEGER},
+      customer_class_create_time = #{customerClassCreateTime,jdbcType=TIMESTAMP},
+      customer_class_edit_time = #{customerClassEditTime,jdbcType=TIMESTAMP}
+    where customer_class_id = #{customerClassId,jdbcType=VARCHAR}
+  </update>
+</mapper>

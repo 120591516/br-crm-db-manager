@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationVisitMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationVisit" >
+    <id column="org_visit_id" property="orgVisitId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_visit_time" property="orgVisitTime" jdbcType="TIMESTAMP" />
+    <result column="org_visit_opinion" property="orgVisitOpinion" jdbcType="VARCHAR" />
+    <result column="org_visit_person_id" property="orgVisitPersonId" jdbcType="BIGINT" />
+    <result column="org_visit_person_name" property="orgVisitPersonName" jdbcType="VARCHAR" />
+    <result column="org_visit_next_time" property="orgVisitNextTime" jdbcType="TIMESTAMP" />
+    <result column="org_visit_create_time" property="orgVisitCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_visit_edit_time" property="orgVisitEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_visit_id, org_id, org_visit_time, org_visit_opinion, org_visit_person_id, org_visit_person_name, 
+    org_visit_next_time, org_visit_create_time, org_visit_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationVisitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_visit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_visit
+    where org_visit_id = #{orgVisitId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_visit
+    where org_visit_id = #{orgVisitId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationVisitExample" >
+    delete from organization_visit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationVisit" >
+    insert into organization_visit (org_visit_id, org_id, org_visit_time, 
+      org_visit_opinion, org_visit_person_id, org_visit_person_name, 
+      org_visit_next_time, org_visit_create_time, 
+      org_visit_edit_time)
+    values (#{orgVisitId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgVisitTime,jdbcType=TIMESTAMP}, 
+      #{orgVisitOpinion,jdbcType=VARCHAR}, #{orgVisitPersonId,jdbcType=BIGINT}, #{orgVisitPersonName,jdbcType=VARCHAR}, 
+      #{orgVisitNextTime,jdbcType=TIMESTAMP}, #{orgVisitCreateTime,jdbcType=TIMESTAMP}, 
+      #{orgVisitEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationVisit" useGeneratedKeys="true" keyProperty="orgVisitId" >
+    insert into organization_visit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgVisitId != null" >
+        org_visit_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgVisitTime != null" >
+        org_visit_time,
+      </if>
+      <if test="orgVisitOpinion != null" >
+        org_visit_opinion,
+      </if>
+      <if test="orgVisitPersonId != null" >
+        org_visit_person_id,
+      </if>
+      <if test="orgVisitPersonName != null" >
+        org_visit_person_name,
+      </if>
+      <if test="orgVisitNextTime != null" >
+        org_visit_next_time,
+      </if>
+      <if test="orgVisitCreateTime != null" >
+        org_visit_create_time,
+      </if>
+      <if test="orgVisitEditTime != null" >
+        org_visit_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgVisitId != null" >
+        #{orgVisitId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgVisitTime != null" >
+        #{orgVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgVisitOpinion != null" >
+        #{orgVisitOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="orgVisitPersonId != null" >
+        #{orgVisitPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="orgVisitPersonName != null" >
+        #{orgVisitPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgVisitNextTime != null" >
+        #{orgVisitNextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgVisitCreateTime != null" >
+        #{orgVisitCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgVisitEditTime != null" >
+        #{orgVisitEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationVisitExample" resultType="java.lang.Integer" >
+    select count(*) from organization_visit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_visit
+    <set >
+      <if test="record.orgVisitId != null" >
+        org_visit_id = #{record.orgVisitId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgVisitTime != null" >
+        org_visit_time = #{record.orgVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgVisitOpinion != null" >
+        org_visit_opinion = #{record.orgVisitOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgVisitPersonId != null" >
+        org_visit_person_id = #{record.orgVisitPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgVisitPersonName != null" >
+        org_visit_person_name = #{record.orgVisitPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgVisitNextTime != null" >
+        org_visit_next_time = #{record.orgVisitNextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgVisitCreateTime != null" >
+        org_visit_create_time = #{record.orgVisitCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgVisitEditTime != null" >
+        org_visit_edit_time = #{record.orgVisitEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_visit
+    set org_visit_id = #{record.orgVisitId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_visit_time = #{record.orgVisitTime,jdbcType=TIMESTAMP},
+      org_visit_opinion = #{record.orgVisitOpinion,jdbcType=VARCHAR},
+      org_visit_person_id = #{record.orgVisitPersonId,jdbcType=BIGINT},
+      org_visit_person_name = #{record.orgVisitPersonName,jdbcType=VARCHAR},
+      org_visit_next_time = #{record.orgVisitNextTime,jdbcType=TIMESTAMP},
+      org_visit_create_time = #{record.orgVisitCreateTime,jdbcType=TIMESTAMP},
+      org_visit_edit_time = #{record.orgVisitEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationVisit" >
+    update organization_visit
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgVisitTime != null" >
+        org_visit_time = #{orgVisitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgVisitOpinion != null" >
+        org_visit_opinion = #{orgVisitOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="orgVisitPersonId != null" >
+        org_visit_person_id = #{orgVisitPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="orgVisitPersonName != null" >
+        org_visit_person_name = #{orgVisitPersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgVisitNextTime != null" >
+        org_visit_next_time = #{orgVisitNextTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgVisitCreateTime != null" >
+        org_visit_create_time = #{orgVisitCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgVisitEditTime != null" >
+        org_visit_edit_time = #{orgVisitEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_visit_id = #{orgVisitId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationVisit" >
+    update organization_visit
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_visit_time = #{orgVisitTime,jdbcType=TIMESTAMP},
+      org_visit_opinion = #{orgVisitOpinion,jdbcType=VARCHAR},
+      org_visit_person_id = #{orgVisitPersonId,jdbcType=BIGINT},
+      org_visit_person_name = #{orgVisitPersonName,jdbcType=VARCHAR},
+      org_visit_next_time = #{orgVisitNextTime,jdbcType=TIMESTAMP},
+      org_visit_create_time = #{orgVisitCreateTime,jdbcType=TIMESTAMP},
+      org_visit_edit_time = #{orgVisitEditTime,jdbcType=TIMESTAMP}
+    where org_visit_id = #{orgVisitId,jdbcType=BIGINT}
+  </update>
+</mapper>

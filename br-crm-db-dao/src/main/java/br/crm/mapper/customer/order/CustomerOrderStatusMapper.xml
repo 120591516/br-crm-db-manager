@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.customer.order.CustomerOrderStatusMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.customer.order.CustomerOrderStatus" >
+    <id column="customer_order_status_id" property="customerOrderStatusId" jdbcType="INTEGER" />
+    <result column="customer_order_status_name" property="customerOrderStatusName" jdbcType="VARCHAR" />
+    <result column="customer_order_status_create_time" property="customerOrderStatusCreateTime" jdbcType="TIMESTAMP" />
+    <result column="customer_order_status_edit_time" property="customerOrderStatusEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_order_status_id, customer_order_status_name, customer_order_status_create_time, 
+    customer_order_status_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.customer.order.CustomerOrderStatusExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_order_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_order_status
+    where customer_order_status_id = #{customerOrderStatusId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customer_order_status
+    where customer_order_status_id = #{customerOrderStatusId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.customer.order.CustomerOrderStatusExample" >
+    delete from customer_order_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.customer.order.CustomerOrderStatus" >
+    insert into customer_order_status (customer_order_status_id, customer_order_status_name, 
+      customer_order_status_create_time, customer_order_status_edit_time
+      )
+    values (#{customerOrderStatusId,jdbcType=INTEGER}, #{customerOrderStatusName,jdbcType=VARCHAR}, 
+      #{customerOrderStatusCreateTime,jdbcType=TIMESTAMP}, #{customerOrderStatusEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.customer.order.CustomerOrderStatus" >
+    insert into customer_order_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerOrderStatusId != null" >
+        customer_order_status_id,
+      </if>
+      <if test="customerOrderStatusName != null" >
+        customer_order_status_name,
+      </if>
+      <if test="customerOrderStatusCreateTime != null" >
+        customer_order_status_create_time,
+      </if>
+      <if test="customerOrderStatusEditTime != null" >
+        customer_order_status_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerOrderStatusId != null" >
+        #{customerOrderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="customerOrderStatusName != null" >
+        #{customerOrderStatusName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderStatusCreateTime != null" >
+        #{customerOrderStatusCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerOrderStatusEditTime != null" >
+        #{customerOrderStatusEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.customer.order.CustomerOrderStatusExample" resultType="java.lang.Integer" >
+    select count(*) from customer_order_status
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_order_status
+    <set >
+      <if test="record.customerOrderStatusId != null" >
+        customer_order_status_id = #{record.customerOrderStatusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerOrderStatusName != null" >
+        customer_order_status_name = #{record.customerOrderStatusName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerOrderStatusCreateTime != null" >
+        customer_order_status_create_time = #{record.customerOrderStatusCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customerOrderStatusEditTime != null" >
+        customer_order_status_edit_time = #{record.customerOrderStatusEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_order_status
+    set customer_order_status_id = #{record.customerOrderStatusId,jdbcType=INTEGER},
+      customer_order_status_name = #{record.customerOrderStatusName,jdbcType=VARCHAR},
+      customer_order_status_create_time = #{record.customerOrderStatusCreateTime,jdbcType=TIMESTAMP},
+      customer_order_status_edit_time = #{record.customerOrderStatusEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.customer.order.CustomerOrderStatus" >
+    update customer_order_status
+    <set >
+      <if test="customerOrderStatusName != null" >
+        customer_order_status_name = #{customerOrderStatusName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderStatusCreateTime != null" >
+        customer_order_status_create_time = #{customerOrderStatusCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerOrderStatusEditTime != null" >
+        customer_order_status_edit_time = #{customerOrderStatusEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_order_status_id = #{customerOrderStatusId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.customer.order.CustomerOrderStatus" >
+    update customer_order_status
+    set customer_order_status_name = #{customerOrderStatusName,jdbcType=VARCHAR},
+      customer_order_status_create_time = #{customerOrderStatusCreateTime,jdbcType=TIMESTAMP},
+      customer_order_status_edit_time = #{customerOrderStatusEditTime,jdbcType=TIMESTAMP}
+    where customer_order_status_id = #{customerOrderStatusId,jdbcType=INTEGER}
+  </update>
+</mapper>

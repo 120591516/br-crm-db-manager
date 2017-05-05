@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.firstshow.FirstimgshowMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.firstshow.Firstimgshow" >
+    <id column="firstimgshow_id" property="firstimgshowId" jdbcType="VARCHAR" />
+    <result column="firstimgshow_title" property="firstimgshowTitle" jdbcType="VARCHAR" />
+    <result column="firstimgshow_title_desc" property="firstimgshowTitleDesc" jdbcType="VARCHAR" />
+    <result column="firstimgshow_img_id" property="firstimgshowImgId" jdbcType="VARCHAR" />
+    <result column="firstimgshow_img_url" property="firstimgshowImgUrl" jdbcType="VARCHAR" />
+    <result column="firstimgshow_data_id" property="firstimgshowDataId" jdbcType="VARCHAR" />
+    <result column="firstimgshow_data_type" property="firstimgshowDataType" jdbcType="INTEGER" />
+    <result column="firstimgshow_data_org_id" property="firstimgshowDataOrgId" jdbcType="VARCHAR" />
+    <result column="firstimgshow_index" property="firstimgshowIndex" jdbcType="INTEGER" />
+    <result column="firstimgshow_status" property="firstimgshowStatus" jdbcType="INTEGER" />
+    <result column="firstimgshow_created" property="firstimgshowCreated" jdbcType="TIMESTAMP" />
+    <result column="firstimgshow_updated" property="firstimgshowUpdated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.firstshow.Firstimgshow" extends="BaseResultMap" >
+    <result column="firstimgshow_content" property="firstimgshowContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    firstimgshow_id, firstimgshow_title, firstimgshow_title_desc, firstimgshow_img_id, 
+    firstimgshow_img_url, firstimgshow_data_id, firstimgshow_data_type, firstimgshow_data_org_id, 
+    firstimgshow_index, firstimgshow_status, firstimgshow_created, firstimgshow_updated
+  </sql>
+  <sql id="Blob_Column_List" >
+    firstimgshow_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.firstshow.FirstimgshowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from firstimgshow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.firstshow.FirstimgshowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from firstimgshow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from firstimgshow
+    where firstimgshow_id = #{firstimgshowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from firstimgshow
+    where firstimgshow_id = #{firstimgshowId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.firstshow.FirstimgshowExample" >
+    delete from firstimgshow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.firstshow.Firstimgshow" >
+    insert into firstimgshow (firstimgshow_id, firstimgshow_title, 
+      firstimgshow_title_desc, firstimgshow_img_id, 
+      firstimgshow_img_url, firstimgshow_data_id, 
+      firstimgshow_data_type, firstimgshow_data_org_id, 
+      firstimgshow_index, firstimgshow_status, 
+      firstimgshow_created, firstimgshow_updated, 
+      firstimgshow_content)
+    values (#{firstimgshowId,jdbcType=VARCHAR}, #{firstimgshowTitle,jdbcType=VARCHAR}, 
+      #{firstimgshowTitleDesc,jdbcType=VARCHAR}, #{firstimgshowImgId,jdbcType=VARCHAR}, 
+      #{firstimgshowImgUrl,jdbcType=VARCHAR}, #{firstimgshowDataId,jdbcType=VARCHAR}, 
+      #{firstimgshowDataType,jdbcType=INTEGER}, #{firstimgshowDataOrgId,jdbcType=VARCHAR}, 
+      #{firstimgshowIndex,jdbcType=INTEGER}, #{firstimgshowStatus,jdbcType=INTEGER}, 
+      #{firstimgshowCreated,jdbcType=TIMESTAMP}, #{firstimgshowUpdated,jdbcType=TIMESTAMP}, 
+      #{firstimgshowContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.firstshow.Firstimgshow" useGeneratedKeys="true" keyProperty="firstimgshowId" >
+    insert into firstimgshow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="firstimgshowId != null" >
+        firstimgshow_id,
+      </if>
+      <if test="firstimgshowTitle != null" >
+        firstimgshow_title,
+      </if>
+      <if test="firstimgshowTitleDesc != null" >
+        firstimgshow_title_desc,
+      </if>
+      <if test="firstimgshowImgId != null" >
+        firstimgshow_img_id,
+      </if>
+      <if test="firstimgshowImgUrl != null" >
+        firstimgshow_img_url,
+      </if>
+      <if test="firstimgshowDataId != null" >
+        firstimgshow_data_id,
+      </if>
+      <if test="firstimgshowDataType != null" >
+        firstimgshow_data_type,
+      </if>
+      <if test="firstimgshowDataOrgId != null" >
+        firstimgshow_data_org_id,
+      </if>
+      <if test="firstimgshowIndex != null" >
+        firstimgshow_index,
+      </if>
+      <if test="firstimgshowStatus != null" >
+        firstimgshow_status,
+      </if>
+      <if test="firstimgshowCreated != null" >
+        firstimgshow_created,
+      </if>
+      <if test="firstimgshowUpdated != null" >
+        firstimgshow_updated,
+      </if>
+      <if test="firstimgshowContent != null" >
+        firstimgshow_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="firstimgshowId != null" >
+        #{firstimgshowId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowTitle != null" >
+        #{firstimgshowTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowTitleDesc != null" >
+        #{firstimgshowTitleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowImgId != null" >
+        #{firstimgshowImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowImgUrl != null" >
+        #{firstimgshowImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowDataId != null" >
+        #{firstimgshowDataId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowDataType != null" >
+        #{firstimgshowDataType,jdbcType=INTEGER},
+      </if>
+      <if test="firstimgshowDataOrgId != null" >
+        #{firstimgshowDataOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowIndex != null" >
+        #{firstimgshowIndex,jdbcType=INTEGER},
+      </if>
+      <if test="firstimgshowStatus != null" >
+        #{firstimgshowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="firstimgshowCreated != null" >
+        #{firstimgshowCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstimgshowUpdated != null" >
+        #{firstimgshowUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstimgshowContent != null" >
+        #{firstimgshowContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.firstshow.FirstimgshowExample" resultType="java.lang.Integer" >
+    select count(*) from firstimgshow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update firstimgshow
+    <set >
+      <if test="record.firstimgshowId != null" >
+        firstimgshow_id = #{record.firstimgshowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowTitle != null" >
+        firstimgshow_title = #{record.firstimgshowTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowTitleDesc != null" >
+        firstimgshow_title_desc = #{record.firstimgshowTitleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowImgId != null" >
+        firstimgshow_img_id = #{record.firstimgshowImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowImgUrl != null" >
+        firstimgshow_img_url = #{record.firstimgshowImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowDataId != null" >
+        firstimgshow_data_id = #{record.firstimgshowDataId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowDataType != null" >
+        firstimgshow_data_type = #{record.firstimgshowDataType,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstimgshowDataOrgId != null" >
+        firstimgshow_data_org_id = #{record.firstimgshowDataOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstimgshowIndex != null" >
+        firstimgshow_index = #{record.firstimgshowIndex,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstimgshowStatus != null" >
+        firstimgshow_status = #{record.firstimgshowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstimgshowCreated != null" >
+        firstimgshow_created = #{record.firstimgshowCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.firstimgshowUpdated != null" >
+        firstimgshow_updated = #{record.firstimgshowUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.firstimgshowContent != null" >
+        firstimgshow_content = #{record.firstimgshowContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update firstimgshow
+    set firstimgshow_id = #{record.firstimgshowId,jdbcType=VARCHAR},
+      firstimgshow_title = #{record.firstimgshowTitle,jdbcType=VARCHAR},
+      firstimgshow_title_desc = #{record.firstimgshowTitleDesc,jdbcType=VARCHAR},
+      firstimgshow_img_id = #{record.firstimgshowImgId,jdbcType=VARCHAR},
+      firstimgshow_img_url = #{record.firstimgshowImgUrl,jdbcType=VARCHAR},
+      firstimgshow_data_id = #{record.firstimgshowDataId,jdbcType=VARCHAR},
+      firstimgshow_data_type = #{record.firstimgshowDataType,jdbcType=INTEGER},
+      firstimgshow_data_org_id = #{record.firstimgshowDataOrgId,jdbcType=VARCHAR},
+      firstimgshow_index = #{record.firstimgshowIndex,jdbcType=INTEGER},
+      firstimgshow_status = #{record.firstimgshowStatus,jdbcType=INTEGER},
+      firstimgshow_created = #{record.firstimgshowCreated,jdbcType=TIMESTAMP},
+      firstimgshow_updated = #{record.firstimgshowUpdated,jdbcType=TIMESTAMP},
+      firstimgshow_content = #{record.firstimgshowContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update firstimgshow
+    set firstimgshow_id = #{record.firstimgshowId,jdbcType=VARCHAR},
+      firstimgshow_title = #{record.firstimgshowTitle,jdbcType=VARCHAR},
+      firstimgshow_title_desc = #{record.firstimgshowTitleDesc,jdbcType=VARCHAR},
+      firstimgshow_img_id = #{record.firstimgshowImgId,jdbcType=VARCHAR},
+      firstimgshow_img_url = #{record.firstimgshowImgUrl,jdbcType=VARCHAR},
+      firstimgshow_data_id = #{record.firstimgshowDataId,jdbcType=VARCHAR},
+      firstimgshow_data_type = #{record.firstimgshowDataType,jdbcType=INTEGER},
+      firstimgshow_data_org_id = #{record.firstimgshowDataOrgId,jdbcType=VARCHAR},
+      firstimgshow_index = #{record.firstimgshowIndex,jdbcType=INTEGER},
+      firstimgshow_status = #{record.firstimgshowStatus,jdbcType=INTEGER},
+      firstimgshow_created = #{record.firstimgshowCreated,jdbcType=TIMESTAMP},
+      firstimgshow_updated = #{record.firstimgshowUpdated,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.firstshow.Firstimgshow" >
+    update firstimgshow
+    <set >
+      <if test="firstimgshowTitle != null" >
+        firstimgshow_title = #{firstimgshowTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowTitleDesc != null" >
+        firstimgshow_title_desc = #{firstimgshowTitleDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowImgId != null" >
+        firstimgshow_img_id = #{firstimgshowImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowImgUrl != null" >
+        firstimgshow_img_url = #{firstimgshowImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowDataId != null" >
+        firstimgshow_data_id = #{firstimgshowDataId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowDataType != null" >
+        firstimgshow_data_type = #{firstimgshowDataType,jdbcType=INTEGER},
+      </if>
+      <if test="firstimgshowDataOrgId != null" >
+        firstimgshow_data_org_id = #{firstimgshowDataOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstimgshowIndex != null" >
+        firstimgshow_index = #{firstimgshowIndex,jdbcType=INTEGER},
+      </if>
+      <if test="firstimgshowStatus != null" >
+        firstimgshow_status = #{firstimgshowStatus,jdbcType=INTEGER},
+      </if>
+      <if test="firstimgshowCreated != null" >
+        firstimgshow_created = #{firstimgshowCreated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstimgshowUpdated != null" >
+        firstimgshow_updated = #{firstimgshowUpdated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstimgshowContent != null" >
+        firstimgshow_content = #{firstimgshowContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where firstimgshow_id = #{firstimgshowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.firstshow.Firstimgshow" >
+    update firstimgshow
+    set firstimgshow_title = #{firstimgshowTitle,jdbcType=VARCHAR},
+      firstimgshow_title_desc = #{firstimgshowTitleDesc,jdbcType=VARCHAR},
+      firstimgshow_img_id = #{firstimgshowImgId,jdbcType=VARCHAR},
+      firstimgshow_img_url = #{firstimgshowImgUrl,jdbcType=VARCHAR},
+      firstimgshow_data_id = #{firstimgshowDataId,jdbcType=VARCHAR},
+      firstimgshow_data_type = #{firstimgshowDataType,jdbcType=INTEGER},
+      firstimgshow_data_org_id = #{firstimgshowDataOrgId,jdbcType=VARCHAR},
+      firstimgshow_index = #{firstimgshowIndex,jdbcType=INTEGER},
+      firstimgshow_status = #{firstimgshowStatus,jdbcType=INTEGER},
+      firstimgshow_created = #{firstimgshowCreated,jdbcType=TIMESTAMP},
+      firstimgshow_updated = #{firstimgshowUpdated,jdbcType=TIMESTAMP},
+      firstimgshow_content = #{firstimgshowContent,jdbcType=LONGVARCHAR}
+    where firstimgshow_id = #{firstimgshowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.firstshow.Firstimgshow" >
+    update firstimgshow
+    set firstimgshow_title = #{firstimgshowTitle,jdbcType=VARCHAR},
+      firstimgshow_title_desc = #{firstimgshowTitleDesc,jdbcType=VARCHAR},
+      firstimgshow_img_id = #{firstimgshowImgId,jdbcType=VARCHAR},
+      firstimgshow_img_url = #{firstimgshowImgUrl,jdbcType=VARCHAR},
+      firstimgshow_data_id = #{firstimgshowDataId,jdbcType=VARCHAR},
+      firstimgshow_data_type = #{firstimgshowDataType,jdbcType=INTEGER},
+      firstimgshow_data_org_id = #{firstimgshowDataOrgId,jdbcType=VARCHAR},
+      firstimgshow_index = #{firstimgshowIndex,jdbcType=INTEGER},
+      firstimgshow_status = #{firstimgshowStatus,jdbcType=INTEGER},
+      firstimgshow_created = #{firstimgshowCreated,jdbcType=TIMESTAMP},
+      firstimgshow_updated = #{firstimgshowUpdated,jdbcType=TIMESTAMP}
+    where firstimgshow_id = #{firstimgshowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

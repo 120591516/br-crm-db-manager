@@ -1,0 +1,982 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.feeItem.PatientFeeItemMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.feeItem.PatientFeeItem" >
+    <id column="patient_fee_item_id" property="patientFeeItemId" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_id" property="examFeeItemId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name" property="examFeeItemName" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_price" property="patientFeeItemPrice" jdbcType="DECIMAL" />
+    <result column="patient_fee_item_fact_price" property="patientFeeItemFactPrice" jdbcType="DECIMAL" />
+    <result column="patient_fee_item_settle_price" property="patientFeeItemSettlePrice" jdbcType="DECIMAL" />
+    <result column="pay_way_id" property="payWayId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_registered" property="patientFeeItemRegistered" jdbcType="BIT" />
+    <result column="patient_fee_item_reg_doctor_id" property="patientFeeItemRegDoctorId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_reg_doctor_name" property="patientFeeItemRegDoctorName" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_register_time" property="patientFeeItemRegisterTime" jdbcType="TIMESTAMP" />
+    <result column="patient_register_sheet_id" property="patientRegisterSheetId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_reg_returned" property="patientFeeItemRegReturned" jdbcType="BIT" />
+    <result column="patient_fee_item_charged" property="patientFeeItemCharged" jdbcType="BIT" />
+    <result column="patient_fee_item_charger_id" property="patientFeeItemChargerId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_charger_name" property="patientFeeItemChargerName" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_charger_time" property="patientFeeItemChargerTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_discounter_id" property="patientFeeItemDiscounterId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_batch_number" property="patientFeeItemBatchNumber" jdbcType="INTEGER" />
+    <result column="patient_fee_item_tube_position" property="patientFeeItemTubePosition" jdbcType="INTEGER" />
+    <result column="patient_fee_item_sample_number" property="patientFeeItemSampleNumber" jdbcType="INTEGER" />
+    <result column="patient_fee_item_lab_sampled" property="patientFeeItemLabSampled" jdbcType="BIGINT" />
+    <result column="patient_fee_item_lab_sampler_id" property="patientFeeItemLabSamplerId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_lab_sampler_name" property="patientFeeItemLabSamplerName" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_lab_sampler_time" property="patientFeeItemLabSamplerTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_lab_send_lis" property="patientFeeItemLabSendLis" jdbcType="BIT" />
+    <result column="patient_fee_item_lab_send_lis_time" property="patientFeeItemLabSendLisTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_lab_rcvd_from_lis" property="patientFeeItemLabRcvdFromLis" jdbcType="BIT" />
+    <result column="patient_fee_item_lab_rcvd_from_lis_time" property="patientFeeItemLabRcvdFromLisTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_give_up" property="patientFeeItemGiveUp" jdbcType="BIT" />
+    <result column="patient_fee_item_examinated" property="patientFeeItemExaminated" jdbcType="BIT" />
+    <result column="patient_exam_depart_id" property="patientExamDepartId" jdbcType="VARCHAR" />
+    <result column="exam_doctor_id" property="examDoctorId" jdbcType="VARCHAR" />
+    <result column="exam_doctor_name" property="examDoctorName" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_examinate_time" property="patientFeeItemExaminateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_mark_fee_return" property="patientFeeItemMarkFeeReturn" jdbcType="BIT" />
+    <result column="patient_fee_item_work_inner_modify" property="patientFeeItemWorkInnerModify" jdbcType="BIT" />
+    <result column="patient_fee_item_severe_degree" property="patientFeeItemSevereDegree" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_Interface_marks" property="patientFeeItemInterfaceMarks" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_url_result" property="patientFeeItemUrlResult" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_create_time" property="patientFeeItemCreateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_edit_time" property="patientFeeItemEditTime" jdbcType="TIMESTAMP" />
+    <result column="patient_fee_item_status" property="patientFeeItemStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.feeItem.PatientFeeItem" extends="BaseResultMap" >
+    <result column="patient_fee_item_positive_summary" property="patientFeeItemPositiveSummary" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_fee_item_id, patient_id, exam_fee_item_id, exam_fee_item_name, patient_fee_item_price, 
+    patient_fee_item_fact_price, patient_fee_item_settle_price, pay_way_id, patient_fee_item_registered, 
+    patient_fee_item_reg_doctor_id, patient_fee_item_reg_doctor_name, patient_fee_item_register_time, 
+    patient_register_sheet_id, patient_fee_item_reg_returned, patient_fee_item_charged, 
+    patient_fee_item_charger_id, patient_fee_item_charger_name, patient_fee_item_charger_time, 
+    patient_fee_item_discounter_id, patient_fee_item_batch_number, patient_fee_item_tube_position, 
+    patient_fee_item_sample_number, patient_fee_item_lab_sampled, patient_fee_item_lab_sampler_id, 
+    patient_fee_item_lab_sampler_name, patient_fee_item_lab_sampler_time, patient_fee_item_lab_send_lis, 
+    patient_fee_item_lab_send_lis_time, patient_fee_item_lab_rcvd_from_lis, patient_fee_item_lab_rcvd_from_lis_time, 
+    patient_fee_item_give_up, patient_fee_item_examinated, patient_exam_depart_id, exam_doctor_id, 
+    exam_doctor_name, patient_fee_item_examinate_time, patient_fee_item_mark_fee_return, 
+    patient_fee_item_work_inner_modify, patient_fee_item_severe_degree, patient_fee_item_Interface_marks, 
+    patient_fee_item_url_result, patient_fee_item_create_time, patient_fee_item_edit_time, 
+    patient_fee_item_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    patient_fee_item_positive_summary
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_fee_item
+    where patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_fee_item
+    where patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItemExample" >
+    delete from patient_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItem" >
+    insert into patient_fee_item (patient_fee_item_id, patient_id, exam_fee_item_id, 
+      exam_fee_item_name, patient_fee_item_price, patient_fee_item_fact_price, 
+      patient_fee_item_settle_price, pay_way_id, patient_fee_item_registered, 
+      patient_fee_item_reg_doctor_id, patient_fee_item_reg_doctor_name, 
+      patient_fee_item_register_time, patient_register_sheet_id, 
+      patient_fee_item_reg_returned, patient_fee_item_charged, 
+      patient_fee_item_charger_id, patient_fee_item_charger_name, 
+      patient_fee_item_charger_time, patient_fee_item_discounter_id, 
+      patient_fee_item_batch_number, patient_fee_item_tube_position, 
+      patient_fee_item_sample_number, patient_fee_item_lab_sampled, 
+      patient_fee_item_lab_sampler_id, patient_fee_item_lab_sampler_name, 
+      patient_fee_item_lab_sampler_time, patient_fee_item_lab_send_lis, 
+      patient_fee_item_lab_send_lis_time, patient_fee_item_lab_rcvd_from_lis, 
+      patient_fee_item_lab_rcvd_from_lis_time, patient_fee_item_give_up, 
+      patient_fee_item_examinated, patient_exam_depart_id, 
+      exam_doctor_id, exam_doctor_name, patient_fee_item_examinate_time, 
+      patient_fee_item_mark_fee_return, patient_fee_item_work_inner_modify, 
+      patient_fee_item_severe_degree, patient_fee_item_Interface_marks, 
+      patient_fee_item_url_result, patient_fee_item_create_time, 
+      patient_fee_item_edit_time, patient_fee_item_status, 
+      patient_fee_item_positive_summary)
+    values (#{patientFeeItemId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{examFeeItemId,jdbcType=VARCHAR}, 
+      #{examFeeItemName,jdbcType=VARCHAR}, #{patientFeeItemPrice,jdbcType=DECIMAL}, #{patientFeeItemFactPrice,jdbcType=DECIMAL}, 
+      #{patientFeeItemSettlePrice,jdbcType=DECIMAL}, #{payWayId,jdbcType=VARCHAR}, #{patientFeeItemRegistered,jdbcType=BIT}, 
+      #{patientFeeItemRegDoctorId,jdbcType=VARCHAR}, #{patientFeeItemRegDoctorName,jdbcType=VARCHAR}, 
+      #{patientFeeItemRegisterTime,jdbcType=TIMESTAMP}, #{patientRegisterSheetId,jdbcType=VARCHAR}, 
+      #{patientFeeItemRegReturned,jdbcType=BIT}, #{patientFeeItemCharged,jdbcType=BIT}, 
+      #{patientFeeItemChargerId,jdbcType=VARCHAR}, #{patientFeeItemChargerName,jdbcType=VARCHAR}, 
+      #{patientFeeItemChargerTime,jdbcType=TIMESTAMP}, #{patientFeeItemDiscounterId,jdbcType=VARCHAR}, 
+      #{patientFeeItemBatchNumber,jdbcType=INTEGER}, #{patientFeeItemTubePosition,jdbcType=INTEGER}, 
+      #{patientFeeItemSampleNumber,jdbcType=INTEGER}, #{patientFeeItemLabSampled,jdbcType=BIGINT}, 
+      #{patientFeeItemLabSamplerId,jdbcType=VARCHAR}, #{patientFeeItemLabSamplerName,jdbcType=VARCHAR}, 
+      #{patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP}, #{patientFeeItemLabSendLis,jdbcType=BIT}, 
+      #{patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP}, #{patientFeeItemLabRcvdFromLis,jdbcType=BIT}, 
+      #{patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP}, #{patientFeeItemGiveUp,jdbcType=BIT}, 
+      #{patientFeeItemExaminated,jdbcType=BIT}, #{patientExamDepartId,jdbcType=VARCHAR}, 
+      #{examDoctorId,jdbcType=VARCHAR}, #{examDoctorName,jdbcType=VARCHAR}, #{patientFeeItemExaminateTime,jdbcType=TIMESTAMP}, 
+      #{patientFeeItemMarkFeeReturn,jdbcType=BIT}, #{patientFeeItemWorkInnerModify,jdbcType=BIT}, 
+      #{patientFeeItemSevereDegree,jdbcType=VARCHAR}, #{patientFeeItemInterfaceMarks,jdbcType=VARCHAR}, 
+      #{patientFeeItemUrlResult,jdbcType=VARCHAR}, #{patientFeeItemCreateTime,jdbcType=TIMESTAMP}, 
+      #{patientFeeItemEditTime,jdbcType=TIMESTAMP}, #{patientFeeItemStatus,jdbcType=INTEGER}, 
+      #{patientFeeItemPositiveSummary,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItem" >
+    insert into patient_fee_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientFeeItemId != null" >
+        patient_fee_item_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id,
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name,
+      </if>
+      <if test="patientFeeItemPrice != null" >
+        patient_fee_item_price,
+      </if>
+      <if test="patientFeeItemFactPrice != null" >
+        patient_fee_item_fact_price,
+      </if>
+      <if test="patientFeeItemSettlePrice != null" >
+        patient_fee_item_settle_price,
+      </if>
+      <if test="payWayId != null" >
+        pay_way_id,
+      </if>
+      <if test="patientFeeItemRegistered != null" >
+        patient_fee_item_registered,
+      </if>
+      <if test="patientFeeItemRegDoctorId != null" >
+        patient_fee_item_reg_doctor_id,
+      </if>
+      <if test="patientFeeItemRegDoctorName != null" >
+        patient_fee_item_reg_doctor_name,
+      </if>
+      <if test="patientFeeItemRegisterTime != null" >
+        patient_fee_item_register_time,
+      </if>
+      <if test="patientRegisterSheetId != null" >
+        patient_register_sheet_id,
+      </if>
+      <if test="patientFeeItemRegReturned != null" >
+        patient_fee_item_reg_returned,
+      </if>
+      <if test="patientFeeItemCharged != null" >
+        patient_fee_item_charged,
+      </if>
+      <if test="patientFeeItemChargerId != null" >
+        patient_fee_item_charger_id,
+      </if>
+      <if test="patientFeeItemChargerName != null" >
+        patient_fee_item_charger_name,
+      </if>
+      <if test="patientFeeItemChargerTime != null" >
+        patient_fee_item_charger_time,
+      </if>
+      <if test="patientFeeItemDiscounterId != null" >
+        patient_fee_item_discounter_id,
+      </if>
+      <if test="patientFeeItemBatchNumber != null" >
+        patient_fee_item_batch_number,
+      </if>
+      <if test="patientFeeItemTubePosition != null" >
+        patient_fee_item_tube_position,
+      </if>
+      <if test="patientFeeItemSampleNumber != null" >
+        patient_fee_item_sample_number,
+      </if>
+      <if test="patientFeeItemLabSampled != null" >
+        patient_fee_item_lab_sampled,
+      </if>
+      <if test="patientFeeItemLabSamplerId != null" >
+        patient_fee_item_lab_sampler_id,
+      </if>
+      <if test="patientFeeItemLabSamplerName != null" >
+        patient_fee_item_lab_sampler_name,
+      </if>
+      <if test="patientFeeItemLabSamplerTime != null" >
+        patient_fee_item_lab_sampler_time,
+      </if>
+      <if test="patientFeeItemLabSendLis != null" >
+        patient_fee_item_lab_send_lis,
+      </if>
+      <if test="patientFeeItemLabSendLisTime != null" >
+        patient_fee_item_lab_send_lis_time,
+      </if>
+      <if test="patientFeeItemLabRcvdFromLis != null" >
+        patient_fee_item_lab_rcvd_from_lis,
+      </if>
+      <if test="patientFeeItemLabRcvdFromLisTime != null" >
+        patient_fee_item_lab_rcvd_from_lis_time,
+      </if>
+      <if test="patientFeeItemGiveUp != null" >
+        patient_fee_item_give_up,
+      </if>
+      <if test="patientFeeItemExaminated != null" >
+        patient_fee_item_examinated,
+      </if>
+      <if test="patientExamDepartId != null" >
+        patient_exam_depart_id,
+      </if>
+      <if test="examDoctorId != null" >
+        exam_doctor_id,
+      </if>
+      <if test="examDoctorName != null" >
+        exam_doctor_name,
+      </if>
+      <if test="patientFeeItemExaminateTime != null" >
+        patient_fee_item_examinate_time,
+      </if>
+      <if test="patientFeeItemMarkFeeReturn != null" >
+        patient_fee_item_mark_fee_return,
+      </if>
+      <if test="patientFeeItemWorkInnerModify != null" >
+        patient_fee_item_work_inner_modify,
+      </if>
+      <if test="patientFeeItemSevereDegree != null" >
+        patient_fee_item_severe_degree,
+      </if>
+      <if test="patientFeeItemInterfaceMarks != null" >
+        patient_fee_item_Interface_marks,
+      </if>
+      <if test="patientFeeItemUrlResult != null" >
+        patient_fee_item_url_result,
+      </if>
+      <if test="patientFeeItemCreateTime != null" >
+        patient_fee_item_create_time,
+      </if>
+      <if test="patientFeeItemEditTime != null" >
+        patient_fee_item_edit_time,
+      </if>
+      <if test="patientFeeItemStatus != null" >
+        patient_fee_item_status,
+      </if>
+      <if test="patientFeeItemPositiveSummary != null" >
+        patient_fee_item_positive_summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientFeeItemId != null" >
+        #{patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemPrice != null" >
+        #{patientFeeItemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="patientFeeItemFactPrice != null" >
+        #{patientFeeItemFactPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="patientFeeItemSettlePrice != null" >
+        #{patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payWayId != null" >
+        #{payWayId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegistered != null" >
+        #{patientFeeItemRegistered,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemRegDoctorId != null" >
+        #{patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegDoctorName != null" >
+        #{patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegisterTime != null" >
+        #{patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientRegisterSheetId != null" >
+        #{patientRegisterSheetId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegReturned != null" >
+        #{patientFeeItemRegReturned,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemCharged != null" >
+        #{patientFeeItemCharged,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemChargerId != null" >
+        #{patientFeeItemChargerId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemChargerName != null" >
+        #{patientFeeItemChargerName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemChargerTime != null" >
+        #{patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemDiscounterId != null" >
+        #{patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemBatchNumber != null" >
+        #{patientFeeItemBatchNumber,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemTubePosition != null" >
+        #{patientFeeItemTubePosition,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemSampleNumber != null" >
+        #{patientFeeItemSampleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemLabSampled != null" >
+        #{patientFeeItemLabSampled,jdbcType=BIGINT},
+      </if>
+      <if test="patientFeeItemLabSamplerId != null" >
+        #{patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemLabSamplerName != null" >
+        #{patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemLabSamplerTime != null" >
+        #{patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemLabSendLis != null" >
+        #{patientFeeItemLabSendLis,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemLabSendLisTime != null" >
+        #{patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemLabRcvdFromLis != null" >
+        #{patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemLabRcvdFromLisTime != null" >
+        #{patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemGiveUp != null" >
+        #{patientFeeItemGiveUp,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemExaminated != null" >
+        #{patientFeeItemExaminated,jdbcType=BIT},
+      </if>
+      <if test="patientExamDepartId != null" >
+        #{patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="examDoctorId != null" >
+        #{examDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="examDoctorName != null" >
+        #{examDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemExaminateTime != null" >
+        #{patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemMarkFeeReturn != null" >
+        #{patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemWorkInnerModify != null" >
+        #{patientFeeItemWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemSevereDegree != null" >
+        #{patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemInterfaceMarks != null" >
+        #{patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemUrlResult != null" >
+        #{patientFeeItemUrlResult,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemCreateTime != null" >
+        #{patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemEditTime != null" >
+        #{patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemStatus != null" >
+        #{patientFeeItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemPositiveSummary != null" >
+        #{patientFeeItemPositiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItemExample" resultType="java.lang.Integer" >
+    select count(*) from patient_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_fee_item
+    <set >
+      <if test="record.patientFeeItemId != null" >
+        patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemId != null" >
+        exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemName != null" >
+        exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemPrice != null" >
+        patient_fee_item_price = #{record.patientFeeItemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.patientFeeItemFactPrice != null" >
+        patient_fee_item_fact_price = #{record.patientFeeItemFactPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.patientFeeItemSettlePrice != null" >
+        patient_fee_item_settle_price = #{record.patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payWayId != null" >
+        pay_way_id = #{record.payWayId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemRegistered != null" >
+        patient_fee_item_registered = #{record.patientFeeItemRegistered,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemRegDoctorId != null" >
+        patient_fee_item_reg_doctor_id = #{record.patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemRegDoctorName != null" >
+        patient_fee_item_reg_doctor_name = #{record.patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemRegisterTime != null" >
+        patient_fee_item_register_time = #{record.patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientRegisterSheetId != null" >
+        patient_register_sheet_id = #{record.patientRegisterSheetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemRegReturned != null" >
+        patient_fee_item_reg_returned = #{record.patientFeeItemRegReturned,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemCharged != null" >
+        patient_fee_item_charged = #{record.patientFeeItemCharged,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemChargerId != null" >
+        patient_fee_item_charger_id = #{record.patientFeeItemChargerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemChargerName != null" >
+        patient_fee_item_charger_name = #{record.patientFeeItemChargerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemChargerTime != null" >
+        patient_fee_item_charger_time = #{record.patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemDiscounterId != null" >
+        patient_fee_item_discounter_id = #{record.patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemBatchNumber != null" >
+        patient_fee_item_batch_number = #{record.patientFeeItemBatchNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientFeeItemTubePosition != null" >
+        patient_fee_item_tube_position = #{record.patientFeeItemTubePosition,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientFeeItemSampleNumber != null" >
+        patient_fee_item_sample_number = #{record.patientFeeItemSampleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientFeeItemLabSampled != null" >
+        patient_fee_item_lab_sampled = #{record.patientFeeItemLabSampled,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientFeeItemLabSamplerId != null" >
+        patient_fee_item_lab_sampler_id = #{record.patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemLabSamplerName != null" >
+        patient_fee_item_lab_sampler_name = #{record.patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemLabSamplerTime != null" >
+        patient_fee_item_lab_sampler_time = #{record.patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemLabSendLis != null" >
+        patient_fee_item_lab_send_lis = #{record.patientFeeItemLabSendLis,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemLabSendLisTime != null" >
+        patient_fee_item_lab_send_lis_time = #{record.patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemLabRcvdFromLis != null" >
+        patient_fee_item_lab_rcvd_from_lis = #{record.patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemLabRcvdFromLisTime != null" >
+        patient_fee_item_lab_rcvd_from_lis_time = #{record.patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemGiveUp != null" >
+        patient_fee_item_give_up = #{record.patientFeeItemGiveUp,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemExaminated != null" >
+        patient_fee_item_examinated = #{record.patientFeeItemExaminated,jdbcType=BIT},
+      </if>
+      <if test="record.patientExamDepartId != null" >
+        patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examDoctorId != null" >
+        exam_doctor_id = #{record.examDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examDoctorName != null" >
+        exam_doctor_name = #{record.examDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemExaminateTime != null" >
+        patient_fee_item_examinate_time = #{record.patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemMarkFeeReturn != null" >
+        patient_fee_item_mark_fee_return = #{record.patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemWorkInnerModify != null" >
+        patient_fee_item_work_inner_modify = #{record.patientFeeItemWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="record.patientFeeItemSevereDegree != null" >
+        patient_fee_item_severe_degree = #{record.patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemInterfaceMarks != null" >
+        patient_fee_item_Interface_marks = #{record.patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemUrlResult != null" >
+        patient_fee_item_url_result = #{record.patientFeeItemUrlResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemCreateTime != null" >
+        patient_fee_item_create_time = #{record.patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemEditTime != null" >
+        patient_fee_item_edit_time = #{record.patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientFeeItemStatus != null" >
+        patient_fee_item_status = #{record.patientFeeItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientFeeItemPositiveSummary != null" >
+        patient_fee_item_positive_summary = #{record.patientFeeItemPositiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_fee_item
+    set patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      patient_fee_item_price = #{record.patientFeeItemPrice,jdbcType=DECIMAL},
+      patient_fee_item_fact_price = #{record.patientFeeItemFactPrice,jdbcType=DECIMAL},
+      patient_fee_item_settle_price = #{record.patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      pay_way_id = #{record.payWayId,jdbcType=VARCHAR},
+      patient_fee_item_registered = #{record.patientFeeItemRegistered,jdbcType=BIT},
+      patient_fee_item_reg_doctor_id = #{record.patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      patient_fee_item_reg_doctor_name = #{record.patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_register_time = #{record.patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      patient_register_sheet_id = #{record.patientRegisterSheetId,jdbcType=VARCHAR},
+      patient_fee_item_reg_returned = #{record.patientFeeItemRegReturned,jdbcType=BIT},
+      patient_fee_item_charged = #{record.patientFeeItemCharged,jdbcType=BIT},
+      patient_fee_item_charger_id = #{record.patientFeeItemChargerId,jdbcType=VARCHAR},
+      patient_fee_item_charger_name = #{record.patientFeeItemChargerName,jdbcType=VARCHAR},
+      patient_fee_item_charger_time = #{record.patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_discounter_id = #{record.patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      patient_fee_item_batch_number = #{record.patientFeeItemBatchNumber,jdbcType=INTEGER},
+      patient_fee_item_tube_position = #{record.patientFeeItemTubePosition,jdbcType=INTEGER},
+      patient_fee_item_sample_number = #{record.patientFeeItemSampleNumber,jdbcType=INTEGER},
+      patient_fee_item_lab_sampled = #{record.patientFeeItemLabSampled,jdbcType=BIGINT},
+      patient_fee_item_lab_sampler_id = #{record.patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_name = #{record.patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_time = #{record.patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_send_lis = #{record.patientFeeItemLabSendLis,jdbcType=BIT},
+      patient_fee_item_lab_send_lis_time = #{record.patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_rcvd_from_lis = #{record.patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      patient_fee_item_lab_rcvd_from_lis_time = #{record.patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_give_up = #{record.patientFeeItemGiveUp,jdbcType=BIT},
+      patient_fee_item_examinated = #{record.patientFeeItemExaminated,jdbcType=BIT},
+      patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      exam_doctor_id = #{record.examDoctorId,jdbcType=VARCHAR},
+      exam_doctor_name = #{record.examDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_examinate_time = #{record.patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_mark_fee_return = #{record.patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      patient_fee_item_work_inner_modify = #{record.patientFeeItemWorkInnerModify,jdbcType=BIT},
+      patient_fee_item_severe_degree = #{record.patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      patient_fee_item_Interface_marks = #{record.patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      patient_fee_item_url_result = #{record.patientFeeItemUrlResult,jdbcType=VARCHAR},
+      patient_fee_item_create_time = #{record.patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_edit_time = #{record.patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      patient_fee_item_status = #{record.patientFeeItemStatus,jdbcType=INTEGER},
+      patient_fee_item_positive_summary = #{record.patientFeeItemPositiveSummary,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_fee_item
+    set patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      patient_fee_item_price = #{record.patientFeeItemPrice,jdbcType=DECIMAL},
+      patient_fee_item_fact_price = #{record.patientFeeItemFactPrice,jdbcType=DECIMAL},
+      patient_fee_item_settle_price = #{record.patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      pay_way_id = #{record.payWayId,jdbcType=VARCHAR},
+      patient_fee_item_registered = #{record.patientFeeItemRegistered,jdbcType=BIT},
+      patient_fee_item_reg_doctor_id = #{record.patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      patient_fee_item_reg_doctor_name = #{record.patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_register_time = #{record.patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      patient_register_sheet_id = #{record.patientRegisterSheetId,jdbcType=VARCHAR},
+      patient_fee_item_reg_returned = #{record.patientFeeItemRegReturned,jdbcType=BIT},
+      patient_fee_item_charged = #{record.patientFeeItemCharged,jdbcType=BIT},
+      patient_fee_item_charger_id = #{record.patientFeeItemChargerId,jdbcType=VARCHAR},
+      patient_fee_item_charger_name = #{record.patientFeeItemChargerName,jdbcType=VARCHAR},
+      patient_fee_item_charger_time = #{record.patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_discounter_id = #{record.patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      patient_fee_item_batch_number = #{record.patientFeeItemBatchNumber,jdbcType=INTEGER},
+      patient_fee_item_tube_position = #{record.patientFeeItemTubePosition,jdbcType=INTEGER},
+      patient_fee_item_sample_number = #{record.patientFeeItemSampleNumber,jdbcType=INTEGER},
+      patient_fee_item_lab_sampled = #{record.patientFeeItemLabSampled,jdbcType=BIGINT},
+      patient_fee_item_lab_sampler_id = #{record.patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_name = #{record.patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_time = #{record.patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_send_lis = #{record.patientFeeItemLabSendLis,jdbcType=BIT},
+      patient_fee_item_lab_send_lis_time = #{record.patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_rcvd_from_lis = #{record.patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      patient_fee_item_lab_rcvd_from_lis_time = #{record.patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_give_up = #{record.patientFeeItemGiveUp,jdbcType=BIT},
+      patient_fee_item_examinated = #{record.patientFeeItemExaminated,jdbcType=BIT},
+      patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      exam_doctor_id = #{record.examDoctorId,jdbcType=VARCHAR},
+      exam_doctor_name = #{record.examDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_examinate_time = #{record.patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_mark_fee_return = #{record.patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      patient_fee_item_work_inner_modify = #{record.patientFeeItemWorkInnerModify,jdbcType=BIT},
+      patient_fee_item_severe_degree = #{record.patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      patient_fee_item_Interface_marks = #{record.patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      patient_fee_item_url_result = #{record.patientFeeItemUrlResult,jdbcType=VARCHAR},
+      patient_fee_item_create_time = #{record.patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_edit_time = #{record.patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      patient_fee_item_status = #{record.patientFeeItemStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItem" >
+    update patient_fee_item
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemPrice != null" >
+        patient_fee_item_price = #{patientFeeItemPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="patientFeeItemFactPrice != null" >
+        patient_fee_item_fact_price = #{patientFeeItemFactPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="patientFeeItemSettlePrice != null" >
+        patient_fee_item_settle_price = #{patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payWayId != null" >
+        pay_way_id = #{payWayId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegistered != null" >
+        patient_fee_item_registered = #{patientFeeItemRegistered,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemRegDoctorId != null" >
+        patient_fee_item_reg_doctor_id = #{patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegDoctorName != null" >
+        patient_fee_item_reg_doctor_name = #{patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegisterTime != null" >
+        patient_fee_item_register_time = #{patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientRegisterSheetId != null" >
+        patient_register_sheet_id = #{patientRegisterSheetId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemRegReturned != null" >
+        patient_fee_item_reg_returned = #{patientFeeItemRegReturned,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemCharged != null" >
+        patient_fee_item_charged = #{patientFeeItemCharged,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemChargerId != null" >
+        patient_fee_item_charger_id = #{patientFeeItemChargerId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemChargerName != null" >
+        patient_fee_item_charger_name = #{patientFeeItemChargerName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemChargerTime != null" >
+        patient_fee_item_charger_time = #{patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemDiscounterId != null" >
+        patient_fee_item_discounter_id = #{patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemBatchNumber != null" >
+        patient_fee_item_batch_number = #{patientFeeItemBatchNumber,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemTubePosition != null" >
+        patient_fee_item_tube_position = #{patientFeeItemTubePosition,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemSampleNumber != null" >
+        patient_fee_item_sample_number = #{patientFeeItemSampleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemLabSampled != null" >
+        patient_fee_item_lab_sampled = #{patientFeeItemLabSampled,jdbcType=BIGINT},
+      </if>
+      <if test="patientFeeItemLabSamplerId != null" >
+        patient_fee_item_lab_sampler_id = #{patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemLabSamplerName != null" >
+        patient_fee_item_lab_sampler_name = #{patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemLabSamplerTime != null" >
+        patient_fee_item_lab_sampler_time = #{patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemLabSendLis != null" >
+        patient_fee_item_lab_send_lis = #{patientFeeItemLabSendLis,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemLabSendLisTime != null" >
+        patient_fee_item_lab_send_lis_time = #{patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemLabRcvdFromLis != null" >
+        patient_fee_item_lab_rcvd_from_lis = #{patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemLabRcvdFromLisTime != null" >
+        patient_fee_item_lab_rcvd_from_lis_time = #{patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemGiveUp != null" >
+        patient_fee_item_give_up = #{patientFeeItemGiveUp,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemExaminated != null" >
+        patient_fee_item_examinated = #{patientFeeItemExaminated,jdbcType=BIT},
+      </if>
+      <if test="patientExamDepartId != null" >
+        patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="examDoctorId != null" >
+        exam_doctor_id = #{examDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="examDoctorName != null" >
+        exam_doctor_name = #{examDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemExaminateTime != null" >
+        patient_fee_item_examinate_time = #{patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemMarkFeeReturn != null" >
+        patient_fee_item_mark_fee_return = #{patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemWorkInnerModify != null" >
+        patient_fee_item_work_inner_modify = #{patientFeeItemWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="patientFeeItemSevereDegree != null" >
+        patient_fee_item_severe_degree = #{patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemInterfaceMarks != null" >
+        patient_fee_item_Interface_marks = #{patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemUrlResult != null" >
+        patient_fee_item_url_result = #{patientFeeItemUrlResult,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemCreateTime != null" >
+        patient_fee_item_create_time = #{patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemEditTime != null" >
+        patient_fee_item_edit_time = #{patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientFeeItemStatus != null" >
+        patient_fee_item_status = #{patientFeeItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientFeeItemPositiveSummary != null" >
+        patient_fee_item_positive_summary = #{patientFeeItemPositiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItem" >
+    update patient_fee_item
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      patient_fee_item_price = #{patientFeeItemPrice,jdbcType=DECIMAL},
+      patient_fee_item_fact_price = #{patientFeeItemFactPrice,jdbcType=DECIMAL},
+      patient_fee_item_settle_price = #{patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      pay_way_id = #{payWayId,jdbcType=VARCHAR},
+      patient_fee_item_registered = #{patientFeeItemRegistered,jdbcType=BIT},
+      patient_fee_item_reg_doctor_id = #{patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      patient_fee_item_reg_doctor_name = #{patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_register_time = #{patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      patient_register_sheet_id = #{patientRegisterSheetId,jdbcType=VARCHAR},
+      patient_fee_item_reg_returned = #{patientFeeItemRegReturned,jdbcType=BIT},
+      patient_fee_item_charged = #{patientFeeItemCharged,jdbcType=BIT},
+      patient_fee_item_charger_id = #{patientFeeItemChargerId,jdbcType=VARCHAR},
+      patient_fee_item_charger_name = #{patientFeeItemChargerName,jdbcType=VARCHAR},
+      patient_fee_item_charger_time = #{patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_discounter_id = #{patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      patient_fee_item_batch_number = #{patientFeeItemBatchNumber,jdbcType=INTEGER},
+      patient_fee_item_tube_position = #{patientFeeItemTubePosition,jdbcType=INTEGER},
+      patient_fee_item_sample_number = #{patientFeeItemSampleNumber,jdbcType=INTEGER},
+      patient_fee_item_lab_sampled = #{patientFeeItemLabSampled,jdbcType=BIGINT},
+      patient_fee_item_lab_sampler_id = #{patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_name = #{patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_time = #{patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_send_lis = #{patientFeeItemLabSendLis,jdbcType=BIT},
+      patient_fee_item_lab_send_lis_time = #{patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_rcvd_from_lis = #{patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      patient_fee_item_lab_rcvd_from_lis_time = #{patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_give_up = #{patientFeeItemGiveUp,jdbcType=BIT},
+      patient_fee_item_examinated = #{patientFeeItemExaminated,jdbcType=BIT},
+      patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR},
+      exam_doctor_id = #{examDoctorId,jdbcType=VARCHAR},
+      exam_doctor_name = #{examDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_examinate_time = #{patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_mark_fee_return = #{patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      patient_fee_item_work_inner_modify = #{patientFeeItemWorkInnerModify,jdbcType=BIT},
+      patient_fee_item_severe_degree = #{patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      patient_fee_item_Interface_marks = #{patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      patient_fee_item_url_result = #{patientFeeItemUrlResult,jdbcType=VARCHAR},
+      patient_fee_item_create_time = #{patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_edit_time = #{patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      patient_fee_item_status = #{patientFeeItemStatus,jdbcType=INTEGER},
+      patient_fee_item_positive_summary = #{patientFeeItemPositiveSummary,jdbcType=LONGVARCHAR}
+    where patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.feeItem.PatientFeeItem" >
+    update patient_fee_item
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      patient_fee_item_price = #{patientFeeItemPrice,jdbcType=DECIMAL},
+      patient_fee_item_fact_price = #{patientFeeItemFactPrice,jdbcType=DECIMAL},
+      patient_fee_item_settle_price = #{patientFeeItemSettlePrice,jdbcType=DECIMAL},
+      pay_way_id = #{payWayId,jdbcType=VARCHAR},
+      patient_fee_item_registered = #{patientFeeItemRegistered,jdbcType=BIT},
+      patient_fee_item_reg_doctor_id = #{patientFeeItemRegDoctorId,jdbcType=VARCHAR},
+      patient_fee_item_reg_doctor_name = #{patientFeeItemRegDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_register_time = #{patientFeeItemRegisterTime,jdbcType=TIMESTAMP},
+      patient_register_sheet_id = #{patientRegisterSheetId,jdbcType=VARCHAR},
+      patient_fee_item_reg_returned = #{patientFeeItemRegReturned,jdbcType=BIT},
+      patient_fee_item_charged = #{patientFeeItemCharged,jdbcType=BIT},
+      patient_fee_item_charger_id = #{patientFeeItemChargerId,jdbcType=VARCHAR},
+      patient_fee_item_charger_name = #{patientFeeItemChargerName,jdbcType=VARCHAR},
+      patient_fee_item_charger_time = #{patientFeeItemChargerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_discounter_id = #{patientFeeItemDiscounterId,jdbcType=VARCHAR},
+      patient_fee_item_batch_number = #{patientFeeItemBatchNumber,jdbcType=INTEGER},
+      patient_fee_item_tube_position = #{patientFeeItemTubePosition,jdbcType=INTEGER},
+      patient_fee_item_sample_number = #{patientFeeItemSampleNumber,jdbcType=INTEGER},
+      patient_fee_item_lab_sampled = #{patientFeeItemLabSampled,jdbcType=BIGINT},
+      patient_fee_item_lab_sampler_id = #{patientFeeItemLabSamplerId,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_name = #{patientFeeItemLabSamplerName,jdbcType=VARCHAR},
+      patient_fee_item_lab_sampler_time = #{patientFeeItemLabSamplerTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_send_lis = #{patientFeeItemLabSendLis,jdbcType=BIT},
+      patient_fee_item_lab_send_lis_time = #{patientFeeItemLabSendLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_lab_rcvd_from_lis = #{patientFeeItemLabRcvdFromLis,jdbcType=BIT},
+      patient_fee_item_lab_rcvd_from_lis_time = #{patientFeeItemLabRcvdFromLisTime,jdbcType=TIMESTAMP},
+      patient_fee_item_give_up = #{patientFeeItemGiveUp,jdbcType=BIT},
+      patient_fee_item_examinated = #{patientFeeItemExaminated,jdbcType=BIT},
+      patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR},
+      exam_doctor_id = #{examDoctorId,jdbcType=VARCHAR},
+      exam_doctor_name = #{examDoctorName,jdbcType=VARCHAR},
+      patient_fee_item_examinate_time = #{patientFeeItemExaminateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_mark_fee_return = #{patientFeeItemMarkFeeReturn,jdbcType=BIT},
+      patient_fee_item_work_inner_modify = #{patientFeeItemWorkInnerModify,jdbcType=BIT},
+      patient_fee_item_severe_degree = #{patientFeeItemSevereDegree,jdbcType=VARCHAR},
+      patient_fee_item_Interface_marks = #{patientFeeItemInterfaceMarks,jdbcType=VARCHAR},
+      patient_fee_item_url_result = #{patientFeeItemUrlResult,jdbcType=VARCHAR},
+      patient_fee_item_create_time = #{patientFeeItemCreateTime,jdbcType=TIMESTAMP},
+      patient_fee_item_edit_time = #{patientFeeItemEditTime,jdbcType=TIMESTAMP},
+      patient_fee_item_status = #{patientFeeItemStatus,jdbcType=INTEGER}
+    where patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictSmsRecordMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.DictSmsRecord" >
+    <id column="SMS_id" property="smsId" jdbcType="BIGINT" />
+    <result column="SMS_phone" property="smsPhone" jdbcType="VARCHAR" />
+    <result column="SMS_content" property="smsContent" jdbcType="VARCHAR" />
+    <result column="SMS_Status" property="smsStatus" jdbcType="INTEGER" />
+    <result column="SMS_create" property="smsCreate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SMS_id, SMS_phone, SMS_content, SMS_Status, SMS_create
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictSmsRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Dict_SMS_Record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from Dict_SMS_Record
+    where SMS_id = #{smsId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from Dict_SMS_Record
+    where SMS_id = #{smsId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictSmsRecordExample" >
+    delete from Dict_SMS_Record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictSmsRecord" >
+    insert into Dict_SMS_Record (SMS_id, SMS_phone, SMS_content, 
+      SMS_Status, SMS_create)
+    values (#{smsId,jdbcType=BIGINT}, #{smsPhone,jdbcType=VARCHAR}, #{smsContent,jdbcType=VARCHAR}, 
+      #{smsStatus,jdbcType=INTEGER}, #{smsCreate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictSmsRecord" useGeneratedKeys="true" keyProperty="SMS_id">
+    insert into Dict_SMS_Record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="smsId != null" >
+        SMS_id,
+      </if>
+      <if test="smsPhone != null" >
+        SMS_phone,
+      </if>
+      <if test="smsContent != null" >
+        SMS_content,
+      </if>
+      <if test="smsStatus != null" >
+        SMS_Status,
+      </if>
+      <if test="smsCreate != null" >
+        SMS_create,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="smsId != null" >
+        #{smsId,jdbcType=BIGINT},
+      </if>
+      <if test="smsPhone != null" >
+        #{smsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="smsContent != null" >
+        #{smsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="smsStatus != null" >
+        #{smsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="smsCreate != null" >
+        #{smsCreate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictSmsRecordExample" resultType="java.lang.Integer" >
+    select count(*) from Dict_SMS_Record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Dict_SMS_Record
+    <set >
+      <if test="record.smsId != null" >
+        SMS_id = #{record.smsId,jdbcType=BIGINT},
+      </if>
+      <if test="record.smsPhone != null" >
+        SMS_phone = #{record.smsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsContent != null" >
+        SMS_content = #{record.smsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsStatus != null" >
+        SMS_Status = #{record.smsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.smsCreate != null" >
+        SMS_create = #{record.smsCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Dict_SMS_Record
+    set SMS_id = #{record.smsId,jdbcType=BIGINT},
+      SMS_phone = #{record.smsPhone,jdbcType=VARCHAR},
+      SMS_content = #{record.smsContent,jdbcType=VARCHAR},
+      SMS_Status = #{record.smsStatus,jdbcType=INTEGER},
+      SMS_create = #{record.smsCreate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictSmsRecord" >
+    update Dict_SMS_Record
+    <set >
+      <if test="smsPhone != null" >
+        SMS_phone = #{smsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="smsContent != null" >
+        SMS_content = #{smsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="smsStatus != null" >
+        SMS_Status = #{smsStatus,jdbcType=INTEGER},
+      </if>
+      <if test="smsCreate != null" >
+        SMS_create = #{smsCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SMS_id = #{smsId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.DictSmsRecord" >
+    update Dict_SMS_Record
+    set SMS_phone = #{smsPhone,jdbcType=VARCHAR},
+      SMS_content = #{smsContent,jdbcType=VARCHAR},
+      SMS_Status = #{smsStatus,jdbcType=INTEGER},
+      SMS_create = #{smsCreate,jdbcType=TIMESTAMP}
+    where SMS_id = #{smsId,jdbcType=BIGINT}
+  </update>
+</mapper>

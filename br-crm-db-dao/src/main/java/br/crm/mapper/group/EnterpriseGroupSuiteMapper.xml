@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.group.EnterpriseGroupSuiteMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.group.EnterpriseGroupSuite" >
+    <id column="enterprise_group_suite_id" property="enterpriseGroupSuiteId" jdbcType="VARCHAR" />
+    <result column="enterprise_group_id" property="enterpriseGroupId" jdbcType="VARCHAR" />
+    <result column="exam_suite_id" property="examSuiteId" jdbcType="VARCHAR" />
+    <result column="exam_suite_name" property="examSuiteName" jdbcType="VARCHAR" />
+    <result column="enterprise_group_suite_hazard_factor" property="enterpriseGroupSuiteHazardFactor" jdbcType="VARCHAR" />
+    <result column="enterprise_group_suite_status" property="enterpriseGroupSuiteStatus" jdbcType="INTEGER" />
+    <result column="enterprise_group_suite_edit_time" property="enterpriseGroupSuiteEditTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_group_suite_create_time" property="enterpriseGroupSuiteCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    enterprise_group_suite_id, enterprise_group_id, exam_suite_id, exam_suite_name, enterprise_group_suite_hazard_factor, 
+    enterprise_group_suite_status, enterprise_group_suite_edit_time, enterprise_group_suite_create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.group.EnterpriseGroupSuiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from enterprise_group_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise_group_suite
+    where enterprise_group_suite_id = #{enterpriseGroupSuiteId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from enterprise_group_suite
+    where enterprise_group_suite_id = #{enterpriseGroupSuiteId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.group.EnterpriseGroupSuiteExample" >
+    delete from enterprise_group_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.group.EnterpriseGroupSuite" >
+    insert into enterprise_group_suite (enterprise_group_suite_id, enterprise_group_id, 
+      exam_suite_id, exam_suite_name, enterprise_group_suite_hazard_factor, 
+      enterprise_group_suite_status, enterprise_group_suite_edit_time, 
+      enterprise_group_suite_create_time)
+    values (#{enterpriseGroupSuiteId,jdbcType=VARCHAR}, #{enterpriseGroupId,jdbcType=VARCHAR}, 
+      #{examSuiteId,jdbcType=VARCHAR}, #{examSuiteName,jdbcType=VARCHAR}, #{enterpriseGroupSuiteHazardFactor,jdbcType=VARCHAR}, 
+      #{enterpriseGroupSuiteStatus,jdbcType=INTEGER}, #{enterpriseGroupSuiteEditTime,jdbcType=TIMESTAMP}, 
+      #{enterpriseGroupSuiteCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.group.EnterpriseGroupSuite" >
+    insert into enterprise_group_suite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseGroupSuiteId != null" >
+        enterprise_group_suite_id,
+      </if>
+      <if test="enterpriseGroupId != null" >
+        enterprise_group_id,
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id,
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name,
+      </if>
+      <if test="enterpriseGroupSuiteHazardFactor != null" >
+        enterprise_group_suite_hazard_factor,
+      </if>
+      <if test="enterpriseGroupSuiteStatus != null" >
+        enterprise_group_suite_status,
+      </if>
+      <if test="enterpriseGroupSuiteEditTime != null" >
+        enterprise_group_suite_edit_time,
+      </if>
+      <if test="enterpriseGroupSuiteCreateTime != null" >
+        enterprise_group_suite_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseGroupSuiteId != null" >
+        #{enterpriseGroupSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupId != null" >
+        #{enterpriseGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteId != null" >
+        #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupSuiteHazardFactor != null" >
+        #{enterpriseGroupSuiteHazardFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupSuiteStatus != null" >
+        #{enterpriseGroupSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupSuiteEditTime != null" >
+        #{enterpriseGroupSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseGroupSuiteCreateTime != null" >
+        #{enterpriseGroupSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.group.EnterpriseGroupSuiteExample" resultType="java.lang.Integer" >
+    select count(*) from enterprise_group_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update enterprise_group_suite
+    <set >
+      <if test="record.enterpriseGroupSuiteId != null" >
+        enterprise_group_suite_id = #{record.enterpriseGroupSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupId != null" >
+        enterprise_group_id = #{record.enterpriseGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteId != null" >
+        exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteName != null" >
+        exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupSuiteHazardFactor != null" >
+        enterprise_group_suite_hazard_factor = #{record.enterpriseGroupSuiteHazardFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupSuiteStatus != null" >
+        enterprise_group_suite_status = #{record.enterpriseGroupSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupSuiteEditTime != null" >
+        enterprise_group_suite_edit_time = #{record.enterpriseGroupSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseGroupSuiteCreateTime != null" >
+        enterprise_group_suite_create_time = #{record.enterpriseGroupSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update enterprise_group_suite
+    set enterprise_group_suite_id = #{record.enterpriseGroupSuiteId,jdbcType=VARCHAR},
+      enterprise_group_id = #{record.enterpriseGroupId,jdbcType=VARCHAR},
+      exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      enterprise_group_suite_hazard_factor = #{record.enterpriseGroupSuiteHazardFactor,jdbcType=VARCHAR},
+      enterprise_group_suite_status = #{record.enterpriseGroupSuiteStatus,jdbcType=INTEGER},
+      enterprise_group_suite_edit_time = #{record.enterpriseGroupSuiteEditTime,jdbcType=TIMESTAMP},
+      enterprise_group_suite_create_time = #{record.enterpriseGroupSuiteCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.group.EnterpriseGroupSuite" >
+    update enterprise_group_suite
+    <set >
+      <if test="enterpriseGroupId != null" >
+        enterprise_group_id = #{enterpriseGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupSuiteHazardFactor != null" >
+        enterprise_group_suite_hazard_factor = #{enterpriseGroupSuiteHazardFactor,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupSuiteStatus != null" >
+        enterprise_group_suite_status = #{enterpriseGroupSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupSuiteEditTime != null" >
+        enterprise_group_suite_edit_time = #{enterpriseGroupSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseGroupSuiteCreateTime != null" >
+        enterprise_group_suite_create_time = #{enterpriseGroupSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where enterprise_group_suite_id = #{enterpriseGroupSuiteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.group.EnterpriseGroupSuite" >
+    update enterprise_group_suite
+    set enterprise_group_id = #{enterpriseGroupId,jdbcType=VARCHAR},
+      exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      enterprise_group_suite_hazard_factor = #{enterpriseGroupSuiteHazardFactor,jdbcType=VARCHAR},
+      enterprise_group_suite_status = #{enterpriseGroupSuiteStatus,jdbcType=INTEGER},
+      enterprise_group_suite_edit_time = #{enterpriseGroupSuiteEditTime,jdbcType=TIMESTAMP},
+      enterprise_group_suite_create_time = #{enterpriseGroupSuiteCreateTime,jdbcType=TIMESTAMP}
+    where enterprise_group_suite_id = #{enterpriseGroupSuiteId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictconclusiondepttypeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictconclusiondepttype" >
+    <id column="ID_Conclusion_Dept_Type" property="idConclusionDeptType" jdbcType="VARCHAR" />
+    <result column="Conclusion_Type_Dept_Name" property="conclusionTypeDeptName" jdbcType="VARCHAR" />
+    <result column="Conclusion_Type_Dept_Name_Eng" property="conclusionTypeDeptNameEng" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="DispOrder" property="disporder" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Conclusion_Dept_Type, Conclusion_Type_Dept_Name, Conclusion_Type_Dept_Name_Eng, 
+    Input_Code, DispOrder, status, createtime, edittime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictconclusiondepttypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictConclusionDeptType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictConclusionDeptType
+    where ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DictConclusionDeptType
+    where ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictconclusiondepttypeExample" >
+    delete from DictConclusionDeptType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictconclusiondepttype" >
+    insert into DictConclusionDeptType (ID_Conclusion_Dept_Type, Conclusion_Type_Dept_Name, 
+      Conclusion_Type_Dept_Name_Eng, Input_Code, DispOrder, 
+      status, createtime, edittime
+      )
+    values (#{idConclusionDeptType,jdbcType=VARCHAR}, #{conclusionTypeDeptName,jdbcType=VARCHAR}, 
+      #{conclusionTypeDeptNameEng,jdbcType=VARCHAR}, #{inputCode,jdbcType=VARCHAR}, #{disporder,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictconclusiondepttype" >
+    insert into DictConclusionDeptType
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idConclusionDeptType != null" >
+        ID_Conclusion_Dept_Type,
+      </if>
+      <if test="conclusionTypeDeptName != null" >
+        Conclusion_Type_Dept_Name,
+      </if>
+      <if test="conclusionTypeDeptNameEng != null" >
+        Conclusion_Type_Dept_Name_Eng,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="disporder != null" >
+        DispOrder,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idConclusionDeptType != null" >
+        #{idConclusionDeptType,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusionTypeDeptName != null" >
+        #{conclusionTypeDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusionTypeDeptNameEng != null" >
+        #{conclusionTypeDeptNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="disporder != null" >
+        #{disporder,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictconclusiondepttypeExample" resultType="java.lang.Integer" >
+    select count(*) from DictConclusionDeptType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictConclusionDeptType
+    <set >
+      <if test="record.idConclusionDeptType != null" >
+        ID_Conclusion_Dept_Type = #{record.idConclusionDeptType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conclusionTypeDeptName != null" >
+        Conclusion_Type_Dept_Name = #{record.conclusionTypeDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conclusionTypeDeptNameEng != null" >
+        Conclusion_Type_Dept_Name_Eng = #{record.conclusionTypeDeptNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disporder != null" >
+        DispOrder = #{record.disporder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictConclusionDeptType
+    set ID_Conclusion_Dept_Type = #{record.idConclusionDeptType,jdbcType=VARCHAR},
+      Conclusion_Type_Dept_Name = #{record.conclusionTypeDeptName,jdbcType=VARCHAR},
+      Conclusion_Type_Dept_Name_Eng = #{record.conclusionTypeDeptNameEng,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      DispOrder = #{record.disporder,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictconclusiondepttype" >
+    update DictConclusionDeptType
+    <set >
+      <if test="conclusionTypeDeptName != null" >
+        Conclusion_Type_Dept_Name = #{conclusionTypeDeptName,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusionTypeDeptNameEng != null" >
+        Conclusion_Type_Dept_Name_Eng = #{conclusionTypeDeptNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="disporder != null" >
+        DispOrder = #{disporder,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictconclusiondepttype" >
+    update DictConclusionDeptType
+    set Conclusion_Type_Dept_Name = #{conclusionTypeDeptName,jdbcType=VARCHAR},
+      Conclusion_Type_Dept_Name_Eng = #{conclusionTypeDeptNameEng,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      DispOrder = #{disporder,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP}
+    where ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR}
+  </update>
+</mapper>

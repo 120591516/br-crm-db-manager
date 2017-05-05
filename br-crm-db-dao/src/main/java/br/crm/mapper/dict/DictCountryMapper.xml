@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictCountryMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.DictCountry" >
+    <id column="country_id" property="countryId" jdbcType="BIGINT" />
+    <result column="country_keys" property="countryKeys" jdbcType="VARCHAR" />
+    <result column="country_name" property="countryName" jdbcType="VARCHAR" />
+    <result column="country_code" property="countryCode" jdbcType="VARCHAR" />
+    <result column="country_input_code" property="countryInputCode" jdbcType="VARCHAR" />
+    <result column="country_line_order" property="countryLineOrder" jdbcType="VARCHAR" />
+    <result column="country_status" property="countryStatus" jdbcType="INTEGER" />
+    <result column="country_create_time" property="countryCreateTime" jdbcType="TIMESTAMP" />
+    <result column="country_update_time" property="countryUpdateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    country_id, country_keys, country_name, country_code, country_input_code, country_line_order, 
+    country_status, country_create_time, country_update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictCountryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dict_country
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dict_country
+    where country_id = #{countryId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dict_country
+    where country_id = #{countryId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictCountryExample" >
+    delete from dict_country
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictCountry" >
+    insert into dict_country (country_id, country_keys, country_name, 
+      country_code, country_input_code, country_line_order, 
+      country_status, country_create_time, country_update_time
+      )
+    values (#{countryId,jdbcType=BIGINT}, #{countryKeys,jdbcType=VARCHAR}, #{countryName,jdbcType=VARCHAR}, 
+      #{countryCode,jdbcType=VARCHAR}, #{countryInputCode,jdbcType=VARCHAR}, #{countryLineOrder,jdbcType=VARCHAR}, 
+      #{countryStatus,jdbcType=INTEGER}, #{countryCreateTime,jdbcType=TIMESTAMP}, #{countryUpdateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictCountry" useGeneratedKeys="true" keyProperty="countryId" >
+    insert into dict_country
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="countryId != null" >
+	    country_id,
+      </if>
+      <if test="countryKeys != null" >
+        country_keys,
+      </if>
+      <if test="countryName != null" >
+        country_name,
+      </if>
+      <if test="countryCode != null" >
+        country_code,
+      </if>
+      <if test="countryInputCode != null" >
+        country_input_code,
+      </if>
+      <if test="countryLineOrder != null" >
+        country_line_order,
+      </if>
+      <if test="countryStatus != null" >
+        country_status,
+      </if>
+      <if test="countryCreateTime != null" >
+        country_create_time,
+      </if>
+      <if test="countryUpdateTime != null" >
+        country_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="countryId != null" >
+        #{countryId,jdbcType=BIGINT},
+      </if>
+      <if test="countryKeys != null" >
+        #{countryKeys,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null" >
+        #{countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null" >
+        #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countryInputCode != null" >
+        #{countryInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countryLineOrder != null" >
+        #{countryLineOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="countryStatus != null" >
+        #{countryStatus,jdbcType=INTEGER},
+      </if>
+      <if test="countryCreateTime != null" >
+        #{countryCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countryUpdateTime != null" >
+        #{countryUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictCountryExample" resultType="java.lang.Integer" >
+    select count(*) from dict_country
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dict_country
+    <set >
+      <if test="record.countryId != null" >
+        country_id = #{record.countryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.countryKeys != null" >
+        country_keys = #{record.countryKeys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryName != null" >
+        country_name = #{record.countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryCode != null" >
+        country_code = #{record.countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryInputCode != null" >
+        country_input_code = #{record.countryInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryLineOrder != null" >
+        country_line_order = #{record.countryLineOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryStatus != null" >
+        country_status = #{record.countryStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.countryCreateTime != null" >
+        country_create_time = #{record.countryCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.countryUpdateTime != null" >
+        country_update_time = #{record.countryUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dict_country
+    set country_id = #{record.countryId,jdbcType=BIGINT},
+      country_keys = #{record.countryKeys,jdbcType=VARCHAR},
+      country_name = #{record.countryName,jdbcType=VARCHAR},
+      country_code = #{record.countryCode,jdbcType=VARCHAR},
+      country_input_code = #{record.countryInputCode,jdbcType=VARCHAR},
+      country_line_order = #{record.countryLineOrder,jdbcType=VARCHAR},
+      country_status = #{record.countryStatus,jdbcType=INTEGER},
+      country_create_time = #{record.countryCreateTime,jdbcType=TIMESTAMP},
+      country_update_time = #{record.countryUpdateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictCountry" >
+    update dict_country
+    <set >
+      <if test="countryKeys != null" >
+        country_keys = #{countryKeys,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null" >
+        country_name = #{countryName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryCode != null" >
+        country_code = #{countryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countryInputCode != null" >
+        country_input_code = #{countryInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="countryLineOrder != null" >
+        country_line_order = #{countryLineOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="countryStatus != null" >
+        country_status = #{countryStatus,jdbcType=INTEGER},
+      </if>
+      <if test="countryCreateTime != null" >
+        country_create_time = #{countryCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="countryUpdateTime != null" >
+        country_update_time = #{countryUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where country_id = #{countryId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.DictCountry" >
+    update dict_country
+    set country_keys = #{countryKeys,jdbcType=VARCHAR},
+      country_name = #{countryName,jdbcType=VARCHAR},
+      country_code = #{countryCode,jdbcType=VARCHAR},
+      country_input_code = #{countryInputCode,jdbcType=VARCHAR},
+      country_line_order = #{countryLineOrder,jdbcType=VARCHAR},
+      country_status = #{countryStatus,jdbcType=INTEGER},
+      country_create_time = #{countryCreateTime,jdbcType=TIMESTAMP},
+      country_update_time = #{countryUpdateTime,jdbcType=TIMESTAMP}
+    where country_id = #{countryId,jdbcType=BIGINT}
+  </update>
+</mapper>

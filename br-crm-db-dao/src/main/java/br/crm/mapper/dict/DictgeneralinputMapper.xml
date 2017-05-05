@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictgeneralinputMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictgeneralinput" >
+    <id column="ID_GeneralInput" property="idGeneralinput" jdbcType="INTEGER" />
+    <result column="GeneralInput_TypeName" property="generalinputTypename" jdbcType="VARCHAR" />
+    <result column="GeneralInput_TypeCode" property="generalinputTypecode" jdbcType="VARCHAR" />
+    <result column="GeneralInput_Name" property="generalinputName" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="GeneralInput_createtime" property="generalinputCreatetime" jdbcType="TIMESTAMP" />
+    <result column="GeneralInput_updatetime" property="generalinputUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="GeneralInput_Status" property="generalinputStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.dict.Dictgeneralinput" extends="BaseResultMap" >
+    <result column="GeneralInput_Text" property="generalinputText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_GeneralInput, GeneralInput_TypeName, GeneralInput_TypeCode, GeneralInput_Name, 
+    Input_Code, GeneralInput_createtime, GeneralInput_updatetime, GeneralInput_Status
+  </sql>
+  <sql id="Blob_Column_List" >
+    GeneralInput_Text
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.dict.DictgeneralinputExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DictGeneralInput
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictgeneralinputExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictGeneralInput
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DictGeneralInput
+    where ID_GeneralInput = #{idGeneralinput,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictGeneralInput
+    where ID_GeneralInput = #{idGeneralinput,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictgeneralinputExample" >
+    delete from DictGeneralInput
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictgeneralinput" >
+    insert into DictGeneralInput (ID_GeneralInput, GeneralInput_TypeName, 
+      GeneralInput_TypeCode, GeneralInput_Name, 
+      Input_Code, GeneralInput_createtime, GeneralInput_updatetime, 
+      GeneralInput_Status, GeneralInput_Text
+      )
+    values (#{idGeneralinput,jdbcType=INTEGER}, #{generalinputTypename,jdbcType=VARCHAR}, 
+      #{generalinputTypecode,jdbcType=VARCHAR}, #{generalinputName,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{generalinputCreatetime,jdbcType=TIMESTAMP}, #{generalinputUpdatetime,jdbcType=TIMESTAMP}, 
+      #{generalinputStatus,jdbcType=INTEGER}, #{generalinputText,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictgeneralinput" >
+    insert into DictGeneralInput
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idGeneralinput != null" >
+        ID_GeneralInput,
+      </if>
+      <if test="generalinputTypename != null" >
+        GeneralInput_TypeName,
+      </if>
+      <if test="generalinputTypecode != null" >
+        GeneralInput_TypeCode,
+      </if>
+      <if test="generalinputName != null" >
+        GeneralInput_Name,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="generalinputCreatetime != null" >
+        GeneralInput_createtime,
+      </if>
+      <if test="generalinputUpdatetime != null" >
+        GeneralInput_updatetime,
+      </if>
+      <if test="generalinputStatus != null" >
+        GeneralInput_Status,
+      </if>
+      <if test="generalinputText != null" >
+        GeneralInput_Text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idGeneralinput != null" >
+        #{idGeneralinput,jdbcType=INTEGER},
+      </if>
+      <if test="generalinputTypename != null" >
+        #{generalinputTypename,jdbcType=VARCHAR},
+      </if>
+      <if test="generalinputTypecode != null" >
+        #{generalinputTypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="generalinputName != null" >
+        #{generalinputName,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="generalinputCreatetime != null" >
+        #{generalinputCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="generalinputUpdatetime != null" >
+        #{generalinputUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="generalinputStatus != null" >
+        #{generalinputStatus,jdbcType=INTEGER},
+      </if>
+      <if test="generalinputText != null" >
+        #{generalinputText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictgeneralinputExample" resultType="java.lang.Integer" >
+    select count(*) from DictGeneralInput
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictGeneralInput
+    <set >
+      <if test="record.idGeneralinput != null" >
+        ID_GeneralInput = #{record.idGeneralinput,jdbcType=INTEGER},
+      </if>
+      <if test="record.generalinputTypename != null" >
+        GeneralInput_TypeName = #{record.generalinputTypename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.generalinputTypecode != null" >
+        GeneralInput_TypeCode = #{record.generalinputTypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.generalinputName != null" >
+        GeneralInput_Name = #{record.generalinputName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.generalinputCreatetime != null" >
+        GeneralInput_createtime = #{record.generalinputCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.generalinputUpdatetime != null" >
+        GeneralInput_updatetime = #{record.generalinputUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.generalinputStatus != null" >
+        GeneralInput_Status = #{record.generalinputStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.generalinputText != null" >
+        GeneralInput_Text = #{record.generalinputText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update DictGeneralInput
+    set ID_GeneralInput = #{record.idGeneralinput,jdbcType=INTEGER},
+      GeneralInput_TypeName = #{record.generalinputTypename,jdbcType=VARCHAR},
+      GeneralInput_TypeCode = #{record.generalinputTypecode,jdbcType=VARCHAR},
+      GeneralInput_Name = #{record.generalinputName,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      GeneralInput_createtime = #{record.generalinputCreatetime,jdbcType=TIMESTAMP},
+      GeneralInput_updatetime = #{record.generalinputUpdatetime,jdbcType=TIMESTAMP},
+      GeneralInput_Status = #{record.generalinputStatus,jdbcType=INTEGER},
+      GeneralInput_Text = #{record.generalinputText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictGeneralInput
+    set ID_GeneralInput = #{record.idGeneralinput,jdbcType=INTEGER},
+      GeneralInput_TypeName = #{record.generalinputTypename,jdbcType=VARCHAR},
+      GeneralInput_TypeCode = #{record.generalinputTypecode,jdbcType=VARCHAR},
+      GeneralInput_Name = #{record.generalinputName,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      GeneralInput_createtime = #{record.generalinputCreatetime,jdbcType=TIMESTAMP},
+      GeneralInput_updatetime = #{record.generalinputUpdatetime,jdbcType=TIMESTAMP},
+      GeneralInput_Status = #{record.generalinputStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictgeneralinput" >
+    update DictGeneralInput
+    <set >
+      <if test="generalinputTypename != null" >
+        GeneralInput_TypeName = #{generalinputTypename,jdbcType=VARCHAR},
+      </if>
+      <if test="generalinputTypecode != null" >
+        GeneralInput_TypeCode = #{generalinputTypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="generalinputName != null" >
+        GeneralInput_Name = #{generalinputName,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="generalinputCreatetime != null" >
+        GeneralInput_createtime = #{generalinputCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="generalinputUpdatetime != null" >
+        GeneralInput_updatetime = #{generalinputUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="generalinputStatus != null" >
+        GeneralInput_Status = #{generalinputStatus,jdbcType=INTEGER},
+      </if>
+      <if test="generalinputText != null" >
+        GeneralInput_Text = #{generalinputText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID_GeneralInput = #{idGeneralinput,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.dict.Dictgeneralinput" >
+    update DictGeneralInput
+    set GeneralInput_TypeName = #{generalinputTypename,jdbcType=VARCHAR},
+      GeneralInput_TypeCode = #{generalinputTypecode,jdbcType=VARCHAR},
+      GeneralInput_Name = #{generalinputName,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      GeneralInput_createtime = #{generalinputCreatetime,jdbcType=TIMESTAMP},
+      GeneralInput_updatetime = #{generalinputUpdatetime,jdbcType=TIMESTAMP},
+      GeneralInput_Status = #{generalinputStatus,jdbcType=INTEGER},
+      GeneralInput_Text = #{generalinputText,jdbcType=LONGVARCHAR}
+    where ID_GeneralInput = #{idGeneralinput,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictgeneralinput" >
+    update DictGeneralInput
+    set GeneralInput_TypeName = #{generalinputTypename,jdbcType=VARCHAR},
+      GeneralInput_TypeCode = #{generalinputTypecode,jdbcType=VARCHAR},
+      GeneralInput_Name = #{generalinputName,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      GeneralInput_createtime = #{generalinputCreatetime,jdbcType=TIMESTAMP},
+      GeneralInput_updatetime = #{generalinputUpdatetime,jdbcType=TIMESTAMP},
+      GeneralInput_Status = #{generalinputStatus,jdbcType=INTEGER}
+    where ID_GeneralInput = #{idGeneralinput,jdbcType=INTEGER}
+  </update>
+</mapper>

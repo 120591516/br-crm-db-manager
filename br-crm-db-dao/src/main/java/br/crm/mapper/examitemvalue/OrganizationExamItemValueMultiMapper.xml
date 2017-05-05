@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examitemvalue.OrganizationExamItemValueMultiMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.examitemvalue.OrganizationExamItemValueMulti" >
+    <id column="exam_item_value_multi_id" property="examItemValueMultiId" jdbcType="VARCHAR" />
+    <result column="exam_item_value_id" property="examItemValueId" jdbcType="VARCHAR" />
+    <result column="dict_bodypart_id" property="dictBodypartId" jdbcType="VARCHAR" />
+    <result column="exam_item_value_multi_degree" property="examItemValueMultiDegree" jdbcType="INTEGER" />
+    <result column="dict_conclusion_id" property="dictConclusionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_item_value_multi_id, exam_item_value_id, dict_bodypart_id, exam_item_value_multi_degree, 
+    dict_conclusion_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMultiExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_item_value_multi
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_item_value_multi
+    where exam_item_value_multi_id = #{examItemValueMultiId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_item_value_multi
+    where exam_item_value_multi_id = #{examItemValueMultiId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMultiExample" >
+    delete from organization_exam_item_value_multi
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMulti" >
+    insert into organization_exam_item_value_multi (exam_item_value_multi_id, exam_item_value_id, 
+      dict_bodypart_id, exam_item_value_multi_degree, 
+      dict_conclusion_id)
+    values (#{examItemValueMultiId,jdbcType=VARCHAR}, #{examItemValueId,jdbcType=VARCHAR}, 
+      #{dictBodypartId,jdbcType=VARCHAR}, #{examItemValueMultiDegree,jdbcType=INTEGER}, 
+      #{dictConclusionId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMulti" >
+    insert into organization_exam_item_value_multi
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examItemValueMultiId != null" >
+        exam_item_value_multi_id,
+      </if>
+      <if test="examItemValueId != null" >
+        exam_item_value_id,
+      </if>
+      <if test="dictBodypartId != null" >
+        dict_bodypart_id,
+      </if>
+      <if test="examItemValueMultiDegree != null" >
+        exam_item_value_multi_degree,
+      </if>
+      <if test="dictConclusionId != null" >
+        dict_conclusion_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examItemValueMultiId != null" >
+        #{examItemValueMultiId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueId != null" >
+        #{examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictBodypartId != null" >
+        #{dictBodypartId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueMultiDegree != null" >
+        #{examItemValueMultiDegree,jdbcType=INTEGER},
+      </if>
+      <if test="dictConclusionId != null" >
+        #{dictConclusionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMultiExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_item_value_multi
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_item_value_multi
+    <set >
+      <if test="record.examItemValueMultiId != null" >
+        exam_item_value_multi_id = #{record.examItemValueMultiId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueId != null" >
+        exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictBodypartId != null" >
+        dict_bodypart_id = #{record.dictBodypartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueMultiDegree != null" >
+        exam_item_value_multi_degree = #{record.examItemValueMultiDegree,jdbcType=INTEGER},
+      </if>
+      <if test="record.dictConclusionId != null" >
+        dict_conclusion_id = #{record.dictConclusionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_item_value_multi
+    set exam_item_value_multi_id = #{record.examItemValueMultiId,jdbcType=VARCHAR},
+      exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      dict_bodypart_id = #{record.dictBodypartId,jdbcType=VARCHAR},
+      exam_item_value_multi_degree = #{record.examItemValueMultiDegree,jdbcType=INTEGER},
+      dict_conclusion_id = #{record.dictConclusionId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMulti" >
+    update organization_exam_item_value_multi
+    <set >
+      <if test="examItemValueId != null" >
+        exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictBodypartId != null" >
+        dict_bodypart_id = #{dictBodypartId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueMultiDegree != null" >
+        exam_item_value_multi_degree = #{examItemValueMultiDegree,jdbcType=INTEGER},
+      </if>
+      <if test="dictConclusionId != null" >
+        dict_conclusion_id = #{dictConclusionId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where exam_item_value_multi_id = #{examItemValueMultiId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueMulti" >
+    update organization_exam_item_value_multi
+    set exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR},
+      dict_bodypart_id = #{dictBodypartId,jdbcType=VARCHAR},
+      exam_item_value_multi_degree = #{examItemValueMultiDegree,jdbcType=INTEGER},
+      dict_conclusion_id = #{dictConclusionId,jdbcType=VARCHAR}
+    where exam_item_value_multi_id = #{examItemValueMultiId,jdbcType=VARCHAR}
+  </update>
+</mapper>

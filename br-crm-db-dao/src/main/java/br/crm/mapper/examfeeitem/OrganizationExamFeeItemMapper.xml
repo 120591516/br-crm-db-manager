@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examfeeitem.OrganizationExamFeeItemMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.examfeeitem.OrganizationExamFeeItem" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="organization_branch_id" property="organizationBranchId" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name" property="examFeeItemName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name_abr" property="examFeeItemNameAbr" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name_eng" property="examFeeItemNameEng" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name_eng_abr" property="examFeeItemNameEngAbr" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_code" property="examFeeItemCode" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_fee_code" property="examFeeItemFeeCode" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_his_name" property="examFeeItemHisName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_unit_price" property="examFeeItemUnitPrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_suite_price" property="examFeeItemSuitePrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_material_price" property="examFeeItemMaterialPrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_cost_price" property="examFeeItemCostPrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_coop_price" property="examFeeItemCoopPrice" jdbcType="DECIMAL" />
+    <result column="coop_org_id" property="coopOrgId" jdbcType="VARCHAR" />
+    <result column="exam_detail" property="examDetail" jdbcType="VARCHAR" />
+    <result column="f_male" property="fMale" jdbcType="INTEGER" />
+    <result column="f_female" property="fFemale" jdbcType="INTEGER" />
+    <result column="f_alert" property="fAlert" jdbcType="INTEGER" />
+    <result column="warning_msg" property="warningMsg" jdbcType="VARCHAR" />
+    <result column="breakfast_order" property="breakfastOrder" jdbcType="INTEGER" />
+    <result column="disp_order" property="dispOrder" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, org_id, organization_branch_id, department_id, department_name, exam_fee_item_name, 
+    exam_fee_item_name_abr, exam_fee_item_name_eng, exam_fee_item_name_eng_abr, exam_fee_item_code, 
+    exam_fee_item_fee_code, exam_fee_item_his_name, exam_fee_item_unit_price, exam_fee_item_suite_price, 
+    exam_fee_item_material_price, exam_fee_item_cost_price, exam_fee_item_coop_price, 
+    coop_org_id, exam_detail, f_male, f_female, f_alert, warning_msg, breakfast_order, 
+    disp_order, note, status, createtime, edittime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItemExample" >
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_fee_item
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_fee_item
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItemExample" >
+    delete from organization_exam_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItem" >
+    insert into organization_exam_fee_item (id, org_id, organization_branch_id, 
+      department_id, department_name, exam_fee_item_name, 
+      exam_fee_item_name_abr, exam_fee_item_name_eng, 
+      exam_fee_item_name_eng_abr, exam_fee_item_code, 
+      exam_fee_item_fee_code, exam_fee_item_his_name, 
+      exam_fee_item_unit_price, exam_fee_item_suite_price, 
+      exam_fee_item_material_price, exam_fee_item_cost_price, 
+      exam_fee_item_coop_price, coop_org_id, exam_detail, 
+      f_male, f_female, f_alert, 
+      warning_msg, breakfast_order, disp_order, 
+      note, status, createtime, 
+      edittime)
+    values (#{id,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{organizationBranchId,jdbcType=VARCHAR}, 
+      #{departmentId,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, #{examFeeItemName,jdbcType=VARCHAR}, 
+      #{examFeeItemNameAbr,jdbcType=VARCHAR}, #{examFeeItemNameEng,jdbcType=VARCHAR}, 
+      #{examFeeItemNameEngAbr,jdbcType=VARCHAR}, #{examFeeItemCode,jdbcType=VARCHAR}, 
+      #{examFeeItemFeeCode,jdbcType=VARCHAR}, #{examFeeItemHisName,jdbcType=VARCHAR}, 
+      #{examFeeItemUnitPrice,jdbcType=DECIMAL}, #{examFeeItemSuitePrice,jdbcType=DECIMAL}, 
+      #{examFeeItemMaterialPrice,jdbcType=DECIMAL}, #{examFeeItemCostPrice,jdbcType=DECIMAL}, 
+      #{examFeeItemCoopPrice,jdbcType=DECIMAL}, #{coopOrgId,jdbcType=VARCHAR}, #{examDetail,jdbcType=VARCHAR}, 
+      #{fMale,jdbcType=INTEGER}, #{fFemale,jdbcType=INTEGER}, #{fAlert,jdbcType=INTEGER}, 
+      #{warningMsg,jdbcType=VARCHAR}, #{breakfastOrder,jdbcType=INTEGER}, #{dispOrder,jdbcType=INTEGER}, 
+      #{note,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{edittime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItem" >
+    insert into organization_exam_fee_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="organizationBranchId != null" >
+        organization_branch_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="departmentName != null" >
+        department_name,
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name,
+      </if>
+      <if test="examFeeItemNameAbr != null" >
+        exam_fee_item_name_abr,
+      </if>
+      <if test="examFeeItemNameEng != null" >
+        exam_fee_item_name_eng,
+      </if>
+      <if test="examFeeItemNameEngAbr != null" >
+        exam_fee_item_name_eng_abr,
+      </if>
+      <if test="examFeeItemCode != null" >
+        exam_fee_item_code,
+      </if>
+      <if test="examFeeItemFeeCode != null" >
+        exam_fee_item_fee_code,
+      </if>
+      <if test="examFeeItemHisName != null" >
+        exam_fee_item_his_name,
+      </if>
+      <if test="examFeeItemUnitPrice != null" >
+        exam_fee_item_unit_price,
+      </if>
+      <if test="examFeeItemSuitePrice != null" >
+        exam_fee_item_suite_price,
+      </if>
+      <if test="examFeeItemMaterialPrice != null" >
+        exam_fee_item_material_price,
+      </if>
+      <if test="examFeeItemCostPrice != null" >
+        exam_fee_item_cost_price,
+      </if>
+      <if test="examFeeItemCoopPrice != null" >
+        exam_fee_item_coop_price,
+      </if>
+      <if test="coopOrgId != null" >
+        coop_org_id,
+      </if>
+      <if test="examDetail != null" >
+        exam_detail,
+      </if>
+      <if test="fMale != null" >
+        f_male,
+      </if>
+      <if test="fFemale != null" >
+        f_female,
+      </if>
+      <if test="fAlert != null" >
+        f_alert,
+      </if>
+      <if test="warningMsg != null" >
+        warning_msg,
+      </if>
+      <if test="breakfastOrder != null" >
+        breakfast_order,
+      </if>
+      <if test="dispOrder != null" >
+        disp_order,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationBranchId != null" >
+        #{organizationBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemNameAbr != null" >
+        #{examFeeItemNameAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemNameEng != null" >
+        #{examFeeItemNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemNameEngAbr != null" >
+        #{examFeeItemNameEngAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemCode != null" >
+        #{examFeeItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemFeeCode != null" >
+        #{examFeeItemFeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemHisName != null" >
+        #{examFeeItemHisName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemUnitPrice != null" >
+        #{examFeeItemUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemSuitePrice != null" >
+        #{examFeeItemSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemMaterialPrice != null" >
+        #{examFeeItemMaterialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemCostPrice != null" >
+        #{examFeeItemCostPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemCoopPrice != null" >
+        #{examFeeItemCoopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="coopOrgId != null" >
+        #{coopOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null" >
+        #{examDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="fMale != null" >
+        #{fMale,jdbcType=INTEGER},
+      </if>
+      <if test="fFemale != null" >
+        #{fFemale,jdbcType=INTEGER},
+      </if>
+      <if test="fAlert != null" >
+        #{fAlert,jdbcType=INTEGER},
+      </if>
+      <if test="warningMsg != null" >
+        #{warningMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="breakfastOrder != null" >
+        #{breakfastOrder,jdbcType=INTEGER},
+      </if>
+      <if test="dispOrder != null" >
+        #{dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItemExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_fee_item
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationBranchId != null" >
+        organization_branch_id = #{record.organizationBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null" >
+        department_id = #{record.departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentName != null" >
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemName != null" >
+        exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemNameAbr != null" >
+        exam_fee_item_name_abr = #{record.examFeeItemNameAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemNameEng != null" >
+        exam_fee_item_name_eng = #{record.examFeeItemNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemNameEngAbr != null" >
+        exam_fee_item_name_eng_abr = #{record.examFeeItemNameEngAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemCode != null" >
+        exam_fee_item_code = #{record.examFeeItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemFeeCode != null" >
+        exam_fee_item_fee_code = #{record.examFeeItemFeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemHisName != null" >
+        exam_fee_item_his_name = #{record.examFeeItemHisName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemUnitPrice != null" >
+        exam_fee_item_unit_price = #{record.examFeeItemUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examFeeItemSuitePrice != null" >
+        exam_fee_item_suite_price = #{record.examFeeItemSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examFeeItemMaterialPrice != null" >
+        exam_fee_item_material_price = #{record.examFeeItemMaterialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examFeeItemCostPrice != null" >
+        exam_fee_item_cost_price = #{record.examFeeItemCostPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examFeeItemCoopPrice != null" >
+        exam_fee_item_coop_price = #{record.examFeeItemCoopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.coopOrgId != null" >
+        coop_org_id = #{record.coopOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examDetail != null" >
+        exam_detail = #{record.examDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fMale != null" >
+        f_male = #{record.fMale,jdbcType=INTEGER},
+      </if>
+      <if test="record.fFemale != null" >
+        f_female = #{record.fFemale,jdbcType=INTEGER},
+      </if>
+      <if test="record.fAlert != null" >
+        f_alert = #{record.fAlert,jdbcType=INTEGER},
+      </if>
+      <if test="record.warningMsg != null" >
+        warning_msg = #{record.warningMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.breakfastOrder != null" >
+        breakfast_order = #{record.breakfastOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.dispOrder != null" >
+        disp_order = #{record.dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_fee_item
+    set id = #{record.id,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      organization_branch_id = #{record.organizationBranchId,jdbcType=VARCHAR},
+      department_id = #{record.departmentId,jdbcType=VARCHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      exam_fee_item_name_abr = #{record.examFeeItemNameAbr,jdbcType=VARCHAR},
+      exam_fee_item_name_eng = #{record.examFeeItemNameEng,jdbcType=VARCHAR},
+      exam_fee_item_name_eng_abr = #{record.examFeeItemNameEngAbr,jdbcType=VARCHAR},
+      exam_fee_item_code = #{record.examFeeItemCode,jdbcType=VARCHAR},
+      exam_fee_item_fee_code = #{record.examFeeItemFeeCode,jdbcType=VARCHAR},
+      exam_fee_item_his_name = #{record.examFeeItemHisName,jdbcType=VARCHAR},
+      exam_fee_item_unit_price = #{record.examFeeItemUnitPrice,jdbcType=DECIMAL},
+      exam_fee_item_suite_price = #{record.examFeeItemSuitePrice,jdbcType=DECIMAL},
+      exam_fee_item_material_price = #{record.examFeeItemMaterialPrice,jdbcType=DECIMAL},
+      exam_fee_item_cost_price = #{record.examFeeItemCostPrice,jdbcType=DECIMAL},
+      exam_fee_item_coop_price = #{record.examFeeItemCoopPrice,jdbcType=DECIMAL},
+      coop_org_id = #{record.coopOrgId,jdbcType=VARCHAR},
+      exam_detail = #{record.examDetail,jdbcType=VARCHAR},
+      f_male = #{record.fMale,jdbcType=INTEGER},
+      f_female = #{record.fFemale,jdbcType=INTEGER},
+      f_alert = #{record.fAlert,jdbcType=INTEGER},
+      warning_msg = #{record.warningMsg,jdbcType=VARCHAR},
+      breakfast_order = #{record.breakfastOrder,jdbcType=INTEGER},
+      disp_order = #{record.dispOrder,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItem" >
+    update organization_exam_fee_item
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationBranchId != null" >
+        organization_branch_id = #{organizationBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        department_id = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemNameAbr != null" >
+        exam_fee_item_name_abr = #{examFeeItemNameAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemNameEng != null" >
+        exam_fee_item_name_eng = #{examFeeItemNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemNameEngAbr != null" >
+        exam_fee_item_name_eng_abr = #{examFeeItemNameEngAbr,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemCode != null" >
+        exam_fee_item_code = #{examFeeItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemFeeCode != null" >
+        exam_fee_item_fee_code = #{examFeeItemFeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemHisName != null" >
+        exam_fee_item_his_name = #{examFeeItemHisName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemUnitPrice != null" >
+        exam_fee_item_unit_price = #{examFeeItemUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemSuitePrice != null" >
+        exam_fee_item_suite_price = #{examFeeItemSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemMaterialPrice != null" >
+        exam_fee_item_material_price = #{examFeeItemMaterialPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemCostPrice != null" >
+        exam_fee_item_cost_price = #{examFeeItemCostPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examFeeItemCoopPrice != null" >
+        exam_fee_item_coop_price = #{examFeeItemCoopPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="coopOrgId != null" >
+        coop_org_id = #{coopOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="examDetail != null" >
+        exam_detail = #{examDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="fMale != null" >
+        f_male = #{fMale,jdbcType=INTEGER},
+      </if>
+      <if test="fFemale != null" >
+        f_female = #{fFemale,jdbcType=INTEGER},
+      </if>
+      <if test="fAlert != null" >
+        f_alert = #{fAlert,jdbcType=INTEGER},
+      </if>
+      <if test="warningMsg != null" >
+        warning_msg = #{warningMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="breakfastOrder != null" >
+        breakfast_order = #{breakfastOrder,jdbcType=INTEGER},
+      </if>
+      <if test="dispOrder != null" >
+        disp_order = #{dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.examfeeitem.OrganizationExamFeeItem" >
+    update organization_exam_fee_item
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      organization_branch_id = #{organizationBranchId,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=VARCHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      exam_fee_item_name_abr = #{examFeeItemNameAbr,jdbcType=VARCHAR},
+      exam_fee_item_name_eng = #{examFeeItemNameEng,jdbcType=VARCHAR},
+      exam_fee_item_name_eng_abr = #{examFeeItemNameEngAbr,jdbcType=VARCHAR},
+      exam_fee_item_code = #{examFeeItemCode,jdbcType=VARCHAR},
+      exam_fee_item_fee_code = #{examFeeItemFeeCode,jdbcType=VARCHAR},
+      exam_fee_item_his_name = #{examFeeItemHisName,jdbcType=VARCHAR},
+      exam_fee_item_unit_price = #{examFeeItemUnitPrice,jdbcType=DECIMAL},
+      exam_fee_item_suite_price = #{examFeeItemSuitePrice,jdbcType=DECIMAL},
+      exam_fee_item_material_price = #{examFeeItemMaterialPrice,jdbcType=DECIMAL},
+      exam_fee_item_cost_price = #{examFeeItemCostPrice,jdbcType=DECIMAL},
+      exam_fee_item_coop_price = #{examFeeItemCoopPrice,jdbcType=DECIMAL},
+      coop_org_id = #{coopOrgId,jdbcType=VARCHAR},
+      exam_detail = #{examDetail,jdbcType=VARCHAR},
+      f_male = #{fMale,jdbcType=INTEGER},
+      f_female = #{fFemale,jdbcType=INTEGER},
+      f_alert = #{fAlert,jdbcType=INTEGER},
+      warning_msg = #{warningMsg,jdbcType=VARCHAR},
+      breakfast_order = #{breakfastOrder,jdbcType=INTEGER},
+      disp_order = #{dispOrder,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

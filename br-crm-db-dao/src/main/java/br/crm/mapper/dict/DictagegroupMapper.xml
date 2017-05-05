@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictagegroupMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictagegroup" >
+    <id column="AgeGroup_ID" property="agegroupId" jdbcType="INTEGER" />
+    <result column="AgeGroup_Name" property="agegroupName" jdbcType="VARCHAR" />
+    <result column="AgeGroup_Up" property="agegroupUp" jdbcType="INTEGER" />
+    <result column="AgeGroup_down" property="agegroupDown" jdbcType="INTEGER" />
+    <result column="AgeGroup_Text" property="agegroupText" jdbcType="VARCHAR" />
+    <result column="AgeGroup_Order" property="agegroupOrder" jdbcType="VARCHAR" />
+    <result column="AgeGroup_CreateTime" property="agegroupCreatetime" jdbcType="TIMESTAMP" />
+    <result column="AgeGroup_UpdateTime" property="agegroupUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="AgeGroup_Status" property="agegroupStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AgeGroup_ID, AgeGroup_Name, AgeGroup_Up, AgeGroup_down, AgeGroup_Text, AgeGroup_Order, 
+    AgeGroup_CreateTime, AgeGroup_UpdateTime, AgeGroup_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictagegroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictAgeGroup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictAgeGroup
+    where AgeGroup_ID = #{agegroupId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictAgeGroup
+    where AgeGroup_ID = #{agegroupId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictagegroupExample" >
+    delete from DictAgeGroup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictagegroup" >
+    insert into DictAgeGroup (AgeGroup_ID, AgeGroup_Name, AgeGroup_Up, 
+      AgeGroup_down, AgeGroup_Text, AgeGroup_Order, 
+      AgeGroup_CreateTime, AgeGroup_UpdateTime, 
+      AgeGroup_Status)
+    values (#{agegroupId,jdbcType=INTEGER}, #{agegroupName,jdbcType=VARCHAR}, #{agegroupUp,jdbcType=INTEGER}, 
+      #{agegroupDown,jdbcType=INTEGER}, #{agegroupText,jdbcType=VARCHAR}, #{agegroupOrder,jdbcType=VARCHAR}, 
+      #{agegroupCreatetime,jdbcType=TIMESTAMP}, #{agegroupUpdatetime,jdbcType=TIMESTAMP}, 
+      #{agegroupStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictagegroup" useGeneratedKeys="true" keyProperty="agegroupId" >
+    insert into DictAgeGroup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="agegroupId != null" >
+        AgeGroup_ID,
+      </if>
+      <if test="agegroupName != null" >
+        AgeGroup_Name,
+      </if>
+      <if test="agegroupUp != null" >
+        AgeGroup_Up,
+      </if>
+      <if test="agegroupDown != null" >
+        AgeGroup_down,
+      </if>
+      <if test="agegroupText != null" >
+        AgeGroup_Text,
+      </if>
+      <if test="agegroupOrder != null" >
+        AgeGroup_Order,
+      </if>
+      <if test="agegroupCreatetime != null" >
+        AgeGroup_CreateTime,
+      </if>
+      <if test="agegroupUpdatetime != null" >
+        AgeGroup_UpdateTime,
+      </if>
+      <if test="agegroupStatus != null" >
+        AgeGroup_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="agegroupId != null" >
+        #{agegroupId,jdbcType=INTEGER},
+      </if>
+      <if test="agegroupName != null" >
+        #{agegroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="agegroupUp != null" >
+        #{agegroupUp,jdbcType=INTEGER},
+      </if>
+      <if test="agegroupDown != null" >
+        #{agegroupDown,jdbcType=INTEGER},
+      </if>
+      <if test="agegroupText != null" >
+        #{agegroupText,jdbcType=VARCHAR},
+      </if>
+      <if test="agegroupOrder != null" >
+        #{agegroupOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="agegroupCreatetime != null" >
+        #{agegroupCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agegroupUpdatetime != null" >
+        #{agegroupUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agegroupStatus != null" >
+        #{agegroupStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictagegroupExample" resultType="java.lang.Integer" >
+    select count(*) from DictAgeGroup
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictAgeGroup
+    <set >
+      <if test="record.agegroupId != null" >
+        AgeGroup_ID = #{record.agegroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.agegroupName != null" >
+        AgeGroup_Name = #{record.agegroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agegroupUp != null" >
+        AgeGroup_Up = #{record.agegroupUp,jdbcType=INTEGER},
+      </if>
+      <if test="record.agegroupDown != null" >
+        AgeGroup_down = #{record.agegroupDown,jdbcType=INTEGER},
+      </if>
+      <if test="record.agegroupText != null" >
+        AgeGroup_Text = #{record.agegroupText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agegroupOrder != null" >
+        AgeGroup_Order = #{record.agegroupOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agegroupCreatetime != null" >
+        AgeGroup_CreateTime = #{record.agegroupCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.agegroupUpdatetime != null" >
+        AgeGroup_UpdateTime = #{record.agegroupUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.agegroupStatus != null" >
+        AgeGroup_Status = #{record.agegroupStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictAgeGroup
+    set AgeGroup_ID = #{record.agegroupId,jdbcType=INTEGER},
+      AgeGroup_Name = #{record.agegroupName,jdbcType=VARCHAR},
+      AgeGroup_Up = #{record.agegroupUp,jdbcType=INTEGER},
+      AgeGroup_down = #{record.agegroupDown,jdbcType=INTEGER},
+      AgeGroup_Text = #{record.agegroupText,jdbcType=VARCHAR},
+      AgeGroup_Order = #{record.agegroupOrder,jdbcType=VARCHAR},
+      AgeGroup_CreateTime = #{record.agegroupCreatetime,jdbcType=TIMESTAMP},
+      AgeGroup_UpdateTime = #{record.agegroupUpdatetime,jdbcType=TIMESTAMP},
+      AgeGroup_Status = #{record.agegroupStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictagegroup" >
+    update DictAgeGroup
+    <set >
+      <if test="agegroupName != null" >
+        AgeGroup_Name = #{agegroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="agegroupUp != null" >
+        AgeGroup_Up = #{agegroupUp,jdbcType=INTEGER},
+      </if>
+      <if test="agegroupDown != null" >
+        AgeGroup_down = #{agegroupDown,jdbcType=INTEGER},
+      </if>
+      <if test="agegroupText != null" >
+        AgeGroup_Text = #{agegroupText,jdbcType=VARCHAR},
+      </if>
+      <if test="agegroupOrder != null" >
+        AgeGroup_Order = #{agegroupOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="agegroupCreatetime != null" >
+        AgeGroup_CreateTime = #{agegroupCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agegroupUpdatetime != null" >
+        AgeGroup_UpdateTime = #{agegroupUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agegroupStatus != null" >
+        AgeGroup_Status = #{agegroupStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where AgeGroup_ID = #{agegroupId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictagegroup" >
+    update DictAgeGroup
+    set AgeGroup_Name = #{agegroupName,jdbcType=VARCHAR},
+      AgeGroup_Up = #{agegroupUp,jdbcType=INTEGER},
+      AgeGroup_down = #{agegroupDown,jdbcType=INTEGER},
+      AgeGroup_Text = #{agegroupText,jdbcType=VARCHAR},
+      AgeGroup_Order = #{agegroupOrder,jdbcType=VARCHAR},
+      AgeGroup_CreateTime = #{agegroupCreatetime,jdbcType=TIMESTAMP},
+      AgeGroup_UpdateTime = #{agegroupUpdatetime,jdbcType=TIMESTAMP},
+      AgeGroup_Status = #{agegroupStatus,jdbcType=INTEGER}
+    where AgeGroup_ID = #{agegroupId,jdbcType=INTEGER}
+  </update>
+</mapper>

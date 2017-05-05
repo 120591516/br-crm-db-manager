@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.exam.depart.PatientExamDepartMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.exam.depart.PatientExamDepart" >
+    <id column="patient_exam_depart_id" property="patientExamDepartId" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="patient_name" property="patientName" jdbcType="VARCHAR" />
+    <result column="depart_id" property="departId" jdbcType="VARCHAR" />
+    <result column="depart_name" property="departName" jdbcType="VARCHAR" />
+    <result column="depart_daily_no_time" property="departDailyNoTime" jdbcType="TIMESTAMP" />
+    <result column="depart_daily_no" property="departDailyNo" jdbcType="INTEGER" />
+    <result column="depart_summary_naming" property="departSummaryNaming" jdbcType="VARCHAR" />
+    <result column="depart_doctor_id" property="departDoctorId" jdbcType="VARCHAR" />
+    <result column="depart_doctor_name" property="departDoctorName" jdbcType="VARCHAR" />
+    <result column="typist" property="typist" jdbcType="VARCHAR" />
+    <result column="typist_name" property="typistName" jdbcType="VARCHAR" />
+    <result column="typist_time" property="typistTime" jdbcType="TIMESTAMP" />
+    <result column="give_up" property="giveUp" jdbcType="BIT" />
+    <result column="approved" property="approved" jdbcType="BIT" />
+    <result column="depart_approved_by_id" property="departApprovedById" jdbcType="VARCHAR" />
+    <result column="depart_approved_by_name" property="departApprovedByName" jdbcType="VARCHAR" />
+    <result column="depart_approved_by_time" property="departApprovedByTime" jdbcType="TIMESTAMP" />
+    <result column="consult_doctor_id" property="consultDoctorId" jdbcType="VARCHAR" />
+    <result column="consult_doctor_name" property="consultDoctorName" jdbcType="VARCHAR" />
+    <result column="severe_degree_id" property="severeDegreeId" jdbcType="INTEGER" />
+    <result column="approved_aux" property="approvedAux" jdbcType="BIT" />
+    <result column="patient_exam_depart_create_time" property="patientExamDepartCreateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_exam_depart_edit_time" property="patientExamDepartEditTime" jdbcType="TIMESTAMP" />
+    <result column="patient_exam_depart_status" property="patientExamDepartStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.exam.depart.PatientExamDepartWithBLOBs" extends="BaseResultMap" >
+    <result column="depart_summary" property="departSummary" jdbcType="LONGVARCHAR" />
+    <result column="final_message" property="finalMessage" jdbcType="LONGVARCHAR" />
+    <result column="positive_summary" property="positiveSummary" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_exam_depart_id, patient_id, patient_name, depart_id, depart_name, depart_daily_no_time, 
+    depart_daily_no, depart_summary_naming, depart_doctor_id, depart_doctor_name, typist, 
+    typist_name, typist_time, give_up, approved, depart_approved_by_id, depart_approved_by_name, 
+    depart_approved_by_time, consult_doctor_id, consult_doctor_name, severe_degree_id, 
+    approved_aux, patient_exam_depart_create_time, patient_exam_depart_edit_time, patient_exam_depart_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    depart_summary, final_message, positive_summary
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_exam_depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_exam_depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_exam_depart
+    where patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_exam_depart
+    where patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartExample" >
+    delete from patient_exam_depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartWithBLOBs" >
+    insert into patient_exam_depart (patient_exam_depart_id, patient_id, patient_name, 
+      depart_id, depart_name, depart_daily_no_time, 
+      depart_daily_no, depart_summary_naming, depart_doctor_id, 
+      depart_doctor_name, typist, typist_name, 
+      typist_time, give_up, approved, 
+      depart_approved_by_id, depart_approved_by_name, 
+      depart_approved_by_time, consult_doctor_id, 
+      consult_doctor_name, severe_degree_id, approved_aux, 
+      patient_exam_depart_create_time, patient_exam_depart_edit_time, 
+      patient_exam_depart_status, depart_summary, 
+      final_message, positive_summary)
+    values (#{patientExamDepartId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{patientName,jdbcType=VARCHAR}, 
+      #{departId,jdbcType=VARCHAR}, #{departName,jdbcType=VARCHAR}, #{departDailyNoTime,jdbcType=TIMESTAMP}, 
+      #{departDailyNo,jdbcType=INTEGER}, #{departSummaryNaming,jdbcType=VARCHAR}, #{departDoctorId,jdbcType=VARCHAR}, 
+      #{departDoctorName,jdbcType=VARCHAR}, #{typist,jdbcType=VARCHAR}, #{typistName,jdbcType=VARCHAR}, 
+      #{typistTime,jdbcType=TIMESTAMP}, #{giveUp,jdbcType=BIT}, #{approved,jdbcType=BIT}, 
+      #{departApprovedById,jdbcType=VARCHAR}, #{departApprovedByName,jdbcType=VARCHAR}, 
+      #{departApprovedByTime,jdbcType=TIMESTAMP}, #{consultDoctorId,jdbcType=VARCHAR}, 
+      #{consultDoctorName,jdbcType=VARCHAR}, #{severeDegreeId,jdbcType=INTEGER}, #{approvedAux,jdbcType=BIT}, 
+      #{patientExamDepartCreateTime,jdbcType=TIMESTAMP}, #{patientExamDepartEditTime,jdbcType=TIMESTAMP}, 
+      #{patientExamDepartStatus,jdbcType=INTEGER}, #{departSummary,jdbcType=LONGVARCHAR}, 
+      #{finalMessage,jdbcType=LONGVARCHAR}, #{positiveSummary,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartWithBLOBs" >
+    insert into patient_exam_depart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientExamDepartId != null" >
+        patient_exam_depart_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="patientName != null" >
+        patient_name,
+      </if>
+      <if test="departId != null" >
+        depart_id,
+      </if>
+      <if test="departName != null" >
+        depart_name,
+      </if>
+      <if test="departDailyNoTime != null" >
+        depart_daily_no_time,
+      </if>
+      <if test="departDailyNo != null" >
+        depart_daily_no,
+      </if>
+      <if test="departSummaryNaming != null" >
+        depart_summary_naming,
+      </if>
+      <if test="departDoctorId != null" >
+        depart_doctor_id,
+      </if>
+      <if test="departDoctorName != null" >
+        depart_doctor_name,
+      </if>
+      <if test="typist != null" >
+        typist,
+      </if>
+      <if test="typistName != null" >
+        typist_name,
+      </if>
+      <if test="typistTime != null" >
+        typist_time,
+      </if>
+      <if test="giveUp != null" >
+        give_up,
+      </if>
+      <if test="approved != null" >
+        approved,
+      </if>
+      <if test="departApprovedById != null" >
+        depart_approved_by_id,
+      </if>
+      <if test="departApprovedByName != null" >
+        depart_approved_by_name,
+      </if>
+      <if test="departApprovedByTime != null" >
+        depart_approved_by_time,
+      </if>
+      <if test="consultDoctorId != null" >
+        consult_doctor_id,
+      </if>
+      <if test="consultDoctorName != null" >
+        consult_doctor_name,
+      </if>
+      <if test="severeDegreeId != null" >
+        severe_degree_id,
+      </if>
+      <if test="approvedAux != null" >
+        approved_aux,
+      </if>
+      <if test="patientExamDepartCreateTime != null" >
+        patient_exam_depart_create_time,
+      </if>
+      <if test="patientExamDepartEditTime != null" >
+        patient_exam_depart_edit_time,
+      </if>
+      <if test="patientExamDepartStatus != null" >
+        patient_exam_depart_status,
+      </if>
+      <if test="departSummary != null" >
+        depart_summary,
+      </if>
+      <if test="finalMessage != null" >
+        final_message,
+      </if>
+      <if test="positiveSummary != null" >
+        positive_summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientExamDepartId != null" >
+        #{patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientName != null" >
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null" >
+        #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null" >
+        #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="departDailyNoTime != null" >
+        #{departDailyNoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departDailyNo != null" >
+        #{departDailyNo,jdbcType=INTEGER},
+      </if>
+      <if test="departSummaryNaming != null" >
+        #{departSummaryNaming,jdbcType=VARCHAR},
+      </if>
+      <if test="departDoctorId != null" >
+        #{departDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="departDoctorName != null" >
+        #{departDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="typist != null" >
+        #{typist,jdbcType=VARCHAR},
+      </if>
+      <if test="typistName != null" >
+        #{typistName,jdbcType=VARCHAR},
+      </if>
+      <if test="typistTime != null" >
+        #{typistTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="giveUp != null" >
+        #{giveUp,jdbcType=BIT},
+      </if>
+      <if test="approved != null" >
+        #{approved,jdbcType=BIT},
+      </if>
+      <if test="departApprovedById != null" >
+        #{departApprovedById,jdbcType=VARCHAR},
+      </if>
+      <if test="departApprovedByName != null" >
+        #{departApprovedByName,jdbcType=VARCHAR},
+      </if>
+      <if test="departApprovedByTime != null" >
+        #{departApprovedByTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultDoctorId != null" >
+        #{consultDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="consultDoctorName != null" >
+        #{consultDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="severeDegreeId != null" >
+        #{severeDegreeId,jdbcType=INTEGER},
+      </if>
+      <if test="approvedAux != null" >
+        #{approvedAux,jdbcType=BIT},
+      </if>
+      <if test="patientExamDepartCreateTime != null" >
+        #{patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamDepartEditTime != null" >
+        #{patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamDepartStatus != null" >
+        #{patientExamDepartStatus,jdbcType=INTEGER},
+      </if>
+      <if test="departSummary != null" >
+        #{departSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finalMessage != null" >
+        #{finalMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="positiveSummary != null" >
+        #{positiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartExample" resultType="java.lang.Integer" >
+    select count(*) from patient_exam_depart
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_exam_depart
+    <set >
+      <if test="record.patientExamDepartId != null" >
+        patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientName != null" >
+        patient_name = #{record.patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departId != null" >
+        depart_id = #{record.departId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departName != null" >
+        depart_name = #{record.departName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departDailyNoTime != null" >
+        depart_daily_no_time = #{record.departDailyNoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.departDailyNo != null" >
+        depart_daily_no = #{record.departDailyNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.departSummaryNaming != null" >
+        depart_summary_naming = #{record.departSummaryNaming,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departDoctorId != null" >
+        depart_doctor_id = #{record.departDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departDoctorName != null" >
+        depart_doctor_name = #{record.departDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typist != null" >
+        typist = #{record.typist,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typistName != null" >
+        typist_name = #{record.typistName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typistTime != null" >
+        typist_time = #{record.typistTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.giveUp != null" >
+        give_up = #{record.giveUp,jdbcType=BIT},
+      </if>
+      <if test="record.approved != null" >
+        approved = #{record.approved,jdbcType=BIT},
+      </if>
+      <if test="record.departApprovedById != null" >
+        depart_approved_by_id = #{record.departApprovedById,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departApprovedByName != null" >
+        depart_approved_by_name = #{record.departApprovedByName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departApprovedByTime != null" >
+        depart_approved_by_time = #{record.departApprovedByTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consultDoctorId != null" >
+        consult_doctor_id = #{record.consultDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consultDoctorName != null" >
+        consult_doctor_name = #{record.consultDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.severeDegreeId != null" >
+        severe_degree_id = #{record.severeDegreeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.approvedAux != null" >
+        approved_aux = #{record.approvedAux,jdbcType=BIT},
+      </if>
+      <if test="record.patientExamDepartCreateTime != null" >
+        patient_exam_depart_create_time = #{record.patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientExamDepartEditTime != null" >
+        patient_exam_depart_edit_time = #{record.patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientExamDepartStatus != null" >
+        patient_exam_depart_status = #{record.patientExamDepartStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.departSummary != null" >
+        depart_summary = #{record.departSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.finalMessage != null" >
+        final_message = #{record.finalMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.positiveSummary != null" >
+        positive_summary = #{record.positiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_exam_depart
+    set patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      patient_name = #{record.patientName,jdbcType=VARCHAR},
+      depart_id = #{record.departId,jdbcType=VARCHAR},
+      depart_name = #{record.departName,jdbcType=VARCHAR},
+      depart_daily_no_time = #{record.departDailyNoTime,jdbcType=TIMESTAMP},
+      depart_daily_no = #{record.departDailyNo,jdbcType=INTEGER},
+      depart_summary_naming = #{record.departSummaryNaming,jdbcType=VARCHAR},
+      depart_doctor_id = #{record.departDoctorId,jdbcType=VARCHAR},
+      depart_doctor_name = #{record.departDoctorName,jdbcType=VARCHAR},
+      typist = #{record.typist,jdbcType=VARCHAR},
+      typist_name = #{record.typistName,jdbcType=VARCHAR},
+      typist_time = #{record.typistTime,jdbcType=TIMESTAMP},
+      give_up = #{record.giveUp,jdbcType=BIT},
+      approved = #{record.approved,jdbcType=BIT},
+      depart_approved_by_id = #{record.departApprovedById,jdbcType=VARCHAR},
+      depart_approved_by_name = #{record.departApprovedByName,jdbcType=VARCHAR},
+      depart_approved_by_time = #{record.departApprovedByTime,jdbcType=TIMESTAMP},
+      consult_doctor_id = #{record.consultDoctorId,jdbcType=VARCHAR},
+      consult_doctor_name = #{record.consultDoctorName,jdbcType=VARCHAR},
+      severe_degree_id = #{record.severeDegreeId,jdbcType=INTEGER},
+      approved_aux = #{record.approvedAux,jdbcType=BIT},
+      patient_exam_depart_create_time = #{record.patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_edit_time = #{record.patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_status = #{record.patientExamDepartStatus,jdbcType=INTEGER},
+      depart_summary = #{record.departSummary,jdbcType=LONGVARCHAR},
+      final_message = #{record.finalMessage,jdbcType=LONGVARCHAR},
+      positive_summary = #{record.positiveSummary,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_exam_depart
+    set patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      patient_name = #{record.patientName,jdbcType=VARCHAR},
+      depart_id = #{record.departId,jdbcType=VARCHAR},
+      depart_name = #{record.departName,jdbcType=VARCHAR},
+      depart_daily_no_time = #{record.departDailyNoTime,jdbcType=TIMESTAMP},
+      depart_daily_no = #{record.departDailyNo,jdbcType=INTEGER},
+      depart_summary_naming = #{record.departSummaryNaming,jdbcType=VARCHAR},
+      depart_doctor_id = #{record.departDoctorId,jdbcType=VARCHAR},
+      depart_doctor_name = #{record.departDoctorName,jdbcType=VARCHAR},
+      typist = #{record.typist,jdbcType=VARCHAR},
+      typist_name = #{record.typistName,jdbcType=VARCHAR},
+      typist_time = #{record.typistTime,jdbcType=TIMESTAMP},
+      give_up = #{record.giveUp,jdbcType=BIT},
+      approved = #{record.approved,jdbcType=BIT},
+      depart_approved_by_id = #{record.departApprovedById,jdbcType=VARCHAR},
+      depart_approved_by_name = #{record.departApprovedByName,jdbcType=VARCHAR},
+      depart_approved_by_time = #{record.departApprovedByTime,jdbcType=TIMESTAMP},
+      consult_doctor_id = #{record.consultDoctorId,jdbcType=VARCHAR},
+      consult_doctor_name = #{record.consultDoctorName,jdbcType=VARCHAR},
+      severe_degree_id = #{record.severeDegreeId,jdbcType=INTEGER},
+      approved_aux = #{record.approvedAux,jdbcType=BIT},
+      patient_exam_depart_create_time = #{record.patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_edit_time = #{record.patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_status = #{record.patientExamDepartStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartWithBLOBs" >
+    update patient_exam_depart
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientName != null" >
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null" >
+        depart_id = #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="departName != null" >
+        depart_name = #{departName,jdbcType=VARCHAR},
+      </if>
+      <if test="departDailyNoTime != null" >
+        depart_daily_no_time = #{departDailyNoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departDailyNo != null" >
+        depart_daily_no = #{departDailyNo,jdbcType=INTEGER},
+      </if>
+      <if test="departSummaryNaming != null" >
+        depart_summary_naming = #{departSummaryNaming,jdbcType=VARCHAR},
+      </if>
+      <if test="departDoctorId != null" >
+        depart_doctor_id = #{departDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="departDoctorName != null" >
+        depart_doctor_name = #{departDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="typist != null" >
+        typist = #{typist,jdbcType=VARCHAR},
+      </if>
+      <if test="typistName != null" >
+        typist_name = #{typistName,jdbcType=VARCHAR},
+      </if>
+      <if test="typistTime != null" >
+        typist_time = #{typistTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="giveUp != null" >
+        give_up = #{giveUp,jdbcType=BIT},
+      </if>
+      <if test="approved != null" >
+        approved = #{approved,jdbcType=BIT},
+      </if>
+      <if test="departApprovedById != null" >
+        depart_approved_by_id = #{departApprovedById,jdbcType=VARCHAR},
+      </if>
+      <if test="departApprovedByName != null" >
+        depart_approved_by_name = #{departApprovedByName,jdbcType=VARCHAR},
+      </if>
+      <if test="departApprovedByTime != null" >
+        depart_approved_by_time = #{departApprovedByTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consultDoctorId != null" >
+        consult_doctor_id = #{consultDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="consultDoctorName != null" >
+        consult_doctor_name = #{consultDoctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="severeDegreeId != null" >
+        severe_degree_id = #{severeDegreeId,jdbcType=INTEGER},
+      </if>
+      <if test="approvedAux != null" >
+        approved_aux = #{approvedAux,jdbcType=BIT},
+      </if>
+      <if test="patientExamDepartCreateTime != null" >
+        patient_exam_depart_create_time = #{patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamDepartEditTime != null" >
+        patient_exam_depart_edit_time = #{patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamDepartStatus != null" >
+        patient_exam_depart_status = #{patientExamDepartStatus,jdbcType=INTEGER},
+      </if>
+      <if test="departSummary != null" >
+        depart_summary = #{departSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finalMessage != null" >
+        final_message = #{finalMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="positiveSummary != null" >
+        positive_summary = #{positiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepartWithBLOBs" >
+    update patient_exam_depart
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      depart_id = #{departId,jdbcType=VARCHAR},
+      depart_name = #{departName,jdbcType=VARCHAR},
+      depart_daily_no_time = #{departDailyNoTime,jdbcType=TIMESTAMP},
+      depart_daily_no = #{departDailyNo,jdbcType=INTEGER},
+      depart_summary_naming = #{departSummaryNaming,jdbcType=VARCHAR},
+      depart_doctor_id = #{departDoctorId,jdbcType=VARCHAR},
+      depart_doctor_name = #{departDoctorName,jdbcType=VARCHAR},
+      typist = #{typist,jdbcType=VARCHAR},
+      typist_name = #{typistName,jdbcType=VARCHAR},
+      typist_time = #{typistTime,jdbcType=TIMESTAMP},
+      give_up = #{giveUp,jdbcType=BIT},
+      approved = #{approved,jdbcType=BIT},
+      depart_approved_by_id = #{departApprovedById,jdbcType=VARCHAR},
+      depart_approved_by_name = #{departApprovedByName,jdbcType=VARCHAR},
+      depart_approved_by_time = #{departApprovedByTime,jdbcType=TIMESTAMP},
+      consult_doctor_id = #{consultDoctorId,jdbcType=VARCHAR},
+      consult_doctor_name = #{consultDoctorName,jdbcType=VARCHAR},
+      severe_degree_id = #{severeDegreeId,jdbcType=INTEGER},
+      approved_aux = #{approvedAux,jdbcType=BIT},
+      patient_exam_depart_create_time = #{patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_edit_time = #{patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_status = #{patientExamDepartStatus,jdbcType=INTEGER},
+      depart_summary = #{departSummary,jdbcType=LONGVARCHAR},
+      final_message = #{finalMessage,jdbcType=LONGVARCHAR},
+      positive_summary = #{positiveSummary,jdbcType=LONGVARCHAR}
+    where patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.exam.depart.PatientExamDepart" >
+    update patient_exam_depart
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      depart_id = #{departId,jdbcType=VARCHAR},
+      depart_name = #{departName,jdbcType=VARCHAR},
+      depart_daily_no_time = #{departDailyNoTime,jdbcType=TIMESTAMP},
+      depart_daily_no = #{departDailyNo,jdbcType=INTEGER},
+      depart_summary_naming = #{departSummaryNaming,jdbcType=VARCHAR},
+      depart_doctor_id = #{departDoctorId,jdbcType=VARCHAR},
+      depart_doctor_name = #{departDoctorName,jdbcType=VARCHAR},
+      typist = #{typist,jdbcType=VARCHAR},
+      typist_name = #{typistName,jdbcType=VARCHAR},
+      typist_time = #{typistTime,jdbcType=TIMESTAMP},
+      give_up = #{giveUp,jdbcType=BIT},
+      approved = #{approved,jdbcType=BIT},
+      depart_approved_by_id = #{departApprovedById,jdbcType=VARCHAR},
+      depart_approved_by_name = #{departApprovedByName,jdbcType=VARCHAR},
+      depart_approved_by_time = #{departApprovedByTime,jdbcType=TIMESTAMP},
+      consult_doctor_id = #{consultDoctorId,jdbcType=VARCHAR},
+      consult_doctor_name = #{consultDoctorName,jdbcType=VARCHAR},
+      severe_degree_id = #{severeDegreeId,jdbcType=INTEGER},
+      approved_aux = #{approvedAux,jdbcType=BIT},
+      patient_exam_depart_create_time = #{patientExamDepartCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_edit_time = #{patientExamDepartEditTime,jdbcType=TIMESTAMP},
+      patient_exam_depart_status = #{patientExamDepartStatus,jdbcType=INTEGER}
+    where patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR}
+  </update>
+</mapper>

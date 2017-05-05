@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.examItem.PatientExamItemPictureMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.examItem.PatientExamItemPicture" >
+    <id column="patient_exam_item_picture_id" property="patientExamItemPictureId" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_id" property="patientExamItemId" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_picture_path" property="patientExamItemPicturePath" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_picture_title" property="patientExamItemPictureTitle" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_picture" property="patientExamItemPicture" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_picture_hidePic" property="patientExamItemPictureHidepic" jdbcType="BIT" />
+    <result column="patient_exam_item_picture_create_time" property="patientExamItemPictureCreateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_exam_item_picture_edit_time" property="patientExamItemPictureEditTime" jdbcType="TIMESTAMP" />
+    <result column="patient_exam_item_picture_status" property="patientExamItemPictureStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.examItem.PatientExamItemPicture" extends="BaseResultMap" >
+    <result column="patient_exam_item_picture_description" property="patientExamItemPictureDescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_exam_item_picture_id, patient_exam_item_id, patient_exam_item_picture_path, 
+    patient_exam_item_picture_title, patient_exam_item_picture, patient_exam_item_picture_hidePic, 
+    patient_exam_item_picture_create_time, patient_exam_item_picture_edit_time, patient_exam_item_picture_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    patient_exam_item_picture_description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_exam_item_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPictureExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_exam_item_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_exam_item_picture
+    where patient_exam_item_picture_id = #{patientExamItemPictureId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_exam_item_picture
+    where patient_exam_item_picture_id = #{patientExamItemPictureId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPictureExample" >
+    delete from patient_exam_item_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPicture" >
+    insert into patient_exam_item_picture (patient_exam_item_picture_id, patient_exam_item_id, 
+      patient_exam_item_picture_path, patient_exam_item_picture_title, 
+      patient_exam_item_picture, patient_exam_item_picture_hidePic, 
+      patient_exam_item_picture_create_time, patient_exam_item_picture_edit_time, 
+      patient_exam_item_picture_status, patient_exam_item_picture_description
+      )
+    values (#{patientExamItemPictureId,jdbcType=VARCHAR}, #{patientExamItemId,jdbcType=VARCHAR}, 
+      #{patientExamItemPicturePath,jdbcType=VARCHAR}, #{patientExamItemPictureTitle,jdbcType=VARCHAR}, 
+      #{patientExamItemPicture,jdbcType=VARCHAR}, #{patientExamItemPictureHidepic,jdbcType=BIT}, 
+      #{patientExamItemPictureCreateTime,jdbcType=TIMESTAMP}, #{patientExamItemPictureEditTime,jdbcType=TIMESTAMP}, 
+      #{patientExamItemPictureStatus,jdbcType=INTEGER}, #{patientExamItemPictureDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPicture" >
+    insert into patient_exam_item_picture
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientExamItemPictureId != null" >
+        patient_exam_item_picture_id,
+      </if>
+      <if test="patientExamItemId != null" >
+        patient_exam_item_id,
+      </if>
+      <if test="patientExamItemPicturePath != null" >
+        patient_exam_item_picture_path,
+      </if>
+      <if test="patientExamItemPictureTitle != null" >
+        patient_exam_item_picture_title,
+      </if>
+      <if test="patientExamItemPicture != null" >
+        patient_exam_item_picture,
+      </if>
+      <if test="patientExamItemPictureHidepic != null" >
+        patient_exam_item_picture_hidePic,
+      </if>
+      <if test="patientExamItemPictureCreateTime != null" >
+        patient_exam_item_picture_create_time,
+      </if>
+      <if test="patientExamItemPictureEditTime != null" >
+        patient_exam_item_picture_edit_time,
+      </if>
+      <if test="patientExamItemPictureStatus != null" >
+        patient_exam_item_picture_status,
+      </if>
+      <if test="patientExamItemPictureDescription != null" >
+        patient_exam_item_picture_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientExamItemPictureId != null" >
+        #{patientExamItemPictureId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemId != null" >
+        #{patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPicturePath != null" >
+        #{patientExamItemPicturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPictureTitle != null" >
+        #{patientExamItemPictureTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPicture != null" >
+        #{patientExamItemPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPictureHidepic != null" >
+        #{patientExamItemPictureHidepic,jdbcType=BIT},
+      </if>
+      <if test="patientExamItemPictureCreateTime != null" >
+        #{patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemPictureEditTime != null" >
+        #{patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemPictureStatus != null" >
+        #{patientExamItemPictureStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientExamItemPictureDescription != null" >
+        #{patientExamItemPictureDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPictureExample" resultType="java.lang.Integer" >
+    select count(*) from patient_exam_item_picture
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_exam_item_picture
+    <set >
+      <if test="record.patientExamItemPictureId != null" >
+        patient_exam_item_picture_id = #{record.patientExamItemPictureId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemId != null" >
+        patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemPicturePath != null" >
+        patient_exam_item_picture_path = #{record.patientExamItemPicturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemPictureTitle != null" >
+        patient_exam_item_picture_title = #{record.patientExamItemPictureTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemPicture != null" >
+        patient_exam_item_picture = #{record.patientExamItemPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemPictureHidepic != null" >
+        patient_exam_item_picture_hidePic = #{record.patientExamItemPictureHidepic,jdbcType=BIT},
+      </if>
+      <if test="record.patientExamItemPictureCreateTime != null" >
+        patient_exam_item_picture_create_time = #{record.patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientExamItemPictureEditTime != null" >
+        patient_exam_item_picture_edit_time = #{record.patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientExamItemPictureStatus != null" >
+        patient_exam_item_picture_status = #{record.patientExamItemPictureStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientExamItemPictureDescription != null" >
+        patient_exam_item_picture_description = #{record.patientExamItemPictureDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_exam_item_picture
+    set patient_exam_item_picture_id = #{record.patientExamItemPictureId,jdbcType=VARCHAR},
+      patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      patient_exam_item_picture_path = #{record.patientExamItemPicturePath,jdbcType=VARCHAR},
+      patient_exam_item_picture_title = #{record.patientExamItemPictureTitle,jdbcType=VARCHAR},
+      patient_exam_item_picture = #{record.patientExamItemPicture,jdbcType=VARCHAR},
+      patient_exam_item_picture_hidePic = #{record.patientExamItemPictureHidepic,jdbcType=BIT},
+      patient_exam_item_picture_create_time = #{record.patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_edit_time = #{record.patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_status = #{record.patientExamItemPictureStatus,jdbcType=INTEGER},
+      patient_exam_item_picture_description = #{record.patientExamItemPictureDescription,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_exam_item_picture
+    set patient_exam_item_picture_id = #{record.patientExamItemPictureId,jdbcType=VARCHAR},
+      patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      patient_exam_item_picture_path = #{record.patientExamItemPicturePath,jdbcType=VARCHAR},
+      patient_exam_item_picture_title = #{record.patientExamItemPictureTitle,jdbcType=VARCHAR},
+      patient_exam_item_picture = #{record.patientExamItemPicture,jdbcType=VARCHAR},
+      patient_exam_item_picture_hidePic = #{record.patientExamItemPictureHidepic,jdbcType=BIT},
+      patient_exam_item_picture_create_time = #{record.patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_edit_time = #{record.patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_status = #{record.patientExamItemPictureStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPicture" >
+    update patient_exam_item_picture
+    <set >
+      <if test="patientExamItemId != null" >
+        patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPicturePath != null" >
+        patient_exam_item_picture_path = #{patientExamItemPicturePath,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPictureTitle != null" >
+        patient_exam_item_picture_title = #{patientExamItemPictureTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPicture != null" >
+        patient_exam_item_picture = #{patientExamItemPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemPictureHidepic != null" >
+        patient_exam_item_picture_hidePic = #{patientExamItemPictureHidepic,jdbcType=BIT},
+      </if>
+      <if test="patientExamItemPictureCreateTime != null" >
+        patient_exam_item_picture_create_time = #{patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemPictureEditTime != null" >
+        patient_exam_item_picture_edit_time = #{patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemPictureStatus != null" >
+        patient_exam_item_picture_status = #{patientExamItemPictureStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientExamItemPictureDescription != null" >
+        patient_exam_item_picture_description = #{patientExamItemPictureDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_exam_item_picture_id = #{patientExamItemPictureId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPicture" >
+    update patient_exam_item_picture
+    set patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR},
+      patient_exam_item_picture_path = #{patientExamItemPicturePath,jdbcType=VARCHAR},
+      patient_exam_item_picture_title = #{patientExamItemPictureTitle,jdbcType=VARCHAR},
+      patient_exam_item_picture = #{patientExamItemPicture,jdbcType=VARCHAR},
+      patient_exam_item_picture_hidePic = #{patientExamItemPictureHidepic,jdbcType=BIT},
+      patient_exam_item_picture_create_time = #{patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_edit_time = #{patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_status = #{patientExamItemPictureStatus,jdbcType=INTEGER},
+      patient_exam_item_picture_description = #{patientExamItemPictureDescription,jdbcType=LONGVARCHAR}
+    where patient_exam_item_picture_id = #{patientExamItemPictureId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.examItem.PatientExamItemPicture" >
+    update patient_exam_item_picture
+    set patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR},
+      patient_exam_item_picture_path = #{patientExamItemPicturePath,jdbcType=VARCHAR},
+      patient_exam_item_picture_title = #{patientExamItemPictureTitle,jdbcType=VARCHAR},
+      patient_exam_item_picture = #{patientExamItemPicture,jdbcType=VARCHAR},
+      patient_exam_item_picture_hidePic = #{patientExamItemPictureHidepic,jdbcType=BIT},
+      patient_exam_item_picture_create_time = #{patientExamItemPictureCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_edit_time = #{patientExamItemPictureEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_picture_status = #{patientExamItemPictureStatus,jdbcType=INTEGER}
+    where patient_exam_item_picture_id = #{patientExamItemPictureId,jdbcType=VARCHAR}
+  </update>
+</mapper>

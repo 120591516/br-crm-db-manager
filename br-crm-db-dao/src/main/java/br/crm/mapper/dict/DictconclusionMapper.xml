@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictconclusionMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictconclusion" >
+    <id column="ID_Conclusion" property="idConclusion" jdbcType="VARCHAR" />
+    <result column="Conclusion_Name" property="conclusionName" jdbcType="VARCHAR" />
+    <result column="Conclusion_NameEng" property="conclusionNameeng" jdbcType="VARCHAR" />
+    <result column="ID_Conclusion_Type" property="idConclusionType" jdbcType="VARCHAR" />
+    <result column="ID_Conclusion_Dept_Type" property="idConclusionDeptType" jdbcType="VARCHAR" />
+    <result column="KeyConclusionGroupId" property="keyconclusiongroupid" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="DispOrder" property="disporder" jdbcType="VARCHAR" />
+    <result column="ID_ConclusionResultClass" property="idConclusionresultclass" jdbcType="VARCHAR" />
+    <result column="F_MaleDisease" property="fMaledisease" jdbcType="INTEGER" />
+    <result column="F_FemaleDisease" property="fFemaledisease" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.dict.DictconclusionWithBLOBs" extends="BaseResultMap" >
+    <result column="Depiction" property="depiction" jdbcType="LONGVARCHAR" />
+    <result column="Suggestion" property="suggestion" jdbcType="LONGVARCHAR" />
+    <result column="Advice" property="advice" jdbcType="LONGVARCHAR" />
+    <result column="DietGuide" property="dietguide" jdbcType="LONGVARCHAR" />
+    <result column="SportGuide" property="sportguide" jdbcType="LONGVARCHAR" />
+    <result column="SuggestionGroup" property="suggestiongroup" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Conclusion, Conclusion_Name, Conclusion_NameEng, ID_Conclusion_Type, ID_Conclusion_Dept_Type, 
+    KeyConclusionGroupId, Input_Code, DispOrder, ID_ConclusionResultClass, F_MaleDisease, 
+    F_FemaleDisease, status, createtime, edittime
+  </sql>
+  <sql id="Blob_Column_List" >
+    Depiction, Suggestion, Advice, DietGuide, SportGuide, SuggestionGroup
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.dict.DictconclusionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DictConclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictconclusionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictConclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from DictConclusion
+    where ID_Conclusion = #{idConclusion,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from DictConclusion
+    where ID_Conclusion = #{idConclusion,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictconclusionExample" >
+    delete from DictConclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictconclusionWithBLOBs" >
+    insert into DictConclusion (ID_Conclusion, Conclusion_Name, Conclusion_NameEng, 
+      ID_Conclusion_Type, ID_Conclusion_Dept_Type, 
+      KeyConclusionGroupId, Input_Code, DispOrder, 
+      ID_ConclusionResultClass, F_MaleDisease, 
+      F_FemaleDisease, status, createtime, 
+      edittime, Depiction, Suggestion, 
+      Advice, DietGuide, SportGuide, 
+      SuggestionGroup)
+    values (#{idConclusion,jdbcType=VARCHAR}, #{conclusionName,jdbcType=VARCHAR}, #{conclusionNameeng,jdbcType=VARCHAR}, 
+      #{idConclusionType,jdbcType=VARCHAR}, #{idConclusionDeptType,jdbcType=VARCHAR}, 
+      #{keyconclusiongroupid,jdbcType=VARCHAR}, #{inputCode,jdbcType=VARCHAR}, #{disporder,jdbcType=VARCHAR}, 
+      #{idConclusionresultclass,jdbcType=VARCHAR}, #{fMaledisease,jdbcType=INTEGER}, 
+      #{fFemaledisease,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{edittime,jdbcType=TIMESTAMP}, #{depiction,jdbcType=LONGVARCHAR}, #{suggestion,jdbcType=LONGVARCHAR}, 
+      #{advice,jdbcType=LONGVARCHAR}, #{dietguide,jdbcType=LONGVARCHAR}, #{sportguide,jdbcType=LONGVARCHAR}, 
+      #{suggestiongroup,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictconclusionWithBLOBs" >
+    insert into DictConclusion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idConclusion != null" >
+        ID_Conclusion,
+      </if>
+      <if test="conclusionName != null" >
+        Conclusion_Name,
+      </if>
+      <if test="conclusionNameeng != null" >
+        Conclusion_NameEng,
+      </if>
+      <if test="idConclusionType != null" >
+        ID_Conclusion_Type,
+      </if>
+      <if test="idConclusionDeptType != null" >
+        ID_Conclusion_Dept_Type,
+      </if>
+      <if test="keyconclusiongroupid != null" >
+        KeyConclusionGroupId,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="disporder != null" >
+        DispOrder,
+      </if>
+      <if test="idConclusionresultclass != null" >
+        ID_ConclusionResultClass,
+      </if>
+      <if test="fMaledisease != null" >
+        F_MaleDisease,
+      </if>
+      <if test="fFemaledisease != null" >
+        F_FemaleDisease,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+      <if test="depiction != null" >
+        Depiction,
+      </if>
+      <if test="suggestion != null" >
+        Suggestion,
+      </if>
+      <if test="advice != null" >
+        Advice,
+      </if>
+      <if test="dietguide != null" >
+        DietGuide,
+      </if>
+      <if test="sportguide != null" >
+        SportGuide,
+      </if>
+      <if test="suggestiongroup != null" >
+        SuggestionGroup,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idConclusion != null" >
+        #{idConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusionName != null" >
+        #{conclusionName,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusionNameeng != null" >
+        #{conclusionNameeng,jdbcType=VARCHAR},
+      </if>
+      <if test="idConclusionType != null" >
+        #{idConclusionType,jdbcType=VARCHAR},
+      </if>
+      <if test="idConclusionDeptType != null" >
+        #{idConclusionDeptType,jdbcType=VARCHAR},
+      </if>
+      <if test="keyconclusiongroupid != null" >
+        #{keyconclusiongroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="disporder != null" >
+        #{disporder,jdbcType=VARCHAR},
+      </if>
+      <if test="idConclusionresultclass != null" >
+        #{idConclusionresultclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fMaledisease != null" >
+        #{fMaledisease,jdbcType=INTEGER},
+      </if>
+      <if test="fFemaledisease != null" >
+        #{fFemaledisease,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depiction != null" >
+        #{depiction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        #{suggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="advice != null" >
+        #{advice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dietguide != null" >
+        #{dietguide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sportguide != null" >
+        #{sportguide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suggestiongroup != null" >
+        #{suggestiongroup,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictconclusionExample" resultType="java.lang.Integer" >
+    select count(*) from DictConclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictConclusion
+    <set >
+      <if test="record.idConclusion != null" >
+        ID_Conclusion = #{record.idConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conclusionName != null" >
+        Conclusion_Name = #{record.conclusionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conclusionNameeng != null" >
+        Conclusion_NameEng = #{record.conclusionNameeng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idConclusionType != null" >
+        ID_Conclusion_Type = #{record.idConclusionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idConclusionDeptType != null" >
+        ID_Conclusion_Dept_Type = #{record.idConclusionDeptType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keyconclusiongroupid != null" >
+        KeyConclusionGroupId = #{record.keyconclusiongroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disporder != null" >
+        DispOrder = #{record.disporder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idConclusionresultclass != null" >
+        ID_ConclusionResultClass = #{record.idConclusionresultclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fMaledisease != null" >
+        F_MaleDisease = #{record.fMaledisease,jdbcType=INTEGER},
+      </if>
+      <if test="record.fFemaledisease != null" >
+        F_FemaleDisease = #{record.fFemaledisease,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.depiction != null" >
+        Depiction = #{record.depiction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.suggestion != null" >
+        Suggestion = #{record.suggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.advice != null" >
+        Advice = #{record.advice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.dietguide != null" >
+        DietGuide = #{record.dietguide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.sportguide != null" >
+        SportGuide = #{record.sportguide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.suggestiongroup != null" >
+        SuggestionGroup = #{record.suggestiongroup,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update DictConclusion
+    set ID_Conclusion = #{record.idConclusion,jdbcType=VARCHAR},
+      Conclusion_Name = #{record.conclusionName,jdbcType=VARCHAR},
+      Conclusion_NameEng = #{record.conclusionNameeng,jdbcType=VARCHAR},
+      ID_Conclusion_Type = #{record.idConclusionType,jdbcType=VARCHAR},
+      ID_Conclusion_Dept_Type = #{record.idConclusionDeptType,jdbcType=VARCHAR},
+      KeyConclusionGroupId = #{record.keyconclusiongroupid,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      DispOrder = #{record.disporder,jdbcType=VARCHAR},
+      ID_ConclusionResultClass = #{record.idConclusionresultclass,jdbcType=VARCHAR},
+      F_MaleDisease = #{record.fMaledisease,jdbcType=INTEGER},
+      F_FemaleDisease = #{record.fFemaledisease,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      Depiction = #{record.depiction,jdbcType=LONGVARCHAR},
+      Suggestion = #{record.suggestion,jdbcType=LONGVARCHAR},
+      Advice = #{record.advice,jdbcType=LONGVARCHAR},
+      DietGuide = #{record.dietguide,jdbcType=LONGVARCHAR},
+      SportGuide = #{record.sportguide,jdbcType=LONGVARCHAR},
+      SuggestionGroup = #{record.suggestiongroup,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictConclusion
+    set ID_Conclusion = #{record.idConclusion,jdbcType=VARCHAR},
+      Conclusion_Name = #{record.conclusionName,jdbcType=VARCHAR},
+      Conclusion_NameEng = #{record.conclusionNameeng,jdbcType=VARCHAR},
+      ID_Conclusion_Type = #{record.idConclusionType,jdbcType=VARCHAR},
+      ID_Conclusion_Dept_Type = #{record.idConclusionDeptType,jdbcType=VARCHAR},
+      KeyConclusionGroupId = #{record.keyconclusiongroupid,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      DispOrder = #{record.disporder,jdbcType=VARCHAR},
+      ID_ConclusionResultClass = #{record.idConclusionresultclass,jdbcType=VARCHAR},
+      F_MaleDisease = #{record.fMaledisease,jdbcType=INTEGER},
+      F_FemaleDisease = #{record.fFemaledisease,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictconclusionWithBLOBs" >
+    update DictConclusion
+    <set >
+      <if test="conclusionName != null" >
+        Conclusion_Name = #{conclusionName,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusionNameeng != null" >
+        Conclusion_NameEng = #{conclusionNameeng,jdbcType=VARCHAR},
+      </if>
+      <if test="idConclusionType != null" >
+        ID_Conclusion_Type = #{idConclusionType,jdbcType=VARCHAR},
+      </if>
+      <if test="idConclusionDeptType != null" >
+        ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR},
+      </if>
+      <if test="keyconclusiongroupid != null" >
+        KeyConclusionGroupId = #{keyconclusiongroupid,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="disporder != null" >
+        DispOrder = #{disporder,jdbcType=VARCHAR},
+      </if>
+      <if test="idConclusionresultclass != null" >
+        ID_ConclusionResultClass = #{idConclusionresultclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fMaledisease != null" >
+        F_MaleDisease = #{fMaledisease,jdbcType=INTEGER},
+      </if>
+      <if test="fFemaledisease != null" >
+        F_FemaleDisease = #{fFemaledisease,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="depiction != null" >
+        Depiction = #{depiction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suggestion != null" >
+        Suggestion = #{suggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="advice != null" >
+        Advice = #{advice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dietguide != null" >
+        DietGuide = #{dietguide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sportguide != null" >
+        SportGuide = #{sportguide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="suggestiongroup != null" >
+        SuggestionGroup = #{suggestiongroup,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID_Conclusion = #{idConclusion,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.dict.DictconclusionWithBLOBs" >
+    update DictConclusion
+    set Conclusion_Name = #{conclusionName,jdbcType=VARCHAR},
+      Conclusion_NameEng = #{conclusionNameeng,jdbcType=VARCHAR},
+      ID_Conclusion_Type = #{idConclusionType,jdbcType=VARCHAR},
+      ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR},
+      KeyConclusionGroupId = #{keyconclusiongroupid,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      DispOrder = #{disporder,jdbcType=VARCHAR},
+      ID_ConclusionResultClass = #{idConclusionresultclass,jdbcType=VARCHAR},
+      F_MaleDisease = #{fMaledisease,jdbcType=INTEGER},
+      F_FemaleDisease = #{fFemaledisease,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP},
+      Depiction = #{depiction,jdbcType=LONGVARCHAR},
+      Suggestion = #{suggestion,jdbcType=LONGVARCHAR},
+      Advice = #{advice,jdbcType=LONGVARCHAR},
+      DietGuide = #{dietguide,jdbcType=LONGVARCHAR},
+      SportGuide = #{sportguide,jdbcType=LONGVARCHAR},
+      SuggestionGroup = #{suggestiongroup,jdbcType=LONGVARCHAR}
+    where ID_Conclusion = #{idConclusion,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictconclusion" >
+    update DictConclusion
+    set Conclusion_Name = #{conclusionName,jdbcType=VARCHAR},
+      Conclusion_NameEng = #{conclusionNameeng,jdbcType=VARCHAR},
+      ID_Conclusion_Type = #{idConclusionType,jdbcType=VARCHAR},
+      ID_Conclusion_Dept_Type = #{idConclusionDeptType,jdbcType=VARCHAR},
+      KeyConclusionGroupId = #{keyconclusiongroupid,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      DispOrder = #{disporder,jdbcType=VARCHAR},
+      ID_ConclusionResultClass = #{idConclusionresultclass,jdbcType=VARCHAR},
+      F_MaleDisease = #{fMaledisease,jdbcType=INTEGER},
+      F_FemaleDisease = #{fFemaledisease,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP}
+    where ID_Conclusion = #{idConclusion,jdbcType=VARCHAR}
+  </update>
+</mapper>

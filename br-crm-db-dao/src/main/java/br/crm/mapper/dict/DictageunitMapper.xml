@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictageunitMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictageunit" >
+    <id column="AgeUnit_ID" property="ageunitId" jdbcType="INTEGER" />
+    <result column="AgeUnit_key" property="ageunitKey" jdbcType="VARCHAR" />
+    <result column="AgeUnit_Name" property="ageunitName" jdbcType="VARCHAR" />
+    <result column="AgeUnit_Code" property="ageunitCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="AgeUnitCodeX" property="ageunitcodex" jdbcType="VARCHAR" />
+    <result column="AgeUnit_createtime" property="ageunitCreatetime" jdbcType="TIMESTAMP" />
+    <result column="AgeUnit_updatetime" property="ageunitUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="AgeUnit_Status" property="ageunitStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AgeUnit_ID, AgeUnit_key, AgeUnit_Name, AgeUnit_Code, Input_Code, Note, AgeUnitCodeX, 
+    AgeUnit_createtime, AgeUnit_updatetime, AgeUnit_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictageunitExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictAgeUnit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictAgeUnit
+    where AgeUnit_ID = #{ageunitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictAgeUnit
+    where AgeUnit_ID = #{ageunitId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictageunitExample" >
+    delete from DictAgeUnit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictageunit" >
+    insert into DictAgeUnit (AgeUnit_ID, AgeUnit_key, AgeUnit_Name, 
+      AgeUnit_Code, Input_Code, Note, 
+      AgeUnitCodeX, AgeUnit_createtime, AgeUnit_updatetime, 
+      AgeUnit_Status)
+    values (#{ageunitId,jdbcType=INTEGER}, #{ageunitKey,jdbcType=VARCHAR}, #{ageunitName,jdbcType=VARCHAR}, 
+      #{ageunitCode,jdbcType=VARCHAR}, #{inputCode,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{ageunitcodex,jdbcType=VARCHAR}, #{ageunitCreatetime,jdbcType=TIMESTAMP}, #{ageunitUpdatetime,jdbcType=TIMESTAMP}, 
+      #{ageunitStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictageunit" useGeneratedKeys="true" keyProperty="ageunitId" >
+    insert into DictAgeUnit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ageunitId != null" >
+        AgeUnit_ID,
+      </if>
+      <if test="ageunitKey != null" >
+        AgeUnit_key,
+      </if>
+      <if test="ageunitName != null" >
+        AgeUnit_Name,
+      </if>
+      <if test="ageunitCode != null" >
+        AgeUnit_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="ageunitcodex != null" >
+        AgeUnitCodeX,
+      </if>
+      <if test="ageunitCreatetime != null" >
+        AgeUnit_createtime,
+      </if>
+      <if test="ageunitUpdatetime != null" >
+        AgeUnit_updatetime,
+      </if>
+      <if test="ageunitStatus != null" >
+        AgeUnit_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ageunitId != null" >
+        #{ageunitId,jdbcType=INTEGER},
+      </if>
+      <if test="ageunitKey != null" >
+        #{ageunitKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitName != null" >
+        #{ageunitName,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitCode != null" >
+        #{ageunitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitcodex != null" >
+        #{ageunitcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitCreatetime != null" >
+        #{ageunitCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ageunitUpdatetime != null" >
+        #{ageunitUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ageunitStatus != null" >
+        #{ageunitStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictageunitExample" resultType="java.lang.Integer" >
+    select count(*) from DictAgeUnit
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictAgeUnit
+    <set >
+      <if test="record.ageunitId != null" >
+        AgeUnit_ID = #{record.ageunitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ageunitKey != null" >
+        AgeUnit_key = #{record.ageunitKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageunitName != null" >
+        AgeUnit_Name = #{record.ageunitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageunitCode != null" >
+        AgeUnit_Code = #{record.ageunitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageunitcodex != null" >
+        AgeUnitCodeX = #{record.ageunitcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ageunitCreatetime != null" >
+        AgeUnit_createtime = #{record.ageunitCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ageunitUpdatetime != null" >
+        AgeUnit_updatetime = #{record.ageunitUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ageunitStatus != null" >
+        AgeUnit_Status = #{record.ageunitStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictAgeUnit
+    set AgeUnit_ID = #{record.ageunitId,jdbcType=INTEGER},
+      AgeUnit_key = #{record.ageunitKey,jdbcType=VARCHAR},
+      AgeUnit_Name = #{record.ageunitName,jdbcType=VARCHAR},
+      AgeUnit_Code = #{record.ageunitCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      AgeUnitCodeX = #{record.ageunitcodex,jdbcType=VARCHAR},
+      AgeUnit_createtime = #{record.ageunitCreatetime,jdbcType=TIMESTAMP},
+      AgeUnit_updatetime = #{record.ageunitUpdatetime,jdbcType=TIMESTAMP},
+      AgeUnit_Status = #{record.ageunitStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictageunit" >
+    update DictAgeUnit
+    <set >
+      <if test="ageunitKey != null" >
+        AgeUnit_key = #{ageunitKey,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitName != null" >
+        AgeUnit_Name = #{ageunitName,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitCode != null" >
+        AgeUnit_Code = #{ageunitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitcodex != null" >
+        AgeUnitCodeX = #{ageunitcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="ageunitCreatetime != null" >
+        AgeUnit_createtime = #{ageunitCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ageunitUpdatetime != null" >
+        AgeUnit_updatetime = #{ageunitUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ageunitStatus != null" >
+        AgeUnit_Status = #{ageunitStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where AgeUnit_ID = #{ageunitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictageunit" >
+    update DictAgeUnit
+    set AgeUnit_key = #{ageunitKey,jdbcType=VARCHAR},
+      AgeUnit_Name = #{ageunitName,jdbcType=VARCHAR},
+      AgeUnit_Code = #{ageunitCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      AgeUnitCodeX = #{ageunitcodex,jdbcType=VARCHAR},
+      AgeUnit_createtime = #{ageunitCreatetime,jdbcType=TIMESTAMP},
+      AgeUnit_updatetime = #{ageunitUpdatetime,jdbcType=TIMESTAMP},
+      AgeUnit_Status = #{ageunitStatus,jdbcType=INTEGER}
+    where AgeUnit_ID = #{ageunitId,jdbcType=INTEGER}
+  </update>
+</mapper>

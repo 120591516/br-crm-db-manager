@@ -1,0 +1,1498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.PatientDetailMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.PatientDetail" >
+    <id column="patient_detail_id" property="patientDetailId" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="patient_class_id" property="patientClassId" jdbcType="VARCHAR" />
+    <result column="patient_off_percent" property="patientOffPercent" jdbcType="INTEGER" />
+    <result column="patient_max_off_percent" property="patientMaxOffPercent" jdbcType="INTEGER" />
+    <result column="patient_price_limit" property="patientPriceLimit" jdbcType="DECIMAL" />
+    <result column="patient_money_amount" property="patientMoneyAmount" jdbcType="DECIMAL" />
+    <result column="patient_money_amount_paid" property="patientMoneyAmountPaid" jdbcType="DECIMAL" />
+    <result column="open_doctor_id" property="openDoctorId" jdbcType="VARCHAR" />
+    <result column="patient_work_no" property="patientWorkNo" jdbcType="VARCHAR" />
+    <result column="doctor_reg_id" property="doctorRegId" jdbcType="VARCHAR" />
+    <result column="doctor_reg_name" property="doctorRegName" jdbcType="VARCHAR" />
+    <result column="exam_suite_id" property="examSuiteId" jdbcType="VARCHAR" />
+    <result column="exam_suite_name" property="examSuiteName" jdbcType="VARCHAR" />
+    <result column="doctor_apply_id" property="doctorApplyId" jdbcType="VARCHAR" />
+    <result column="doctor_apply_name" property="doctorApplyName" jdbcType="VARCHAR" />
+    <result column="patient_guidance_printed" property="patientGuidancePrinted" jdbcType="BIGINT" />
+    <result column="patient_fee_charged" property="patientFeeCharged" jdbcType="BIGINT" />
+    <result column="patient_exam_started" property="patientExamStarted" jdbcType="BIGINT" />
+    <result column="patient_ready_to_final" property="patientReadyToFinal" jdbcType="BIGINT" />
+    <result column="doctor_fee_id" property="doctorFeeId" jdbcType="VARCHAR" />
+    <result column="doctor_fee_name" property="doctorFeeName" jdbcType="VARCHAR" />
+    <result column="patient_paused" property="patientPaused" jdbcType="BIGINT" />
+    <result column="patient_final_locked" property="patientFinalLocked" jdbcType="BIGINT" />
+    <result column="patient_final_examed" property="patientFinalExamed" jdbcType="BIGINT" />
+    <result column="patient_final_approved" property="patientFinalApproved" jdbcType="BIGINT" />
+    <result column="doctor_final_id" property="doctorFinalId" jdbcType="VARCHAR" />
+    <result column="doctor_final_name" property="doctorFinalName" jdbcType="VARCHAR" />
+    <result column="patient_final_examed_time" property="patientFinalExamedTime" jdbcType="TIMESTAMP" />
+    <result column="doctor_final_approved_id" property="doctorFinalApprovedId" jdbcType="VARCHAR" />
+    <result column="doctor_final_approved_name" property="doctorFinalApprovedName" jdbcType="VARCHAR" />
+    <result column="doctor_final_approved_time" property="doctorFinalApprovedTime" jdbcType="TIMESTAMP" />
+    <result column="patient_card_issued" property="patientCardIssued" jdbcType="BIGINT" />
+    <result column="patient_card_returned" property="patientCardReturned" jdbcType="BIGINT" />
+    <result column="patient_cover_printed" property="patientCoverPrinted" jdbcType="BIGINT" />
+    <result column="patient_report_printed" property="patientReportPrinted" jdbcType="BIGINT" />
+    <result column="report_printed_by_id" property="reportPrintedById" jdbcType="VARCHAR" />
+    <result column="report_printed_by_time" property="reportPrintedByTime" jdbcType="TIMESTAMP" />
+    <result column="report_in_formed" property="reportInFormed" jdbcType="BIGINT" />
+    <result column="report_in_formed_time" property="reportInFormedTime" jdbcType="TIMESTAMP" />
+    <result column="patient_is_severe" property="patientIsSevere" jdbcType="BIGINT" />
+    <result column="patient_closed" property="patientClosed" jdbcType="BIGINT" />
+    <result column="patient_closed_time" property="patientClosedTime" jdbcType="TIMESTAMP" />
+    <result column="patient_need_traced" property="patientNeedTraced" jdbcType="BIGINT" />
+    <result column="patient_diff_person" property="patientDiffPerson" jdbcType="BIGINT" />
+    <result column="patient_settle_all" property="patientSettleAll" jdbcType="BIGINT" />
+    <result column="patient_inner_oper" property="patientInnerOper" jdbcType="BIGINT" />
+    <result column="exam_item_value_server_degree" property="examItemValueServerDegree" jdbcType="VARCHAR" />
+    <result column="patient_server_degree_note" property="patientServerDegreeNote" jdbcType="VARCHAR" />
+    <result column="patient_severe_informed" property="patientSevereInformed" jdbcType="BIGINT" />
+    <result column="patient_severe_informed_time" property="patientSevereInformedTime" jdbcType="TIMESTAMP" />
+    <result column="patient_severe_informed_time_by" property="patientSevereInformedTimeBy" jdbcType="VARCHAR" />
+    <result column="patient_interface_marks" property="patientInterfaceMarks" jdbcType="VARCHAR" />
+    <result column="patient_flag" property="patientFlag" jdbcType="VARCHAR" />
+    <result column="patient_start_at_time" property="patientStartAtTime" jdbcType="TIMESTAMP" />
+    <result column="patient_result_last_change_time" property="patientResultLastChangeTime" jdbcType="TIMESTAMP" />
+    <result column="patient_result_last_archive_time" property="patientResultLastArchiveTime" jdbcType="TIMESTAMP" />
+    <result column="patient_result_last_OLAP_time" property="patientResultLastOlapTime" jdbcType="TIMESTAMP" />
+    <result column="patient_hospital_code" property="patientHospitalCode" jdbcType="VARCHAR" />
+    <result column="patient_hospital_name" property="patientHospitalName" jdbcType="VARCHAR" />
+    <result column="patient_detail_status" property="patientDetailStatus" jdbcType="INTEGER" />
+    <result column="patient_detail_crate_time" property="patientDetailCrateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_detail_edit_time" property="patientDetailEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.PatientDetailWithBLOBs" extends="BaseResultMap" >
+    <result column="patient_guidance_note" property="patientGuidanceNote" jdbcType="LONGVARCHAR" />
+    <result column="patient_patient_conclusion" property="patientPatientConclusion" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_summary" property="patientConclusionSummary" jdbcType="LONGVARCHAR" />
+    <result column="patient_suggestion" property="patientSuggestion" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_rich" property="patientConclusionRich" jdbcType="LONGVARCHAR" />
+    <result column="patient_advice" property="patientAdvice" jdbcType="LONGVARCHAR" />
+    <result column="patient_diet_guide" property="patientDietGuide" jdbcType="LONGVARCHAR" />
+    <result column="patient_sport_guide" property="patientSportGuide" jdbcType="LONGVARCHAR" />
+    <result column="patient_knowledge" property="patientKnowledge" jdbcType="LONGVARCHAR" />
+    <result column="patient_message" property="patientMessage" jdbcType="LONGVARCHAR" />
+    <result column="patient_positive_summary" property="patientPositiveSummary" jdbcType="LONGVARCHAR" />
+    <result column="patient_result_compare" property="patientResultCompare" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_detail_id, patient_id, patient_class_id, patient_off_percent, patient_max_off_percent, 
+    patient_price_limit, patient_money_amount, patient_money_amount_paid, open_doctor_id, 
+    patient_work_no, doctor_reg_id, doctor_reg_name, exam_suite_id, exam_suite_name, 
+    doctor_apply_id, doctor_apply_name, patient_guidance_printed, patient_fee_charged, 
+    patient_exam_started, patient_ready_to_final, doctor_fee_id, doctor_fee_name, patient_paused, 
+    patient_final_locked, patient_final_examed, patient_final_approved, doctor_final_id, 
+    doctor_final_name, patient_final_examed_time, doctor_final_approved_id, doctor_final_approved_name, 
+    doctor_final_approved_time, patient_card_issued, patient_card_returned, patient_cover_printed, 
+    patient_report_printed, report_printed_by_id, report_printed_by_time, report_in_formed, 
+    report_in_formed_time, patient_is_severe, patient_closed, patient_closed_time, patient_need_traced, 
+    patient_diff_person, patient_settle_all, patient_inner_oper, exam_item_value_server_degree, 
+    patient_server_degree_note, patient_severe_informed, patient_severe_informed_time, 
+    patient_severe_informed_time_by, patient_interface_marks, patient_flag, patient_start_at_time, 
+    patient_result_last_change_time, patient_result_last_archive_time, patient_result_last_OLAP_time, 
+    patient_hospital_code, patient_hospital_name, patient_detail_status, patient_detail_crate_time, 
+    patient_detail_edit_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    patient_guidance_note, patient_patient_conclusion, patient_conclusion_summary, patient_suggestion, 
+    patient_conclusion_rich, patient_advice, patient_diet_guide, patient_sport_guide, 
+    patient_knowledge, patient_message, patient_positive_summary, patient_result_compare
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.PatientDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.PatientDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_detail
+    where patient_detail_id = #{patientDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_detail
+    where patient_detail_id = #{patientDetailId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.PatientDetailExample" >
+    delete from patient_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.PatientDetailWithBLOBs" >
+    insert into patient_detail (patient_detail_id, patient_id, patient_class_id, 
+      patient_off_percent, patient_max_off_percent, 
+      patient_price_limit, patient_money_amount, 
+      patient_money_amount_paid, open_doctor_id, patient_work_no, 
+      doctor_reg_id, doctor_reg_name, exam_suite_id, 
+      exam_suite_name, doctor_apply_id, doctor_apply_name, 
+      patient_guidance_printed, patient_fee_charged, 
+      patient_exam_started, patient_ready_to_final, 
+      doctor_fee_id, doctor_fee_name, patient_paused, 
+      patient_final_locked, patient_final_examed, patient_final_approved, 
+      doctor_final_id, doctor_final_name, patient_final_examed_time, 
+      doctor_final_approved_id, doctor_final_approved_name, 
+      doctor_final_approved_time, patient_card_issued, 
+      patient_card_returned, patient_cover_printed, 
+      patient_report_printed, report_printed_by_id, 
+      report_printed_by_time, report_in_formed, report_in_formed_time, 
+      patient_is_severe, patient_closed, patient_closed_time, 
+      patient_need_traced, patient_diff_person, patient_settle_all, 
+      patient_inner_oper, exam_item_value_server_degree, 
+      patient_server_degree_note, patient_severe_informed, 
+      patient_severe_informed_time, patient_severe_informed_time_by, 
+      patient_interface_marks, patient_flag, patient_start_at_time, 
+      patient_result_last_change_time, patient_result_last_archive_time, 
+      patient_result_last_OLAP_time, patient_hospital_code, 
+      patient_hospital_name, patient_detail_status, 
+      patient_detail_crate_time, patient_detail_edit_time, 
+      patient_guidance_note, patient_patient_conclusion, 
+      patient_conclusion_summary, patient_suggestion, 
+      patient_conclusion_rich, patient_advice, 
+      patient_diet_guide, patient_sport_guide, 
+      patient_knowledge, patient_message, 
+      patient_positive_summary, patient_result_compare
+      )
+    values (#{patientDetailId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{patientClassId,jdbcType=VARCHAR}, 
+      #{patientOffPercent,jdbcType=INTEGER}, #{patientMaxOffPercent,jdbcType=INTEGER}, 
+      #{patientPriceLimit,jdbcType=DECIMAL}, #{patientMoneyAmount,jdbcType=DECIMAL}, 
+      #{patientMoneyAmountPaid,jdbcType=DECIMAL}, #{openDoctorId,jdbcType=VARCHAR}, #{patientWorkNo,jdbcType=VARCHAR}, 
+      #{doctorRegId,jdbcType=VARCHAR}, #{doctorRegName,jdbcType=VARCHAR}, #{examSuiteId,jdbcType=VARCHAR}, 
+      #{examSuiteName,jdbcType=VARCHAR}, #{doctorApplyId,jdbcType=VARCHAR}, #{doctorApplyName,jdbcType=VARCHAR}, 
+      #{patientGuidancePrinted,jdbcType=BIGINT}, #{patientFeeCharged,jdbcType=BIGINT}, 
+      #{patientExamStarted,jdbcType=BIGINT}, #{patientReadyToFinal,jdbcType=BIGINT}, 
+      #{doctorFeeId,jdbcType=VARCHAR}, #{doctorFeeName,jdbcType=VARCHAR}, #{patientPaused,jdbcType=BIGINT}, 
+      #{patientFinalLocked,jdbcType=BIGINT}, #{patientFinalExamed,jdbcType=BIGINT}, #{patientFinalApproved,jdbcType=BIGINT}, 
+      #{doctorFinalId,jdbcType=VARCHAR}, #{doctorFinalName,jdbcType=VARCHAR}, #{patientFinalExamedTime,jdbcType=TIMESTAMP}, 
+      #{doctorFinalApprovedId,jdbcType=VARCHAR}, #{doctorFinalApprovedName,jdbcType=VARCHAR}, 
+      #{doctorFinalApprovedTime,jdbcType=TIMESTAMP}, #{patientCardIssued,jdbcType=BIGINT}, 
+      #{patientCardReturned,jdbcType=BIGINT}, #{patientCoverPrinted,jdbcType=BIGINT}, 
+      #{patientReportPrinted,jdbcType=BIGINT}, #{reportPrintedById,jdbcType=VARCHAR}, 
+      #{reportPrintedByTime,jdbcType=TIMESTAMP}, #{reportInFormed,jdbcType=BIGINT}, #{reportInFormedTime,jdbcType=TIMESTAMP}, 
+      #{patientIsSevere,jdbcType=BIGINT}, #{patientClosed,jdbcType=BIGINT}, #{patientClosedTime,jdbcType=TIMESTAMP}, 
+      #{patientNeedTraced,jdbcType=BIGINT}, #{patientDiffPerson,jdbcType=BIGINT}, #{patientSettleAll,jdbcType=BIGINT}, 
+      #{patientInnerOper,jdbcType=BIGINT}, #{examItemValueServerDegree,jdbcType=VARCHAR}, 
+      #{patientServerDegreeNote,jdbcType=VARCHAR}, #{patientSevereInformed,jdbcType=BIGINT}, 
+      #{patientSevereInformedTime,jdbcType=TIMESTAMP}, #{patientSevereInformedTimeBy,jdbcType=VARCHAR}, 
+      #{patientInterfaceMarks,jdbcType=VARCHAR}, #{patientFlag,jdbcType=VARCHAR}, #{patientStartAtTime,jdbcType=TIMESTAMP}, 
+      #{patientResultLastChangeTime,jdbcType=TIMESTAMP}, #{patientResultLastArchiveTime,jdbcType=TIMESTAMP}, 
+      #{patientResultLastOlapTime,jdbcType=TIMESTAMP}, #{patientHospitalCode,jdbcType=VARCHAR}, 
+      #{patientHospitalName,jdbcType=VARCHAR}, #{patientDetailStatus,jdbcType=INTEGER}, 
+      #{patientDetailCrateTime,jdbcType=TIMESTAMP}, #{patientDetailEditTime,jdbcType=TIMESTAMP}, 
+      #{patientGuidanceNote,jdbcType=LONGVARCHAR}, #{patientPatientConclusion,jdbcType=LONGVARCHAR}, 
+      #{patientConclusionSummary,jdbcType=LONGVARCHAR}, #{patientSuggestion,jdbcType=LONGVARCHAR}, 
+      #{patientConclusionRich,jdbcType=LONGVARCHAR}, #{patientAdvice,jdbcType=LONGVARCHAR}, 
+      #{patientDietGuide,jdbcType=LONGVARCHAR}, #{patientSportGuide,jdbcType=LONGVARCHAR}, 
+      #{patientKnowledge,jdbcType=LONGVARCHAR}, #{patientMessage,jdbcType=LONGVARCHAR}, 
+      #{patientPositiveSummary,jdbcType=LONGVARCHAR}, #{patientResultCompare,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.PatientDetailWithBLOBs" >
+    insert into patient_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientDetailId != null" >
+        patient_detail_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="patientClassId != null" >
+        patient_class_id,
+      </if>
+      <if test="patientOffPercent != null" >
+        patient_off_percent,
+      </if>
+      <if test="patientMaxOffPercent != null" >
+        patient_max_off_percent,
+      </if>
+      <if test="patientPriceLimit != null" >
+        patient_price_limit,
+      </if>
+      <if test="patientMoneyAmount != null" >
+        patient_money_amount,
+      </if>
+      <if test="patientMoneyAmountPaid != null" >
+        patient_money_amount_paid,
+      </if>
+      <if test="openDoctorId != null" >
+        open_doctor_id,
+      </if>
+      <if test="patientWorkNo != null" >
+        patient_work_no,
+      </if>
+      <if test="doctorRegId != null" >
+        doctor_reg_id,
+      </if>
+      <if test="doctorRegName != null" >
+        doctor_reg_name,
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id,
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name,
+      </if>
+      <if test="doctorApplyId != null" >
+        doctor_apply_id,
+      </if>
+      <if test="doctorApplyName != null" >
+        doctor_apply_name,
+      </if>
+      <if test="patientGuidancePrinted != null" >
+        patient_guidance_printed,
+      </if>
+      <if test="patientFeeCharged != null" >
+        patient_fee_charged,
+      </if>
+      <if test="patientExamStarted != null" >
+        patient_exam_started,
+      </if>
+      <if test="patientReadyToFinal != null" >
+        patient_ready_to_final,
+      </if>
+      <if test="doctorFeeId != null" >
+        doctor_fee_id,
+      </if>
+      <if test="doctorFeeName != null" >
+        doctor_fee_name,
+      </if>
+      <if test="patientPaused != null" >
+        patient_paused,
+      </if>
+      <if test="patientFinalLocked != null" >
+        patient_final_locked,
+      </if>
+      <if test="patientFinalExamed != null" >
+        patient_final_examed,
+      </if>
+      <if test="patientFinalApproved != null" >
+        patient_final_approved,
+      </if>
+      <if test="doctorFinalId != null" >
+        doctor_final_id,
+      </if>
+      <if test="doctorFinalName != null" >
+        doctor_final_name,
+      </if>
+      <if test="patientFinalExamedTime != null" >
+        patient_final_examed_time,
+      </if>
+      <if test="doctorFinalApprovedId != null" >
+        doctor_final_approved_id,
+      </if>
+      <if test="doctorFinalApprovedName != null" >
+        doctor_final_approved_name,
+      </if>
+      <if test="doctorFinalApprovedTime != null" >
+        doctor_final_approved_time,
+      </if>
+      <if test="patientCardIssued != null" >
+        patient_card_issued,
+      </if>
+      <if test="patientCardReturned != null" >
+        patient_card_returned,
+      </if>
+      <if test="patientCoverPrinted != null" >
+        patient_cover_printed,
+      </if>
+      <if test="patientReportPrinted != null" >
+        patient_report_printed,
+      </if>
+      <if test="reportPrintedById != null" >
+        report_printed_by_id,
+      </if>
+      <if test="reportPrintedByTime != null" >
+        report_printed_by_time,
+      </if>
+      <if test="reportInFormed != null" >
+        report_in_formed,
+      </if>
+      <if test="reportInFormedTime != null" >
+        report_in_formed_time,
+      </if>
+      <if test="patientIsSevere != null" >
+        patient_is_severe,
+      </if>
+      <if test="patientClosed != null" >
+        patient_closed,
+      </if>
+      <if test="patientClosedTime != null" >
+        patient_closed_time,
+      </if>
+      <if test="patientNeedTraced != null" >
+        patient_need_traced,
+      </if>
+      <if test="patientDiffPerson != null" >
+        patient_diff_person,
+      </if>
+      <if test="patientSettleAll != null" >
+        patient_settle_all,
+      </if>
+      <if test="patientInnerOper != null" >
+        patient_inner_oper,
+      </if>
+      <if test="examItemValueServerDegree != null" >
+        exam_item_value_server_degree,
+      </if>
+      <if test="patientServerDegreeNote != null" >
+        patient_server_degree_note,
+      </if>
+      <if test="patientSevereInformed != null" >
+        patient_severe_informed,
+      </if>
+      <if test="patientSevereInformedTime != null" >
+        patient_severe_informed_time,
+      </if>
+      <if test="patientSevereInformedTimeBy != null" >
+        patient_severe_informed_time_by,
+      </if>
+      <if test="patientInterfaceMarks != null" >
+        patient_interface_marks,
+      </if>
+      <if test="patientFlag != null" >
+        patient_flag,
+      </if>
+      <if test="patientStartAtTime != null" >
+        patient_start_at_time,
+      </if>
+      <if test="patientResultLastChangeTime != null" >
+        patient_result_last_change_time,
+      </if>
+      <if test="patientResultLastArchiveTime != null" >
+        patient_result_last_archive_time,
+      </if>
+      <if test="patientResultLastOlapTime != null" >
+        patient_result_last_OLAP_time,
+      </if>
+      <if test="patientHospitalCode != null" >
+        patient_hospital_code,
+      </if>
+      <if test="patientHospitalName != null" >
+        patient_hospital_name,
+      </if>
+      <if test="patientDetailStatus != null" >
+        patient_detail_status,
+      </if>
+      <if test="patientDetailCrateTime != null" >
+        patient_detail_crate_time,
+      </if>
+      <if test="patientDetailEditTime != null" >
+        patient_detail_edit_time,
+      </if>
+      <if test="patientGuidanceNote != null" >
+        patient_guidance_note,
+      </if>
+      <if test="patientPatientConclusion != null" >
+        patient_patient_conclusion,
+      </if>
+      <if test="patientConclusionSummary != null" >
+        patient_conclusion_summary,
+      </if>
+      <if test="patientSuggestion != null" >
+        patient_suggestion,
+      </if>
+      <if test="patientConclusionRich != null" >
+        patient_conclusion_rich,
+      </if>
+      <if test="patientAdvice != null" >
+        patient_advice,
+      </if>
+      <if test="patientDietGuide != null" >
+        patient_diet_guide,
+      </if>
+      <if test="patientSportGuide != null" >
+        patient_sport_guide,
+      </if>
+      <if test="patientKnowledge != null" >
+        patient_knowledge,
+      </if>
+      <if test="patientMessage != null" >
+        patient_message,
+      </if>
+      <if test="patientPositiveSummary != null" >
+        patient_positive_summary,
+      </if>
+      <if test="patientResultCompare != null" >
+        patient_result_compare,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientDetailId != null" >
+        #{patientDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientClassId != null" >
+        #{patientClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientOffPercent != null" >
+        #{patientOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="patientMaxOffPercent != null" >
+        #{patientMaxOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="patientPriceLimit != null" >
+        #{patientPriceLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="patientMoneyAmount != null" >
+        #{patientMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="patientMoneyAmountPaid != null" >
+        #{patientMoneyAmountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="openDoctorId != null" >
+        #{openDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientWorkNo != null" >
+        #{patientWorkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRegId != null" >
+        #{doctorRegId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRegName != null" >
+        #{doctorRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteId != null" >
+        #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorApplyId != null" >
+        #{doctorApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorApplyName != null" >
+        #{doctorApplyName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientGuidancePrinted != null" >
+        #{patientGuidancePrinted,jdbcType=BIGINT},
+      </if>
+      <if test="patientFeeCharged != null" >
+        #{patientFeeCharged,jdbcType=BIGINT},
+      </if>
+      <if test="patientExamStarted != null" >
+        #{patientExamStarted,jdbcType=BIGINT},
+      </if>
+      <if test="patientReadyToFinal != null" >
+        #{patientReadyToFinal,jdbcType=BIGINT},
+      </if>
+      <if test="doctorFeeId != null" >
+        #{doctorFeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFeeName != null" >
+        #{doctorFeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientPaused != null" >
+        #{patientPaused,jdbcType=BIGINT},
+      </if>
+      <if test="patientFinalLocked != null" >
+        #{patientFinalLocked,jdbcType=BIGINT},
+      </if>
+      <if test="patientFinalExamed != null" >
+        #{patientFinalExamed,jdbcType=BIGINT},
+      </if>
+      <if test="patientFinalApproved != null" >
+        #{patientFinalApproved,jdbcType=BIGINT},
+      </if>
+      <if test="doctorFinalId != null" >
+        #{doctorFinalId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFinalName != null" >
+        #{doctorFinalName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFinalExamedTime != null" >
+        #{patientFinalExamedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorFinalApprovedId != null" >
+        #{doctorFinalApprovedId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFinalApprovedName != null" >
+        #{doctorFinalApprovedName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFinalApprovedTime != null" >
+        #{doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientCardIssued != null" >
+        #{patientCardIssued,jdbcType=BIGINT},
+      </if>
+      <if test="patientCardReturned != null" >
+        #{patientCardReturned,jdbcType=BIGINT},
+      </if>
+      <if test="patientCoverPrinted != null" >
+        #{patientCoverPrinted,jdbcType=BIGINT},
+      </if>
+      <if test="patientReportPrinted != null" >
+        #{patientReportPrinted,jdbcType=BIGINT},
+      </if>
+      <if test="reportPrintedById != null" >
+        #{reportPrintedById,jdbcType=VARCHAR},
+      </if>
+      <if test="reportPrintedByTime != null" >
+        #{reportPrintedByTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportInFormed != null" >
+        #{reportInFormed,jdbcType=BIGINT},
+      </if>
+      <if test="reportInFormedTime != null" >
+        #{reportInFormedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientIsSevere != null" >
+        #{patientIsSevere,jdbcType=BIGINT},
+      </if>
+      <if test="patientClosed != null" >
+        #{patientClosed,jdbcType=BIGINT},
+      </if>
+      <if test="patientClosedTime != null" >
+        #{patientClosedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientNeedTraced != null" >
+        #{patientNeedTraced,jdbcType=BIGINT},
+      </if>
+      <if test="patientDiffPerson != null" >
+        #{patientDiffPerson,jdbcType=BIGINT},
+      </if>
+      <if test="patientSettleAll != null" >
+        #{patientSettleAll,jdbcType=BIGINT},
+      </if>
+      <if test="patientInnerOper != null" >
+        #{patientInnerOper,jdbcType=BIGINT},
+      </if>
+      <if test="examItemValueServerDegree != null" >
+        #{examItemValueServerDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="patientServerDegreeNote != null" >
+        #{patientServerDegreeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSevereInformed != null" >
+        #{patientSevereInformed,jdbcType=BIGINT},
+      </if>
+      <if test="patientSevereInformedTime != null" >
+        #{patientSevereInformedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientSevereInformedTimeBy != null" >
+        #{patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      </if>
+      <if test="patientInterfaceMarks != null" >
+        #{patientInterfaceMarks,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFlag != null" >
+        #{patientFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="patientStartAtTime != null" >
+        #{patientStartAtTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientResultLastChangeTime != null" >
+        #{patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientResultLastArchiveTime != null" >
+        #{patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientResultLastOlapTime != null" >
+        #{patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientHospitalCode != null" >
+        #{patientHospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="patientHospitalName != null" >
+        #{patientHospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientDetailStatus != null" >
+        #{patientDetailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientDetailCrateTime != null" >
+        #{patientDetailCrateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientDetailEditTime != null" >
+        #{patientDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientGuidanceNote != null" >
+        #{patientGuidanceNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientPatientConclusion != null" >
+        #{patientPatientConclusion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionSummary != null" >
+        #{patientConclusionSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientSuggestion != null" >
+        #{patientSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionRich != null" >
+        #{patientConclusionRich,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientAdvice != null" >
+        #{patientAdvice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientDietGuide != null" >
+        #{patientDietGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientSportGuide != null" >
+        #{patientSportGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientKnowledge != null" >
+        #{patientKnowledge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientMessage != null" >
+        #{patientMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientPositiveSummary != null" >
+        #{patientPositiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientResultCompare != null" >
+        #{patientResultCompare,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.PatientDetailExample" resultType="java.lang.Integer" >
+    select count(*) from patient_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_detail
+    <set >
+      <if test="record.patientDetailId != null" >
+        patient_detail_id = #{record.patientDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientClassId != null" >
+        patient_class_id = #{record.patientClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientOffPercent != null" >
+        patient_off_percent = #{record.patientOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientMaxOffPercent != null" >
+        patient_max_off_percent = #{record.patientMaxOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientPriceLimit != null" >
+        patient_price_limit = #{record.patientPriceLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.patientMoneyAmount != null" >
+        patient_money_amount = #{record.patientMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.patientMoneyAmountPaid != null" >
+        patient_money_amount_paid = #{record.patientMoneyAmountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.openDoctorId != null" >
+        open_doctor_id = #{record.openDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientWorkNo != null" >
+        patient_work_no = #{record.patientWorkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorRegId != null" >
+        doctor_reg_id = #{record.doctorRegId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorRegName != null" >
+        doctor_reg_name = #{record.doctorRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteId != null" >
+        exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteName != null" >
+        exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorApplyId != null" >
+        doctor_apply_id = #{record.doctorApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorApplyName != null" >
+        doctor_apply_name = #{record.doctorApplyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientGuidancePrinted != null" >
+        patient_guidance_printed = #{record.patientGuidancePrinted,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientFeeCharged != null" >
+        patient_fee_charged = #{record.patientFeeCharged,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientExamStarted != null" >
+        patient_exam_started = #{record.patientExamStarted,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientReadyToFinal != null" >
+        patient_ready_to_final = #{record.patientReadyToFinal,jdbcType=BIGINT},
+      </if>
+      <if test="record.doctorFeeId != null" >
+        doctor_fee_id = #{record.doctorFeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorFeeName != null" >
+        doctor_fee_name = #{record.doctorFeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientPaused != null" >
+        patient_paused = #{record.patientPaused,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientFinalLocked != null" >
+        patient_final_locked = #{record.patientFinalLocked,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientFinalExamed != null" >
+        patient_final_examed = #{record.patientFinalExamed,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientFinalApproved != null" >
+        patient_final_approved = #{record.patientFinalApproved,jdbcType=BIGINT},
+      </if>
+      <if test="record.doctorFinalId != null" >
+        doctor_final_id = #{record.doctorFinalId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorFinalName != null" >
+        doctor_final_name = #{record.doctorFinalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFinalExamedTime != null" >
+        patient_final_examed_time = #{record.patientFinalExamedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.doctorFinalApprovedId != null" >
+        doctor_final_approved_id = #{record.doctorFinalApprovedId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorFinalApprovedName != null" >
+        doctor_final_approved_name = #{record.doctorFinalApprovedName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorFinalApprovedTime != null" >
+        doctor_final_approved_time = #{record.doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientCardIssued != null" >
+        patient_card_issued = #{record.patientCardIssued,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientCardReturned != null" >
+        patient_card_returned = #{record.patientCardReturned,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientCoverPrinted != null" >
+        patient_cover_printed = #{record.patientCoverPrinted,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientReportPrinted != null" >
+        patient_report_printed = #{record.patientReportPrinted,jdbcType=BIGINT},
+      </if>
+      <if test="record.reportPrintedById != null" >
+        report_printed_by_id = #{record.reportPrintedById,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportPrintedByTime != null" >
+        report_printed_by_time = #{record.reportPrintedByTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportInFormed != null" >
+        report_in_formed = #{record.reportInFormed,jdbcType=BIGINT},
+      </if>
+      <if test="record.reportInFormedTime != null" >
+        report_in_formed_time = #{record.reportInFormedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientIsSevere != null" >
+        patient_is_severe = #{record.patientIsSevere,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientClosed != null" >
+        patient_closed = #{record.patientClosed,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientClosedTime != null" >
+        patient_closed_time = #{record.patientClosedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientNeedTraced != null" >
+        patient_need_traced = #{record.patientNeedTraced,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientDiffPerson != null" >
+        patient_diff_person = #{record.patientDiffPerson,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientSettleAll != null" >
+        patient_settle_all = #{record.patientSettleAll,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientInnerOper != null" >
+        patient_inner_oper = #{record.patientInnerOper,jdbcType=BIGINT},
+      </if>
+      <if test="record.examItemValueServerDegree != null" >
+        exam_item_value_server_degree = #{record.examItemValueServerDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientServerDegreeNote != null" >
+        patient_server_degree_note = #{record.patientServerDegreeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientSevereInformed != null" >
+        patient_severe_informed = #{record.patientSevereInformed,jdbcType=BIGINT},
+      </if>
+      <if test="record.patientSevereInformedTime != null" >
+        patient_severe_informed_time = #{record.patientSevereInformedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientSevereInformedTimeBy != null" >
+        patient_severe_informed_time_by = #{record.patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientInterfaceMarks != null" >
+        patient_interface_marks = #{record.patientInterfaceMarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFlag != null" >
+        patient_flag = #{record.patientFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientStartAtTime != null" >
+        patient_start_at_time = #{record.patientStartAtTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientResultLastChangeTime != null" >
+        patient_result_last_change_time = #{record.patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientResultLastArchiveTime != null" >
+        patient_result_last_archive_time = #{record.patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientResultLastOlapTime != null" >
+        patient_result_last_OLAP_time = #{record.patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientHospitalCode != null" >
+        patient_hospital_code = #{record.patientHospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientHospitalName != null" >
+        patient_hospital_name = #{record.patientHospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientDetailStatus != null" >
+        patient_detail_status = #{record.patientDetailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientDetailCrateTime != null" >
+        patient_detail_crate_time = #{record.patientDetailCrateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientDetailEditTime != null" >
+        patient_detail_edit_time = #{record.patientDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientGuidanceNote != null" >
+        patient_guidance_note = #{record.patientGuidanceNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientPatientConclusion != null" >
+        patient_patient_conclusion = #{record.patientPatientConclusion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionSummary != null" >
+        patient_conclusion_summary = #{record.patientConclusionSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientSuggestion != null" >
+        patient_suggestion = #{record.patientSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionRich != null" >
+        patient_conclusion_rich = #{record.patientConclusionRich,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientAdvice != null" >
+        patient_advice = #{record.patientAdvice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientDietGuide != null" >
+        patient_diet_guide = #{record.patientDietGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientSportGuide != null" >
+        patient_sport_guide = #{record.patientSportGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientKnowledge != null" >
+        patient_knowledge = #{record.patientKnowledge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientMessage != null" >
+        patient_message = #{record.patientMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientPositiveSummary != null" >
+        patient_positive_summary = #{record.patientPositiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientResultCompare != null" >
+        patient_result_compare = #{record.patientResultCompare,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_detail
+    set patient_detail_id = #{record.patientDetailId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      patient_class_id = #{record.patientClassId,jdbcType=VARCHAR},
+      patient_off_percent = #{record.patientOffPercent,jdbcType=INTEGER},
+      patient_max_off_percent = #{record.patientMaxOffPercent,jdbcType=INTEGER},
+      patient_price_limit = #{record.patientPriceLimit,jdbcType=DECIMAL},
+      patient_money_amount = #{record.patientMoneyAmount,jdbcType=DECIMAL},
+      patient_money_amount_paid = #{record.patientMoneyAmountPaid,jdbcType=DECIMAL},
+      open_doctor_id = #{record.openDoctorId,jdbcType=VARCHAR},
+      patient_work_no = #{record.patientWorkNo,jdbcType=VARCHAR},
+      doctor_reg_id = #{record.doctorRegId,jdbcType=VARCHAR},
+      doctor_reg_name = #{record.doctorRegName,jdbcType=VARCHAR},
+      exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      doctor_apply_id = #{record.doctorApplyId,jdbcType=VARCHAR},
+      doctor_apply_name = #{record.doctorApplyName,jdbcType=VARCHAR},
+      patient_guidance_printed = #{record.patientGuidancePrinted,jdbcType=BIGINT},
+      patient_fee_charged = #{record.patientFeeCharged,jdbcType=BIGINT},
+      patient_exam_started = #{record.patientExamStarted,jdbcType=BIGINT},
+      patient_ready_to_final = #{record.patientReadyToFinal,jdbcType=BIGINT},
+      doctor_fee_id = #{record.doctorFeeId,jdbcType=VARCHAR},
+      doctor_fee_name = #{record.doctorFeeName,jdbcType=VARCHAR},
+      patient_paused = #{record.patientPaused,jdbcType=BIGINT},
+      patient_final_locked = #{record.patientFinalLocked,jdbcType=BIGINT},
+      patient_final_examed = #{record.patientFinalExamed,jdbcType=BIGINT},
+      patient_final_approved = #{record.patientFinalApproved,jdbcType=BIGINT},
+      doctor_final_id = #{record.doctorFinalId,jdbcType=VARCHAR},
+      doctor_final_name = #{record.doctorFinalName,jdbcType=VARCHAR},
+      patient_final_examed_time = #{record.patientFinalExamedTime,jdbcType=TIMESTAMP},
+      doctor_final_approved_id = #{record.doctorFinalApprovedId,jdbcType=VARCHAR},
+      doctor_final_approved_name = #{record.doctorFinalApprovedName,jdbcType=VARCHAR},
+      doctor_final_approved_time = #{record.doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      patient_card_issued = #{record.patientCardIssued,jdbcType=BIGINT},
+      patient_card_returned = #{record.patientCardReturned,jdbcType=BIGINT},
+      patient_cover_printed = #{record.patientCoverPrinted,jdbcType=BIGINT},
+      patient_report_printed = #{record.patientReportPrinted,jdbcType=BIGINT},
+      report_printed_by_id = #{record.reportPrintedById,jdbcType=VARCHAR},
+      report_printed_by_time = #{record.reportPrintedByTime,jdbcType=TIMESTAMP},
+      report_in_formed = #{record.reportInFormed,jdbcType=BIGINT},
+      report_in_formed_time = #{record.reportInFormedTime,jdbcType=TIMESTAMP},
+      patient_is_severe = #{record.patientIsSevere,jdbcType=BIGINT},
+      patient_closed = #{record.patientClosed,jdbcType=BIGINT},
+      patient_closed_time = #{record.patientClosedTime,jdbcType=TIMESTAMP},
+      patient_need_traced = #{record.patientNeedTraced,jdbcType=BIGINT},
+      patient_diff_person = #{record.patientDiffPerson,jdbcType=BIGINT},
+      patient_settle_all = #{record.patientSettleAll,jdbcType=BIGINT},
+      patient_inner_oper = #{record.patientInnerOper,jdbcType=BIGINT},
+      exam_item_value_server_degree = #{record.examItemValueServerDegree,jdbcType=VARCHAR},
+      patient_server_degree_note = #{record.patientServerDegreeNote,jdbcType=VARCHAR},
+      patient_severe_informed = #{record.patientSevereInformed,jdbcType=BIGINT},
+      patient_severe_informed_time = #{record.patientSevereInformedTime,jdbcType=TIMESTAMP},
+      patient_severe_informed_time_by = #{record.patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      patient_interface_marks = #{record.patientInterfaceMarks,jdbcType=VARCHAR},
+      patient_flag = #{record.patientFlag,jdbcType=VARCHAR},
+      patient_start_at_time = #{record.patientStartAtTime,jdbcType=TIMESTAMP},
+      patient_result_last_change_time = #{record.patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      patient_result_last_archive_time = #{record.patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      patient_result_last_OLAP_time = #{record.patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      patient_hospital_code = #{record.patientHospitalCode,jdbcType=VARCHAR},
+      patient_hospital_name = #{record.patientHospitalName,jdbcType=VARCHAR},
+      patient_detail_status = #{record.patientDetailStatus,jdbcType=INTEGER},
+      patient_detail_crate_time = #{record.patientDetailCrateTime,jdbcType=TIMESTAMP},
+      patient_detail_edit_time = #{record.patientDetailEditTime,jdbcType=TIMESTAMP},
+      patient_guidance_note = #{record.patientGuidanceNote,jdbcType=LONGVARCHAR},
+      patient_patient_conclusion = #{record.patientPatientConclusion,jdbcType=LONGVARCHAR},
+      patient_conclusion_summary = #{record.patientConclusionSummary,jdbcType=LONGVARCHAR},
+      patient_suggestion = #{record.patientSuggestion,jdbcType=LONGVARCHAR},
+      patient_conclusion_rich = #{record.patientConclusionRich,jdbcType=LONGVARCHAR},
+      patient_advice = #{record.patientAdvice,jdbcType=LONGVARCHAR},
+      patient_diet_guide = #{record.patientDietGuide,jdbcType=LONGVARCHAR},
+      patient_sport_guide = #{record.patientSportGuide,jdbcType=LONGVARCHAR},
+      patient_knowledge = #{record.patientKnowledge,jdbcType=LONGVARCHAR},
+      patient_message = #{record.patientMessage,jdbcType=LONGVARCHAR},
+      patient_positive_summary = #{record.patientPositiveSummary,jdbcType=LONGVARCHAR},
+      patient_result_compare = #{record.patientResultCompare,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_detail
+    set patient_detail_id = #{record.patientDetailId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      patient_class_id = #{record.patientClassId,jdbcType=VARCHAR},
+      patient_off_percent = #{record.patientOffPercent,jdbcType=INTEGER},
+      patient_max_off_percent = #{record.patientMaxOffPercent,jdbcType=INTEGER},
+      patient_price_limit = #{record.patientPriceLimit,jdbcType=DECIMAL},
+      patient_money_amount = #{record.patientMoneyAmount,jdbcType=DECIMAL},
+      patient_money_amount_paid = #{record.patientMoneyAmountPaid,jdbcType=DECIMAL},
+      open_doctor_id = #{record.openDoctorId,jdbcType=VARCHAR},
+      patient_work_no = #{record.patientWorkNo,jdbcType=VARCHAR},
+      doctor_reg_id = #{record.doctorRegId,jdbcType=VARCHAR},
+      doctor_reg_name = #{record.doctorRegName,jdbcType=VARCHAR},
+      exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      doctor_apply_id = #{record.doctorApplyId,jdbcType=VARCHAR},
+      doctor_apply_name = #{record.doctorApplyName,jdbcType=VARCHAR},
+      patient_guidance_printed = #{record.patientGuidancePrinted,jdbcType=BIGINT},
+      patient_fee_charged = #{record.patientFeeCharged,jdbcType=BIGINT},
+      patient_exam_started = #{record.patientExamStarted,jdbcType=BIGINT},
+      patient_ready_to_final = #{record.patientReadyToFinal,jdbcType=BIGINT},
+      doctor_fee_id = #{record.doctorFeeId,jdbcType=VARCHAR},
+      doctor_fee_name = #{record.doctorFeeName,jdbcType=VARCHAR},
+      patient_paused = #{record.patientPaused,jdbcType=BIGINT},
+      patient_final_locked = #{record.patientFinalLocked,jdbcType=BIGINT},
+      patient_final_examed = #{record.patientFinalExamed,jdbcType=BIGINT},
+      patient_final_approved = #{record.patientFinalApproved,jdbcType=BIGINT},
+      doctor_final_id = #{record.doctorFinalId,jdbcType=VARCHAR},
+      doctor_final_name = #{record.doctorFinalName,jdbcType=VARCHAR},
+      patient_final_examed_time = #{record.patientFinalExamedTime,jdbcType=TIMESTAMP},
+      doctor_final_approved_id = #{record.doctorFinalApprovedId,jdbcType=VARCHAR},
+      doctor_final_approved_name = #{record.doctorFinalApprovedName,jdbcType=VARCHAR},
+      doctor_final_approved_time = #{record.doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      patient_card_issued = #{record.patientCardIssued,jdbcType=BIGINT},
+      patient_card_returned = #{record.patientCardReturned,jdbcType=BIGINT},
+      patient_cover_printed = #{record.patientCoverPrinted,jdbcType=BIGINT},
+      patient_report_printed = #{record.patientReportPrinted,jdbcType=BIGINT},
+      report_printed_by_id = #{record.reportPrintedById,jdbcType=VARCHAR},
+      report_printed_by_time = #{record.reportPrintedByTime,jdbcType=TIMESTAMP},
+      report_in_formed = #{record.reportInFormed,jdbcType=BIGINT},
+      report_in_formed_time = #{record.reportInFormedTime,jdbcType=TIMESTAMP},
+      patient_is_severe = #{record.patientIsSevere,jdbcType=BIGINT},
+      patient_closed = #{record.patientClosed,jdbcType=BIGINT},
+      patient_closed_time = #{record.patientClosedTime,jdbcType=TIMESTAMP},
+      patient_need_traced = #{record.patientNeedTraced,jdbcType=BIGINT},
+      patient_diff_person = #{record.patientDiffPerson,jdbcType=BIGINT},
+      patient_settle_all = #{record.patientSettleAll,jdbcType=BIGINT},
+      patient_inner_oper = #{record.patientInnerOper,jdbcType=BIGINT},
+      exam_item_value_server_degree = #{record.examItemValueServerDegree,jdbcType=VARCHAR},
+      patient_server_degree_note = #{record.patientServerDegreeNote,jdbcType=VARCHAR},
+      patient_severe_informed = #{record.patientSevereInformed,jdbcType=BIGINT},
+      patient_severe_informed_time = #{record.patientSevereInformedTime,jdbcType=TIMESTAMP},
+      patient_severe_informed_time_by = #{record.patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      patient_interface_marks = #{record.patientInterfaceMarks,jdbcType=VARCHAR},
+      patient_flag = #{record.patientFlag,jdbcType=VARCHAR},
+      patient_start_at_time = #{record.patientStartAtTime,jdbcType=TIMESTAMP},
+      patient_result_last_change_time = #{record.patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      patient_result_last_archive_time = #{record.patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      patient_result_last_OLAP_time = #{record.patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      patient_hospital_code = #{record.patientHospitalCode,jdbcType=VARCHAR},
+      patient_hospital_name = #{record.patientHospitalName,jdbcType=VARCHAR},
+      patient_detail_status = #{record.patientDetailStatus,jdbcType=INTEGER},
+      patient_detail_crate_time = #{record.patientDetailCrateTime,jdbcType=TIMESTAMP},
+      patient_detail_edit_time = #{record.patientDetailEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.PatientDetailWithBLOBs" >
+    update patient_detail
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientClassId != null" >
+        patient_class_id = #{patientClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientOffPercent != null" >
+        patient_off_percent = #{patientOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="patientMaxOffPercent != null" >
+        patient_max_off_percent = #{patientMaxOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="patientPriceLimit != null" >
+        patient_price_limit = #{patientPriceLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="patientMoneyAmount != null" >
+        patient_money_amount = #{patientMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="patientMoneyAmountPaid != null" >
+        patient_money_amount_paid = #{patientMoneyAmountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="openDoctorId != null" >
+        open_doctor_id = #{openDoctorId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientWorkNo != null" >
+        patient_work_no = #{patientWorkNo,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRegId != null" >
+        doctor_reg_id = #{doctorRegId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorRegName != null" >
+        doctor_reg_name = #{doctorRegName,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorApplyId != null" >
+        doctor_apply_id = #{doctorApplyId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorApplyName != null" >
+        doctor_apply_name = #{doctorApplyName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientGuidancePrinted != null" >
+        patient_guidance_printed = #{patientGuidancePrinted,jdbcType=BIGINT},
+      </if>
+      <if test="patientFeeCharged != null" >
+        patient_fee_charged = #{patientFeeCharged,jdbcType=BIGINT},
+      </if>
+      <if test="patientExamStarted != null" >
+        patient_exam_started = #{patientExamStarted,jdbcType=BIGINT},
+      </if>
+      <if test="patientReadyToFinal != null" >
+        patient_ready_to_final = #{patientReadyToFinal,jdbcType=BIGINT},
+      </if>
+      <if test="doctorFeeId != null" >
+        doctor_fee_id = #{doctorFeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFeeName != null" >
+        doctor_fee_name = #{doctorFeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientPaused != null" >
+        patient_paused = #{patientPaused,jdbcType=BIGINT},
+      </if>
+      <if test="patientFinalLocked != null" >
+        patient_final_locked = #{patientFinalLocked,jdbcType=BIGINT},
+      </if>
+      <if test="patientFinalExamed != null" >
+        patient_final_examed = #{patientFinalExamed,jdbcType=BIGINT},
+      </if>
+      <if test="patientFinalApproved != null" >
+        patient_final_approved = #{patientFinalApproved,jdbcType=BIGINT},
+      </if>
+      <if test="doctorFinalId != null" >
+        doctor_final_id = #{doctorFinalId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFinalName != null" >
+        doctor_final_name = #{doctorFinalName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFinalExamedTime != null" >
+        patient_final_examed_time = #{patientFinalExamedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doctorFinalApprovedId != null" >
+        doctor_final_approved_id = #{doctorFinalApprovedId,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFinalApprovedName != null" >
+        doctor_final_approved_name = #{doctorFinalApprovedName,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorFinalApprovedTime != null" >
+        doctor_final_approved_time = #{doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientCardIssued != null" >
+        patient_card_issued = #{patientCardIssued,jdbcType=BIGINT},
+      </if>
+      <if test="patientCardReturned != null" >
+        patient_card_returned = #{patientCardReturned,jdbcType=BIGINT},
+      </if>
+      <if test="patientCoverPrinted != null" >
+        patient_cover_printed = #{patientCoverPrinted,jdbcType=BIGINT},
+      </if>
+      <if test="patientReportPrinted != null" >
+        patient_report_printed = #{patientReportPrinted,jdbcType=BIGINT},
+      </if>
+      <if test="reportPrintedById != null" >
+        report_printed_by_id = #{reportPrintedById,jdbcType=VARCHAR},
+      </if>
+      <if test="reportPrintedByTime != null" >
+        report_printed_by_time = #{reportPrintedByTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportInFormed != null" >
+        report_in_formed = #{reportInFormed,jdbcType=BIGINT},
+      </if>
+      <if test="reportInFormedTime != null" >
+        report_in_formed_time = #{reportInFormedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientIsSevere != null" >
+        patient_is_severe = #{patientIsSevere,jdbcType=BIGINT},
+      </if>
+      <if test="patientClosed != null" >
+        patient_closed = #{patientClosed,jdbcType=BIGINT},
+      </if>
+      <if test="patientClosedTime != null" >
+        patient_closed_time = #{patientClosedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientNeedTraced != null" >
+        patient_need_traced = #{patientNeedTraced,jdbcType=BIGINT},
+      </if>
+      <if test="patientDiffPerson != null" >
+        patient_diff_person = #{patientDiffPerson,jdbcType=BIGINT},
+      </if>
+      <if test="patientSettleAll != null" >
+        patient_settle_all = #{patientSettleAll,jdbcType=BIGINT},
+      </if>
+      <if test="patientInnerOper != null" >
+        patient_inner_oper = #{patientInnerOper,jdbcType=BIGINT},
+      </if>
+      <if test="examItemValueServerDegree != null" >
+        exam_item_value_server_degree = #{examItemValueServerDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="patientServerDegreeNote != null" >
+        patient_server_degree_note = #{patientServerDegreeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="patientSevereInformed != null" >
+        patient_severe_informed = #{patientSevereInformed,jdbcType=BIGINT},
+      </if>
+      <if test="patientSevereInformedTime != null" >
+        patient_severe_informed_time = #{patientSevereInformedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientSevereInformedTimeBy != null" >
+        patient_severe_informed_time_by = #{patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      </if>
+      <if test="patientInterfaceMarks != null" >
+        patient_interface_marks = #{patientInterfaceMarks,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFlag != null" >
+        patient_flag = #{patientFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="patientStartAtTime != null" >
+        patient_start_at_time = #{patientStartAtTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientResultLastChangeTime != null" >
+        patient_result_last_change_time = #{patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientResultLastArchiveTime != null" >
+        patient_result_last_archive_time = #{patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientResultLastOlapTime != null" >
+        patient_result_last_OLAP_time = #{patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientHospitalCode != null" >
+        patient_hospital_code = #{patientHospitalCode,jdbcType=VARCHAR},
+      </if>
+      <if test="patientHospitalName != null" >
+        patient_hospital_name = #{patientHospitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientDetailStatus != null" >
+        patient_detail_status = #{patientDetailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientDetailCrateTime != null" >
+        patient_detail_crate_time = #{patientDetailCrateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientDetailEditTime != null" >
+        patient_detail_edit_time = #{patientDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientGuidanceNote != null" >
+        patient_guidance_note = #{patientGuidanceNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientPatientConclusion != null" >
+        patient_patient_conclusion = #{patientPatientConclusion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionSummary != null" >
+        patient_conclusion_summary = #{patientConclusionSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientSuggestion != null" >
+        patient_suggestion = #{patientSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionRich != null" >
+        patient_conclusion_rich = #{patientConclusionRich,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientAdvice != null" >
+        patient_advice = #{patientAdvice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientDietGuide != null" >
+        patient_diet_guide = #{patientDietGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientSportGuide != null" >
+        patient_sport_guide = #{patientSportGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientKnowledge != null" >
+        patient_knowledge = #{patientKnowledge,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientMessage != null" >
+        patient_message = #{patientMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientPositiveSummary != null" >
+        patient_positive_summary = #{patientPositiveSummary,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientResultCompare != null" >
+        patient_result_compare = #{patientResultCompare,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_detail_id = #{patientDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.PatientDetailWithBLOBs" >
+    update patient_detail
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      patient_class_id = #{patientClassId,jdbcType=VARCHAR},
+      patient_off_percent = #{patientOffPercent,jdbcType=INTEGER},
+      patient_max_off_percent = #{patientMaxOffPercent,jdbcType=INTEGER},
+      patient_price_limit = #{patientPriceLimit,jdbcType=DECIMAL},
+      patient_money_amount = #{patientMoneyAmount,jdbcType=DECIMAL},
+      patient_money_amount_paid = #{patientMoneyAmountPaid,jdbcType=DECIMAL},
+      open_doctor_id = #{openDoctorId,jdbcType=VARCHAR},
+      patient_work_no = #{patientWorkNo,jdbcType=VARCHAR},
+      doctor_reg_id = #{doctorRegId,jdbcType=VARCHAR},
+      doctor_reg_name = #{doctorRegName,jdbcType=VARCHAR},
+      exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      doctor_apply_id = #{doctorApplyId,jdbcType=VARCHAR},
+      doctor_apply_name = #{doctorApplyName,jdbcType=VARCHAR},
+      patient_guidance_printed = #{patientGuidancePrinted,jdbcType=BIGINT},
+      patient_fee_charged = #{patientFeeCharged,jdbcType=BIGINT},
+      patient_exam_started = #{patientExamStarted,jdbcType=BIGINT},
+      patient_ready_to_final = #{patientReadyToFinal,jdbcType=BIGINT},
+      doctor_fee_id = #{doctorFeeId,jdbcType=VARCHAR},
+      doctor_fee_name = #{doctorFeeName,jdbcType=VARCHAR},
+      patient_paused = #{patientPaused,jdbcType=BIGINT},
+      patient_final_locked = #{patientFinalLocked,jdbcType=BIGINT},
+      patient_final_examed = #{patientFinalExamed,jdbcType=BIGINT},
+      patient_final_approved = #{patientFinalApproved,jdbcType=BIGINT},
+      doctor_final_id = #{doctorFinalId,jdbcType=VARCHAR},
+      doctor_final_name = #{doctorFinalName,jdbcType=VARCHAR},
+      patient_final_examed_time = #{patientFinalExamedTime,jdbcType=TIMESTAMP},
+      doctor_final_approved_id = #{doctorFinalApprovedId,jdbcType=VARCHAR},
+      doctor_final_approved_name = #{doctorFinalApprovedName,jdbcType=VARCHAR},
+      doctor_final_approved_time = #{doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      patient_card_issued = #{patientCardIssued,jdbcType=BIGINT},
+      patient_card_returned = #{patientCardReturned,jdbcType=BIGINT},
+      patient_cover_printed = #{patientCoverPrinted,jdbcType=BIGINT},
+      patient_report_printed = #{patientReportPrinted,jdbcType=BIGINT},
+      report_printed_by_id = #{reportPrintedById,jdbcType=VARCHAR},
+      report_printed_by_time = #{reportPrintedByTime,jdbcType=TIMESTAMP},
+      report_in_formed = #{reportInFormed,jdbcType=BIGINT},
+      report_in_formed_time = #{reportInFormedTime,jdbcType=TIMESTAMP},
+      patient_is_severe = #{patientIsSevere,jdbcType=BIGINT},
+      patient_closed = #{patientClosed,jdbcType=BIGINT},
+      patient_closed_time = #{patientClosedTime,jdbcType=TIMESTAMP},
+      patient_need_traced = #{patientNeedTraced,jdbcType=BIGINT},
+      patient_diff_person = #{patientDiffPerson,jdbcType=BIGINT},
+      patient_settle_all = #{patientSettleAll,jdbcType=BIGINT},
+      patient_inner_oper = #{patientInnerOper,jdbcType=BIGINT},
+      exam_item_value_server_degree = #{examItemValueServerDegree,jdbcType=VARCHAR},
+      patient_server_degree_note = #{patientServerDegreeNote,jdbcType=VARCHAR},
+      patient_severe_informed = #{patientSevereInformed,jdbcType=BIGINT},
+      patient_severe_informed_time = #{patientSevereInformedTime,jdbcType=TIMESTAMP},
+      patient_severe_informed_time_by = #{patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      patient_interface_marks = #{patientInterfaceMarks,jdbcType=VARCHAR},
+      patient_flag = #{patientFlag,jdbcType=VARCHAR},
+      patient_start_at_time = #{patientStartAtTime,jdbcType=TIMESTAMP},
+      patient_result_last_change_time = #{patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      patient_result_last_archive_time = #{patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      patient_result_last_OLAP_time = #{patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      patient_hospital_code = #{patientHospitalCode,jdbcType=VARCHAR},
+      patient_hospital_name = #{patientHospitalName,jdbcType=VARCHAR},
+      patient_detail_status = #{patientDetailStatus,jdbcType=INTEGER},
+      patient_detail_crate_time = #{patientDetailCrateTime,jdbcType=TIMESTAMP},
+      patient_detail_edit_time = #{patientDetailEditTime,jdbcType=TIMESTAMP},
+      patient_guidance_note = #{patientGuidanceNote,jdbcType=LONGVARCHAR},
+      patient_patient_conclusion = #{patientPatientConclusion,jdbcType=LONGVARCHAR},
+      patient_conclusion_summary = #{patientConclusionSummary,jdbcType=LONGVARCHAR},
+      patient_suggestion = #{patientSuggestion,jdbcType=LONGVARCHAR},
+      patient_conclusion_rich = #{patientConclusionRich,jdbcType=LONGVARCHAR},
+      patient_advice = #{patientAdvice,jdbcType=LONGVARCHAR},
+      patient_diet_guide = #{patientDietGuide,jdbcType=LONGVARCHAR},
+      patient_sport_guide = #{patientSportGuide,jdbcType=LONGVARCHAR},
+      patient_knowledge = #{patientKnowledge,jdbcType=LONGVARCHAR},
+      patient_message = #{patientMessage,jdbcType=LONGVARCHAR},
+      patient_positive_summary = #{patientPositiveSummary,jdbcType=LONGVARCHAR},
+      patient_result_compare = #{patientResultCompare,jdbcType=LONGVARCHAR}
+    where patient_detail_id = #{patientDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.PatientDetail" >
+    update patient_detail
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      patient_class_id = #{patientClassId,jdbcType=VARCHAR},
+      patient_off_percent = #{patientOffPercent,jdbcType=INTEGER},
+      patient_max_off_percent = #{patientMaxOffPercent,jdbcType=INTEGER},
+      patient_price_limit = #{patientPriceLimit,jdbcType=DECIMAL},
+      patient_money_amount = #{patientMoneyAmount,jdbcType=DECIMAL},
+      patient_money_amount_paid = #{patientMoneyAmountPaid,jdbcType=DECIMAL},
+      open_doctor_id = #{openDoctorId,jdbcType=VARCHAR},
+      patient_work_no = #{patientWorkNo,jdbcType=VARCHAR},
+      doctor_reg_id = #{doctorRegId,jdbcType=VARCHAR},
+      doctor_reg_name = #{doctorRegName,jdbcType=VARCHAR},
+      exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      doctor_apply_id = #{doctorApplyId,jdbcType=VARCHAR},
+      doctor_apply_name = #{doctorApplyName,jdbcType=VARCHAR},
+      patient_guidance_printed = #{patientGuidancePrinted,jdbcType=BIGINT},
+      patient_fee_charged = #{patientFeeCharged,jdbcType=BIGINT},
+      patient_exam_started = #{patientExamStarted,jdbcType=BIGINT},
+      patient_ready_to_final = #{patientReadyToFinal,jdbcType=BIGINT},
+      doctor_fee_id = #{doctorFeeId,jdbcType=VARCHAR},
+      doctor_fee_name = #{doctorFeeName,jdbcType=VARCHAR},
+      patient_paused = #{patientPaused,jdbcType=BIGINT},
+      patient_final_locked = #{patientFinalLocked,jdbcType=BIGINT},
+      patient_final_examed = #{patientFinalExamed,jdbcType=BIGINT},
+      patient_final_approved = #{patientFinalApproved,jdbcType=BIGINT},
+      doctor_final_id = #{doctorFinalId,jdbcType=VARCHAR},
+      doctor_final_name = #{doctorFinalName,jdbcType=VARCHAR},
+      patient_final_examed_time = #{patientFinalExamedTime,jdbcType=TIMESTAMP},
+      doctor_final_approved_id = #{doctorFinalApprovedId,jdbcType=VARCHAR},
+      doctor_final_approved_name = #{doctorFinalApprovedName,jdbcType=VARCHAR},
+      doctor_final_approved_time = #{doctorFinalApprovedTime,jdbcType=TIMESTAMP},
+      patient_card_issued = #{patientCardIssued,jdbcType=BIGINT},
+      patient_card_returned = #{patientCardReturned,jdbcType=BIGINT},
+      patient_cover_printed = #{patientCoverPrinted,jdbcType=BIGINT},
+      patient_report_printed = #{patientReportPrinted,jdbcType=BIGINT},
+      report_printed_by_id = #{reportPrintedById,jdbcType=VARCHAR},
+      report_printed_by_time = #{reportPrintedByTime,jdbcType=TIMESTAMP},
+      report_in_formed = #{reportInFormed,jdbcType=BIGINT},
+      report_in_formed_time = #{reportInFormedTime,jdbcType=TIMESTAMP},
+      patient_is_severe = #{patientIsSevere,jdbcType=BIGINT},
+      patient_closed = #{patientClosed,jdbcType=BIGINT},
+      patient_closed_time = #{patientClosedTime,jdbcType=TIMESTAMP},
+      patient_need_traced = #{patientNeedTraced,jdbcType=BIGINT},
+      patient_diff_person = #{patientDiffPerson,jdbcType=BIGINT},
+      patient_settle_all = #{patientSettleAll,jdbcType=BIGINT},
+      patient_inner_oper = #{patientInnerOper,jdbcType=BIGINT},
+      exam_item_value_server_degree = #{examItemValueServerDegree,jdbcType=VARCHAR},
+      patient_server_degree_note = #{patientServerDegreeNote,jdbcType=VARCHAR},
+      patient_severe_informed = #{patientSevereInformed,jdbcType=BIGINT},
+      patient_severe_informed_time = #{patientSevereInformedTime,jdbcType=TIMESTAMP},
+      patient_severe_informed_time_by = #{patientSevereInformedTimeBy,jdbcType=VARCHAR},
+      patient_interface_marks = #{patientInterfaceMarks,jdbcType=VARCHAR},
+      patient_flag = #{patientFlag,jdbcType=VARCHAR},
+      patient_start_at_time = #{patientStartAtTime,jdbcType=TIMESTAMP},
+      patient_result_last_change_time = #{patientResultLastChangeTime,jdbcType=TIMESTAMP},
+      patient_result_last_archive_time = #{patientResultLastArchiveTime,jdbcType=TIMESTAMP},
+      patient_result_last_OLAP_time = #{patientResultLastOlapTime,jdbcType=TIMESTAMP},
+      patient_hospital_code = #{patientHospitalCode,jdbcType=VARCHAR},
+      patient_hospital_name = #{patientHospitalName,jdbcType=VARCHAR},
+      patient_detail_status = #{patientDetailStatus,jdbcType=INTEGER},
+      patient_detail_crate_time = #{patientDetailCrateTime,jdbcType=TIMESTAMP},
+      patient_detail_edit_time = #{patientDetailEditTime,jdbcType=TIMESTAMP}
+    where patient_detail_id = #{patientDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

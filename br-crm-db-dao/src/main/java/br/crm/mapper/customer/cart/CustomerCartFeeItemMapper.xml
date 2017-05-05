@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.customer.cart.CustomerCartFeeItemMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.customer.cart.CustomerCartFeeItem" >
+    <id column="customer_cart_fee_item_id" property="customerCartFeeItemId" jdbcType="VARCHAR" />
+    <result column="cart_id" property="cartId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="exam_suite_split" property="examSuiteSplit" jdbcType="BIT" />
+    <result column="exam_suite_id" property="examSuiteId" jdbcType="VARCHAR" />
+    <result column="exam_suite_name" property="examSuiteName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_id_old" property="examFeeItemIdOld" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_id" property="examFeeItemId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name" property="examFeeItemName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="exam_suite_price" property="examSuitePrice" jdbcType="DECIMAL" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="enterprise_name" property="enterpriseName" jdbcType="VARCHAR" />
+    <result column="customer_cart_fee_item_status" property="customerCartFeeItemStatus" jdbcType="INTEGER" />
+    <result column="customer_cart_fee_item_create_time" property="customerCartFeeItemCreateTime" jdbcType="TIMESTAMP" />
+    <result column="customer_cart_fee_item_edit_time" property="customerCartFeeItemEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_cart_fee_item_id, cart_id, org_id, org_name, exam_suite_split, exam_suite_id, 
+    exam_suite_name, exam_fee_item_id_old, exam_fee_item_id, exam_fee_item_name, price, 
+    exam_suite_price, customer_id, enterprise_id, enterprise_name, customer_cart_fee_item_status, 
+    customer_cart_fee_item_create_time, customer_cart_fee_item_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_cart_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_cart_fee_item
+    where customer_cart_fee_item_id = #{customerCartFeeItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer_cart_fee_item
+    where customer_cart_fee_item_id = #{customerCartFeeItemId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItemExample" >
+    delete from customer_cart_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItem" >
+    insert into customer_cart_fee_item (customer_cart_fee_item_id, cart_id, org_id, 
+      org_name, exam_suite_split, exam_suite_id, 
+      exam_suite_name, exam_fee_item_id_old, exam_fee_item_id, 
+      exam_fee_item_name, price, exam_suite_price, 
+      customer_id, enterprise_id, enterprise_name, 
+      customer_cart_fee_item_status, customer_cart_fee_item_create_time, 
+      customer_cart_fee_item_edit_time)
+    values (#{customerCartFeeItemId,jdbcType=VARCHAR}, #{cartId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{examSuiteSplit,jdbcType=BIT}, #{examSuiteId,jdbcType=VARCHAR}, 
+      #{examSuiteName,jdbcType=VARCHAR}, #{examFeeItemIdOld,jdbcType=VARCHAR}, #{examFeeItemId,jdbcType=VARCHAR}, 
+      #{examFeeItemName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{examSuitePrice,jdbcType=DECIMAL}, 
+      #{customerId,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=VARCHAR}, #{enterpriseName,jdbcType=VARCHAR}, 
+      #{customerCartFeeItemStatus,jdbcType=INTEGER}, #{customerCartFeeItemCreateTime,jdbcType=TIMESTAMP}, 
+      #{customerCartFeeItemEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItem" >
+    insert into customer_cart_fee_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerCartFeeItemId != null" >
+        customer_cart_fee_item_id,
+      </if>
+      <if test="cartId != null" >
+        cart_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="examSuiteSplit != null" >
+        exam_suite_split,
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id,
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name,
+      </if>
+      <if test="examFeeItemIdOld != null" >
+        exam_fee_item_id_old,
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id,
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="examSuitePrice != null" >
+        exam_suite_price,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name,
+      </if>
+      <if test="customerCartFeeItemStatus != null" >
+        customer_cart_fee_item_status,
+      </if>
+      <if test="customerCartFeeItemCreateTime != null" >
+        customer_cart_fee_item_create_time,
+      </if>
+      <if test="customerCartFeeItemEditTime != null" >
+        customer_cart_fee_item_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerCartFeeItemId != null" >
+        #{customerCartFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="cartId != null" >
+        #{cartId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteSplit != null" >
+        #{examSuiteSplit,jdbcType=BIT},
+      </if>
+      <if test="examSuiteId != null" >
+        #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemIdOld != null" >
+        #{examFeeItemIdOld,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuitePrice != null" >
+        #{examSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCartFeeItemStatus != null" >
+        #{customerCartFeeItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="customerCartFeeItemCreateTime != null" >
+        #{customerCartFeeItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerCartFeeItemEditTime != null" >
+        #{customerCartFeeItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItemExample" resultType="java.lang.Integer" >
+    select count(*) from customer_cart_fee_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_cart_fee_item
+    <set >
+      <if test="record.customerCartFeeItemId != null" >
+        customer_cart_fee_item_id = #{record.customerCartFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cartId != null" >
+        cart_id = #{record.cartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteSplit != null" >
+        exam_suite_split = #{record.examSuiteSplit,jdbcType=BIT},
+      </if>
+      <if test="record.examSuiteId != null" >
+        exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteName != null" >
+        exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemIdOld != null" >
+        exam_fee_item_id_old = #{record.examFeeItemIdOld,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemId != null" >
+        exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemName != null" >
+        exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examSuitePrice != null" >
+        exam_suite_price = #{record.examSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseId != null" >
+        enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseName != null" >
+        enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCartFeeItemStatus != null" >
+        customer_cart_fee_item_status = #{record.customerCartFeeItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.customerCartFeeItemCreateTime != null" >
+        customer_cart_fee_item_create_time = #{record.customerCartFeeItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customerCartFeeItemEditTime != null" >
+        customer_cart_fee_item_edit_time = #{record.customerCartFeeItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_cart_fee_item
+    set customer_cart_fee_item_id = #{record.customerCartFeeItemId,jdbcType=VARCHAR},
+      cart_id = #{record.cartId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      exam_suite_split = #{record.examSuiteSplit,jdbcType=BIT},
+      exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      exam_fee_item_id_old = #{record.examFeeItemIdOld,jdbcType=VARCHAR},
+      exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_name = #{record.examFeeItemName,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      exam_suite_price = #{record.examSuitePrice,jdbcType=DECIMAL},
+      customer_id = #{record.customerId,jdbcType=VARCHAR},
+      enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      enterprise_name = #{record.enterpriseName,jdbcType=VARCHAR},
+      customer_cart_fee_item_status = #{record.customerCartFeeItemStatus,jdbcType=INTEGER},
+      customer_cart_fee_item_create_time = #{record.customerCartFeeItemCreateTime,jdbcType=TIMESTAMP},
+      customer_cart_fee_item_edit_time = #{record.customerCartFeeItemEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItem" >
+    update customer_cart_fee_item
+    <set >
+      <if test="cartId != null" >
+        cart_id = #{cartId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteSplit != null" >
+        exam_suite_split = #{examSuiteSplit,jdbcType=BIT},
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemIdOld != null" >
+        exam_fee_item_id_old = #{examFeeItemIdOld,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemName != null" >
+        exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuitePrice != null" >
+        exam_suite_price = #{examSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseName != null" >
+        enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCartFeeItemStatus != null" >
+        customer_cart_fee_item_status = #{customerCartFeeItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="customerCartFeeItemCreateTime != null" >
+        customer_cart_fee_item_create_time = #{customerCartFeeItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerCartFeeItemEditTime != null" >
+        customer_cart_fee_item_edit_time = #{customerCartFeeItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_cart_fee_item_id = #{customerCartFeeItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.customer.cart.CustomerCartFeeItem" >
+    update customer_cart_fee_item
+    set cart_id = #{cartId,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      exam_suite_split = #{examSuiteSplit,jdbcType=BIT},
+      exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      exam_fee_item_id_old = #{examFeeItemIdOld,jdbcType=VARCHAR},
+      exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_name = #{examFeeItemName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      exam_suite_price = #{examSuitePrice,jdbcType=DECIMAL},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+      customer_cart_fee_item_status = #{customerCartFeeItemStatus,jdbcType=INTEGER},
+      customer_cart_fee_item_create_time = #{customerCartFeeItemCreateTime,jdbcType=TIMESTAMP},
+      customer_cart_fee_item_edit_time = #{customerCartFeeItemEditTime,jdbcType=TIMESTAMP}
+    where customer_cart_fee_item_id = #{customerCartFeeItemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

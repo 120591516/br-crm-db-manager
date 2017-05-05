@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationCooperationMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationCooperation" >
+    <id column="org_cooperation_id" property="orgCooperationId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_cooperation_val" property="orgCooperationVal" jdbcType="INTEGER" />
+    <result column="org_cooperation_opinion" property="orgCooperationOpinion" jdbcType="VARCHAR" />
+    <result column="org_cooperation_create_time" property="orgCooperationCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_cooperation_edit_time" property="orgCooperationEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_cooperation_id, org_id, org_cooperation_val, org_cooperation_opinion, org_cooperation_create_time, 
+    org_cooperation_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationCooperationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_cooperation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_cooperation
+    where org_cooperation_id = #{orgCooperationId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_cooperation
+    where org_cooperation_id = #{orgCooperationId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationCooperationExample" >
+    delete from organization_cooperation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationCooperation" >
+    insert into organization_cooperation (org_cooperation_id, org_id, org_cooperation_val, 
+      org_cooperation_opinion, org_cooperation_create_time, 
+      org_cooperation_edit_time)
+    values (#{orgCooperationId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgCooperationVal,jdbcType=INTEGER}, 
+      #{orgCooperationOpinion,jdbcType=VARCHAR}, #{orgCooperationCreateTime,jdbcType=TIMESTAMP}, 
+      #{orgCooperationEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationCooperation" useGeneratedKeys="true" keyProperty="orgCooperationId" >
+    insert into organization_cooperation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgCooperationId != null" >
+        org_cooperation_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgCooperationVal != null" >
+        org_cooperation_val,
+      </if>
+      <if test="orgCooperationOpinion != null" >
+        org_cooperation_opinion,
+      </if>
+      <if test="orgCooperationCreateTime != null" >
+        org_cooperation_create_time,
+      </if>
+      <if test="orgCooperationEditTime != null" >
+        org_cooperation_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgCooperationId != null" >
+        #{orgCooperationId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCooperationVal != null" >
+        #{orgCooperationVal,jdbcType=INTEGER},
+      </if>
+      <if test="orgCooperationOpinion != null" >
+        #{orgCooperationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCooperationCreateTime != null" >
+        #{orgCooperationCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCooperationEditTime != null" >
+        #{orgCooperationEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationCooperationExample" resultType="java.lang.Integer" >
+    select count(*) from organization_cooperation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_cooperation
+    <set >
+      <if test="record.orgCooperationId != null" >
+        org_cooperation_id = #{record.orgCooperationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCooperationVal != null" >
+        org_cooperation_val = #{record.orgCooperationVal,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgCooperationOpinion != null" >
+        org_cooperation_opinion = #{record.orgCooperationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCooperationCreateTime != null" >
+        org_cooperation_create_time = #{record.orgCooperationCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgCooperationEditTime != null" >
+        org_cooperation_edit_time = #{record.orgCooperationEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_cooperation
+    set org_cooperation_id = #{record.orgCooperationId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_cooperation_val = #{record.orgCooperationVal,jdbcType=INTEGER},
+      org_cooperation_opinion = #{record.orgCooperationOpinion,jdbcType=VARCHAR},
+      org_cooperation_create_time = #{record.orgCooperationCreateTime,jdbcType=TIMESTAMP},
+      org_cooperation_edit_time = #{record.orgCooperationEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationCooperation" >
+    update organization_cooperation
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCooperationVal != null" >
+        org_cooperation_val = #{orgCooperationVal,jdbcType=INTEGER},
+      </if>
+      <if test="orgCooperationOpinion != null" >
+        org_cooperation_opinion = #{orgCooperationOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCooperationCreateTime != null" >
+        org_cooperation_create_time = #{orgCooperationCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCooperationEditTime != null" >
+        org_cooperation_edit_time = #{orgCooperationEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_cooperation_id = #{orgCooperationId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationCooperation" >
+    update organization_cooperation
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_cooperation_val = #{orgCooperationVal,jdbcType=INTEGER},
+      org_cooperation_opinion = #{orgCooperationOpinion,jdbcType=VARCHAR},
+      org_cooperation_create_time = #{orgCooperationCreateTime,jdbcType=TIMESTAMP},
+      org_cooperation_edit_time = #{orgCooperationEditTime,jdbcType=TIMESTAMP}
+    where org_cooperation_id = #{orgCooperationId,jdbcType=BIGINT}
+  </update>
+</mapper>

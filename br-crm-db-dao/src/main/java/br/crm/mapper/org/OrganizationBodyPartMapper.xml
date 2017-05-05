@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationBodyPartMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationBodyPart" >
+    <id column="body_part_id" property="bodyPartId" jdbcType="VARCHAR" />
+    <result column="body_part_name" property="bodyPartName" jdbcType="VARCHAR" />
+    <result column="body_part_code" property="bodyPartCode" jdbcType="VARCHAR" />
+    <result column="body_part_disp_order" property="bodyPartDispOrder" jdbcType="INTEGER" />
+    <result column="body_part_status" property="bodyPartStatus" jdbcType="INTEGER" />
+    <result column="body_part_create_time" property="bodyPartCreateTime" jdbcType="TIMESTAMP" />
+    <result column="body_part_edit_time" property="bodyPartEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    body_part_id, body_part_name, body_part_code, body_part_disp_order, body_part_status, 
+    body_part_create_time, body_part_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationBodyPartExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_body_part
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_body_part
+    where body_part_id = #{bodyPartId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_body_part
+    where body_part_id = #{bodyPartId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationBodyPartExample" >
+    delete from organization_body_part
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationBodyPart" >
+    insert into organization_body_part (body_part_id, body_part_name, body_part_code, 
+      body_part_disp_order, body_part_status, body_part_create_time, 
+      body_part_edit_time)
+    values (#{bodyPartId,jdbcType=VARCHAR}, #{bodyPartName,jdbcType=VARCHAR}, #{bodyPartCode,jdbcType=VARCHAR}, 
+      #{bodyPartDispOrder,jdbcType=INTEGER}, #{bodyPartStatus,jdbcType=INTEGER}, #{bodyPartCreateTime,jdbcType=TIMESTAMP}, 
+      #{bodyPartEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationBodyPart" >
+    insert into organization_body_part
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bodyPartId != null" >
+        body_part_id,
+      </if>
+      <if test="bodyPartName != null" >
+        body_part_name,
+      </if>
+      <if test="bodyPartCode != null" >
+        body_part_code,
+      </if>
+      <if test="bodyPartDispOrder != null" >
+        body_part_disp_order,
+      </if>
+      <if test="bodyPartStatus != null" >
+        body_part_status,
+      </if>
+      <if test="bodyPartCreateTime != null" >
+        body_part_create_time,
+      </if>
+      <if test="bodyPartEditTime != null" >
+        body_part_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bodyPartId != null" >
+        #{bodyPartId,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartName != null" >
+        #{bodyPartName,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartCode != null" >
+        #{bodyPartCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartDispOrder != null" >
+        #{bodyPartDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="bodyPartStatus != null" >
+        #{bodyPartStatus,jdbcType=INTEGER},
+      </if>
+      <if test="bodyPartCreateTime != null" >
+        #{bodyPartCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bodyPartEditTime != null" >
+        #{bodyPartEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationBodyPartExample" resultType="java.lang.Integer" >
+    select count(*) from organization_body_part
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_body_part
+    <set >
+      <if test="record.bodyPartId != null" >
+        body_part_id = #{record.bodyPartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bodyPartName != null" >
+        body_part_name = #{record.bodyPartName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bodyPartCode != null" >
+        body_part_code = #{record.bodyPartCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bodyPartDispOrder != null" >
+        body_part_disp_order = #{record.bodyPartDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.bodyPartStatus != null" >
+        body_part_status = #{record.bodyPartStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.bodyPartCreateTime != null" >
+        body_part_create_time = #{record.bodyPartCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bodyPartEditTime != null" >
+        body_part_edit_time = #{record.bodyPartEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_body_part
+    set body_part_id = #{record.bodyPartId,jdbcType=VARCHAR},
+      body_part_name = #{record.bodyPartName,jdbcType=VARCHAR},
+      body_part_code = #{record.bodyPartCode,jdbcType=VARCHAR},
+      body_part_disp_order = #{record.bodyPartDispOrder,jdbcType=INTEGER},
+      body_part_status = #{record.bodyPartStatus,jdbcType=INTEGER},
+      body_part_create_time = #{record.bodyPartCreateTime,jdbcType=TIMESTAMP},
+      body_part_edit_time = #{record.bodyPartEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationBodyPart" >
+    update organization_body_part
+    <set >
+      <if test="bodyPartName != null" >
+        body_part_name = #{bodyPartName,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartCode != null" >
+        body_part_code = #{bodyPartCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartDispOrder != null" >
+        body_part_disp_order = #{bodyPartDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="bodyPartStatus != null" >
+        body_part_status = #{bodyPartStatus,jdbcType=INTEGER},
+      </if>
+      <if test="bodyPartCreateTime != null" >
+        body_part_create_time = #{bodyPartCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bodyPartEditTime != null" >
+        body_part_edit_time = #{bodyPartEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where body_part_id = #{bodyPartId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationBodyPart" >
+    update organization_body_part
+    set body_part_name = #{bodyPartName,jdbcType=VARCHAR},
+      body_part_code = #{bodyPartCode,jdbcType=VARCHAR},
+      body_part_disp_order = #{bodyPartDispOrder,jdbcType=INTEGER},
+      body_part_status = #{bodyPartStatus,jdbcType=INTEGER},
+      body_part_create_time = #{bodyPartCreateTime,jdbcType=TIMESTAMP},
+      body_part_edit_time = #{bodyPartEditTime,jdbcType=TIMESTAMP}
+    where body_part_id = #{bodyPartId,jdbcType=VARCHAR}
+  </update>
+</mapper>

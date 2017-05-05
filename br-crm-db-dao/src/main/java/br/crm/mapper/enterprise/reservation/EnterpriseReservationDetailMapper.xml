@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.enterprise.reservation.EnterpriseReservationDetailMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetail" >
+    <id column="enterprise_reservation_detail_id" property="enterpriseReservationDetailId" jdbcType="VARCHAR" />
+    <result column="enterprise_reservation_id" property="enterpriseReservationId" jdbcType="VARCHAR" />
+    <result column="enterprise_reservation_count_customer" property="enterpriseReservationCountCustomer" jdbcType="INTEGER" />
+    <result column="enterprise_reservation_count_registered" property="enterpriseReservationCountRegistered" jdbcType="INTEGER" />
+    <result column="enterprise_reservation_full_finished" property="enterpriseReservationFullFinished" jdbcType="INTEGER" />
+    <result column="enterprise_reservation_part_finished" property="enterpriseReservationPartFinished" jdbcType="INTEGER" />
+    <result column="enterprise_reservation_money_amount" property="enterpriseReservationMoneyAmount" jdbcType="DECIMAL" />
+    <result column="enterprise_reservation_settled_money_amount" property="enterpriseReservationSettledMoneyAmount" jdbcType="DECIMAL" />
+    <result column="enterprise_reservation_paid" property="enterpriseReservationPaid" jdbcType="DECIMAL" />
+    <result column="enterprise_reservation_final_settled_time" property="enterpriseReservationFinalSettledTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_reservation_finished_paid" property="enterpriseReservationFinishedPaid" jdbcType="BIT" />
+    <result column="enterprise_reservation_finished" property="enterpriseReservationFinished" jdbcType="BIT" />
+    <result column="enterprise_reservation_detail_status" property="enterpriseReservationDetailStatus" jdbcType="INTEGER" />
+    <result column="enterprise_reservation_detail_create_time" property="enterpriseReservationDetailCreateTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_reservation_detail_edit_time" property="enterpriseReservationDetailEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    enterprise_reservation_detail_id, enterprise_reservation_id, enterprise_reservation_count_customer, 
+    enterprise_reservation_count_registered, enterprise_reservation_full_finished, enterprise_reservation_part_finished, 
+    enterprise_reservation_money_amount, enterprise_reservation_settled_money_amount, 
+    enterprise_reservation_paid, enterprise_reservation_final_settled_time, enterprise_reservation_finished_paid, 
+    enterprise_reservation_finished, enterprise_reservation_detail_status, enterprise_reservation_detail_create_time, 
+    enterprise_reservation_detail_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from enterprise_reservation_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise_reservation_detail
+    where enterprise_reservation_detail_id = #{enterpriseReservationDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from enterprise_reservation_detail
+    where enterprise_reservation_detail_id = #{enterpriseReservationDetailId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetailExample" >
+    delete from enterprise_reservation_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetail" >
+    insert into enterprise_reservation_detail (enterprise_reservation_detail_id, enterprise_reservation_id, 
+      enterprise_reservation_count_customer, enterprise_reservation_count_registered, 
+      enterprise_reservation_full_finished, enterprise_reservation_part_finished, 
+      enterprise_reservation_money_amount, enterprise_reservation_settled_money_amount, 
+      enterprise_reservation_paid, enterprise_reservation_final_settled_time, 
+      enterprise_reservation_finished_paid, enterprise_reservation_finished, 
+      enterprise_reservation_detail_status, enterprise_reservation_detail_create_time, 
+      enterprise_reservation_detail_edit_time)
+    values (#{enterpriseReservationDetailId,jdbcType=VARCHAR}, #{enterpriseReservationId,jdbcType=VARCHAR}, 
+      #{enterpriseReservationCountCustomer,jdbcType=INTEGER}, #{enterpriseReservationCountRegistered,jdbcType=INTEGER}, 
+      #{enterpriseReservationFullFinished,jdbcType=INTEGER}, #{enterpriseReservationPartFinished,jdbcType=INTEGER}, 
+      #{enterpriseReservationMoneyAmount,jdbcType=DECIMAL}, #{enterpriseReservationSettledMoneyAmount,jdbcType=DECIMAL}, 
+      #{enterpriseReservationPaid,jdbcType=DECIMAL}, #{enterpriseReservationFinalSettledTime,jdbcType=TIMESTAMP}, 
+      #{enterpriseReservationFinishedPaid,jdbcType=BIT}, #{enterpriseReservationFinished,jdbcType=BIT}, 
+      #{enterpriseReservationDetailStatus,jdbcType=INTEGER}, #{enterpriseReservationDetailCreateTime,jdbcType=TIMESTAMP}, 
+      #{enterpriseReservationDetailEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetail" >
+    insert into enterprise_reservation_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseReservationDetailId != null" >
+        enterprise_reservation_detail_id,
+      </if>
+      <if test="enterpriseReservationId != null" >
+        enterprise_reservation_id,
+      </if>
+      <if test="enterpriseReservationCountCustomer != null" >
+        enterprise_reservation_count_customer,
+      </if>
+      <if test="enterpriseReservationCountRegistered != null" >
+        enterprise_reservation_count_registered,
+      </if>
+      <if test="enterpriseReservationFullFinished != null" >
+        enterprise_reservation_full_finished,
+      </if>
+      <if test="enterpriseReservationPartFinished != null" >
+        enterprise_reservation_part_finished,
+      </if>
+      <if test="enterpriseReservationMoneyAmount != null" >
+        enterprise_reservation_money_amount,
+      </if>
+      <if test="enterpriseReservationSettledMoneyAmount != null" >
+        enterprise_reservation_settled_money_amount,
+      </if>
+      <if test="enterpriseReservationPaid != null" >
+        enterprise_reservation_paid,
+      </if>
+      <if test="enterpriseReservationFinalSettledTime != null" >
+        enterprise_reservation_final_settled_time,
+      </if>
+      <if test="enterpriseReservationFinishedPaid != null" >
+        enterprise_reservation_finished_paid,
+      </if>
+      <if test="enterpriseReservationFinished != null" >
+        enterprise_reservation_finished,
+      </if>
+      <if test="enterpriseReservationDetailStatus != null" >
+        enterprise_reservation_detail_status,
+      </if>
+      <if test="enterpriseReservationDetailCreateTime != null" >
+        enterprise_reservation_detail_create_time,
+      </if>
+      <if test="enterpriseReservationDetailEditTime != null" >
+        enterprise_reservation_detail_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseReservationDetailId != null" >
+        #{enterpriseReservationDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseReservationId != null" >
+        #{enterpriseReservationId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseReservationCountCustomer != null" >
+        #{enterpriseReservationCountCustomer,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationCountRegistered != null" >
+        #{enterpriseReservationCountRegistered,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationFullFinished != null" >
+        #{enterpriseReservationFullFinished,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationPartFinished != null" >
+        #{enterpriseReservationPartFinished,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationMoneyAmount != null" >
+        #{enterpriseReservationMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseReservationSettledMoneyAmount != null" >
+        #{enterpriseReservationSettledMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseReservationPaid != null" >
+        #{enterpriseReservationPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseReservationFinalSettledTime != null" >
+        #{enterpriseReservationFinalSettledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseReservationFinishedPaid != null" >
+        #{enterpriseReservationFinishedPaid,jdbcType=BIT},
+      </if>
+      <if test="enterpriseReservationFinished != null" >
+        #{enterpriseReservationFinished,jdbcType=BIT},
+      </if>
+      <if test="enterpriseReservationDetailStatus != null" >
+        #{enterpriseReservationDetailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationDetailCreateTime != null" >
+        #{enterpriseReservationDetailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseReservationDetailEditTime != null" >
+        #{enterpriseReservationDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetailExample" resultType="java.lang.Integer" >
+    select count(*) from enterprise_reservation_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update enterprise_reservation_detail
+    <set >
+      <if test="record.enterpriseReservationDetailId != null" >
+        enterprise_reservation_detail_id = #{record.enterpriseReservationDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseReservationId != null" >
+        enterprise_reservation_id = #{record.enterpriseReservationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseReservationCountCustomer != null" >
+        enterprise_reservation_count_customer = #{record.enterpriseReservationCountCustomer,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseReservationCountRegistered != null" >
+        enterprise_reservation_count_registered = #{record.enterpriseReservationCountRegistered,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseReservationFullFinished != null" >
+        enterprise_reservation_full_finished = #{record.enterpriseReservationFullFinished,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseReservationPartFinished != null" >
+        enterprise_reservation_part_finished = #{record.enterpriseReservationPartFinished,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseReservationMoneyAmount != null" >
+        enterprise_reservation_money_amount = #{record.enterpriseReservationMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.enterpriseReservationSettledMoneyAmount != null" >
+        enterprise_reservation_settled_money_amount = #{record.enterpriseReservationSettledMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.enterpriseReservationPaid != null" >
+        enterprise_reservation_paid = #{record.enterpriseReservationPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.enterpriseReservationFinalSettledTime != null" >
+        enterprise_reservation_final_settled_time = #{record.enterpriseReservationFinalSettledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseReservationFinishedPaid != null" >
+        enterprise_reservation_finished_paid = #{record.enterpriseReservationFinishedPaid,jdbcType=BIT},
+      </if>
+      <if test="record.enterpriseReservationFinished != null" >
+        enterprise_reservation_finished = #{record.enterpriseReservationFinished,jdbcType=BIT},
+      </if>
+      <if test="record.enterpriseReservationDetailStatus != null" >
+        enterprise_reservation_detail_status = #{record.enterpriseReservationDetailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseReservationDetailCreateTime != null" >
+        enterprise_reservation_detail_create_time = #{record.enterpriseReservationDetailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseReservationDetailEditTime != null" >
+        enterprise_reservation_detail_edit_time = #{record.enterpriseReservationDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update enterprise_reservation_detail
+    set enterprise_reservation_detail_id = #{record.enterpriseReservationDetailId,jdbcType=VARCHAR},
+      enterprise_reservation_id = #{record.enterpriseReservationId,jdbcType=VARCHAR},
+      enterprise_reservation_count_customer = #{record.enterpriseReservationCountCustomer,jdbcType=INTEGER},
+      enterprise_reservation_count_registered = #{record.enterpriseReservationCountRegistered,jdbcType=INTEGER},
+      enterprise_reservation_full_finished = #{record.enterpriseReservationFullFinished,jdbcType=INTEGER},
+      enterprise_reservation_part_finished = #{record.enterpriseReservationPartFinished,jdbcType=INTEGER},
+      enterprise_reservation_money_amount = #{record.enterpriseReservationMoneyAmount,jdbcType=DECIMAL},
+      enterprise_reservation_settled_money_amount = #{record.enterpriseReservationSettledMoneyAmount,jdbcType=DECIMAL},
+      enterprise_reservation_paid = #{record.enterpriseReservationPaid,jdbcType=DECIMAL},
+      enterprise_reservation_final_settled_time = #{record.enterpriseReservationFinalSettledTime,jdbcType=TIMESTAMP},
+      enterprise_reservation_finished_paid = #{record.enterpriseReservationFinishedPaid,jdbcType=BIT},
+      enterprise_reservation_finished = #{record.enterpriseReservationFinished,jdbcType=BIT},
+      enterprise_reservation_detail_status = #{record.enterpriseReservationDetailStatus,jdbcType=INTEGER},
+      enterprise_reservation_detail_create_time = #{record.enterpriseReservationDetailCreateTime,jdbcType=TIMESTAMP},
+      enterprise_reservation_detail_edit_time = #{record.enterpriseReservationDetailEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetail" >
+    update enterprise_reservation_detail
+    <set >
+      <if test="enterpriseReservationId != null" >
+        enterprise_reservation_id = #{enterpriseReservationId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseReservationCountCustomer != null" >
+        enterprise_reservation_count_customer = #{enterpriseReservationCountCustomer,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationCountRegistered != null" >
+        enterprise_reservation_count_registered = #{enterpriseReservationCountRegistered,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationFullFinished != null" >
+        enterprise_reservation_full_finished = #{enterpriseReservationFullFinished,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationPartFinished != null" >
+        enterprise_reservation_part_finished = #{enterpriseReservationPartFinished,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationMoneyAmount != null" >
+        enterprise_reservation_money_amount = #{enterpriseReservationMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseReservationSettledMoneyAmount != null" >
+        enterprise_reservation_settled_money_amount = #{enterpriseReservationSettledMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseReservationPaid != null" >
+        enterprise_reservation_paid = #{enterpriseReservationPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="enterpriseReservationFinalSettledTime != null" >
+        enterprise_reservation_final_settled_time = #{enterpriseReservationFinalSettledTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseReservationFinishedPaid != null" >
+        enterprise_reservation_finished_paid = #{enterpriseReservationFinishedPaid,jdbcType=BIT},
+      </if>
+      <if test="enterpriseReservationFinished != null" >
+        enterprise_reservation_finished = #{enterpriseReservationFinished,jdbcType=BIT},
+      </if>
+      <if test="enterpriseReservationDetailStatus != null" >
+        enterprise_reservation_detail_status = #{enterpriseReservationDetailStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseReservationDetailCreateTime != null" >
+        enterprise_reservation_detail_create_time = #{enterpriseReservationDetailCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseReservationDetailEditTime != null" >
+        enterprise_reservation_detail_edit_time = #{enterpriseReservationDetailEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where enterprise_reservation_detail_id = #{enterpriseReservationDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.enterprise.reservation.EnterpriseReservationDetail" >
+    update enterprise_reservation_detail
+    set enterprise_reservation_id = #{enterpriseReservationId,jdbcType=VARCHAR},
+      enterprise_reservation_count_customer = #{enterpriseReservationCountCustomer,jdbcType=INTEGER},
+      enterprise_reservation_count_registered = #{enterpriseReservationCountRegistered,jdbcType=INTEGER},
+      enterprise_reservation_full_finished = #{enterpriseReservationFullFinished,jdbcType=INTEGER},
+      enterprise_reservation_part_finished = #{enterpriseReservationPartFinished,jdbcType=INTEGER},
+      enterprise_reservation_money_amount = #{enterpriseReservationMoneyAmount,jdbcType=DECIMAL},
+      enterprise_reservation_settled_money_amount = #{enterpriseReservationSettledMoneyAmount,jdbcType=DECIMAL},
+      enterprise_reservation_paid = #{enterpriseReservationPaid,jdbcType=DECIMAL},
+      enterprise_reservation_final_settled_time = #{enterpriseReservationFinalSettledTime,jdbcType=TIMESTAMP},
+      enterprise_reservation_finished_paid = #{enterpriseReservationFinishedPaid,jdbcType=BIT},
+      enterprise_reservation_finished = #{enterpriseReservationFinished,jdbcType=BIT},
+      enterprise_reservation_detail_status = #{enterpriseReservationDetailStatus,jdbcType=INTEGER},
+      enterprise_reservation_detail_create_time = #{enterpriseReservationDetailCreateTime,jdbcType=TIMESTAMP},
+      enterprise_reservation_detail_edit_time = #{enterpriseReservationDetailEditTime,jdbcType=TIMESTAMP}
+    where enterprise_reservation_detail_id = #{enterpriseReservationDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

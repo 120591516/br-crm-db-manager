@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.customer.order.CustomerOrderRefundMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.customer.order.CustomerOrderRefund" >
+    <id column="customer_order_refund_id" property="customerOrderRefundId" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="customer_order_pay_info_id" property="customerOrderPayInfoId" jdbcType="VARCHAR" />
+    <result column="customer_order_pay_info_No" property="customerOrderPayInfoNo" jdbcType="VARCHAR" />
+    <result column="customer_order_pay_way_id" property="customerOrderPayWayId" jdbcType="INTEGER" />
+    <result column="order_refund_order_no" property="orderRefundOrderNo" jdbcType="VARCHAR" />
+    <result column="order_refund_details" property="orderRefundDetails" jdbcType="VARCHAR" />
+    <result column="order_refund_result" property="orderRefundResult" jdbcType="INTEGER" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="customer_id" property="customerId" jdbcType="VARCHAR" />
+    <result column="customer_order_refund_create_time" property="customerOrderRefundCreateTime" jdbcType="TIMESTAMP" />
+    <result column="customer_order_refund_edit_time" property="customerOrderRefundEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    customer_order_refund_id, order_no, customer_order_pay_info_id, customer_order_pay_info_No, 
+    customer_order_pay_way_id, order_refund_order_no, order_refund_details, order_refund_result, 
+    enterprise_id, customer_id, customer_order_refund_create_time, customer_order_refund_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.customer.order.CustomerOrderRefundExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customer_order_refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from customer_order_refund
+    where customer_order_refund_id = #{customerOrderRefundId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from customer_order_refund
+    where customer_order_refund_id = #{customerOrderRefundId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.customer.order.CustomerOrderRefundExample" >
+    delete from customer_order_refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.customer.order.CustomerOrderRefund" >
+    insert into customer_order_refund (customer_order_refund_id, order_no, customer_order_pay_info_id, 
+      customer_order_pay_info_No, customer_order_pay_way_id, 
+      order_refund_order_no, order_refund_details, 
+      order_refund_result, enterprise_id, customer_id, 
+      customer_order_refund_create_time, customer_order_refund_edit_time
+      )
+    values (#{customerOrderRefundId,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, #{customerOrderPayInfoId,jdbcType=VARCHAR}, 
+      #{customerOrderPayInfoNo,jdbcType=VARCHAR}, #{customerOrderPayWayId,jdbcType=INTEGER}, 
+      #{orderRefundOrderNo,jdbcType=VARCHAR}, #{orderRefundDetails,jdbcType=VARCHAR}, 
+      #{orderRefundResult,jdbcType=INTEGER}, #{enterpriseId,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, 
+      #{customerOrderRefundCreateTime,jdbcType=TIMESTAMP}, #{customerOrderRefundEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.customer.order.CustomerOrderRefund" >
+    insert into customer_order_refund
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerOrderRefundId != null" >
+        customer_order_refund_id,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="customerOrderPayInfoId != null" >
+        customer_order_pay_info_id,
+      </if>
+      <if test="customerOrderPayInfoNo != null" >
+        customer_order_pay_info_No,
+      </if>
+      <if test="customerOrderPayWayId != null" >
+        customer_order_pay_way_id,
+      </if>
+      <if test="orderRefundOrderNo != null" >
+        order_refund_order_no,
+      </if>
+      <if test="orderRefundDetails != null" >
+        order_refund_details,
+      </if>
+      <if test="orderRefundResult != null" >
+        order_refund_result,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerOrderRefundCreateTime != null" >
+        customer_order_refund_create_time,
+      </if>
+      <if test="customerOrderRefundEditTime != null" >
+        customer_order_refund_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerOrderRefundId != null" >
+        #{customerOrderRefundId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayInfoId != null" >
+        #{customerOrderPayInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayInfoNo != null" >
+        #{customerOrderPayInfoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayWayId != null" >
+        #{customerOrderPayWayId,jdbcType=INTEGER},
+      </if>
+      <if test="orderRefundOrderNo != null" >
+        #{orderRefundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRefundDetails != null" >
+        #{orderRefundDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRefundResult != null" >
+        #{orderRefundResult,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderRefundCreateTime != null" >
+        #{customerOrderRefundCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerOrderRefundEditTime != null" >
+        #{customerOrderRefundEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.customer.order.CustomerOrderRefundExample" resultType="java.lang.Integer" >
+    select count(*) from customer_order_refund
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customer_order_refund
+    <set >
+      <if test="record.customerOrderRefundId != null" >
+        customer_order_refund_id = #{record.customerOrderRefundId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderNo != null" >
+        order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerOrderPayInfoId != null" >
+        customer_order_pay_info_id = #{record.customerOrderPayInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerOrderPayInfoNo != null" >
+        customer_order_pay_info_No = #{record.customerOrderPayInfoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerOrderPayWayId != null" >
+        customer_order_pay_way_id = #{record.customerOrderPayWayId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderRefundOrderNo != null" >
+        order_refund_order_no = #{record.orderRefundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderRefundDetails != null" >
+        order_refund_details = #{record.orderRefundDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderRefundResult != null" >
+        order_refund_result = #{record.orderRefundResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseId != null" >
+        enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerId != null" >
+        customer_id = #{record.customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerOrderRefundCreateTime != null" >
+        customer_order_refund_create_time = #{record.customerOrderRefundCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.customerOrderRefundEditTime != null" >
+        customer_order_refund_edit_time = #{record.customerOrderRefundEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customer_order_refund
+    set customer_order_refund_id = #{record.customerOrderRefundId,jdbcType=VARCHAR},
+      order_no = #{record.orderNo,jdbcType=VARCHAR},
+      customer_order_pay_info_id = #{record.customerOrderPayInfoId,jdbcType=VARCHAR},
+      customer_order_pay_info_No = #{record.customerOrderPayInfoNo,jdbcType=VARCHAR},
+      customer_order_pay_way_id = #{record.customerOrderPayWayId,jdbcType=INTEGER},
+      order_refund_order_no = #{record.orderRefundOrderNo,jdbcType=VARCHAR},
+      order_refund_details = #{record.orderRefundDetails,jdbcType=VARCHAR},
+      order_refund_result = #{record.orderRefundResult,jdbcType=INTEGER},
+      enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      customer_id = #{record.customerId,jdbcType=VARCHAR},
+      customer_order_refund_create_time = #{record.customerOrderRefundCreateTime,jdbcType=TIMESTAMP},
+      customer_order_refund_edit_time = #{record.customerOrderRefundEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.customer.order.CustomerOrderRefund" >
+    update customer_order_refund
+    <set >
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayInfoId != null" >
+        customer_order_pay_info_id = #{customerOrderPayInfoId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayInfoNo != null" >
+        customer_order_pay_info_No = #{customerOrderPayInfoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderPayWayId != null" >
+        customer_order_pay_way_id = #{customerOrderPayWayId,jdbcType=INTEGER},
+      </if>
+      <if test="orderRefundOrderNo != null" >
+        order_refund_order_no = #{orderRefundOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRefundDetails != null" >
+        order_refund_details = #{orderRefundDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRefundResult != null" >
+        order_refund_result = #{orderRefundResult,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=VARCHAR},
+      </if>
+      <if test="customerOrderRefundCreateTime != null" >
+        customer_order_refund_create_time = #{customerOrderRefundCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="customerOrderRefundEditTime != null" >
+        customer_order_refund_edit_time = #{customerOrderRefundEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where customer_order_refund_id = #{customerOrderRefundId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.customer.order.CustomerOrderRefund" >
+    update customer_order_refund
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      customer_order_pay_info_id = #{customerOrderPayInfoId,jdbcType=VARCHAR},
+      customer_order_pay_info_No = #{customerOrderPayInfoNo,jdbcType=VARCHAR},
+      customer_order_pay_way_id = #{customerOrderPayWayId,jdbcType=INTEGER},
+      order_refund_order_no = #{orderRefundOrderNo,jdbcType=VARCHAR},
+      order_refund_details = #{orderRefundDetails,jdbcType=VARCHAR},
+      order_refund_result = #{orderRefundResult,jdbcType=INTEGER},
+      enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      customer_id = #{customerId,jdbcType=VARCHAR},
+      customer_order_refund_create_time = #{customerOrderRefundCreateTime,jdbcType=TIMESTAMP},
+      customer_order_refund_edit_time = #{customerOrderRefundEditTime,jdbcType=TIMESTAMP}
+    where customer_order_refund_id = #{customerOrderRefundId,jdbcType=VARCHAR}
+  </update>
+</mapper>

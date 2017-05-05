@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.PatientConclusionMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.PatientConclusion" >
+    <id column="patient_conclusion_id" property="patientConclusionId" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="depart_id" property="departId" jdbcType="VARCHAR" />
+    <result column="patient_conclusion" property="patientConclusion" jdbcType="VARCHAR" />
+    <result column="patient_conclusion_name" property="patientConclusionName" jdbcType="VARCHAR" />
+    <result column="patient_conclusion_by_summary" property="patientConclusionBySummary" jdbcType="VARCHAR" />
+    <result column="patient_conclusion_Invisible" property="patientConclusionInvisible" jdbcType="VARCHAR" />
+    <result column="patient_conclusion_type" property="patientConclusionType" jdbcType="VARCHAR" />
+    <result column="patient_conclusion_order" property="patientConclusionOrder" jdbcType="INTEGER" />
+    <result column="patient_conclusion_create_time" property="patientConclusionCreateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_conclusion_edit_time" property="patientConclusionEditTime" jdbcType="TIMESTAMP" />
+    <result column="patient_conclusion_status" property="patientConclusionStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.PatientConclusionWithBLOBs" extends="BaseResultMap" >
+    <result column="patient_conclusion_depiction" property="patientConclusionDepiction" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_suggestion" property="patientConclusionSuggestion" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_advice" property="patientConclusionAdvice" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_diet_guide" property="patientConclusionDietGuide" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_sport_guide" property="patientConclusionSportGuide" jdbcType="LONGVARCHAR" />
+    <result column="patient_conclusion_knowledge" property="patientConclusionKnowledge" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_conclusion_id, patient_id, depart_id, patient_conclusion, patient_conclusion_name, 
+    patient_conclusion_by_summary, patient_conclusion_Invisible, patient_conclusion_type, 
+    patient_conclusion_order, patient_conclusion_create_time, patient_conclusion_edit_time, 
+    patient_conclusion_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    patient_conclusion_depiction, patient_conclusion_suggestion, patient_conclusion_advice, 
+    patient_conclusion_diet_guide, patient_conclusion_sport_guide, patient_conclusion_knowledge
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.PatientConclusionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_conclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.PatientConclusionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_conclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_conclusion
+    where patient_conclusion_id = #{patientConclusionId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_conclusion
+    where patient_conclusion_id = #{patientConclusionId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.PatientConclusionExample" >
+    delete from patient_conclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.PatientConclusionWithBLOBs" >
+    insert into patient_conclusion (patient_conclusion_id, patient_id, depart_id, 
+      patient_conclusion, patient_conclusion_name, 
+      patient_conclusion_by_summary, patient_conclusion_Invisible, 
+      patient_conclusion_type, patient_conclusion_order, 
+      patient_conclusion_create_time, patient_conclusion_edit_time, 
+      patient_conclusion_status, patient_conclusion_depiction, 
+      patient_conclusion_suggestion, patient_conclusion_advice, 
+      patient_conclusion_diet_guide, patient_conclusion_sport_guide, 
+      patient_conclusion_knowledge)
+    values (#{patientConclusionId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{departId,jdbcType=VARCHAR}, 
+      #{patientConclusion,jdbcType=VARCHAR}, #{patientConclusionName,jdbcType=VARCHAR}, 
+      #{patientConclusionBySummary,jdbcType=VARCHAR}, #{patientConclusionInvisible,jdbcType=VARCHAR}, 
+      #{patientConclusionType,jdbcType=VARCHAR}, #{patientConclusionOrder,jdbcType=INTEGER}, 
+      #{patientConclusionCreateTime,jdbcType=TIMESTAMP}, #{patientConclusionEditTime,jdbcType=TIMESTAMP}, 
+      #{patientConclusionStatus,jdbcType=INTEGER}, #{patientConclusionDepiction,jdbcType=LONGVARCHAR}, 
+      #{patientConclusionSuggestion,jdbcType=LONGVARCHAR}, #{patientConclusionAdvice,jdbcType=LONGVARCHAR}, 
+      #{patientConclusionDietGuide,jdbcType=LONGVARCHAR}, #{patientConclusionSportGuide,jdbcType=LONGVARCHAR}, 
+      #{patientConclusionKnowledge,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.PatientConclusionWithBLOBs" >
+    insert into patient_conclusion
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientConclusionId != null" >
+        patient_conclusion_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="departId != null" >
+        depart_id,
+      </if>
+      <if test="patientConclusion != null" >
+        patient_conclusion,
+      </if>
+      <if test="patientConclusionName != null" >
+        patient_conclusion_name,
+      </if>
+      <if test="patientConclusionBySummary != null" >
+        patient_conclusion_by_summary,
+      </if>
+      <if test="patientConclusionInvisible != null" >
+        patient_conclusion_Invisible,
+      </if>
+      <if test="patientConclusionType != null" >
+        patient_conclusion_type,
+      </if>
+      <if test="patientConclusionOrder != null" >
+        patient_conclusion_order,
+      </if>
+      <if test="patientConclusionCreateTime != null" >
+        patient_conclusion_create_time,
+      </if>
+      <if test="patientConclusionEditTime != null" >
+        patient_conclusion_edit_time,
+      </if>
+      <if test="patientConclusionStatus != null" >
+        patient_conclusion_status,
+      </if>
+      <if test="patientConclusionDepiction != null" >
+        patient_conclusion_depiction,
+      </if>
+      <if test="patientConclusionSuggestion != null" >
+        patient_conclusion_suggestion,
+      </if>
+      <if test="patientConclusionAdvice != null" >
+        patient_conclusion_advice,
+      </if>
+      <if test="patientConclusionDietGuide != null" >
+        patient_conclusion_diet_guide,
+      </if>
+      <if test="patientConclusionSportGuide != null" >
+        patient_conclusion_sport_guide,
+      </if>
+      <if test="patientConclusionKnowledge != null" >
+        patient_conclusion_knowledge,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientConclusionId != null" >
+        #{patientConclusionId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null" >
+        #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusion != null" >
+        #{patientConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionName != null" >
+        #{patientConclusionName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionBySummary != null" >
+        #{patientConclusionBySummary,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionInvisible != null" >
+        #{patientConclusionInvisible,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionType != null" >
+        #{patientConclusionType,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionOrder != null" >
+        #{patientConclusionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="patientConclusionCreateTime != null" >
+        #{patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientConclusionEditTime != null" >
+        #{patientConclusionEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientConclusionStatus != null" >
+        #{patientConclusionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientConclusionDepiction != null" >
+        #{patientConclusionDepiction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionSuggestion != null" >
+        #{patientConclusionSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionAdvice != null" >
+        #{patientConclusionAdvice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionDietGuide != null" >
+        #{patientConclusionDietGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionSportGuide != null" >
+        #{patientConclusionSportGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionKnowledge != null" >
+        #{patientConclusionKnowledge,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.PatientConclusionExample" resultType="java.lang.Integer" >
+    select count(*) from patient_conclusion
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_conclusion
+    <set >
+      <if test="record.patientConclusionId != null" >
+        patient_conclusion_id = #{record.patientConclusionId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departId != null" >
+        depart_id = #{record.departId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientConclusion != null" >
+        patient_conclusion = #{record.patientConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientConclusionName != null" >
+        patient_conclusion_name = #{record.patientConclusionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientConclusionBySummary != null" >
+        patient_conclusion_by_summary = #{record.patientConclusionBySummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientConclusionInvisible != null" >
+        patient_conclusion_Invisible = #{record.patientConclusionInvisible,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientConclusionType != null" >
+        patient_conclusion_type = #{record.patientConclusionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientConclusionOrder != null" >
+        patient_conclusion_order = #{record.patientConclusionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientConclusionCreateTime != null" >
+        patient_conclusion_create_time = #{record.patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientConclusionEditTime != null" >
+        patient_conclusion_edit_time = #{record.patientConclusionEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientConclusionStatus != null" >
+        patient_conclusion_status = #{record.patientConclusionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientConclusionDepiction != null" >
+        patient_conclusion_depiction = #{record.patientConclusionDepiction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionSuggestion != null" >
+        patient_conclusion_suggestion = #{record.patientConclusionSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionAdvice != null" >
+        patient_conclusion_advice = #{record.patientConclusionAdvice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionDietGuide != null" >
+        patient_conclusion_diet_guide = #{record.patientConclusionDietGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionSportGuide != null" >
+        patient_conclusion_sport_guide = #{record.patientConclusionSportGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patientConclusionKnowledge != null" >
+        patient_conclusion_knowledge = #{record.patientConclusionKnowledge,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_conclusion
+    set patient_conclusion_id = #{record.patientConclusionId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      depart_id = #{record.departId,jdbcType=VARCHAR},
+      patient_conclusion = #{record.patientConclusion,jdbcType=VARCHAR},
+      patient_conclusion_name = #{record.patientConclusionName,jdbcType=VARCHAR},
+      patient_conclusion_by_summary = #{record.patientConclusionBySummary,jdbcType=VARCHAR},
+      patient_conclusion_Invisible = #{record.patientConclusionInvisible,jdbcType=VARCHAR},
+      patient_conclusion_type = #{record.patientConclusionType,jdbcType=VARCHAR},
+      patient_conclusion_order = #{record.patientConclusionOrder,jdbcType=INTEGER},
+      patient_conclusion_create_time = #{record.patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      patient_conclusion_edit_time = #{record.patientConclusionEditTime,jdbcType=TIMESTAMP},
+      patient_conclusion_status = #{record.patientConclusionStatus,jdbcType=INTEGER},
+      patient_conclusion_depiction = #{record.patientConclusionDepiction,jdbcType=LONGVARCHAR},
+      patient_conclusion_suggestion = #{record.patientConclusionSuggestion,jdbcType=LONGVARCHAR},
+      patient_conclusion_advice = #{record.patientConclusionAdvice,jdbcType=LONGVARCHAR},
+      patient_conclusion_diet_guide = #{record.patientConclusionDietGuide,jdbcType=LONGVARCHAR},
+      patient_conclusion_sport_guide = #{record.patientConclusionSportGuide,jdbcType=LONGVARCHAR},
+      patient_conclusion_knowledge = #{record.patientConclusionKnowledge,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_conclusion
+    set patient_conclusion_id = #{record.patientConclusionId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      depart_id = #{record.departId,jdbcType=VARCHAR},
+      patient_conclusion = #{record.patientConclusion,jdbcType=VARCHAR},
+      patient_conclusion_name = #{record.patientConclusionName,jdbcType=VARCHAR},
+      patient_conclusion_by_summary = #{record.patientConclusionBySummary,jdbcType=VARCHAR},
+      patient_conclusion_Invisible = #{record.patientConclusionInvisible,jdbcType=VARCHAR},
+      patient_conclusion_type = #{record.patientConclusionType,jdbcType=VARCHAR},
+      patient_conclusion_order = #{record.patientConclusionOrder,jdbcType=INTEGER},
+      patient_conclusion_create_time = #{record.patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      patient_conclusion_edit_time = #{record.patientConclusionEditTime,jdbcType=TIMESTAMP},
+      patient_conclusion_status = #{record.patientConclusionStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.PatientConclusionWithBLOBs" >
+    update patient_conclusion
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null" >
+        depart_id = #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusion != null" >
+        patient_conclusion = #{patientConclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionName != null" >
+        patient_conclusion_name = #{patientConclusionName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionBySummary != null" >
+        patient_conclusion_by_summary = #{patientConclusionBySummary,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionInvisible != null" >
+        patient_conclusion_Invisible = #{patientConclusionInvisible,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionType != null" >
+        patient_conclusion_type = #{patientConclusionType,jdbcType=VARCHAR},
+      </if>
+      <if test="patientConclusionOrder != null" >
+        patient_conclusion_order = #{patientConclusionOrder,jdbcType=INTEGER},
+      </if>
+      <if test="patientConclusionCreateTime != null" >
+        patient_conclusion_create_time = #{patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientConclusionEditTime != null" >
+        patient_conclusion_edit_time = #{patientConclusionEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientConclusionStatus != null" >
+        patient_conclusion_status = #{patientConclusionStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientConclusionDepiction != null" >
+        patient_conclusion_depiction = #{patientConclusionDepiction,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionSuggestion != null" >
+        patient_conclusion_suggestion = #{patientConclusionSuggestion,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionAdvice != null" >
+        patient_conclusion_advice = #{patientConclusionAdvice,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionDietGuide != null" >
+        patient_conclusion_diet_guide = #{patientConclusionDietGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionSportGuide != null" >
+        patient_conclusion_sport_guide = #{patientConclusionSportGuide,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patientConclusionKnowledge != null" >
+        patient_conclusion_knowledge = #{patientConclusionKnowledge,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_conclusion_id = #{patientConclusionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.PatientConclusionWithBLOBs" >
+    update patient_conclusion
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      depart_id = #{departId,jdbcType=VARCHAR},
+      patient_conclusion = #{patientConclusion,jdbcType=VARCHAR},
+      patient_conclusion_name = #{patientConclusionName,jdbcType=VARCHAR},
+      patient_conclusion_by_summary = #{patientConclusionBySummary,jdbcType=VARCHAR},
+      patient_conclusion_Invisible = #{patientConclusionInvisible,jdbcType=VARCHAR},
+      patient_conclusion_type = #{patientConclusionType,jdbcType=VARCHAR},
+      patient_conclusion_order = #{patientConclusionOrder,jdbcType=INTEGER},
+      patient_conclusion_create_time = #{patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      patient_conclusion_edit_time = #{patientConclusionEditTime,jdbcType=TIMESTAMP},
+      patient_conclusion_status = #{patientConclusionStatus,jdbcType=INTEGER},
+      patient_conclusion_depiction = #{patientConclusionDepiction,jdbcType=LONGVARCHAR},
+      patient_conclusion_suggestion = #{patientConclusionSuggestion,jdbcType=LONGVARCHAR},
+      patient_conclusion_advice = #{patientConclusionAdvice,jdbcType=LONGVARCHAR},
+      patient_conclusion_diet_guide = #{patientConclusionDietGuide,jdbcType=LONGVARCHAR},
+      patient_conclusion_sport_guide = #{patientConclusionSportGuide,jdbcType=LONGVARCHAR},
+      patient_conclusion_knowledge = #{patientConclusionKnowledge,jdbcType=LONGVARCHAR}
+    where patient_conclusion_id = #{patientConclusionId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.PatientConclusion" >
+    update patient_conclusion
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      depart_id = #{departId,jdbcType=VARCHAR},
+      patient_conclusion = #{patientConclusion,jdbcType=VARCHAR},
+      patient_conclusion_name = #{patientConclusionName,jdbcType=VARCHAR},
+      patient_conclusion_by_summary = #{patientConclusionBySummary,jdbcType=VARCHAR},
+      patient_conclusion_Invisible = #{patientConclusionInvisible,jdbcType=VARCHAR},
+      patient_conclusion_type = #{patientConclusionType,jdbcType=VARCHAR},
+      patient_conclusion_order = #{patientConclusionOrder,jdbcType=INTEGER},
+      patient_conclusion_create_time = #{patientConclusionCreateTime,jdbcType=TIMESTAMP},
+      patient_conclusion_edit_time = #{patientConclusionEditTime,jdbcType=TIMESTAMP},
+      patient_conclusion_status = #{patientConclusionStatus,jdbcType=INTEGER}
+    where patient_conclusion_id = #{patientConclusionId,jdbcType=VARCHAR}
+  </update>
+</mapper>

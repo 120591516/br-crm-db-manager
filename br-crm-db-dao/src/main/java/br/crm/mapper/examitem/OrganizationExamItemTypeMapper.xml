@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examitem.OrganizationExamItemTypeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.examitem.OrganizationExamItemType" >
+    <id column="exam_item_type_id" property="examItemTypeId" jdbcType="VARCHAR" />
+    <result column="exam_item_type_name" property="examItemTypeName" jdbcType="VARCHAR" />
+    <result column="exam_item_type_name_eng" property="examItemTypeNameEng" jdbcType="VARCHAR" />
+    <result column="exam_item_type_code" property="examItemTypeCode" jdbcType="VARCHAR" />
+    <result column="dept_id" property="deptId" jdbcType="BIGINT" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="exam_item_type_note" property="examItemTypeNote" jdbcType="VARCHAR" />
+    <result column="exam_item_type_status" property="examItemTypeStatus" jdbcType="INTEGER" />
+    <result column="exam_item_type_create_time" property="examItemTypeCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_item_type_edit_time" property="examItemTypeEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_item_type_id, exam_item_type_name, exam_item_type_name_eng, exam_item_type_code, 
+    dept_id, dept_name, exam_item_type_note, exam_item_type_status, exam_item_type_create_time, 
+    exam_item_type_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.examitem.OrganizationExamItemTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_item_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_item_type
+    where exam_item_type_id = #{examItemTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_item_type
+    where exam_item_type_id = #{examItemTypeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.examitem.OrganizationExamItemTypeExample" >
+    delete from organization_exam_item_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.examitem.OrganizationExamItemType" >
+    insert into organization_exam_item_type (exam_item_type_id, exam_item_type_name, 
+      exam_item_type_name_eng, exam_item_type_code, 
+      dept_id, dept_name, exam_item_type_note, 
+      exam_item_type_status, exam_item_type_create_time, 
+      exam_item_type_edit_time)
+    values (#{examItemTypeId,jdbcType=VARCHAR}, #{examItemTypeName,jdbcType=VARCHAR}, 
+      #{examItemTypeNameEng,jdbcType=VARCHAR}, #{examItemTypeCode,jdbcType=VARCHAR}, 
+      #{deptId,jdbcType=BIGINT}, #{deptName,jdbcType=VARCHAR}, #{examItemTypeNote,jdbcType=VARCHAR}, 
+      #{examItemTypeStatus,jdbcType=INTEGER}, #{examItemTypeCreateTime,jdbcType=TIMESTAMP}, 
+      #{examItemTypeEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.examitem.OrganizationExamItemType" >
+    insert into organization_exam_item_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examItemTypeId != null" >
+        exam_item_type_id,
+      </if>
+      <if test="examItemTypeName != null" >
+        exam_item_type_name,
+      </if>
+      <if test="examItemTypeNameEng != null" >
+        exam_item_type_name_eng,
+      </if>
+      <if test="examItemTypeCode != null" >
+        exam_item_type_code,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="deptName != null" >
+        dept_name,
+      </if>
+      <if test="examItemTypeNote != null" >
+        exam_item_type_note,
+      </if>
+      <if test="examItemTypeStatus != null" >
+        exam_item_type_status,
+      </if>
+      <if test="examItemTypeCreateTime != null" >
+        exam_item_type_create_time,
+      </if>
+      <if test="examItemTypeEditTime != null" >
+        exam_item_type_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examItemTypeId != null" >
+        #{examItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeName != null" >
+        #{examItemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeNameEng != null" >
+        #{examItemTypeNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeCode != null" >
+        #{examItemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeNote != null" >
+        #{examItemTypeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeStatus != null" >
+        #{examItemTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemTypeCreateTime != null" >
+        #{examItemTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examItemTypeEditTime != null" >
+        #{examItemTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.examitem.OrganizationExamItemTypeExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_item_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_item_type
+    <set >
+      <if test="record.examItemTypeId != null" >
+        exam_item_type_id = #{record.examItemTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemTypeName != null" >
+        exam_item_type_name = #{record.examItemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemTypeNameEng != null" >
+        exam_item_type_name_eng = #{record.examItemTypeNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemTypeCode != null" >
+        exam_item_type_code = #{record.examItemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deptId != null" >
+        dept_id = #{record.deptId,jdbcType=BIGINT},
+      </if>
+      <if test="record.deptName != null" >
+        dept_name = #{record.deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemTypeNote != null" >
+        exam_item_type_note = #{record.examItemTypeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemTypeStatus != null" >
+        exam_item_type_status = #{record.examItemTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemTypeCreateTime != null" >
+        exam_item_type_create_time = #{record.examItemTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examItemTypeEditTime != null" >
+        exam_item_type_edit_time = #{record.examItemTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_item_type
+    set exam_item_type_id = #{record.examItemTypeId,jdbcType=VARCHAR},
+      exam_item_type_name = #{record.examItemTypeName,jdbcType=VARCHAR},
+      exam_item_type_name_eng = #{record.examItemTypeNameEng,jdbcType=VARCHAR},
+      exam_item_type_code = #{record.examItemTypeCode,jdbcType=VARCHAR},
+      dept_id = #{record.deptId,jdbcType=BIGINT},
+      dept_name = #{record.deptName,jdbcType=VARCHAR},
+      exam_item_type_note = #{record.examItemTypeNote,jdbcType=VARCHAR},
+      exam_item_type_status = #{record.examItemTypeStatus,jdbcType=INTEGER},
+      exam_item_type_create_time = #{record.examItemTypeCreateTime,jdbcType=TIMESTAMP},
+      exam_item_type_edit_time = #{record.examItemTypeEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.examitem.OrganizationExamItemType">
+    update organization_exam_item_type
+    <set >
+      <if test="examItemTypeName != null" >
+        exam_item_type_name = #{examItemTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeNameEng != null" >
+        exam_item_type_name_eng = #{examItemTypeNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeCode != null" >
+        exam_item_type_code = #{examItemTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=BIGINT},
+      </if>
+      <if test="deptName != null" >
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeNote != null" >
+        exam_item_type_note = #{examItemTypeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemTypeStatus != null" >
+        exam_item_type_status = #{examItemTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemTypeCreateTime != null" >
+        exam_item_type_create_time = #{examItemTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examItemTypeEditTime != null" >
+        exam_item_type_edit_time = #{examItemTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where exam_item_type_id = #{examItemTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.examitem.OrganizationExamItemType" >
+    update organization_exam_item_type
+    set exam_item_type_name = #{examItemTypeName,jdbcType=VARCHAR},
+      exam_item_type_name_eng = #{examItemTypeNameEng,jdbcType=VARCHAR},
+      exam_item_type_code = #{examItemTypeCode,jdbcType=VARCHAR},
+      dept_id = #{deptId,jdbcType=BIGINT},
+      dept_name = #{deptName,jdbcType=VARCHAR},
+      exam_item_type_note = #{examItemTypeNote,jdbcType=VARCHAR},
+      exam_item_type_status = #{examItemTypeStatus,jdbcType=INTEGER},
+      exam_item_type_create_time = #{examItemTypeCreateTime,jdbcType=TIMESTAMP},
+      exam_item_type_edit_time = #{examItemTypeEditTime,jdbcType=TIMESTAMP}
+    where exam_item_type_id = #{examItemTypeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

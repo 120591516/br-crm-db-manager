@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.suite.OrganizationExamSuiteHidMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.suite.OrganizationExamSuiteHid" >
+    <id column="oes_hid_id" property="oesHidId" jdbcType="VARCHAR" />
+    <result column="exam_suite_id" property="examSuiteId" jdbcType="VARCHAR" />
+    <result column="high_incidence_disease_id" property="highIncidenceDiseaseId" jdbcType="VARCHAR" />
+    <result column="oes_hid_note" property="oesHidNote" jdbcType="VARCHAR" />
+    <result column="oes_hid_status" property="oesHidStatus" jdbcType="INTEGER" />
+    <result column="oes_hid_create_time" property="oesHidCreateTime" jdbcType="TIMESTAMP" />
+    <result column="oes_hid_edit_time" property="oesHidEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    oes_hid_id, exam_suite_id, high_incidence_disease_id, oes_hid_note, oes_hid_status, 
+    oes_hid_create_time, oes_hid_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHidExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_suite_hid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_suite_hid
+    where oes_hid_id = #{oesHidId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_suite_hid
+    where oes_hid_id = #{oesHidId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHidExample" >
+    delete from organization_exam_suite_hid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHid" >
+    insert into organization_exam_suite_hid (oes_hid_id, exam_suite_id, high_incidence_disease_id, 
+      oes_hid_note, oes_hid_status, oes_hid_create_time, 
+      oes_hid_edit_time)
+    values (#{oesHidId,jdbcType=VARCHAR}, #{examSuiteId,jdbcType=VARCHAR}, #{highIncidenceDiseaseId,jdbcType=VARCHAR}, 
+      #{oesHidNote,jdbcType=VARCHAR}, #{oesHidStatus,jdbcType=INTEGER}, #{oesHidCreateTime,jdbcType=TIMESTAMP}, 
+      #{oesHidEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHid" >
+    insert into organization_exam_suite_hid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oesHidId != null" >
+        oes_hid_id,
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id,
+      </if>
+      <if test="highIncidenceDiseaseId != null" >
+        high_incidence_disease_id,
+      </if>
+      <if test="oesHidNote != null" >
+        oes_hid_note,
+      </if>
+      <if test="oesHidStatus != null" >
+        oes_hid_status,
+      </if>
+      <if test="oesHidCreateTime != null" >
+        oes_hid_create_time,
+      </if>
+      <if test="oesHidEditTime != null" >
+        oes_hid_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oesHidId != null" >
+        #{oesHidId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteId != null" >
+        #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="highIncidenceDiseaseId != null" >
+        #{highIncidenceDiseaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="oesHidNote != null" >
+        #{oesHidNote,jdbcType=VARCHAR},
+      </if>
+      <if test="oesHidStatus != null" >
+        #{oesHidStatus,jdbcType=INTEGER},
+      </if>
+      <if test="oesHidCreateTime != null" >
+        #{oesHidCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oesHidEditTime != null" >
+        #{oesHidEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHidExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_suite_hid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_suite_hid
+    <set >
+      <if test="record.oesHidId != null" >
+        oes_hid_id = #{record.oesHidId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteId != null" >
+        exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.highIncidenceDiseaseId != null" >
+        high_incidence_disease_id = #{record.highIncidenceDiseaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oesHidNote != null" >
+        oes_hid_note = #{record.oesHidNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oesHidStatus != null" >
+        oes_hid_status = #{record.oesHidStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.oesHidCreateTime != null" >
+        oes_hid_create_time = #{record.oesHidCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.oesHidEditTime != null" >
+        oes_hid_edit_time = #{record.oesHidEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_suite_hid
+    set oes_hid_id = #{record.oesHidId,jdbcType=VARCHAR},
+      exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      high_incidence_disease_id = #{record.highIncidenceDiseaseId,jdbcType=VARCHAR},
+      oes_hid_note = #{record.oesHidNote,jdbcType=VARCHAR},
+      oes_hid_status = #{record.oesHidStatus,jdbcType=INTEGER},
+      oes_hid_create_time = #{record.oesHidCreateTime,jdbcType=TIMESTAMP},
+      oes_hid_edit_time = #{record.oesHidEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHid" >
+    update organization_exam_suite_hid
+    <set >
+      <if test="examSuiteId != null" >
+        exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="highIncidenceDiseaseId != null" >
+        high_incidence_disease_id = #{highIncidenceDiseaseId,jdbcType=VARCHAR},
+      </if>
+      <if test="oesHidNote != null" >
+        oes_hid_note = #{oesHidNote,jdbcType=VARCHAR},
+      </if>
+      <if test="oesHidStatus != null" >
+        oes_hid_status = #{oesHidStatus,jdbcType=INTEGER},
+      </if>
+      <if test="oesHidCreateTime != null" >
+        oes_hid_create_time = #{oesHidCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oesHidEditTime != null" >
+        oes_hid_edit_time = #{oesHidEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where oes_hid_id = #{oesHidId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.suite.OrganizationExamSuiteHid" >
+    update organization_exam_suite_hid
+    set exam_suite_id = #{examSuiteId,jdbcType=VARCHAR},
+      high_incidence_disease_id = #{highIncidenceDiseaseId,jdbcType=VARCHAR},
+      oes_hid_note = #{oesHidNote,jdbcType=VARCHAR},
+      oes_hid_status = #{oesHidStatus,jdbcType=INTEGER},
+      oes_hid_create_time = #{oesHidCreateTime,jdbcType=TIMESTAMP},
+      oes_hid_edit_time = #{oesHidEditTime,jdbcType=TIMESTAMP}
+    where oes_hid_id = #{oesHidId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.self.OrganizationSelfMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.Organization" >
+    <id column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_short_name" property="orgShortName" jdbcType="VARCHAR" />
+    <result column="org_total_name" property="orgTotalName" jdbcType="VARCHAR" />
+    <result column="org_nature" property="orgNature" jdbcType="INTEGER" />
+    <result column="org_level_id" property="orgLevelId" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="org_address" property="orgAddress" jdbcType="VARCHAR" />
+    <result column="org_size" property="orgSize" jdbcType="DOUBLE" />
+    <result column="org_status" property="orgStatus" jdbcType="INTEGER" />
+    <result column="org_create_time" property="orgCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_edit_time" property="orgEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap type="br.crm.vo.org.OrganizationVo" id="OrganizationVoMap" extends="BaseResultMap">
+  	<result column="org_level_name" property="orgLevelName" jdbcType="VARCHAR" />
+  	<result column="province_id" property="provinceId" jdbcType="INTEGER" />
+  	<result column="city_id" property="cityId" jdbcType="INTEGER" />
+  </resultMap>
+ <select id="getOrganizationByPage" resultMap="OrganizationVoMap">
+	SELECT
+	o.org_id,
+	o.org_short_name,
+	o.org_total_name,
+	o.org_nature,
+	o.org_level_id,
+	ol.org_level_name,
+	o.org_size,
+	o.area_id,
+	o.org_status,
+	CONCAT_WS(
+		',',
+		da.province_name,
+		da.city_name,
+		da.district_name,
+		o.org_address
+	) org_address
+	FROM
+		organization AS o
+	LEFT JOIN dict_area AS da ON o.area_id = da.id
+	LEFT JOIN organization_level ol ON o.org_level_id = ol.org_level_id
+	<where>
+		<if test="organizationQu!=null and organizationQu.orgShortName!=null">
+			AND o.org_short_name LIKE '%${organizationQu.orgShortName}%'
+		</if> 
+		<if test="organizationQu!=null and organizationQu.orgNature!=null and organizationQu.orgNature!=''">
+			AND o.org_nature = #{organizationQu.orgNature}
+		</if> 
+		<if test="organizationQu!=null and organizationQu.orgLevelId!=null">
+			AND o.org_level_id = #{organizationQu.orgLevelId}
+		</if>
+		<if test="organizationQu!=null and organizationQu.provinceId!=null">
+			AND da.province_id  = #{organizationQu.provinceId}
+		</if>
+		<if test="organizationQu!=null and organizationQu.cityId!=null">
+			AND da.city_id = #{organizationQu.cityId}
+		</if>
+		<if test="organizationQu!=null and organizationQu.areaId!=null">
+			AND o.area_id = #{organizationQu.areaId}
+		</if>
+		<if test="organizationQu!=null and organizationQu.orgStatus!=null">
+			AND o.org_status = #{organizationQu.orgStatus}
+		</if>	
+		</where>
+	ORDER BY o.org_create_time DESC
+ </select>
+ <insert id="insertOrganization" parameterType="br.crm.vo.org.RegistOrgInfoVo" useGeneratedKeys="true" keyProperty="registOrgInfoVo.orgId" >
+	 INSERT INTO organization (
+		org_id,
+		org_short_name,
+		org_total_name,
+		org_code,
+		org_nature,
+		org_level_id,
+		area_id,
+		org_address,
+		org_status,
+		org_create_time,
+		org_edit_time
+	)
+	VALUES
+	(
+		#{registOrgInfoVo.orgId},
+		#{registOrgInfoVo.orgShortName},
+		#{registOrgInfoVo.orgTotalName},
+		#{registOrgInfoVo.orgCode},
+		#{registOrgInfoVo.orgNature},
+		#{registOrgInfoVo.orgLevelId},
+		#{registOrgInfoVo.areaId},
+		#{registOrgInfoVo.orgAddress},
+		#{registOrgInfoVo.orgStatus},
+		#{registOrgInfoVo.orgCreateTime},
+		#{registOrgInfoVo.orgEditTime}
+	)
+ </insert>
+ <insert id="insertOrganizationConn" >
+	 INSERT INTO organization_conn (
+		org_conn_id,
+		org_id,
+		org_conn_name,
+		org_conn_post,
+		org_conn_phone,
+		org_conn_email,
+		org_conn_call,
+		org_conn_status,
+		org_conn_create_time,
+		org_conn_edit_time
+	)
+	VALUES
+	(
+		null,
+		#{registOrgInfoVo.orgId},
+		#{registOrgInfoVo.orgConnName},
+		#{registOrgInfoVo.orgConnPost},
+		#{registOrgInfoVo.orgConnPhone},
+		#{registOrgInfoVo.orgConnEmail},
+		#{registOrgInfoVo.orgConnCall},
+		#{registOrgInfoVo.orgConnStatus},
+		#{registOrgInfoVo.orgConnCreateTime},
+		#{registOrgInfoVo.orgConnEditTime}
+	)
+ </insert>
+ <insert id="insertOrganizationLicense">
+	 INSERT INTO organization_license (
+		org_license_id,
+		org_id,
+		org_license_no,
+		org_license_img_id,
+		org_license_img_url,
+		org_license_open_id,
+		org_license_open_url,
+		org_license_person_name,
+		org_license_create_time,
+		org_license_edit_time
+	)
+	VALUES
+		(
+			null,
+			#{registOrgInfoVo.orgId},
+			#{registOrgInfoVo.orgLicenseNo},
+			#{registOrgInfoVo.orgLicenseImgId},
+			#{registOrgInfoVo.orgLicenseImgUrl},
+			#{registOrgInfoVo.orgLicenseOpenId},
+			#{registOrgInfoVo.orgLicenseOpenUrl},
+			#{registOrgInfoVo.orgLicensePersonName},
+			#{registOrgInfoVo.orgLicenseCreateTime},
+			#{registOrgInfoVo.orgLicenseEditTime}
+		)
+ </insert>
+ <select id="getOrganizationById" resultMap="OrganizationVoMap">
+	 SELECT
+		o.org_id,
+		o.org_short_name,
+		o.org_total_name,
+		o.org_code,
+		o.org_nature,
+		o.org_level_id,
+		o.area_id,
+		o.org_address,
+		o.org_size,
+		o.org_status,
+		o.org_create_time,
+		o.org_edit_time,
+		da.province_id,
+		da.city_id
+	FROM
+		organization o,
+		dict_area da
+	WHERE
+		o.org_id = #{orgId}
+	AND o.area_id = da.id
+ </select>
+
+  
+</mapper>

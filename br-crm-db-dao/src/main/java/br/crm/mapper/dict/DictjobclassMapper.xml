@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictjobclassMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictjobclass" >
+    <id column="ID_JobClass" property="idJobclass" jdbcType="BIGINT" />
+    <result column="JobClass_Name" property="jobclassName" jdbcType="VARCHAR" />
+    <result column="JobClass_Code" property="jobclassCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="JobClassCodeX" property="jobclasscodex" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="JobClass_createtime" property="jobclassCreatetime" jdbcType="TIMESTAMP" />
+    <result column="JobClass_updatetime" property="jobclassUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="JobClass_Status" property="jobclassStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_JobClass, JobClass_Name, JobClass_Code, Input_Code, JobClassCodeX, Note, JobClass_createtime, 
+    JobClass_updatetime, JobClass_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictjobclassExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictJobClass
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictJobClass
+    where ID_JobClass = #{idJobclass,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from DictJobClass
+    where ID_JobClass = #{idJobclass,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictjobclassExample" >
+    delete from DictJobClass
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictjobclass" >
+    insert into DictJobClass (ID_JobClass, JobClass_Name, JobClass_Code, 
+      Input_Code, JobClassCodeX, Note, 
+      JobClass_createtime, JobClass_updatetime, 
+      JobClass_Status)
+    values (#{idJobclass,jdbcType=BIGINT}, #{jobclassName,jdbcType=VARCHAR}, #{jobclassCode,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{jobclasscodex,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{jobclassCreatetime,jdbcType=TIMESTAMP}, #{jobclassUpdatetime,jdbcType=TIMESTAMP}, 
+      #{jobclassStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictjobclass" useGeneratedKeys="true" keyProperty="idJobclass" >
+    insert into DictJobClass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idJobclass != null" >
+        ID_JobClass,
+      </if>
+      <if test="jobclassName != null" >
+        JobClass_Name,
+      </if>
+      <if test="jobclassCode != null" >
+        JobClass_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="jobclasscodex != null" >
+        JobClassCodeX,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="jobclassCreatetime != null" >
+        JobClass_createtime,
+      </if>
+      <if test="jobclassUpdatetime != null" >
+        JobClass_updatetime,
+      </if>
+      <if test="jobclassStatus != null" >
+        JobClass_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idJobclass != null" >
+        #{idJobclass,jdbcType=BIGINT},
+      </if>
+      <if test="jobclassName != null" >
+        #{jobclassName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclassCode != null" >
+        #{jobclassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclasscodex != null" >
+        #{jobclasscodex,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclassCreatetime != null" >
+        #{jobclassCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobclassUpdatetime != null" >
+        #{jobclassUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobclassStatus != null" >
+        #{jobclassStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictjobclassExample" resultType="java.lang.Integer" >
+    select count(*) from DictJobClass
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictJobClass
+    <set >
+      <if test="record.idJobclass != null" >
+        ID_JobClass = #{record.idJobclass,jdbcType=BIGINT},
+      </if>
+      <if test="record.jobclassName != null" >
+        JobClass_Name = #{record.jobclassName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobclassCode != null" >
+        JobClass_Code = #{record.jobclassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobclasscodex != null" >
+        JobClassCodeX = #{record.jobclasscodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobclassCreatetime != null" >
+        JobClass_createtime = #{record.jobclassCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobclassUpdatetime != null" >
+        JobClass_updatetime = #{record.jobclassUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobclassStatus != null" >
+        JobClass_Status = #{record.jobclassStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictJobClass
+    set ID_JobClass = #{record.idJobclass,jdbcType=BIGINT},
+      JobClass_Name = #{record.jobclassName,jdbcType=VARCHAR},
+      JobClass_Code = #{record.jobclassCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      JobClassCodeX = #{record.jobclasscodex,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      JobClass_createtime = #{record.jobclassCreatetime,jdbcType=TIMESTAMP},
+      JobClass_updatetime = #{record.jobclassUpdatetime,jdbcType=TIMESTAMP},
+      JobClass_Status = #{record.jobclassStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictjobclass" >
+    update DictJobClass
+    <set >
+      <if test="jobclassName != null" >
+        JobClass_Name = #{jobclassName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclassCode != null" >
+        JobClass_Code = #{jobclassCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclasscodex != null" >
+        JobClassCodeX = #{jobclasscodex,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="jobclassCreatetime != null" >
+        JobClass_createtime = #{jobclassCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobclassUpdatetime != null" >
+        JobClass_updatetime = #{jobclassUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobclassStatus != null" >
+        JobClass_Status = #{jobclassStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_JobClass = #{idJobclass,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictjobclass" >
+    update DictJobClass
+    set JobClass_Name = #{jobclassName,jdbcType=VARCHAR},
+      JobClass_Code = #{jobclassCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      JobClassCodeX = #{jobclasscodex,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      JobClass_createtime = #{jobclassCreatetime,jdbcType=TIMESTAMP},
+      JobClass_updatetime = #{jobclassUpdatetime,jdbcType=TIMESTAMP},
+      JobClass_Status = #{jobclassStatus,jdbcType=INTEGER}
+    where ID_JobClass = #{idJobclass,jdbcType=BIGINT}
+  </update>
+</mapper>

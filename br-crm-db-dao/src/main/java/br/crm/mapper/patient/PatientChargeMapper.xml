@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.PatientChargeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.PatientCharge" >
+    <id column="patient_charge_id" property="patientChargeId" jdbcType="VARCHAR" />
+    <result column="patient_id" property="patientId" jdbcType="VARCHAR" />
+    <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+    <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR" />
+    <result column="patient_charge_money_amount" property="patientChargeMoneyAmount" jdbcType="DECIMAL" />
+    <result column="patient_charge_money_amount_paid" property="patientChargeMoneyAmountPaid" jdbcType="DECIMAL" />
+    <result column="patient_charge_FeeConfirmed" property="patientChargeFeeconfirmed" jdbcType="BIT" />
+    <result column="patient_charge_work_by_org_delta" property="patientChargeWorkByOrgDelta" jdbcType="BIT" />
+    <result column="patient_charge_fee_transfered" property="patientChargeFeeTransfered" jdbcType="BIT" />
+    <result column="patient_charge_fee_charged" property="patientChargeFeeCharged" jdbcType="BIT" />
+    <result column="patient_charge_fee_charged_on_credit" property="patientChargeFeeChargedOnCredit" jdbcType="BIT" />
+    <result column="patient_charge_is_return" property="patientChargeIsReturn" jdbcType="BIT" />
+    <result column="patient_charge_receipt_printed" property="patientChargeReceiptPrinted" jdbcType="BIT" />
+    <result column="patient_charge_charger_id" property="patientChargeChargerId" jdbcType="VARCHAR" />
+    <result column="patient_charge_charge_time" property="patientChargeChargeTime" jdbcType="TIMESTAMP" />
+    <result column="patient_charge_ver_this_record" property="patientChargeVerThisRecord" jdbcType="INTEGER" />
+    <result column="patient_charge_work_inner_modify" property="patientChargeWorkInnerModify" jdbcType="BIT" />
+    <result column="patient_charge_create_time" property="patientChargeCreateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_charge_edit_time" property="patientChargeEditTime" jdbcType="TIMESTAMP" />
+    <result column="patient_charge_status" property="patientChargeStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.PatientCharge" extends="BaseResultMap" >
+    <result column="patient_charge_note" property="patientChargeNote" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_charge_id, patient_id, pay_way, pay_way_name, patient_charge_money_amount, 
+    patient_charge_money_amount_paid, patient_charge_FeeConfirmed, patient_charge_work_by_org_delta, 
+    patient_charge_fee_transfered, patient_charge_fee_charged, patient_charge_fee_charged_on_credit, 
+    patient_charge_is_return, patient_charge_receipt_printed, patient_charge_charger_id, 
+    patient_charge_charge_time, patient_charge_ver_this_record, patient_charge_work_inner_modify, 
+    patient_charge_create_time, patient_charge_edit_time, patient_charge_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    patient_charge_note
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.PatientChargeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_charge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.PatientChargeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_charge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_charge
+    where patient_charge_id = #{patientChargeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_charge
+    where patient_charge_id = #{patientChargeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.PatientChargeExample" >
+    delete from patient_charge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.PatientCharge" >
+    insert into patient_charge (patient_charge_id, patient_id, pay_way, 
+      pay_way_name, patient_charge_money_amount, patient_charge_money_amount_paid, 
+      patient_charge_FeeConfirmed, patient_charge_work_by_org_delta, 
+      patient_charge_fee_transfered, patient_charge_fee_charged, 
+      patient_charge_fee_charged_on_credit, patient_charge_is_return, 
+      patient_charge_receipt_printed, patient_charge_charger_id, 
+      patient_charge_charge_time, patient_charge_ver_this_record, 
+      patient_charge_work_inner_modify, patient_charge_create_time, 
+      patient_charge_edit_time, patient_charge_status, 
+      patient_charge_note)
+    values (#{patientChargeId,jdbcType=VARCHAR}, #{patientId,jdbcType=VARCHAR}, #{payWay,jdbcType=VARCHAR}, 
+      #{payWayName,jdbcType=VARCHAR}, #{patientChargeMoneyAmount,jdbcType=DECIMAL}, #{patientChargeMoneyAmountPaid,jdbcType=DECIMAL}, 
+      #{patientChargeFeeconfirmed,jdbcType=BIT}, #{patientChargeWorkByOrgDelta,jdbcType=BIT}, 
+      #{patientChargeFeeTransfered,jdbcType=BIT}, #{patientChargeFeeCharged,jdbcType=BIT}, 
+      #{patientChargeFeeChargedOnCredit,jdbcType=BIT}, #{patientChargeIsReturn,jdbcType=BIT}, 
+      #{patientChargeReceiptPrinted,jdbcType=BIT}, #{patientChargeChargerId,jdbcType=VARCHAR}, 
+      #{patientChargeChargeTime,jdbcType=TIMESTAMP}, #{patientChargeVerThisRecord,jdbcType=INTEGER}, 
+      #{patientChargeWorkInnerModify,jdbcType=BIT}, #{patientChargeCreateTime,jdbcType=TIMESTAMP}, 
+      #{patientChargeEditTime,jdbcType=TIMESTAMP}, #{patientChargeStatus,jdbcType=INTEGER}, 
+      #{patientChargeNote,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.PatientCharge" >
+    insert into patient_charge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientChargeId != null" >
+        patient_charge_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="payWay != null" >
+        pay_way,
+      </if>
+      <if test="payWayName != null" >
+        pay_way_name,
+      </if>
+      <if test="patientChargeMoneyAmount != null" >
+        patient_charge_money_amount,
+      </if>
+      <if test="patientChargeMoneyAmountPaid != null" >
+        patient_charge_money_amount_paid,
+      </if>
+      <if test="patientChargeFeeconfirmed != null" >
+        patient_charge_FeeConfirmed,
+      </if>
+      <if test="patientChargeWorkByOrgDelta != null" >
+        patient_charge_work_by_org_delta,
+      </if>
+      <if test="patientChargeFeeTransfered != null" >
+        patient_charge_fee_transfered,
+      </if>
+      <if test="patientChargeFeeCharged != null" >
+        patient_charge_fee_charged,
+      </if>
+      <if test="patientChargeFeeChargedOnCredit != null" >
+        patient_charge_fee_charged_on_credit,
+      </if>
+      <if test="patientChargeIsReturn != null" >
+        patient_charge_is_return,
+      </if>
+      <if test="patientChargeReceiptPrinted != null" >
+        patient_charge_receipt_printed,
+      </if>
+      <if test="patientChargeChargerId != null" >
+        patient_charge_charger_id,
+      </if>
+      <if test="patientChargeChargeTime != null" >
+        patient_charge_charge_time,
+      </if>
+      <if test="patientChargeVerThisRecord != null" >
+        patient_charge_ver_this_record,
+      </if>
+      <if test="patientChargeWorkInnerModify != null" >
+        patient_charge_work_inner_modify,
+      </if>
+      <if test="patientChargeCreateTime != null" >
+        patient_charge_create_time,
+      </if>
+      <if test="patientChargeEditTime != null" >
+        patient_charge_edit_time,
+      </if>
+      <if test="patientChargeStatus != null" >
+        patient_charge_status,
+      </if>
+      <if test="patientChargeNote != null" >
+        patient_charge_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientChargeId != null" >
+        #{patientChargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="payWay != null" >
+        #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="payWayName != null" >
+        #{payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientChargeMoneyAmount != null" >
+        #{patientChargeMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="patientChargeMoneyAmountPaid != null" >
+        #{patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="patientChargeFeeconfirmed != null" >
+        #{patientChargeFeeconfirmed,jdbcType=BIT},
+      </if>
+      <if test="patientChargeWorkByOrgDelta != null" >
+        #{patientChargeWorkByOrgDelta,jdbcType=BIT},
+      </if>
+      <if test="patientChargeFeeTransfered != null" >
+        #{patientChargeFeeTransfered,jdbcType=BIT},
+      </if>
+      <if test="patientChargeFeeCharged != null" >
+        #{patientChargeFeeCharged,jdbcType=BIT},
+      </if>
+      <if test="patientChargeFeeChargedOnCredit != null" >
+        #{patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      </if>
+      <if test="patientChargeIsReturn != null" >
+        #{patientChargeIsReturn,jdbcType=BIT},
+      </if>
+      <if test="patientChargeReceiptPrinted != null" >
+        #{patientChargeReceiptPrinted,jdbcType=BIT},
+      </if>
+      <if test="patientChargeChargerId != null" >
+        #{patientChargeChargerId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientChargeChargeTime != null" >
+        #{patientChargeChargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientChargeVerThisRecord != null" >
+        #{patientChargeVerThisRecord,jdbcType=INTEGER},
+      </if>
+      <if test="patientChargeWorkInnerModify != null" >
+        #{patientChargeWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="patientChargeCreateTime != null" >
+        #{patientChargeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientChargeEditTime != null" >
+        #{patientChargeEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientChargeStatus != null" >
+        #{patientChargeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientChargeNote != null" >
+        #{patientChargeNote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.PatientChargeExample" resultType="java.lang.Integer" >
+    select count(*) from patient_charge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_charge
+    <set >
+      <if test="record.patientChargeId != null" >
+        patient_charge_id = #{record.patientChargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payWay != null" >
+        pay_way = #{record.payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payWayName != null" >
+        pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientChargeMoneyAmount != null" >
+        patient_charge_money_amount = #{record.patientChargeMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.patientChargeMoneyAmountPaid != null" >
+        patient_charge_money_amount_paid = #{record.patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.patientChargeFeeconfirmed != null" >
+        patient_charge_FeeConfirmed = #{record.patientChargeFeeconfirmed,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeWorkByOrgDelta != null" >
+        patient_charge_work_by_org_delta = #{record.patientChargeWorkByOrgDelta,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeFeeTransfered != null" >
+        patient_charge_fee_transfered = #{record.patientChargeFeeTransfered,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeFeeCharged != null" >
+        patient_charge_fee_charged = #{record.patientChargeFeeCharged,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeFeeChargedOnCredit != null" >
+        patient_charge_fee_charged_on_credit = #{record.patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeIsReturn != null" >
+        patient_charge_is_return = #{record.patientChargeIsReturn,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeReceiptPrinted != null" >
+        patient_charge_receipt_printed = #{record.patientChargeReceiptPrinted,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeChargerId != null" >
+        patient_charge_charger_id = #{record.patientChargeChargerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientChargeChargeTime != null" >
+        patient_charge_charge_time = #{record.patientChargeChargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientChargeVerThisRecord != null" >
+        patient_charge_ver_this_record = #{record.patientChargeVerThisRecord,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientChargeWorkInnerModify != null" >
+        patient_charge_work_inner_modify = #{record.patientChargeWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="record.patientChargeCreateTime != null" >
+        patient_charge_create_time = #{record.patientChargeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientChargeEditTime != null" >
+        patient_charge_edit_time = #{record.patientChargeEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientChargeStatus != null" >
+        patient_charge_status = #{record.patientChargeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientChargeNote != null" >
+        patient_charge_note = #{record.patientChargeNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_charge
+    set patient_charge_id = #{record.patientChargeId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      pay_way = #{record.payWay,jdbcType=VARCHAR},
+      pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      patient_charge_money_amount = #{record.patientChargeMoneyAmount,jdbcType=DECIMAL},
+      patient_charge_money_amount_paid = #{record.patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      patient_charge_FeeConfirmed = #{record.patientChargeFeeconfirmed,jdbcType=BIT},
+      patient_charge_work_by_org_delta = #{record.patientChargeWorkByOrgDelta,jdbcType=BIT},
+      patient_charge_fee_transfered = #{record.patientChargeFeeTransfered,jdbcType=BIT},
+      patient_charge_fee_charged = #{record.patientChargeFeeCharged,jdbcType=BIT},
+      patient_charge_fee_charged_on_credit = #{record.patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      patient_charge_is_return = #{record.patientChargeIsReturn,jdbcType=BIT},
+      patient_charge_receipt_printed = #{record.patientChargeReceiptPrinted,jdbcType=BIT},
+      patient_charge_charger_id = #{record.patientChargeChargerId,jdbcType=VARCHAR},
+      patient_charge_charge_time = #{record.patientChargeChargeTime,jdbcType=TIMESTAMP},
+      patient_charge_ver_this_record = #{record.patientChargeVerThisRecord,jdbcType=INTEGER},
+      patient_charge_work_inner_modify = #{record.patientChargeWorkInnerModify,jdbcType=BIT},
+      patient_charge_create_time = #{record.patientChargeCreateTime,jdbcType=TIMESTAMP},
+      patient_charge_edit_time = #{record.patientChargeEditTime,jdbcType=TIMESTAMP},
+      patient_charge_status = #{record.patientChargeStatus,jdbcType=INTEGER},
+      patient_charge_note = #{record.patientChargeNote,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_charge
+    set patient_charge_id = #{record.patientChargeId,jdbcType=VARCHAR},
+      patient_id = #{record.patientId,jdbcType=VARCHAR},
+      pay_way = #{record.payWay,jdbcType=VARCHAR},
+      pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      patient_charge_money_amount = #{record.patientChargeMoneyAmount,jdbcType=DECIMAL},
+      patient_charge_money_amount_paid = #{record.patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      patient_charge_FeeConfirmed = #{record.patientChargeFeeconfirmed,jdbcType=BIT},
+      patient_charge_work_by_org_delta = #{record.patientChargeWorkByOrgDelta,jdbcType=BIT},
+      patient_charge_fee_transfered = #{record.patientChargeFeeTransfered,jdbcType=BIT},
+      patient_charge_fee_charged = #{record.patientChargeFeeCharged,jdbcType=BIT},
+      patient_charge_fee_charged_on_credit = #{record.patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      patient_charge_is_return = #{record.patientChargeIsReturn,jdbcType=BIT},
+      patient_charge_receipt_printed = #{record.patientChargeReceiptPrinted,jdbcType=BIT},
+      patient_charge_charger_id = #{record.patientChargeChargerId,jdbcType=VARCHAR},
+      patient_charge_charge_time = #{record.patientChargeChargeTime,jdbcType=TIMESTAMP},
+      patient_charge_ver_this_record = #{record.patientChargeVerThisRecord,jdbcType=INTEGER},
+      patient_charge_work_inner_modify = #{record.patientChargeWorkInnerModify,jdbcType=BIT},
+      patient_charge_create_time = #{record.patientChargeCreateTime,jdbcType=TIMESTAMP},
+      patient_charge_edit_time = #{record.patientChargeEditTime,jdbcType=TIMESTAMP},
+      patient_charge_status = #{record.patientChargeStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.PatientCharge" >
+    update patient_charge
+    <set >
+      <if test="patientId != null" >
+        patient_id = #{patientId,jdbcType=VARCHAR},
+      </if>
+      <if test="payWay != null" >
+        pay_way = #{payWay,jdbcType=VARCHAR},
+      </if>
+      <if test="payWayName != null" >
+        pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="patientChargeMoneyAmount != null" >
+        patient_charge_money_amount = #{patientChargeMoneyAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="patientChargeMoneyAmountPaid != null" >
+        patient_charge_money_amount_paid = #{patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="patientChargeFeeconfirmed != null" >
+        patient_charge_FeeConfirmed = #{patientChargeFeeconfirmed,jdbcType=BIT},
+      </if>
+      <if test="patientChargeWorkByOrgDelta != null" >
+        patient_charge_work_by_org_delta = #{patientChargeWorkByOrgDelta,jdbcType=BIT},
+      </if>
+      <if test="patientChargeFeeTransfered != null" >
+        patient_charge_fee_transfered = #{patientChargeFeeTransfered,jdbcType=BIT},
+      </if>
+      <if test="patientChargeFeeCharged != null" >
+        patient_charge_fee_charged = #{patientChargeFeeCharged,jdbcType=BIT},
+      </if>
+      <if test="patientChargeFeeChargedOnCredit != null" >
+        patient_charge_fee_charged_on_credit = #{patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      </if>
+      <if test="patientChargeIsReturn != null" >
+        patient_charge_is_return = #{patientChargeIsReturn,jdbcType=BIT},
+      </if>
+      <if test="patientChargeReceiptPrinted != null" >
+        patient_charge_receipt_printed = #{patientChargeReceiptPrinted,jdbcType=BIT},
+      </if>
+      <if test="patientChargeChargerId != null" >
+        patient_charge_charger_id = #{patientChargeChargerId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientChargeChargeTime != null" >
+        patient_charge_charge_time = #{patientChargeChargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientChargeVerThisRecord != null" >
+        patient_charge_ver_this_record = #{patientChargeVerThisRecord,jdbcType=INTEGER},
+      </if>
+      <if test="patientChargeWorkInnerModify != null" >
+        patient_charge_work_inner_modify = #{patientChargeWorkInnerModify,jdbcType=BIT},
+      </if>
+      <if test="patientChargeCreateTime != null" >
+        patient_charge_create_time = #{patientChargeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientChargeEditTime != null" >
+        patient_charge_edit_time = #{patientChargeEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientChargeStatus != null" >
+        patient_charge_status = #{patientChargeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="patientChargeNote != null" >
+        patient_charge_note = #{patientChargeNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_charge_id = #{patientChargeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.PatientCharge" >
+    update patient_charge
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      pay_way = #{payWay,jdbcType=VARCHAR},
+      pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      patient_charge_money_amount = #{patientChargeMoneyAmount,jdbcType=DECIMAL},
+      patient_charge_money_amount_paid = #{patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      patient_charge_FeeConfirmed = #{patientChargeFeeconfirmed,jdbcType=BIT},
+      patient_charge_work_by_org_delta = #{patientChargeWorkByOrgDelta,jdbcType=BIT},
+      patient_charge_fee_transfered = #{patientChargeFeeTransfered,jdbcType=BIT},
+      patient_charge_fee_charged = #{patientChargeFeeCharged,jdbcType=BIT},
+      patient_charge_fee_charged_on_credit = #{patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      patient_charge_is_return = #{patientChargeIsReturn,jdbcType=BIT},
+      patient_charge_receipt_printed = #{patientChargeReceiptPrinted,jdbcType=BIT},
+      patient_charge_charger_id = #{patientChargeChargerId,jdbcType=VARCHAR},
+      patient_charge_charge_time = #{patientChargeChargeTime,jdbcType=TIMESTAMP},
+      patient_charge_ver_this_record = #{patientChargeVerThisRecord,jdbcType=INTEGER},
+      patient_charge_work_inner_modify = #{patientChargeWorkInnerModify,jdbcType=BIT},
+      patient_charge_create_time = #{patientChargeCreateTime,jdbcType=TIMESTAMP},
+      patient_charge_edit_time = #{patientChargeEditTime,jdbcType=TIMESTAMP},
+      patient_charge_status = #{patientChargeStatus,jdbcType=INTEGER},
+      patient_charge_note = #{patientChargeNote,jdbcType=LONGVARCHAR}
+    where patient_charge_id = #{patientChargeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.PatientCharge" >
+    update patient_charge
+    set patient_id = #{patientId,jdbcType=VARCHAR},
+      pay_way = #{payWay,jdbcType=VARCHAR},
+      pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      patient_charge_money_amount = #{patientChargeMoneyAmount,jdbcType=DECIMAL},
+      patient_charge_money_amount_paid = #{patientChargeMoneyAmountPaid,jdbcType=DECIMAL},
+      patient_charge_FeeConfirmed = #{patientChargeFeeconfirmed,jdbcType=BIT},
+      patient_charge_work_by_org_delta = #{patientChargeWorkByOrgDelta,jdbcType=BIT},
+      patient_charge_fee_transfered = #{patientChargeFeeTransfered,jdbcType=BIT},
+      patient_charge_fee_charged = #{patientChargeFeeCharged,jdbcType=BIT},
+      patient_charge_fee_charged_on_credit = #{patientChargeFeeChargedOnCredit,jdbcType=BIT},
+      patient_charge_is_return = #{patientChargeIsReturn,jdbcType=BIT},
+      patient_charge_receipt_printed = #{patientChargeReceiptPrinted,jdbcType=BIT},
+      patient_charge_charger_id = #{patientChargeChargerId,jdbcType=VARCHAR},
+      patient_charge_charge_time = #{patientChargeChargeTime,jdbcType=TIMESTAMP},
+      patient_charge_ver_this_record = #{patientChargeVerThisRecord,jdbcType=INTEGER},
+      patient_charge_work_inner_modify = #{patientChargeWorkInnerModify,jdbcType=BIT},
+      patient_charge_create_time = #{patientChargeCreateTime,jdbcType=TIMESTAMP},
+      patient_charge_edit_time = #{patientChargeEditTime,jdbcType=TIMESTAMP},
+      patient_charge_status = #{patientChargeStatus,jdbcType=INTEGER}
+    where patient_charge_id = #{patientChargeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

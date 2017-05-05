@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examfeeitem.self.OrgExamFeeItemSelfMapper" >
+<resultMap id="BaseResultMap" type="br.crm.vo.examfeeitem.OrgExamFeeItemVo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="VARCHAR" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="exam_fis_id" property="examFisId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name" property="examFeeItemName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name_abr" property="examFeeItemNameAbr" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name_eng" property="examFeeItemNameEng" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_name_eng_abr" property="examFeeItemNameEngAbr" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_code" property="examFeeItemCode" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_fee_code" property="examFeeItemFeeCode" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_his_name" property="examFeeItemHisName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_unit_price" property="examFeeItemUnitPrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_suite_price" property="examFeeItemSuitePrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_material_price" property="examFeeItemMaterialPrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_cost_price" property="examFeeItemCostPrice" jdbcType="DECIMAL" />
+    <result column="exam_fee_item_coop_price" property="examFeeItemCoopPrice" jdbcType="DECIMAL" />
+    <result column="coop_org_id" property="coopOrgId" jdbcType="BIGINT" />
+    <result column="exam_detail" property="examDetail" jdbcType="VARCHAR" />
+    <result column="f_male" property="fMale" jdbcType="INTEGER" />
+    <result column="f_female" property="fFemale" jdbcType="INTEGER" />
+    <result column="f_alert" property="fAlert" jdbcType="INTEGER" />
+    <result column="warning_msg" property="warningMsg" jdbcType="VARCHAR" />
+    <result column="breakfast_order" property="breakfastOrder" jdbcType="INTEGER" />
+    <result column="disp_order" property="dispOrder" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+<select id="selectByLike" resultMap="BaseResultMap" parameterType="br.crm.vo.examfeeitem.OrgExamFeeItemQu" >
+		SELECT DISTINCT
+		  oefi.id,
+		  oefi.department_id,
+		  oefi.exam_fee_item_name,
+		  oefi.exam_fee_item_name_abr,
+		  oefi.exam_fee_item_name_eng,
+		  oefi.exam_fee_item_name_eng_abr,
+		  oefi.exam_fee_item_code,
+		  oefi.exam_fee_item_fee_code,
+		  oefi.exam_fee_item_his_name,
+		  oefi.exam_fee_item_unit_price,
+		  oefi.exam_fee_item_suite_price,
+		  oefi.exam_fee_item_material_price,
+		  oefi.exam_fee_item_cost_price,
+		  oefi.exam_fee_item_coop_price,
+		  oefi.coop_org_id,
+		  oefi.exam_detail,
+		  oefi.f_male,
+		  oefi.f_female,
+		  oefi.f_alert,
+		  oefi.warning_msg,
+		  oefi.breakfast_order,
+		  oefi.disp_order,
+		  oefi.note,
+		  oefi.status,
+		  oefi.createtime,
+		  oefi.edittime,
+		  od.depart_name                    AS department_name
+		FROM organization_exam_fee_item oefi
+		  LEFT JOIN organization_dept od
+		    ON oefi.department_id = od.org_dept_id
+    	where oefi.status = 0
+    		<if test="orgExamFeeItemQu.examFeeItemName!=null" >
+    		and	oefi.exam_fee_item_name like concat(concat('%', #{orgExamFeeItemQu.examFeeItemName}), '%')
+    		</if>
+    		<if test="orgExamFeeItemQu.examFeeItemNameEng!=null">
+    		and	oefi.exam_fee_item_name_eng like concat(concat('%', #{orgExamFeeItemQu.examFeeItemNameEng}), '%')
+    		</if>	
+    		<if test="orgExamFeeItemQu.departmentId!=null">
+    		and	oefi.department_id =#{orgExamFeeItemQu.departmentId}
+    		</if>	
+    		<if test="orgExamFeeItemQu.sex!=null">
+    			<if test="orgExamFeeItemQu.sex==0">
+    				and oefi.f_male=0
+    			</if>
+    			<if test="orgExamFeeItemQu.sex==1">
+    				and oefi.f_female=0
+    			</if>
+    			<if test="orgExamFeeItemQu.sex==2">
+    				and oefi.f_male=0 and oefi.f_female=0
+    			</if>
+    		</if>	
+    		<if test="orgExamFeeItemQu.examFeeItemUnitPriceStart!=null">
+    		<![CDATA[ 
+    		and	oefi.exam_fee_item_unit_price >=#{orgExamFeeItemQu.examFeeItemUnitPriceStart}
+          		]]>
+    		</if>
+    		<if test="orgExamFeeItemQu.examFeeItemUnitPriceEnd!=null">
+    		<![CDATA[ 
+    		and	oefi.exam_fee_item_unit_price <=#{orgExamFeeItemQu.examFeeItemUnitPriceEnd}
+          		]]>
+    		</if>	
+  </select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select DISTINCT
+      oefi.id,
+	  oefi.department_id,
+	  oefi.exam_fee_item_name,
+	  oefi.exam_fee_item_name_abr,
+	  oefi.exam_fee_item_name_eng,
+	  oefi.exam_fee_item_name_eng_abr,
+	  oefi.exam_fee_item_code,
+	  oefi.exam_fee_item_fee_code,
+	  oefi.exam_fee_item_his_name,
+	  oefi.exam_fee_item_unit_price,
+	  oefi.exam_fee_item_suite_price,
+	  oefi.exam_fee_item_material_price,
+	  oefi.exam_fee_item_cost_price,
+	  oefi.exam_fee_item_coop_price,
+	  oefi.coop_org_id,
+	  oefi.exam_detail,
+	  oefi.f_male,
+	  oefi.f_female,
+	  oefi.f_alert,
+	  oefi.warning_msg,
+	  oefi.breakfast_order,
+	  oefi.disp_order,
+	  oefi.note,
+	  oefi.status,
+	  oefi.createtime,
+	  oefi.edittime,
+	  od.depart_name as department_name
+    FROM organization_exam_fee_item oefi
+    LEFT JOIN organization_dept od
+		    ON oefi.department_id = od.org_dept_id
+		      AND oefi.status = 0
+    where oefi.id = #{id,jdbcType=BIGINT}
+  </select>
+  <!-- 根据套餐id查询收费项信息 -->
+	<select id="getOrgExamFeeItemBySId" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT DISTINCT
+		a.exam_fis_id,
+		b.id,
+		b.department_id,
+		b.department_name,
+		b.exam_fee_item_name,
+		b.exam_fee_item_name_abr,
+		b.exam_fee_item_name_eng,
+		b.exam_fee_item_name_eng_abr,
+		b.exam_fee_item_code,
+		b.exam_fee_item_fee_code,
+		b.exam_fee_item_his_name,
+		b.exam_fee_item_unit_price,
+		b.exam_fee_item_suite_price,
+		b.exam_fee_item_material_price,
+		b.exam_fee_item_cost_price,
+		b.exam_fee_item_coop_price,
+		b.coop_org_id,
+		b.exam_detail,
+		b.f_male,
+		b.f_female,
+		b.f_alert,
+		b.warning_msg,
+		b.breakfast_order,
+		b.disp_order,
+		b.note,
+		b.STATUS,
+		b.createtime,
+		b.edittime
+		FROM organization_exam_fee_item_suite a
+		LEFT JOIN organization_exam_fee_item b
+		ON a.exam_fee_item_id = b.id
+		WHERE a.exam_fis_status = 0 AND
+		a.exam_suite_id=#{orgExamSuiteId}
+	</select>
+</mapper>

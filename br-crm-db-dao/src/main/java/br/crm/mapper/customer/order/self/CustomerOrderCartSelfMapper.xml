@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.customer.order.self.CustomerOrderCartSelfMapper">
+	<select id="sumSuiteNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT
+			count(exam_suite_id)
+		FROM
+			customer_order_cart coc
+		LEFT JOIN customer_order co ON coc.customer_order_id = co.customer_order_id
+		LEFT JOIN customer_cart cc ON coc.customer_cart_id = cc.cart_id
+		WHERE
+			co.order_status > 30
+		AND cc.exam_suite_id = #{examSuiteId}
+		
+	</select>
+</mapper>

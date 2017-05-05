@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.firstshow.FirstdatashowMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.firstshow.Firstdatashow" >
+    <id column="firstdatashow_id" property="firstdatashowId" jdbcType="VARCHAR" />
+    <result column="firstdatashow_data_type" property="firstdatashowDataType" jdbcType="INTEGER" />
+    <result column="firstdatashow_data_id" property="firstdatashowDataId" jdbcType="VARCHAR" />
+    <result column="firstdatashow_data_image_id" property="firstdatashowDataImageId" jdbcType="BIGINT" />
+    <result column="firstdatashow_data_name" property="firstdatashowDataName" jdbcType="VARCHAR" />
+    <result column="firstdatashow_data_describe" property="firstdatashowDataDescribe" jdbcType="VARCHAR" />
+    <result column="firstdatashow_data_status" property="firstdatashowDataStatus" jdbcType="INTEGER" />
+    <result column="firstdatashow_create_time" property="firstdatashowCreateTime" jdbcType="TIMESTAMP" />
+    <result column="firstdatashow_edit_time" property="firstdatashowEditTime" jdbcType="TIMESTAMP" />
+    <result column="firstdatashow_org_id" property="firstdatashowOrgId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    firstdatashow_id, firstdatashow_data_type, firstdatashow_data_id, firstdatashow_data_image_id, 
+    firstdatashow_data_name, firstdatashow_data_describe, firstdatashow_data_status, 
+    firstdatashow_create_time, firstdatashow_edit_time, firstdatashow_org_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.firstshow.FirstdatashowExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from firstdatashow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from firstdatashow
+    where firstdatashow_id = #{firstdatashowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from firstdatashow
+    where firstdatashow_id = #{firstdatashowId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.firstshow.FirstdatashowExample" >
+    delete from firstdatashow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.firstshow.Firstdatashow" >
+    insert into firstdatashow (firstdatashow_id, firstdatashow_data_type, 
+      firstdatashow_data_id, firstdatashow_data_image_id, 
+      firstdatashow_data_name, firstdatashow_data_describe, 
+      firstdatashow_data_status, firstdatashow_create_time, 
+      firstdatashow_edit_time, firstdatashow_org_id
+      )
+    values (#{firstdatashowId,jdbcType=VARCHAR}, #{firstdatashowDataType,jdbcType=INTEGER}, 
+      #{firstdatashowDataId,jdbcType=VARCHAR}, #{firstdatashowDataImageId,jdbcType=BIGINT}, 
+      #{firstdatashowDataName,jdbcType=VARCHAR}, #{firstdatashowDataDescribe,jdbcType=VARCHAR}, 
+      #{firstdatashowDataStatus,jdbcType=INTEGER}, #{firstdatashowCreateTime,jdbcType=TIMESTAMP}, 
+      #{firstdatashowEditTime,jdbcType=TIMESTAMP}, #{firstdatashowOrgId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.firstshow.Firstdatashow" >
+    insert into firstdatashow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="firstdatashowId != null" >
+        firstdatashow_id,
+      </if>
+      <if test="firstdatashowDataType != null" >
+        firstdatashow_data_type,
+      </if>
+      <if test="firstdatashowDataId != null" >
+        firstdatashow_data_id,
+      </if>
+      <if test="firstdatashowDataImageId != null" >
+        firstdatashow_data_image_id,
+      </if>
+      <if test="firstdatashowDataName != null" >
+        firstdatashow_data_name,
+      </if>
+      <if test="firstdatashowDataDescribe != null" >
+        firstdatashow_data_describe,
+      </if>
+      <if test="firstdatashowDataStatus != null" >
+        firstdatashow_data_status,
+      </if>
+      <if test="firstdatashowCreateTime != null" >
+        firstdatashow_create_time,
+      </if>
+      <if test="firstdatashowEditTime != null" >
+        firstdatashow_edit_time,
+      </if>
+      <if test="firstdatashowOrgId != null" >
+        firstdatashow_org_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="firstdatashowId != null" >
+        #{firstdatashowId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataType != null" >
+        #{firstdatashowDataType,jdbcType=INTEGER},
+      </if>
+      <if test="firstdatashowDataId != null" >
+        #{firstdatashowDataId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataImageId != null" >
+        #{firstdatashowDataImageId,jdbcType=BIGINT},
+      </if>
+      <if test="firstdatashowDataName != null" >
+        #{firstdatashowDataName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataDescribe != null" >
+        #{firstdatashowDataDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataStatus != null" >
+        #{firstdatashowDataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="firstdatashowCreateTime != null" >
+        #{firstdatashowCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstdatashowEditTime != null" >
+        #{firstdatashowEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstdatashowOrgId != null" >
+        #{firstdatashowOrgId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.firstshow.FirstdatashowExample" resultType="java.lang.Integer" >
+    select count(*) from firstdatashow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update firstdatashow
+    <set >
+      <if test="record.firstdatashowId != null" >
+        firstdatashow_id = #{record.firstdatashowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstdatashowDataType != null" >
+        firstdatashow_data_type = #{record.firstdatashowDataType,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstdatashowDataId != null" >
+        firstdatashow_data_id = #{record.firstdatashowDataId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstdatashowDataImageId != null" >
+        firstdatashow_data_image_id = #{record.firstdatashowDataImageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.firstdatashowDataName != null" >
+        firstdatashow_data_name = #{record.firstdatashowDataName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstdatashowDataDescribe != null" >
+        firstdatashow_data_describe = #{record.firstdatashowDataDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="record.firstdatashowDataStatus != null" >
+        firstdatashow_data_status = #{record.firstdatashowDataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.firstdatashowCreateTime != null" >
+        firstdatashow_create_time = #{record.firstdatashowCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.firstdatashowEditTime != null" >
+        firstdatashow_edit_time = #{record.firstdatashowEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.firstdatashowOrgId != null" >
+        firstdatashow_org_id = #{record.firstdatashowOrgId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update firstdatashow
+    set firstdatashow_id = #{record.firstdatashowId,jdbcType=VARCHAR},
+      firstdatashow_data_type = #{record.firstdatashowDataType,jdbcType=INTEGER},
+      firstdatashow_data_id = #{record.firstdatashowDataId,jdbcType=VARCHAR},
+      firstdatashow_data_image_id = #{record.firstdatashowDataImageId,jdbcType=BIGINT},
+      firstdatashow_data_name = #{record.firstdatashowDataName,jdbcType=VARCHAR},
+      firstdatashow_data_describe = #{record.firstdatashowDataDescribe,jdbcType=VARCHAR},
+      firstdatashow_data_status = #{record.firstdatashowDataStatus,jdbcType=INTEGER},
+      firstdatashow_create_time = #{record.firstdatashowCreateTime,jdbcType=TIMESTAMP},
+      firstdatashow_edit_time = #{record.firstdatashowEditTime,jdbcType=TIMESTAMP},
+      firstdatashow_org_id = #{record.firstdatashowOrgId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.firstshow.Firstdatashow" >
+    update firstdatashow
+    <set >
+      <if test="firstdatashowDataType != null" >
+        firstdatashow_data_type = #{firstdatashowDataType,jdbcType=INTEGER},
+      </if>
+      <if test="firstdatashowDataId != null" >
+        firstdatashow_data_id = #{firstdatashowDataId,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataImageId != null" >
+        firstdatashow_data_image_id = #{firstdatashowDataImageId,jdbcType=BIGINT},
+      </if>
+      <if test="firstdatashowDataName != null" >
+        firstdatashow_data_name = #{firstdatashowDataName,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataDescribe != null" >
+        firstdatashow_data_describe = #{firstdatashowDataDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="firstdatashowDataStatus != null" >
+        firstdatashow_data_status = #{firstdatashowDataStatus,jdbcType=INTEGER},
+      </if>
+      <if test="firstdatashowCreateTime != null" >
+        firstdatashow_create_time = #{firstdatashowCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstdatashowEditTime != null" >
+        firstdatashow_edit_time = #{firstdatashowEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstdatashowOrgId != null" >
+        firstdatashow_org_id = #{firstdatashowOrgId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where firstdatashow_id = #{firstdatashowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.firstshow.Firstdatashow" >
+    update firstdatashow
+    set firstdatashow_data_type = #{firstdatashowDataType,jdbcType=INTEGER},
+      firstdatashow_data_id = #{firstdatashowDataId,jdbcType=VARCHAR},
+      firstdatashow_data_image_id = #{firstdatashowDataImageId,jdbcType=BIGINT},
+      firstdatashow_data_name = #{firstdatashowDataName,jdbcType=VARCHAR},
+      firstdatashow_data_describe = #{firstdatashowDataDescribe,jdbcType=VARCHAR},
+      firstdatashow_data_status = #{firstdatashowDataStatus,jdbcType=INTEGER},
+      firstdatashow_create_time = #{firstdatashowCreateTime,jdbcType=TIMESTAMP},
+      firstdatashow_edit_time = #{firstdatashowEditTime,jdbcType=TIMESTAMP},
+      firstdatashow_org_id = #{firstdatashowOrgId,jdbcType=VARCHAR}
+    where firstdatashow_id = #{firstdatashowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

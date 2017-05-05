@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.Organization" >
+    <id column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_short_name" property="orgShortName" jdbcType="VARCHAR" />
+    <result column="org_total_name" property="orgTotalName" jdbcType="VARCHAR" />
+    <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+    <result column="org_nature" property="orgNature" jdbcType="INTEGER" />
+    <result column="org_level_id" property="orgLevelId" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="INTEGER" />
+    <result column="org_address" property="orgAddress" jdbcType="VARCHAR" />
+    <result column="org_size" property="orgSize" jdbcType="DOUBLE" />
+    <result column="org_status" property="orgStatus" jdbcType="INTEGER" />
+    <result column="org_create_time" property="orgCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_edit_time" property="orgEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_id, org_short_name, org_total_name, org_code, org_nature, org_level_id, province_id, 
+    city_id, area_id, org_address, org_size, org_status, org_create_time, org_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationExample" >
+    delete from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.Organization" >
+    insert into organization (org_id, org_short_name, org_total_name, 
+      org_code, org_nature, org_level_id, 
+      province_id, city_id, area_id, 
+      org_address, org_size, org_status, 
+      org_create_time, org_edit_time)
+    values (#{orgId,jdbcType=VARCHAR}, #{orgShortName,jdbcType=VARCHAR}, #{orgTotalName,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{orgNature,jdbcType=INTEGER}, #{orgLevelId,jdbcType=INTEGER}, 
+      #{provinceId,jdbcType=INTEGER}, #{cityId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, 
+      #{orgAddress,jdbcType=VARCHAR}, #{orgSize,jdbcType=DOUBLE}, #{orgStatus,jdbcType=INTEGER}, 
+      #{orgCreateTime,jdbcType=TIMESTAMP}, #{orgEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.Organization" useGeneratedKeys="true" keyProperty="orgId">
+    insert into organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgShortName != null" >
+        org_short_name,
+      </if>
+      <if test="orgTotalName != null" >
+        org_total_name,
+      </if>
+      <if test="orgCode != null" >
+        org_code,
+      </if>
+      <if test="orgNature != null" >
+        org_nature,
+      </if>
+      <if test="orgLevelId != null" >
+        org_level_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="orgAddress != null" >
+        org_address,
+      </if>
+      <if test="orgSize != null" >
+        org_size,
+      </if>
+      <if test="orgStatus != null" >
+        org_status,
+      </if>
+      <if test="orgCreateTime != null" >
+        org_create_time,
+      </if>
+      <if test="orgEditTime != null" >
+        org_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgShortName != null" >
+        #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTotalName != null" >
+        #{orgTotalName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        #{orgNature,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevelId != null" >
+        #{orgLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="orgAddress != null" >
+        #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSize != null" >
+        #{orgSize,jdbcType=DOUBLE},
+      </if>
+      <if test="orgStatus != null" >
+        #{orgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgCreateTime != null" >
+        #{orgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgEditTime != null" >
+        #{orgEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationExample" resultType="java.lang.Integer" >
+    select count(*) from organization
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization
+    <set >
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgShortName != null" >
+        org_short_name = #{record.orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgTotalName != null" >
+        org_total_name = #{record.orgTotalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgCode != null" >
+        org_code = #{record.orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgNature != null" >
+        org_nature = #{record.orgNature,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgLevelId != null" >
+        org_level_id = #{record.orgLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaId != null" >
+        area_id = #{record.areaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgAddress != null" >
+        org_address = #{record.orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgSize != null" >
+        org_size = #{record.orgSize,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orgStatus != null" >
+        org_status = #{record.orgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgCreateTime != null" >
+        org_create_time = #{record.orgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgEditTime != null" >
+        org_edit_time = #{record.orgEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization
+    set org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_short_name = #{record.orgShortName,jdbcType=VARCHAR},
+      org_total_name = #{record.orgTotalName,jdbcType=VARCHAR},
+      org_code = #{record.orgCode,jdbcType=VARCHAR},
+      org_nature = #{record.orgNature,jdbcType=INTEGER},
+      org_level_id = #{record.orgLevelId,jdbcType=INTEGER},
+      province_id = #{record.provinceId,jdbcType=INTEGER},
+      city_id = #{record.cityId,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=INTEGER},
+      org_address = #{record.orgAddress,jdbcType=VARCHAR},
+      org_size = #{record.orgSize,jdbcType=DOUBLE},
+      org_status = #{record.orgStatus,jdbcType=INTEGER},
+      org_create_time = #{record.orgCreateTime,jdbcType=TIMESTAMP},
+      org_edit_time = #{record.orgEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.Organization" >
+    update organization
+    <set >
+      <if test="orgShortName != null" >
+        org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTotalName != null" >
+        org_total_name = #{orgTotalName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgNature != null" >
+        org_nature = #{orgNature,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevelId != null" >
+        org_level_id = #{orgLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="orgAddress != null" >
+        org_address = #{orgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSize != null" >
+        org_size = #{orgSize,jdbcType=DOUBLE},
+      </if>
+      <if test="orgStatus != null" >
+        org_status = #{orgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgCreateTime != null" >
+        org_create_time = #{orgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgEditTime != null" >
+        org_edit_time = #{orgEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.Organization" >
+    update organization
+    set org_short_name = #{orgShortName,jdbcType=VARCHAR},
+      org_total_name = #{orgTotalName,jdbcType=VARCHAR},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      org_nature = #{orgNature,jdbcType=INTEGER},
+      org_level_id = #{orgLevelId,jdbcType=INTEGER},
+      province_id = #{provinceId,jdbcType=INTEGER},
+      city_id = #{cityId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=INTEGER},
+      org_address = #{orgAddress,jdbcType=VARCHAR},
+      org_size = #{orgSize,jdbcType=DOUBLE},
+      org_status = #{orgStatus,jdbcType=INTEGER},
+      org_create_time = #{orgCreateTime,jdbcType=TIMESTAMP},
+      org_edit_time = #{orgEditTime,jdbcType=TIMESTAMP}
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

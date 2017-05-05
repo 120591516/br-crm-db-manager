@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examitem.OrganizationExamFeeItemDetailMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.examitem.OrganizationExamFeeItemDetail" >
+    <id column="exam_fee_item_detail_id" property="examFeeItemDetailId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_id" property="examFeeItemId" jdbcType="VARCHAR" />
+    <result column="organization_id" property="organizationId" jdbcType="VARCHAR" />
+    <result column="organization_branch_id" property="organizationBranchId" jdbcType="VARCHAR" />
+    <result column="organization_dept_id" property="organizationDeptId" jdbcType="VARCHAR" />
+    <result column="exam_item_user_id" property="examItemUserId" jdbcType="VARCHAR" />
+    <result column="disp_order" property="dispOrder" jdbcType="INTEGER" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_fee_item_detail_id, exam_fee_item_id, organization_id, organization_branch_id, 
+    organization_dept_id, exam_item_user_id, disp_order, note, status, create_time, edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetailExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_fee_item_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_fee_item_detail
+    where exam_fee_item_detail_id = #{examFeeItemDetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_fee_item_detail
+    where exam_fee_item_detail_id = #{examFeeItemDetailId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetailExample" >
+    delete from organization_exam_fee_item_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetail" >
+    insert into organization_exam_fee_item_detail (exam_fee_item_detail_id, exam_fee_item_id, 
+      organization_id, organization_branch_id, organization_dept_id, 
+      exam_item_user_id, disp_order, note, 
+      status, create_time, edit_time
+      )
+    values (#{examFeeItemDetailId,jdbcType=VARCHAR}, #{examFeeItemId,jdbcType=VARCHAR}, 
+      #{organizationId,jdbcType=VARCHAR}, #{organizationBranchId,jdbcType=VARCHAR}, #{organizationDeptId,jdbcType=VARCHAR}, 
+      #{examItemUserId,jdbcType=VARCHAR}, #{dispOrder,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetail" >
+    insert into organization_exam_fee_item_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examFeeItemDetailId != null" >
+        exam_fee_item_detail_id,
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id,
+      </if>
+      <if test="organizationId != null" >
+        organization_id,
+      </if>
+      <if test="organizationBranchId != null" >
+        organization_branch_id,
+      </if>
+      <if test="organizationDeptId != null" >
+        organization_dept_id,
+      </if>
+      <if test="examItemUserId != null" >
+        exam_item_user_id,
+      </if>
+      <if test="dispOrder != null" >
+        disp_order,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="editTime != null" >
+        edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examFeeItemDetailId != null" >
+        #{examFeeItemDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationBranchId != null" >
+        #{organizationBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationDeptId != null" >
+        #{organizationDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemUserId != null" >
+        #{examItemUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="dispOrder != null" >
+        #{dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetailExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_fee_item_detail
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_fee_item_detail
+    <set >
+      <if test="record.examFeeItemDetailId != null" >
+        exam_fee_item_detail_id = #{record.examFeeItemDetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemId != null" >
+        exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationId != null" >
+        organization_id = #{record.organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationBranchId != null" >
+        organization_branch_id = #{record.organizationBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationDeptId != null" >
+        organization_dept_id = #{record.organizationDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemUserId != null" >
+        exam_item_user_id = #{record.examItemUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispOrder != null" >
+        disp_order = #{record.dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.editTime != null" >
+        edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_fee_item_detail
+    set exam_fee_item_detail_id = #{record.examFeeItemDetailId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      organization_id = #{record.organizationId,jdbcType=VARCHAR},
+      organization_branch_id = #{record.organizationBranchId,jdbcType=VARCHAR},
+      organization_dept_id = #{record.organizationDeptId,jdbcType=VARCHAR},
+      exam_item_user_id = #{record.examItemUserId,jdbcType=VARCHAR},
+      disp_order = #{record.dispOrder,jdbcType=INTEGER},
+      note = #{record.note,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      edit_time = #{record.editTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetail" >
+    update organization_exam_fee_item_detail
+    <set >
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationId != null" >
+        organization_id = #{organizationId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationBranchId != null" >
+        organization_branch_id = #{organizationBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationDeptId != null" >
+        organization_dept_id = #{organizationDeptId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemUserId != null" >
+        exam_item_user_id = #{examItemUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="dispOrder != null" >
+        disp_order = #{dispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        edit_time = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where exam_fee_item_detail_id = #{examFeeItemDetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.examitem.OrganizationExamFeeItemDetail" >
+    update organization_exam_fee_item_detail
+    set exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      organization_id = #{organizationId,jdbcType=VARCHAR},
+      organization_branch_id = #{organizationBranchId,jdbcType=VARCHAR},
+      organization_dept_id = #{organizationDeptId,jdbcType=VARCHAR},
+      exam_item_user_id = #{examItemUserId,jdbcType=VARCHAR},
+      disp_order = #{dispOrder,jdbcType=INTEGER},
+      note = #{note,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      edit_time = #{editTime,jdbcType=TIMESTAMP}
+    where exam_fee_item_detail_id = #{examFeeItemDetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DicteducationMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dicteducation" >
+    <id column="ID_Education" property="idEducation" jdbcType="INTEGER" />
+    <result column="KeyEducation" property="keyeducation" jdbcType="VARCHAR" />
+    <result column="Education_Name" property="educationName" jdbcType="VARCHAR" />
+    <result column="Education_Code" property="educationCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="EducationCodeX" property="educationcodex" jdbcType="VARCHAR" />
+    <result column="Education_createtime" property="educationCreatetime" jdbcType="TIMESTAMP" />
+    <result column="Education_updatetime" property="educationUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="Education_Status" property="educationStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Education, KeyEducation, Education_Name, Education_Code, Input_Code, Note, EducationCodeX, 
+    Education_createtime, Education_updatetime, Education_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DicteducationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictEducation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictEducation
+    where ID_Education = #{idEducation,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictEducation
+    where ID_Education = #{idEducation,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DicteducationExample" >
+    delete from DictEducation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dicteducation" >
+    insert into DictEducation (ID_Education, KeyEducation, Education_Name, 
+      Education_Code, Input_Code, Note, 
+      EducationCodeX, Education_createtime, 
+      Education_updatetime, Education_Status)
+    values (#{idEducation,jdbcType=INTEGER}, #{keyeducation,jdbcType=VARCHAR}, #{educationName,jdbcType=VARCHAR}, 
+      #{educationCode,jdbcType=VARCHAR}, #{inputCode,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, 
+      #{educationcodex,jdbcType=VARCHAR}, #{educationCreatetime,jdbcType=TIMESTAMP}, 
+      #{educationUpdatetime,jdbcType=TIMESTAMP}, #{educationStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dicteducation" useGeneratedKeys="true" keyProperty="idEducation" >
+    insert into DictEducation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idEducation != null" >
+        ID_Education,
+      </if>
+      <if test="keyeducation != null" >
+        KeyEducation,
+      </if>
+      <if test="educationName != null" >
+        Education_Name,
+      </if>
+      <if test="educationCode != null" >
+        Education_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="educationcodex != null" >
+        EducationCodeX,
+      </if>
+      <if test="educationCreatetime != null" >
+        Education_createtime,
+      </if>
+      <if test="educationUpdatetime != null" >
+        Education_updatetime,
+      </if>
+      <if test="educationStatus != null" >
+        Education_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idEducation != null" >
+        #{idEducation,jdbcType=INTEGER},
+      </if>
+      <if test="keyeducation != null" >
+        #{keyeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="educationName != null" >
+        #{educationName,jdbcType=VARCHAR},
+      </if>
+      <if test="educationCode != null" >
+        #{educationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="educationcodex != null" >
+        #{educationcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="educationCreatetime != null" >
+        #{educationCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="educationUpdatetime != null" >
+        #{educationUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="educationStatus != null" >
+        #{educationStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DicteducationExample" resultType="java.lang.Integer" >
+    select count(*) from DictEducation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictEducation
+    <set >
+      <if test="record.idEducation != null" >
+        ID_Education = #{record.idEducation,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyeducation != null" >
+        KeyEducation = #{record.keyeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationName != null" >
+        Education_Name = #{record.educationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationCode != null" >
+        Education_Code = #{record.educationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationcodex != null" >
+        EducationCodeX = #{record.educationcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.educationCreatetime != null" >
+        Education_createtime = #{record.educationCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.educationUpdatetime != null" >
+        Education_updatetime = #{record.educationUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.educationStatus != null" >
+        Education_Status = #{record.educationStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictEducation
+    set ID_Education = #{record.idEducation,jdbcType=INTEGER},
+      KeyEducation = #{record.keyeducation,jdbcType=VARCHAR},
+      Education_Name = #{record.educationName,jdbcType=VARCHAR},
+      Education_Code = #{record.educationCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      EducationCodeX = #{record.educationcodex,jdbcType=VARCHAR},
+      Education_createtime = #{record.educationCreatetime,jdbcType=TIMESTAMP},
+      Education_updatetime = #{record.educationUpdatetime,jdbcType=TIMESTAMP},
+      Education_Status = #{record.educationStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dicteducation" >
+    update DictEducation
+    <set >
+      <if test="keyeducation != null" >
+        KeyEducation = #{keyeducation,jdbcType=VARCHAR},
+      </if>
+      <if test="educationName != null" >
+        Education_Name = #{educationName,jdbcType=VARCHAR},
+      </if>
+      <if test="educationCode != null" >
+        Education_Code = #{educationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="educationcodex != null" >
+        EducationCodeX = #{educationcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="educationCreatetime != null" >
+        Education_createtime = #{educationCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="educationUpdatetime != null" >
+        Education_updatetime = #{educationUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="educationStatus != null" >
+        Education_Status = #{educationStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_Education = #{idEducation,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dicteducation" >
+    update DictEducation
+    set KeyEducation = #{keyeducation,jdbcType=VARCHAR},
+      Education_Name = #{educationName,jdbcType=VARCHAR},
+      Education_Code = #{educationCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      EducationCodeX = #{educationcodex,jdbcType=VARCHAR},
+      Education_createtime = #{educationCreatetime,jdbcType=TIMESTAMP},
+      Education_updatetime = #{educationUpdatetime,jdbcType=TIMESTAMP},
+      Education_Status = #{educationStatus,jdbcType=INTEGER}
+    where ID_Education = #{idEducation,jdbcType=INTEGER}
+  </update>
+</mapper>

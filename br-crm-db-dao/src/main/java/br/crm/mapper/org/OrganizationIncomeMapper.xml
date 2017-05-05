@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationIncomeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationIncome" >
+    <id column="org_income_id" property="orgIncomeId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_income_year" property="orgIncomeYear" jdbcType="VARCHAR" />
+    <result column="org_income_count" property="orgIncomeCount" jdbcType="INTEGER" />
+    <result column="org_income_turnover" property="orgIncomeTurnover" jdbcType="DOUBLE" />
+    <result column="org_income_profit" property="orgIncomeProfit" jdbcType="DOUBLE" />
+    <result column="org_income_create_time" property="orgIncomeCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_income_edit_time" property="orgIncomeEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_income_id, org_id, org_income_year, org_income_count, org_income_turnover, org_income_profit, 
+    org_income_create_time, org_income_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationIncomeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_income
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_income
+    where org_income_id = #{orgIncomeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_income
+    where org_income_id = #{orgIncomeId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationIncomeExample" >
+    delete from organization_income
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationIncome" >
+    insert into organization_income (org_income_id, org_id, org_income_year, 
+      org_income_count, org_income_turnover, org_income_profit, 
+      org_income_create_time, org_income_edit_time
+      )
+    values (#{orgIncomeId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgIncomeYear,jdbcType=VARCHAR}, 
+      #{orgIncomeCount,jdbcType=INTEGER}, #{orgIncomeTurnover,jdbcType=DOUBLE}, #{orgIncomeProfit,jdbcType=DOUBLE}, 
+      #{orgIncomeCreateTime,jdbcType=TIMESTAMP}, #{orgIncomeEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationIncome" useGeneratedKeys="true" keyProperty="orgIncomeId">
+    insert into organization_income
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgIncomeId != null" >
+        org_income_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgIncomeYear != null" >
+        org_income_year,
+      </if>
+      <if test="orgIncomeCount != null" >
+        org_income_count,
+      </if>
+      <if test="orgIncomeTurnover != null" >
+        org_income_turnover,
+      </if>
+      <if test="orgIncomeProfit != null" >
+        org_income_profit,
+      </if>
+      <if test="orgIncomeCreateTime != null" >
+        org_income_create_time,
+      </if>
+      <if test="orgIncomeEditTime != null" >
+        org_income_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgIncomeId != null" >
+        #{orgIncomeId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIncomeYear != null" >
+        #{orgIncomeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIncomeCount != null" >
+        #{orgIncomeCount,jdbcType=INTEGER},
+      </if>
+      <if test="orgIncomeTurnover != null" >
+        #{orgIncomeTurnover,jdbcType=DOUBLE},
+      </if>
+      <if test="orgIncomeProfit != null" >
+        #{orgIncomeProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="orgIncomeCreateTime != null" >
+        #{orgIncomeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgIncomeEditTime != null" >
+        #{orgIncomeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationIncomeExample" resultType="java.lang.Integer" >
+    select count(*) from organization_income
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_income
+    <set >
+      <if test="record.orgIncomeId != null" >
+        org_income_id = #{record.orgIncomeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgIncomeYear != null" >
+        org_income_year = #{record.orgIncomeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgIncomeCount != null" >
+        org_income_count = #{record.orgIncomeCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgIncomeTurnover != null" >
+        org_income_turnover = #{record.orgIncomeTurnover,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orgIncomeProfit != null" >
+        org_income_profit = #{record.orgIncomeProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="record.orgIncomeCreateTime != null" >
+        org_income_create_time = #{record.orgIncomeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgIncomeEditTime != null" >
+        org_income_edit_time = #{record.orgIncomeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_income
+    set org_income_id = #{record.orgIncomeId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_income_year = #{record.orgIncomeYear,jdbcType=VARCHAR},
+      org_income_count = #{record.orgIncomeCount,jdbcType=INTEGER},
+      org_income_turnover = #{record.orgIncomeTurnover,jdbcType=DOUBLE},
+      org_income_profit = #{record.orgIncomeProfit,jdbcType=DOUBLE},
+      org_income_create_time = #{record.orgIncomeCreateTime,jdbcType=TIMESTAMP},
+      org_income_edit_time = #{record.orgIncomeEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationIncome" >
+    update organization_income
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIncomeYear != null" >
+        org_income_year = #{orgIncomeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIncomeCount != null" >
+        org_income_count = #{orgIncomeCount,jdbcType=INTEGER},
+      </if>
+      <if test="orgIncomeTurnover != null" >
+        org_income_turnover = #{orgIncomeTurnover,jdbcType=DOUBLE},
+      </if>
+      <if test="orgIncomeProfit != null" >
+        org_income_profit = #{orgIncomeProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="orgIncomeCreateTime != null" >
+        org_income_create_time = #{orgIncomeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgIncomeEditTime != null" >
+        org_income_edit_time = #{orgIncomeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_income_id = #{orgIncomeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationIncome" >
+    update organization_income
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_income_year = #{orgIncomeYear,jdbcType=VARCHAR},
+      org_income_count = #{orgIncomeCount,jdbcType=INTEGER},
+      org_income_turnover = #{orgIncomeTurnover,jdbcType=DOUBLE},
+      org_income_profit = #{orgIncomeProfit,jdbcType=DOUBLE},
+      org_income_create_time = #{orgIncomeCreateTime,jdbcType=TIMESTAMP},
+      org_income_edit_time = #{orgIncomeEditTime,jdbcType=TIMESTAMP}
+    where org_income_id = #{orgIncomeId,jdbcType=BIGINT}
+  </update>
+</mapper>

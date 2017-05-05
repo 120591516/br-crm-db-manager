@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.suite.OrganizationExamSuiteTypeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.suite.OrganizationExamSuiteType" >
+    <id column="exam_suite_type_id" property="examSuiteTypeId" jdbcType="BIGINT" />
+    <result column="exam_suite_id" property="examSuiteId" jdbcType="BIGINT" />
+    <result column="exam_type_id" property="examTypeId" jdbcType="BIGINT" />
+    <result column="exam_suite_type_note" property="examSuiteTypeNote" jdbcType="VARCHAR" />
+    <result column="exam_suite_type_status" property="examSuiteTypeStatus" jdbcType="INTEGER" />
+    <result column="exam_suite_type_create_time" property="examSuiteTypeCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_suite_type_edit_time" property="examSuiteTypeEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_suite_type_id, exam_suite_id, exam_type_id, exam_suite_type_note, exam_suite_type_status, 
+    exam_suite_type_create_time, exam_suite_type_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.suite.OrganizationExamSuiteTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_suite_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_suite_type
+    where exam_suite_type_id = #{examSuiteTypeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_exam_suite_type
+    where exam_suite_type_id = #{examSuiteTypeId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteTypeExample" >
+    delete from organization_exam_suite_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.suite.OrganizationExamSuiteType" >
+    insert into organization_exam_suite_type (exam_suite_type_id, exam_suite_id, exam_type_id, 
+      exam_suite_type_note, exam_suite_type_status, 
+      exam_suite_type_create_time, exam_suite_type_edit_time
+      )
+    values (#{examSuiteTypeId,jdbcType=BIGINT}, #{examSuiteId,jdbcType=BIGINT}, #{examTypeId,jdbcType=BIGINT}, 
+      #{examSuiteTypeNote,jdbcType=VARCHAR}, #{examSuiteTypeStatus,jdbcType=INTEGER}, 
+      #{examSuiteTypeCreateTime,jdbcType=TIMESTAMP}, #{examSuiteTypeEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.suite.OrganizationExamSuiteType" useGeneratedKeys="true" keyProperty="examSuiteTypeId" >
+    insert into organization_exam_suite_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examSuiteTypeId != null" >
+        exam_suite_type_id,
+      </if>
+      <if test="examSuiteId != null" >
+        exam_suite_id,
+      </if>
+      <if test="examTypeId != null" >
+        exam_type_id,
+      </if>
+      <if test="examSuiteTypeNote != null" >
+        exam_suite_type_note,
+      </if>
+      <if test="examSuiteTypeStatus != null" >
+        exam_suite_type_status,
+      </if>
+      <if test="examSuiteTypeCreateTime != null" >
+        exam_suite_type_create_time,
+      </if>
+      <if test="examSuiteTypeEditTime != null" >
+        exam_suite_type_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examSuiteTypeId != null" >
+        #{examSuiteTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="examSuiteId != null" >
+        #{examSuiteId,jdbcType=BIGINT},
+      </if>
+      <if test="examTypeId != null" >
+        #{examTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="examSuiteTypeNote != null" >
+        #{examSuiteTypeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteTypeStatus != null" >
+        #{examSuiteTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteTypeCreateTime != null" >
+        #{examSuiteTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examSuiteTypeEditTime != null" >
+        #{examSuiteTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteTypeExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_suite_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_suite_type
+    <set >
+      <if test="record.examSuiteTypeId != null" >
+        exam_suite_type_id = #{record.examSuiteTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.examSuiteId != null" >
+        exam_suite_id = #{record.examSuiteId,jdbcType=BIGINT},
+      </if>
+      <if test="record.examTypeId != null" >
+        exam_type_id = #{record.examTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.examSuiteTypeNote != null" >
+        exam_suite_type_note = #{record.examSuiteTypeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteTypeStatus != null" >
+        exam_suite_type_status = #{record.examSuiteTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteTypeCreateTime != null" >
+        exam_suite_type_create_time = #{record.examSuiteTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examSuiteTypeEditTime != null" >
+        exam_suite_type_edit_time = #{record.examSuiteTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_suite_type
+    set exam_suite_type_id = #{record.examSuiteTypeId,jdbcType=BIGINT},
+      exam_suite_id = #{record.examSuiteId,jdbcType=BIGINT},
+      exam_type_id = #{record.examTypeId,jdbcType=BIGINT},
+      exam_suite_type_note = #{record.examSuiteTypeNote,jdbcType=VARCHAR},
+      exam_suite_type_status = #{record.examSuiteTypeStatus,jdbcType=INTEGER},
+      exam_suite_type_create_time = #{record.examSuiteTypeCreateTime,jdbcType=TIMESTAMP},
+      exam_suite_type_edit_time = #{record.examSuiteTypeEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.suite.OrganizationExamSuiteType" >
+    update organization_exam_suite_type
+    <set >
+      <if test="examSuiteId != null" >
+        exam_suite_id = #{examSuiteId,jdbcType=BIGINT},
+      </if>
+      <if test="examTypeId != null" >
+        exam_type_id = #{examTypeId,jdbcType=BIGINT},
+      </if>
+      <if test="examSuiteTypeNote != null" >
+        exam_suite_type_note = #{examSuiteTypeNote,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteTypeStatus != null" >
+        exam_suite_type_status = #{examSuiteTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteTypeCreateTime != null" >
+        exam_suite_type_create_time = #{examSuiteTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examSuiteTypeEditTime != null" >
+        exam_suite_type_edit_time = #{examSuiteTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where exam_suite_type_id = #{examSuiteTypeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.suite.OrganizationExamSuiteType" >
+    update organization_exam_suite_type
+    set exam_suite_id = #{examSuiteId,jdbcType=BIGINT},
+      exam_type_id = #{examTypeId,jdbcType=BIGINT},
+      exam_suite_type_note = #{examSuiteTypeNote,jdbcType=VARCHAR},
+      exam_suite_type_status = #{examSuiteTypeStatus,jdbcType=INTEGER},
+      exam_suite_type_create_time = #{examSuiteTypeCreateTime,jdbcType=TIMESTAMP},
+      exam_suite_type_edit_time = #{examSuiteTypeEditTime,jdbcType=TIMESTAMP}
+    where exam_suite_type_id = #{examSuiteTypeId,jdbcType=BIGINT}
+  </update>
+</mapper>

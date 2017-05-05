@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictsexMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictsex" >
+    <id column="ID_Sex" property="idSex" jdbcType="INTEGER" />
+    <result column="Sex_Name" property="sexName" jdbcType="VARCHAR" />
+    <result column="Sex_Code" property="sexCode" jdbcType="VARCHAR" />
+    <result column="SexCodeX" property="sexcodex" jdbcType="VARCHAR" />
+    <result column="SexType" property="sextype" jdbcType="INTEGER" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="Sex_createtime" property="sexCreatetime" jdbcType="TIMESTAMP" />
+    <result column="Sex_updatetime" property="sexUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="Sex_Status" property="sexStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Sex, Sex_Name, Sex_Code, SexCodeX, SexType, Input_Code, Note, Sex_createtime, 
+    Sex_updatetime, Sex_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictsexExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictSex
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictSex
+    where ID_Sex = #{idSex,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictSex
+    where ID_Sex = #{idSex,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictsexExample" >
+    delete from DictSex
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictsex" >
+    insert into DictSex (ID_Sex, Sex_Name, Sex_Code, 
+      SexCodeX, SexType, Input_Code, 
+      Note, Sex_createtime, Sex_updatetime, 
+      Sex_Status)
+    values (#{idSex,jdbcType=INTEGER}, #{sexName,jdbcType=VARCHAR}, #{sexCode,jdbcType=VARCHAR}, 
+      #{sexcodex,jdbcType=VARCHAR}, #{sextype,jdbcType=INTEGER}, #{inputCode,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{sexCreatetime,jdbcType=TIMESTAMP}, #{sexUpdatetime,jdbcType=TIMESTAMP}, 
+      #{sexStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictsex" useGeneratedKeys="true" keyProperty="idSex" >
+    insert into DictSex
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idSex != null" >
+        ID_Sex,
+      </if>
+      <if test="sexName != null" >
+        Sex_Name,
+      </if>
+      <if test="sexCode != null" >
+        Sex_Code,
+      </if>
+      <if test="sexcodex != null" >
+        SexCodeX,
+      </if>
+      <if test="sextype != null" >
+        SexType,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="sexCreatetime != null" >
+        Sex_createtime,
+      </if>
+      <if test="sexUpdatetime != null" >
+        Sex_updatetime,
+      </if>
+      <if test="sexStatus != null" >
+        Sex_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idSex != null" >
+        #{idSex,jdbcType=INTEGER},
+      </if>
+      <if test="sexName != null" >
+        #{sexName,jdbcType=VARCHAR},
+      </if>
+      <if test="sexCode != null" >
+        #{sexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sexcodex != null" >
+        #{sexcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="sextype != null" >
+        #{sextype,jdbcType=INTEGER},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="sexCreatetime != null" >
+        #{sexCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sexUpdatetime != null" >
+        #{sexUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sexStatus != null" >
+        #{sexStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictsexExample" resultType="java.lang.Integer" >
+    select count(*) from DictSex
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictSex
+    <set >
+      <if test="record.idSex != null" >
+        ID_Sex = #{record.idSex,jdbcType=INTEGER},
+      </if>
+      <if test="record.sexName != null" >
+        Sex_Name = #{record.sexName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sexCode != null" >
+        Sex_Code = #{record.sexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sexcodex != null" >
+        SexCodeX = #{record.sexcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sextype != null" >
+        SexType = #{record.sextype,jdbcType=INTEGER},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sexCreatetime != null" >
+        Sex_createtime = #{record.sexCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sexUpdatetime != null" >
+        Sex_updatetime = #{record.sexUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sexStatus != null" >
+        Sex_Status = #{record.sexStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictSex
+    set ID_Sex = #{record.idSex,jdbcType=INTEGER},
+      Sex_Name = #{record.sexName,jdbcType=VARCHAR},
+      Sex_Code = #{record.sexCode,jdbcType=VARCHAR},
+      SexCodeX = #{record.sexcodex,jdbcType=VARCHAR},
+      SexType = #{record.sextype,jdbcType=INTEGER},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      Sex_createtime = #{record.sexCreatetime,jdbcType=TIMESTAMP},
+      Sex_updatetime = #{record.sexUpdatetime,jdbcType=TIMESTAMP},
+      Sex_Status = #{record.sexStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictsex" >
+    update DictSex
+    <set >
+      <if test="sexName != null" >
+        Sex_Name = #{sexName,jdbcType=VARCHAR},
+      </if>
+      <if test="sexCode != null" >
+        Sex_Code = #{sexCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sexcodex != null" >
+        SexCodeX = #{sexcodex,jdbcType=VARCHAR},
+      </if>
+      <if test="sextype != null" >
+        SexType = #{sextype,jdbcType=INTEGER},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="sexCreatetime != null" >
+        Sex_createtime = #{sexCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sexUpdatetime != null" >
+        Sex_updatetime = #{sexUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sexStatus != null" >
+        Sex_Status = #{sexStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_Sex = #{idSex,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictsex" >
+    update DictSex
+    set Sex_Name = #{sexName,jdbcType=VARCHAR},
+      Sex_Code = #{sexCode,jdbcType=VARCHAR},
+      SexCodeX = #{sexcodex,jdbcType=VARCHAR},
+      SexType = #{sextype,jdbcType=INTEGER},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      Sex_createtime = #{sexCreatetime,jdbcType=TIMESTAMP},
+      Sex_updatetime = #{sexUpdatetime,jdbcType=TIMESTAMP},
+      Sex_Status = #{sexStatus,jdbcType=INTEGER}
+    where ID_Sex = #{idSex,jdbcType=INTEGER}
+  </update>
+</mapper>

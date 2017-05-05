@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.self.DictSmsRecordSelfMapper" >
+  	
+  	<select id="getSMSCount" parameterType="java.lang.String" resultType="int">
+  			SELECT
+					count(*)
+			FROM  Dict_SMS_Record s
+			<where>
+			s.SMS_phone=#{mobile}
+			and s.SMS_create > TIMESTAMP (DATE(SYSDATE()))
+			</where>
+  	</select>
+</mapper>

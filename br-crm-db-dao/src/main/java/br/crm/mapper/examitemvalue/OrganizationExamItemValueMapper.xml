@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examitemvalue.OrganizationExamItemValueMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.examitemvalue.OrganizationExamItemValue" >
+    <id column="exam_item_value_id" property="examItemValueId" jdbcType="VARCHAR" />
+    <result column="exam_item_id" property="examItemId" jdbcType="VARCHAR" />
+    <result column="exam_item_value_name" property="examItemValueName" jdbcType="VARCHAR" />
+    <result column="exam_item_value_code" property="examItemValueCode" jdbcType="VARCHAR" />
+    <result column="exam_item_value_input_code" property="examItemValueInputCode" jdbcType="VARCHAR" />
+    <result column="exam_item_value_server_degree" property="examItemValueServerDegree" jdbcType="INTEGER" />
+    <result column="exam_item_value_askscore" property="examItemValueAskscore" jdbcType="INTEGER" />
+    <result column="exam_item_value_oper" property="examItemValueOper" jdbcType="VARCHAR" />
+    <result column="exam_item_value_operand_male" property="examItemValueOperandMale" jdbcType="INTEGER" />
+    <result column="exam_item_value_operand_female" property="examItemValueOperandFemale" jdbcType="INTEGER" />
+    <result column="exam_item_value_disp_order" property="examItemValueDispOrder" jdbcType="INTEGER" />
+    <result column="exam_item_value_text" property="examItemValueText" jdbcType="VARCHAR" />
+    <result column="exam_item_value_status" property="examItemValueStatus" jdbcType="INTEGER" />
+    <result column="exam_item_value_create_time" property="examItemValueCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_item_value_edit_time" property="examItemValueEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_item_value_id, exam_item_id, exam_item_value_name, exam_item_value_code, exam_item_value_input_code, 
+    exam_item_value_server_degree, exam_item_value_askscore, exam_item_value_oper, exam_item_value_operand_male, 
+    exam_item_value_operand_female, exam_item_value_disp_order, exam_item_value_text, 
+    exam_item_value_status, exam_item_value_create_time, exam_item_value_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_item_value
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_item_value
+    where exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_item_value
+    where exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueExample" >
+    delete from organization_exam_item_value
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValue" >
+    insert into organization_exam_item_value (exam_item_value_id, exam_item_id, exam_item_value_name, 
+      exam_item_value_code, exam_item_value_input_code, 
+      exam_item_value_server_degree, exam_item_value_askscore, 
+      exam_item_value_oper, exam_item_value_operand_male, 
+      exam_item_value_operand_female, exam_item_value_disp_order, 
+      exam_item_value_text, exam_item_value_status, 
+      exam_item_value_create_time, exam_item_value_edit_time
+      )
+    values (#{examItemValueId,jdbcType=VARCHAR}, #{examItemId,jdbcType=VARCHAR}, #{examItemValueName,jdbcType=VARCHAR}, 
+      #{examItemValueCode,jdbcType=VARCHAR}, #{examItemValueInputCode,jdbcType=VARCHAR}, 
+      #{examItemValueServerDegree,jdbcType=INTEGER}, #{examItemValueAskscore,jdbcType=INTEGER}, 
+      #{examItemValueOper,jdbcType=VARCHAR}, #{examItemValueOperandMale,jdbcType=INTEGER}, 
+      #{examItemValueOperandFemale,jdbcType=INTEGER}, #{examItemValueDispOrder,jdbcType=INTEGER}, 
+      #{examItemValueText,jdbcType=VARCHAR}, #{examItemValueStatus,jdbcType=INTEGER}, 
+      #{examItemValueCreateTime,jdbcType=TIMESTAMP}, #{examItemValueEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValue" >
+    insert into organization_exam_item_value
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examItemValueId != null" >
+        exam_item_value_id,
+      </if>
+      <if test="examItemId != null" >
+        exam_item_id,
+      </if>
+      <if test="examItemValueName != null" >
+        exam_item_value_name,
+      </if>
+      <if test="examItemValueCode != null" >
+        exam_item_value_code,
+      </if>
+      <if test="examItemValueInputCode != null" >
+        exam_item_value_input_code,
+      </if>
+      <if test="examItemValueServerDegree != null" >
+        exam_item_value_server_degree,
+      </if>
+      <if test="examItemValueAskscore != null" >
+        exam_item_value_askscore,
+      </if>
+      <if test="examItemValueOper != null" >
+        exam_item_value_oper,
+      </if>
+      <if test="examItemValueOperandMale != null" >
+        exam_item_value_operand_male,
+      </if>
+      <if test="examItemValueOperandFemale != null" >
+        exam_item_value_operand_female,
+      </if>
+      <if test="examItemValueDispOrder != null" >
+        exam_item_value_disp_order,
+      </if>
+      <if test="examItemValueText != null" >
+        exam_item_value_text,
+      </if>
+      <if test="examItemValueStatus != null" >
+        exam_item_value_status,
+      </if>
+      <if test="examItemValueCreateTime != null" >
+        exam_item_value_create_time,
+      </if>
+      <if test="examItemValueEditTime != null" >
+        exam_item_value_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examItemValueId != null" >
+        #{examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemId != null" >
+        #{examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueName != null" >
+        #{examItemValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueCode != null" >
+        #{examItemValueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueInputCode != null" >
+        #{examItemValueInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueServerDegree != null" >
+        #{examItemValueServerDegree,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueAskscore != null" >
+        #{examItemValueAskscore,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueOper != null" >
+        #{examItemValueOper,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueOperandMale != null" >
+        #{examItemValueOperandMale,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueOperandFemale != null" >
+        #{examItemValueOperandFemale,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueDispOrder != null" >
+        #{examItemValueDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueText != null" >
+        #{examItemValueText,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueStatus != null" >
+        #{examItemValueStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueCreateTime != null" >
+        #{examItemValueCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examItemValueEditTime != null" >
+        #{examItemValueEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValueExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_item_value
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_item_value
+    <set >
+      <if test="record.examItemValueId != null" >
+        exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemId != null" >
+        exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueName != null" >
+        exam_item_value_name = #{record.examItemValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueCode != null" >
+        exam_item_value_code = #{record.examItemValueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueInputCode != null" >
+        exam_item_value_input_code = #{record.examItemValueInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueServerDegree != null" >
+        exam_item_value_server_degree = #{record.examItemValueServerDegree,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValueAskscore != null" >
+        exam_item_value_askscore = #{record.examItemValueAskscore,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValueOper != null" >
+        exam_item_value_oper = #{record.examItemValueOper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueOperandMale != null" >
+        exam_item_value_operand_male = #{record.examItemValueOperandMale,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValueOperandFemale != null" >
+        exam_item_value_operand_female = #{record.examItemValueOperandFemale,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValueDispOrder != null" >
+        exam_item_value_disp_order = #{record.examItemValueDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValueText != null" >
+        exam_item_value_text = #{record.examItemValueText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueStatus != null" >
+        exam_item_value_status = #{record.examItemValueStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValueCreateTime != null" >
+        exam_item_value_create_time = #{record.examItemValueCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examItemValueEditTime != null" >
+        exam_item_value_edit_time = #{record.examItemValueEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_item_value
+    set exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      exam_item_value_name = #{record.examItemValueName,jdbcType=VARCHAR},
+      exam_item_value_code = #{record.examItemValueCode,jdbcType=VARCHAR},
+      exam_item_value_input_code = #{record.examItemValueInputCode,jdbcType=VARCHAR},
+      exam_item_value_server_degree = #{record.examItemValueServerDegree,jdbcType=INTEGER},
+      exam_item_value_askscore = #{record.examItemValueAskscore,jdbcType=INTEGER},
+      exam_item_value_oper = #{record.examItemValueOper,jdbcType=VARCHAR},
+      exam_item_value_operand_male = #{record.examItemValueOperandMale,jdbcType=INTEGER},
+      exam_item_value_operand_female = #{record.examItemValueOperandFemale,jdbcType=INTEGER},
+      exam_item_value_disp_order = #{record.examItemValueDispOrder,jdbcType=INTEGER},
+      exam_item_value_text = #{record.examItemValueText,jdbcType=VARCHAR},
+      exam_item_value_status = #{record.examItemValueStatus,jdbcType=INTEGER},
+      exam_item_value_create_time = #{record.examItemValueCreateTime,jdbcType=TIMESTAMP},
+      exam_item_value_edit_time = #{record.examItemValueEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValue" >
+    update organization_exam_item_value
+    <set >
+      <if test="examItemId != null" >
+        exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueName != null" >
+        exam_item_value_name = #{examItemValueName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueCode != null" >
+        exam_item_value_code = #{examItemValueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueInputCode != null" >
+        exam_item_value_input_code = #{examItemValueInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueServerDegree != null" >
+        exam_item_value_server_degree = #{examItemValueServerDegree,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueAskscore != null" >
+        exam_item_value_askscore = #{examItemValueAskscore,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueOper != null" >
+        exam_item_value_oper = #{examItemValueOper,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueOperandMale != null" >
+        exam_item_value_operand_male = #{examItemValueOperandMale,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueOperandFemale != null" >
+        exam_item_value_operand_female = #{examItemValueOperandFemale,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueDispOrder != null" >
+        exam_item_value_disp_order = #{examItemValueDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueText != null" >
+        exam_item_value_text = #{examItemValueText,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueStatus != null" >
+        exam_item_value_status = #{examItemValueStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValueCreateTime != null" >
+        exam_item_value_create_time = #{examItemValueCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examItemValueEditTime != null" >
+        exam_item_value_edit_time = #{examItemValueEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.examitemvalue.OrganizationExamItemValue" >
+    update organization_exam_item_value
+    set exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      exam_item_value_name = #{examItemValueName,jdbcType=VARCHAR},
+      exam_item_value_code = #{examItemValueCode,jdbcType=VARCHAR},
+      exam_item_value_input_code = #{examItemValueInputCode,jdbcType=VARCHAR},
+      exam_item_value_server_degree = #{examItemValueServerDegree,jdbcType=INTEGER},
+      exam_item_value_askscore = #{examItemValueAskscore,jdbcType=INTEGER},
+      exam_item_value_oper = #{examItemValueOper,jdbcType=VARCHAR},
+      exam_item_value_operand_male = #{examItemValueOperandMale,jdbcType=INTEGER},
+      exam_item_value_operand_female = #{examItemValueOperandFemale,jdbcType=INTEGER},
+      exam_item_value_disp_order = #{examItemValueDispOrder,jdbcType=INTEGER},
+      exam_item_value_text = #{examItemValueText,jdbcType=VARCHAR},
+      exam_item_value_status = #{examItemValueStatus,jdbcType=INTEGER},
+      exam_item_value_create_time = #{examItemValueCreateTime,jdbcType=TIMESTAMP},
+      exam_item_value_edit_time = #{examItemValueEditTime,jdbcType=TIMESTAMP}
+    where exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR}
+  </update>
+</mapper>

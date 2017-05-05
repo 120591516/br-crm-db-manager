@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationWebMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationWeb" >
+    <id column="org_web_id" property="orgWebId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_web_wechat" property="orgWebWechat" jdbcType="INTEGER" />
+    <result column="org_web_website" property="orgWebWebsite" jdbcType="INTEGER" />
+    <result column="org_web_app" property="orgWebApp" jdbcType="INTEGER" />
+    <result column="org_web_create_time" property="orgWebCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_web_edit_time" property="orgWebEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_web_id, org_id, org_web_wechat, org_web_website, org_web_app, org_web_create_time, 
+    org_web_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationWebExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_web
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_web
+    where org_web_id = #{orgWebId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_web
+    where org_web_id = #{orgWebId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationWebExample" >
+    delete from organization_web
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationWeb" >
+    insert into organization_web (org_web_id, org_id, org_web_wechat, 
+      org_web_website, org_web_app, org_web_create_time, 
+      org_web_edit_time)
+    values (#{orgWebId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgWebWechat,jdbcType=INTEGER}, 
+      #{orgWebWebsite,jdbcType=INTEGER}, #{orgWebApp,jdbcType=INTEGER}, #{orgWebCreateTime,jdbcType=TIMESTAMP}, 
+      #{orgWebEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationWeb" useGeneratedKeys="true" keyProperty="orgWebId" >
+    insert into organization_web
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgWebId != null" >
+        org_web_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgWebWechat != null" >
+        org_web_wechat,
+      </if>
+      <if test="orgWebWebsite != null" >
+        org_web_website,
+      </if>
+      <if test="orgWebApp != null" >
+        org_web_app,
+      </if>
+      <if test="orgWebCreateTime != null" >
+        org_web_create_time,
+      </if>
+      <if test="orgWebEditTime != null" >
+        org_web_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgWebId != null" >
+        #{orgWebId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgWebWechat != null" >
+        #{orgWebWechat,jdbcType=INTEGER},
+      </if>
+      <if test="orgWebWebsite != null" >
+        #{orgWebWebsite,jdbcType=INTEGER},
+      </if>
+      <if test="orgWebApp != null" >
+        #{orgWebApp,jdbcType=INTEGER},
+      </if>
+      <if test="orgWebCreateTime != null" >
+        #{orgWebCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgWebEditTime != null" >
+        #{orgWebEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationWebExample" resultType="java.lang.Integer" >
+    select count(*) from organization_web
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_web
+    <set >
+      <if test="record.orgWebId != null" >
+        org_web_id = #{record.orgWebId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgWebWechat != null" >
+        org_web_wechat = #{record.orgWebWechat,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgWebWebsite != null" >
+        org_web_website = #{record.orgWebWebsite,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgWebApp != null" >
+        org_web_app = #{record.orgWebApp,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgWebCreateTime != null" >
+        org_web_create_time = #{record.orgWebCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgWebEditTime != null" >
+        org_web_edit_time = #{record.orgWebEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_web
+    set org_web_id = #{record.orgWebId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_web_wechat = #{record.orgWebWechat,jdbcType=INTEGER},
+      org_web_website = #{record.orgWebWebsite,jdbcType=INTEGER},
+      org_web_app = #{record.orgWebApp,jdbcType=INTEGER},
+      org_web_create_time = #{record.orgWebCreateTime,jdbcType=TIMESTAMP},
+      org_web_edit_time = #{record.orgWebEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationWeb" >
+    update organization_web
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgWebWechat != null" >
+        org_web_wechat = #{orgWebWechat,jdbcType=INTEGER},
+      </if>
+      <if test="orgWebWebsite != null" >
+        org_web_website = #{orgWebWebsite,jdbcType=INTEGER},
+      </if>
+      <if test="orgWebApp != null" >
+        org_web_app = #{orgWebApp,jdbcType=INTEGER},
+      </if>
+      <if test="orgWebCreateTime != null" >
+        org_web_create_time = #{orgWebCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgWebEditTime != null" >
+        org_web_edit_time = #{orgWebEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_web_id = #{orgWebId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationWeb" >
+    update organization_web
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_web_wechat = #{orgWebWechat,jdbcType=INTEGER},
+      org_web_website = #{orgWebWebsite,jdbcType=INTEGER},
+      org_web_app = #{orgWebApp,jdbcType=INTEGER},
+      org_web_create_time = #{orgWebCreateTime,jdbcType=TIMESTAMP},
+      org_web_edit_time = #{orgWebEditTime,jdbcType=TIMESTAMP}
+    where org_web_id = #{orgWebId,jdbcType=BIGINT}
+  </update>
+</mapper>

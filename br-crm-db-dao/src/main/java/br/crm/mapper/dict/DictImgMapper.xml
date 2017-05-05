@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictImgMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.DictImg" >
+    <id column="img_id" property="imgId" jdbcType="BIGINT" />
+    <result column="img_name" property="imgName" jdbcType="VARCHAR" />
+    <result column="img_size" property="imgSize" jdbcType="BIGINT" />
+    <result column="img_location" property="imgLocation" jdbcType="VARCHAR" />
+    <result column="img_type" property="imgType" jdbcType="VARCHAR" />
+    <result column="img_note" property="imgNote" jdbcType="VARCHAR" />
+    <result column="img_status" property="imgStatus" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    img_id, img_name, img_size, img_location, img_type, img_note, img_status, create_time, 
+    edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictImgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dict_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dict_img
+    where img_id = #{imgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dict_img
+    where img_id = #{imgId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictImgExample" >
+    delete from dict_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictImg" >
+    insert into dict_img (img_id, img_name, img_size, 
+      img_location, img_type, img_note, 
+      img_status, create_time, edit_time
+      )
+    values (#{imgId,jdbcType=BIGINT}, #{imgName,jdbcType=VARCHAR}, #{imgSize,jdbcType=BIGINT}, 
+      #{imgLocation,jdbcType=VARCHAR}, #{imgType,jdbcType=VARCHAR}, #{imgNote,jdbcType=VARCHAR}, 
+      #{imgStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictImg" useGeneratedKeys="true" keyProperty="imgId">
+    insert into dict_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="imgId != null" >
+        img_id,
+      </if>
+      <if test="imgName != null" >
+        img_name,
+      </if>
+      <if test="imgSize != null" >
+        img_size,
+      </if>
+      <if test="imgLocation != null" >
+        img_location,
+      </if>
+      <if test="imgType != null" >
+        img_type,
+      </if>
+      <if test="imgNote != null" >
+        img_note,
+      </if>
+      <if test="imgStatus != null" >
+        img_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="editTime != null" >
+        edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="imgId != null" >
+        #{imgId,jdbcType=BIGINT},
+      </if>
+      <if test="imgName != null" >
+        #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSize != null" >
+        #{imgSize,jdbcType=BIGINT},
+      </if>
+      <if test="imgLocation != null" >
+        #{imgLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="imgType != null" >
+        #{imgType,jdbcType=VARCHAR},
+      </if>
+      <if test="imgNote != null" >
+        #{imgNote,jdbcType=VARCHAR},
+      </if>
+      <if test="imgStatus != null" >
+        #{imgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictImgExample" resultType="java.lang.Integer" >
+    select count(*) from dict_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dict_img
+    <set >
+      <if test="record.imgId != null" >
+        img_id = #{record.imgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.imgName != null" >
+        img_name = #{record.imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgSize != null" >
+        img_size = #{record.imgSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.imgLocation != null" >
+        img_location = #{record.imgLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgType != null" >
+        img_type = #{record.imgType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgNote != null" >
+        img_note = #{record.imgNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgStatus != null" >
+        img_status = #{record.imgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.editTime != null" >
+        edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dict_img
+    set img_id = #{record.imgId,jdbcType=BIGINT},
+      img_name = #{record.imgName,jdbcType=VARCHAR},
+      img_size = #{record.imgSize,jdbcType=BIGINT},
+      img_location = #{record.imgLocation,jdbcType=VARCHAR},
+      img_type = #{record.imgType,jdbcType=VARCHAR},
+      img_note = #{record.imgNote,jdbcType=VARCHAR},
+      img_status = #{record.imgStatus,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      edit_time = #{record.editTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictImg" >
+    update dict_img
+    <set >
+      <if test="imgName != null" >
+        img_name = #{imgName,jdbcType=VARCHAR},
+      </if>
+      <if test="imgSize != null" >
+        img_size = #{imgSize,jdbcType=BIGINT},
+      </if>
+      <if test="imgLocation != null" >
+        img_location = #{imgLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="imgType != null" >
+        img_type = #{imgType,jdbcType=VARCHAR},
+      </if>
+      <if test="imgNote != null" >
+        img_note = #{imgNote,jdbcType=VARCHAR},
+      </if>
+      <if test="imgStatus != null" >
+        img_status = #{imgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        edit_time = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where img_id = #{imgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.DictImg" >
+    update dict_img
+    set img_name = #{imgName,jdbcType=VARCHAR},
+      img_size = #{imgSize,jdbcType=BIGINT},
+      img_location = #{imgLocation,jdbcType=VARCHAR},
+      img_type = #{imgType,jdbcType=VARCHAR},
+      img_note = #{imgNote,jdbcType=VARCHAR},
+      img_status = #{imgStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      edit_time = #{editTime,jdbcType=TIMESTAMP}
+    where img_id = #{imgId,jdbcType=BIGINT}
+  </update>
+</mapper>

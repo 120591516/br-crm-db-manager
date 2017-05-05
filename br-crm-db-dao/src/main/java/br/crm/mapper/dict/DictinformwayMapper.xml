@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictinformwayMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictinformway" >
+    <id column="ID_InformWay" property="idInformway" jdbcType="INTEGER" />
+    <result column="InformWay_Name" property="informwayName" jdbcType="VARCHAR" />
+    <result column="InformWay_Code" property="informwayCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="InformWayCodeX" property="informwaycodex" jdbcType="VARCHAR" />
+    <result column="F_BuiltIn" property="fBuiltin" jdbcType="BIT" />
+    <result column="InformWay_createtime" property="informwayCreatetime" jdbcType="TIMESTAMP" />
+    <result column="InformWay_updatetime" property="informwayUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="InformWay_Status" property="informwayStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_InformWay, InformWay_Name, InformWay_Code, Input_Code, InformWayCodeX, F_BuiltIn, 
+    InformWay_createtime, InformWay_updatetime, InformWay_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictinformwayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictInformWay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictInformWay
+    where ID_InformWay = #{idInformway,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictInformWay
+    where ID_InformWay = #{idInformway,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictinformwayExample" >
+    delete from DictInformWay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictinformway" >
+    insert into DictInformWay (ID_InformWay, InformWay_Name, InformWay_Code, 
+      Input_Code, InformWayCodeX, F_BuiltIn, 
+      InformWay_createtime, InformWay_updatetime, 
+      InformWay_Status)
+    values (#{idInformway,jdbcType=INTEGER}, #{informwayName,jdbcType=VARCHAR}, #{informwayCode,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{informwaycodex,jdbcType=VARCHAR}, #{fBuiltin,jdbcType=BIT}, 
+      #{informwayCreatetime,jdbcType=TIMESTAMP}, #{informwayUpdatetime,jdbcType=TIMESTAMP}, 
+      #{informwayStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictinformway" >
+    insert into DictInformWay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idInformway != null" >
+        ID_InformWay,
+      </if>
+      <if test="informwayName != null" >
+        InformWay_Name,
+      </if>
+      <if test="informwayCode != null" >
+        InformWay_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="informwaycodex != null" >
+        InformWayCodeX,
+      </if>
+      <if test="fBuiltin != null" >
+        F_BuiltIn,
+      </if>
+      <if test="informwayCreatetime != null" >
+        InformWay_createtime,
+      </if>
+      <if test="informwayUpdatetime != null" >
+        InformWay_updatetime,
+      </if>
+      <if test="informwayStatus != null" >
+        InformWay_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idInformway != null" >
+        #{idInformway,jdbcType=INTEGER},
+      </if>
+      <if test="informwayName != null" >
+        #{informwayName,jdbcType=VARCHAR},
+      </if>
+      <if test="informwayCode != null" >
+        #{informwayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="informwaycodex != null" >
+        #{informwaycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuiltin != null" >
+        #{fBuiltin,jdbcType=BIT},
+      </if>
+      <if test="informwayCreatetime != null" >
+        #{informwayCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="informwayUpdatetime != null" >
+        #{informwayUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="informwayStatus != null" >
+        #{informwayStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictinformwayExample" resultType="java.lang.Integer" >
+    select count(*) from DictInformWay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictInformWay
+    <set >
+      <if test="record.idInformway != null" >
+        ID_InformWay = #{record.idInformway,jdbcType=INTEGER},
+      </if>
+      <if test="record.informwayName != null" >
+        InformWay_Name = #{record.informwayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.informwayCode != null" >
+        InformWay_Code = #{record.informwayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.informwaycodex != null" >
+        InformWayCodeX = #{record.informwaycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBuiltin != null" >
+        F_BuiltIn = #{record.fBuiltin,jdbcType=BIT},
+      </if>
+      <if test="record.informwayCreatetime != null" >
+        InformWay_createtime = #{record.informwayCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.informwayUpdatetime != null" >
+        InformWay_updatetime = #{record.informwayUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.informwayStatus != null" >
+        InformWay_Status = #{record.informwayStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictInformWay
+    set ID_InformWay = #{record.idInformway,jdbcType=INTEGER},
+      InformWay_Name = #{record.informwayName,jdbcType=VARCHAR},
+      InformWay_Code = #{record.informwayCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      InformWayCodeX = #{record.informwaycodex,jdbcType=VARCHAR},
+      F_BuiltIn = #{record.fBuiltin,jdbcType=BIT},
+      InformWay_createtime = #{record.informwayCreatetime,jdbcType=TIMESTAMP},
+      InformWay_updatetime = #{record.informwayUpdatetime,jdbcType=TIMESTAMP},
+      InformWay_Status = #{record.informwayStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictinformway" >
+    update DictInformWay
+    <set >
+      <if test="informwayName != null" >
+        InformWay_Name = #{informwayName,jdbcType=VARCHAR},
+      </if>
+      <if test="informwayCode != null" >
+        InformWay_Code = #{informwayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="informwaycodex != null" >
+        InformWayCodeX = #{informwaycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuiltin != null" >
+        F_BuiltIn = #{fBuiltin,jdbcType=BIT},
+      </if>
+      <if test="informwayCreatetime != null" >
+        InformWay_createtime = #{informwayCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="informwayUpdatetime != null" >
+        InformWay_updatetime = #{informwayUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="informwayStatus != null" >
+        InformWay_Status = #{informwayStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_InformWay = #{idInformway,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictinformway" >
+    update DictInformWay
+    set InformWay_Name = #{informwayName,jdbcType=VARCHAR},
+      InformWay_Code = #{informwayCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      InformWayCodeX = #{informwaycodex,jdbcType=VARCHAR},
+      F_BuiltIn = #{fBuiltin,jdbcType=BIT},
+      InformWay_createtime = #{informwayCreatetime,jdbcType=TIMESTAMP},
+      InformWay_updatetime = #{informwayUpdatetime,jdbcType=TIMESTAMP},
+      InformWay_Status = #{informwayStatus,jdbcType=INTEGER}
+    where ID_InformWay = #{idInformway,jdbcType=INTEGER}
+  </update>
+</mapper>

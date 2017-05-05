@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationLevelMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationLevel" >
+    <id column="org_level_id" property="orgLevelId" jdbcType="INTEGER" />
+    <result column="org_level_name" property="orgLevelName" jdbcType="VARCHAR" />
+    <result column="org_level_status" property="orgLevelStatus" jdbcType="INTEGER" />
+    <result column="org_level_createtime" property="orgLevelCreatetime" jdbcType="TIMESTAMP" />
+    <result column="org_level_edittime" property="orgLevelEdittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_level_id, org_level_name, org_level_status, org_level_createtime, org_level_edittime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_level
+    where org_level_id = #{orgLevelId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from organization_level
+    where org_level_id = #{orgLevelId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationLevelExample" >
+    delete from organization_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationLevel" >
+    insert into organization_level (org_level_id, org_level_name, org_level_status, 
+      org_level_createtime, org_level_edittime
+      )
+    values (#{orgLevelId,jdbcType=INTEGER}, #{orgLevelName,jdbcType=VARCHAR}, #{orgLevelStatus,jdbcType=INTEGER}, 
+      #{orgLevelCreatetime,jdbcType=TIMESTAMP}, #{orgLevelEdittime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationLevel" useGeneratedKeys="true" keyProperty="orgLevelId" >
+    insert into organization_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgLevelId != null" >
+        org_level_id,
+      </if>
+      <if test="orgLevelName != null" >
+        org_level_name,
+      </if>
+      <if test="orgLevelStatus != null" >
+        org_level_status,
+      </if>
+      <if test="orgLevelCreatetime != null" >
+        org_level_createtime,
+      </if>
+      <if test="orgLevelEdittime != null" >
+        org_level_edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgLevelId != null" >
+        #{orgLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevelName != null" >
+        #{orgLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLevelStatus != null" >
+        #{orgLevelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevelCreatetime != null" >
+        #{orgLevelCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgLevelEdittime != null" >
+        #{orgLevelEdittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationLevelExample" resultType="java.lang.Integer" >
+    select count(*) from organization_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_level
+    <set >
+      <if test="record.orgLevelId != null" >
+        org_level_id = #{record.orgLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgLevelName != null" >
+        org_level_name = #{record.orgLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLevelStatus != null" >
+        org_level_status = #{record.orgLevelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgLevelCreatetime != null" >
+        org_level_createtime = #{record.orgLevelCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgLevelEdittime != null" >
+        org_level_edittime = #{record.orgLevelEdittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_level
+    set org_level_id = #{record.orgLevelId,jdbcType=INTEGER},
+      org_level_name = #{record.orgLevelName,jdbcType=VARCHAR},
+      org_level_status = #{record.orgLevelStatus,jdbcType=INTEGER},
+      org_level_createtime = #{record.orgLevelCreatetime,jdbcType=TIMESTAMP},
+      org_level_edittime = #{record.orgLevelEdittime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationLevel" >
+    update organization_level
+    <set >
+      <if test="orgLevelName != null" >
+        org_level_name = #{orgLevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLevelStatus != null" >
+        org_level_status = #{orgLevelStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevelCreatetime != null" >
+        org_level_createtime = #{orgLevelCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgLevelEdittime != null" >
+        org_level_edittime = #{orgLevelEdittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_level_id = #{orgLevelId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationLevel" >
+    update organization_level
+    set org_level_name = #{orgLevelName,jdbcType=VARCHAR},
+      org_level_status = #{orgLevelStatus,jdbcType=INTEGER},
+      org_level_createtime = #{orgLevelCreatetime,jdbcType=TIMESTAMP},
+      org_level_edittime = #{orgLevelEdittime,jdbcType=TIMESTAMP}
+    where org_level_id = #{orgLevelId,jdbcType=INTEGER}
+  </update>
+</mapper>

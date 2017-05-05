@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationReviewMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationReview" >
+    <id column="org_review_id" property="orgReviewId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_review_result" property="orgReviewResult" jdbcType="INTEGER" />
+    <result column="org_review_message" property="orgReviewMessage" jdbcType="VARCHAR" />
+    <result column="org_review_person_id" property="orgReviewPersonId" jdbcType="BIGINT" />
+    <result column="org_review_create_time" property="orgReviewCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_review_id, org_id, org_review_result, org_review_message, org_review_person_id, 
+    org_review_create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationReviewExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_review
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_review
+    where org_review_id = #{orgReviewId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_review
+    where org_review_id = #{orgReviewId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationReviewExample" >
+    delete from organization_review
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationReview" >
+    insert into organization_review (org_review_id, org_id, org_review_result, 
+      org_review_message, org_review_person_id, org_review_create_time
+      )
+    values (#{orgReviewId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgReviewResult,jdbcType=INTEGER}, 
+      #{orgReviewMessage,jdbcType=VARCHAR}, #{orgReviewPersonId,jdbcType=BIGINT}, #{orgReviewCreateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationReview" >
+    insert into organization_review
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgReviewId != null" >
+        org_review_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgReviewResult != null" >
+        org_review_result,
+      </if>
+      <if test="orgReviewMessage != null" >
+        org_review_message,
+      </if>
+      <if test="orgReviewPersonId != null" >
+        org_review_person_id,
+      </if>
+      <if test="orgReviewCreateTime != null" >
+        org_review_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgReviewId != null" >
+        #{orgReviewId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgReviewResult != null" >
+        #{orgReviewResult,jdbcType=INTEGER},
+      </if>
+      <if test="orgReviewMessage != null" >
+        #{orgReviewMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="orgReviewPersonId != null" >
+        #{orgReviewPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="orgReviewCreateTime != null" >
+        #{orgReviewCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationReviewExample" resultType="java.lang.Integer" >
+    select count(*) from organization_review
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_review
+    <set >
+      <if test="record.orgReviewId != null" >
+        org_review_id = #{record.orgReviewId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgReviewResult != null" >
+        org_review_result = #{record.orgReviewResult,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgReviewMessage != null" >
+        org_review_message = #{record.orgReviewMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgReviewPersonId != null" >
+        org_review_person_id = #{record.orgReviewPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgReviewCreateTime != null" >
+        org_review_create_time = #{record.orgReviewCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_review
+    set org_review_id = #{record.orgReviewId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_review_result = #{record.orgReviewResult,jdbcType=INTEGER},
+      org_review_message = #{record.orgReviewMessage,jdbcType=VARCHAR},
+      org_review_person_id = #{record.orgReviewPersonId,jdbcType=BIGINT},
+      org_review_create_time = #{record.orgReviewCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationReview" >
+    update organization_review
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgReviewResult != null" >
+        org_review_result = #{orgReviewResult,jdbcType=INTEGER},
+      </if>
+      <if test="orgReviewMessage != null" >
+        org_review_message = #{orgReviewMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="orgReviewPersonId != null" >
+        org_review_person_id = #{orgReviewPersonId,jdbcType=BIGINT},
+      </if>
+      <if test="orgReviewCreateTime != null" >
+        org_review_create_time = #{orgReviewCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_review_id = #{orgReviewId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationReview" >
+    update organization_review
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_review_result = #{orgReviewResult,jdbcType=INTEGER},
+      org_review_message = #{orgReviewMessage,jdbcType=VARCHAR},
+      org_review_person_id = #{orgReviewPersonId,jdbcType=BIGINT},
+      org_review_create_time = #{orgReviewCreateTime,jdbcType=TIMESTAMP}
+    where org_review_id = #{orgReviewId,jdbcType=BIGINT}
+  </update>
+</mapper>

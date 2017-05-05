@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationLicenseMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationLicense" >
+    <id column="org_license_id" property="orgLicenseId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_license_no" property="orgLicenseNo" jdbcType="VARCHAR" />
+    <result column="org_license_img_id" property="orgLicenseImgId" jdbcType="BIGINT" />
+    <result column="org_license_img_url" property="orgLicenseImgUrl" jdbcType="VARCHAR" />
+    <result column="org_license_open_id" property="orgLicenseOpenId" jdbcType="BIGINT" />
+    <result column="org_license_open_url" property="orgLicenseOpenUrl" jdbcType="VARCHAR" />
+    <result column="org_license_person_name" property="orgLicensePersonName" jdbcType="VARCHAR" />
+    <result column="org_license_create_time" property="orgLicenseCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_license_edit_time" property="orgLicenseEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_license_id, org_id, org_license_no, org_license_img_id, org_license_img_url, 
+    org_license_open_id, org_license_open_url, org_license_person_name, org_license_create_time, 
+    org_license_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationLicenseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_license
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_license
+    where org_license_id = #{orgLicenseId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_license
+    where org_license_id = #{orgLicenseId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationLicenseExample" >
+    delete from organization_license
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationLicense" >
+    insert into organization_license (org_license_id, org_id, org_license_no, 
+      org_license_img_id, org_license_img_url, org_license_open_id, 
+      org_license_open_url, org_license_person_name, 
+      org_license_create_time, org_license_edit_time
+      )
+    values (#{orgLicenseId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgLicenseNo,jdbcType=VARCHAR}, 
+      #{orgLicenseImgId,jdbcType=BIGINT}, #{orgLicenseImgUrl,jdbcType=VARCHAR}, #{orgLicenseOpenId,jdbcType=BIGINT}, 
+      #{orgLicenseOpenUrl,jdbcType=VARCHAR}, #{orgLicensePersonName,jdbcType=VARCHAR}, 
+      #{orgLicenseCreateTime,jdbcType=TIMESTAMP}, #{orgLicenseEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationLicense" >
+    insert into organization_license
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgLicenseId != null" >
+        org_license_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgLicenseNo != null" >
+        org_license_no,
+      </if>
+      <if test="orgLicenseImgId != null" >
+        org_license_img_id,
+      </if>
+      <if test="orgLicenseImgUrl != null" >
+        org_license_img_url,
+      </if>
+      <if test="orgLicenseOpenId != null" >
+        org_license_open_id,
+      </if>
+      <if test="orgLicenseOpenUrl != null" >
+        org_license_open_url,
+      </if>
+      <if test="orgLicensePersonName != null" >
+        org_license_person_name,
+      </if>
+      <if test="orgLicenseCreateTime != null" >
+        org_license_create_time,
+      </if>
+      <if test="orgLicenseEditTime != null" >
+        org_license_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgLicenseId != null" >
+        #{orgLicenseId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseNo != null" >
+        #{orgLicenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseImgId != null" >
+        #{orgLicenseImgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgLicenseImgUrl != null" >
+        #{orgLicenseImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseOpenId != null" >
+        #{orgLicenseOpenId,jdbcType=BIGINT},
+      </if>
+      <if test="orgLicenseOpenUrl != null" >
+        #{orgLicenseOpenUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicensePersonName != null" >
+        #{orgLicensePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseCreateTime != null" >
+        #{orgLicenseCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgLicenseEditTime != null" >
+        #{orgLicenseEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationLicenseExample" resultType="java.lang.Integer" >
+    select count(*) from organization_license
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_license
+    <set >
+      <if test="record.orgLicenseId != null" >
+        org_license_id = #{record.orgLicenseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLicenseNo != null" >
+        org_license_no = #{record.orgLicenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLicenseImgId != null" >
+        org_license_img_id = #{record.orgLicenseImgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgLicenseImgUrl != null" >
+        org_license_img_url = #{record.orgLicenseImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLicenseOpenId != null" >
+        org_license_open_id = #{record.orgLicenseOpenId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgLicenseOpenUrl != null" >
+        org_license_open_url = #{record.orgLicenseOpenUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLicensePersonName != null" >
+        org_license_person_name = #{record.orgLicensePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLicenseCreateTime != null" >
+        org_license_create_time = #{record.orgLicenseCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgLicenseEditTime != null" >
+        org_license_edit_time = #{record.orgLicenseEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_license
+    set org_license_id = #{record.orgLicenseId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_license_no = #{record.orgLicenseNo,jdbcType=VARCHAR},
+      org_license_img_id = #{record.orgLicenseImgId,jdbcType=BIGINT},
+      org_license_img_url = #{record.orgLicenseImgUrl,jdbcType=VARCHAR},
+      org_license_open_id = #{record.orgLicenseOpenId,jdbcType=BIGINT},
+      org_license_open_url = #{record.orgLicenseOpenUrl,jdbcType=VARCHAR},
+      org_license_person_name = #{record.orgLicensePersonName,jdbcType=VARCHAR},
+      org_license_create_time = #{record.orgLicenseCreateTime,jdbcType=TIMESTAMP},
+      org_license_edit_time = #{record.orgLicenseEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationLicense" >
+    update organization_license
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseNo != null" >
+        org_license_no = #{orgLicenseNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseImgId != null" >
+        org_license_img_id = #{orgLicenseImgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgLicenseImgUrl != null" >
+        org_license_img_url = #{orgLicenseImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseOpenId != null" >
+        org_license_open_id = #{orgLicenseOpenId,jdbcType=BIGINT},
+      </if>
+      <if test="orgLicenseOpenUrl != null" >
+        org_license_open_url = #{orgLicenseOpenUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicensePersonName != null" >
+        org_license_person_name = #{orgLicensePersonName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLicenseCreateTime != null" >
+        org_license_create_time = #{orgLicenseCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgLicenseEditTime != null" >
+        org_license_edit_time = #{orgLicenseEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_license_id = #{orgLicenseId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationLicense" >
+    update organization_license
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_license_no = #{orgLicenseNo,jdbcType=VARCHAR},
+      org_license_img_id = #{orgLicenseImgId,jdbcType=BIGINT},
+      org_license_img_url = #{orgLicenseImgUrl,jdbcType=VARCHAR},
+      org_license_open_id = #{orgLicenseOpenId,jdbcType=BIGINT},
+      org_license_open_url = #{orgLicenseOpenUrl,jdbcType=VARCHAR},
+      org_license_person_name = #{orgLicensePersonName,jdbcType=VARCHAR},
+      org_license_create_time = #{orgLicenseCreateTime,jdbcType=TIMESTAMP},
+      org_license_edit_time = #{orgLicenseEditTime,jdbcType=TIMESTAMP}
+    where org_license_id = #{orgLicenseId,jdbcType=BIGINT}
+  </update>
+</mapper>

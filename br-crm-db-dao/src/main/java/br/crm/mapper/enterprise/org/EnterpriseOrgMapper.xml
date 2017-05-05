@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.enterprise.org.EnterpriseOrgMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.enterprise.org.EnterpriseOrg" >
+    <id column="enterprise_org_id" property="enterpriseOrgId" jdbcType="VARCHAR" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="org_linkman" property="orgLinkman" jdbcType="VARCHAR" />
+    <result column="org_phone" property="orgPhone" jdbcType="VARCHAR" />
+    <result column="enterprise_org_contract_id" property="enterpriseOrgContractId" jdbcType="VARCHAR" />
+    <result column="enterprise_org_contract_name" property="enterpriseOrgContractName" jdbcType="VARCHAR" />
+    <result column="enterprise_org_status" property="enterpriseOrgStatus" jdbcType="INTEGER" />
+    <result column="enterprise_org_edit_time" property="enterpriseOrgEditTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_org_create_time" property="enterpriseOrgCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    enterprise_org_id, enterprise_id, org_id, org_name, org_linkman, org_phone, enterprise_org_contract_id, 
+    enterprise_org_contract_name, enterprise_org_status, enterprise_org_edit_time, enterprise_org_create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from enterprise_org
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise_org
+    where enterprise_org_id = #{enterpriseOrgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from enterprise_org
+    where enterprise_org_id = #{enterpriseOrgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrgExample" >
+    delete from enterprise_org
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrg" >
+    insert into enterprise_org (enterprise_org_id, enterprise_id, org_id, 
+      org_name, org_linkman, org_phone, 
+      enterprise_org_contract_id, enterprise_org_contract_name, 
+      enterprise_org_status, enterprise_org_edit_time, 
+      enterprise_org_create_time)
+    values (#{enterpriseOrgId,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{orgName,jdbcType=VARCHAR}, #{orgLinkman,jdbcType=VARCHAR}, #{orgPhone,jdbcType=VARCHAR}, 
+      #{enterpriseOrgContractId,jdbcType=VARCHAR}, #{enterpriseOrgContractName,jdbcType=VARCHAR}, 
+      #{enterpriseOrgStatus,jdbcType=INTEGER}, #{enterpriseOrgEditTime,jdbcType=TIMESTAMP}, 
+      #{enterpriseOrgCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrg" >
+    insert into enterprise_org
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseOrgId != null" >
+        enterprise_org_id,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgName != null" >
+        org_name,
+      </if>
+      <if test="orgLinkman != null" >
+        org_linkman,
+      </if>
+      <if test="orgPhone != null" >
+        org_phone,
+      </if>
+      <if test="enterpriseOrgContractId != null" >
+        enterprise_org_contract_id,
+      </if>
+      <if test="enterpriseOrgContractName != null" >
+        enterprise_org_contract_name,
+      </if>
+      <if test="enterpriseOrgStatus != null" >
+        enterprise_org_status,
+      </if>
+      <if test="enterpriseOrgEditTime != null" >
+        enterprise_org_edit_time,
+      </if>
+      <if test="enterpriseOrgCreateTime != null" >
+        enterprise_org_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseOrgId != null" >
+        #{enterpriseOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLinkman != null" >
+        #{orgLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPhone != null" >
+        #{orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOrgContractId != null" >
+        #{enterpriseOrgContractId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOrgContractName != null" >
+        #{enterpriseOrgContractName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOrgStatus != null" >
+        #{enterpriseOrgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseOrgEditTime != null" >
+        #{enterpriseOrgEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseOrgCreateTime != null" >
+        #{enterpriseOrgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrgExample" resultType="java.lang.Integer" >
+    select count(*) from enterprise_org
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update enterprise_org
+    <set >
+      <if test="record.enterpriseOrgId != null" >
+        enterprise_org_id = #{record.enterpriseOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseId != null" >
+        enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgName != null" >
+        org_name = #{record.orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgLinkman != null" >
+        org_linkman = #{record.orgLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgPhone != null" >
+        org_phone = #{record.orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseOrgContractId != null" >
+        enterprise_org_contract_id = #{record.enterpriseOrgContractId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseOrgContractName != null" >
+        enterprise_org_contract_name = #{record.enterpriseOrgContractName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseOrgStatus != null" >
+        enterprise_org_status = #{record.enterpriseOrgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseOrgEditTime != null" >
+        enterprise_org_edit_time = #{record.enterpriseOrgEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseOrgCreateTime != null" >
+        enterprise_org_create_time = #{record.enterpriseOrgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update enterprise_org
+    set enterprise_org_id = #{record.enterpriseOrgId,jdbcType=VARCHAR},
+      enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_name = #{record.orgName,jdbcType=VARCHAR},
+      org_linkman = #{record.orgLinkman,jdbcType=VARCHAR},
+      org_phone = #{record.orgPhone,jdbcType=VARCHAR},
+      enterprise_org_contract_id = #{record.enterpriseOrgContractId,jdbcType=VARCHAR},
+      enterprise_org_contract_name = #{record.enterpriseOrgContractName,jdbcType=VARCHAR},
+      enterprise_org_status = #{record.enterpriseOrgStatus,jdbcType=INTEGER},
+      enterprise_org_edit_time = #{record.enterpriseOrgEditTime,jdbcType=TIMESTAMP},
+      enterprise_org_create_time = #{record.enterpriseOrgCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrg" >
+    update enterprise_org
+    <set >
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLinkman != null" >
+        org_linkman = #{orgLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPhone != null" >
+        org_phone = #{orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOrgContractId != null" >
+        enterprise_org_contract_id = #{enterpriseOrgContractId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOrgContractName != null" >
+        enterprise_org_contract_name = #{enterpriseOrgContractName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseOrgStatus != null" >
+        enterprise_org_status = #{enterpriseOrgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseOrgEditTime != null" >
+        enterprise_org_edit_time = #{enterpriseOrgEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseOrgCreateTime != null" >
+        enterprise_org_create_time = #{enterpriseOrgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where enterprise_org_id = #{enterpriseOrgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.enterprise.org.EnterpriseOrg" >
+    update enterprise_org
+    set enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      org_name = #{orgName,jdbcType=VARCHAR},
+      org_linkman = #{orgLinkman,jdbcType=VARCHAR},
+      org_phone = #{orgPhone,jdbcType=VARCHAR},
+      enterprise_org_contract_id = #{enterpriseOrgContractId,jdbcType=VARCHAR},
+      enterprise_org_contract_name = #{enterpriseOrgContractName,jdbcType=VARCHAR},
+      enterprise_org_status = #{enterpriseOrgStatus,jdbcType=INTEGER},
+      enterprise_org_edit_time = #{enterpriseOrgEditTime,jdbcType=TIMESTAMP},
+      enterprise_org_create_time = #{enterpriseOrgCreateTime,jdbcType=TIMESTAMP}
+    where enterprise_org_id = #{enterpriseOrgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.suite.OrganizationExamSuiteMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.suite.OrganizationExamSuite" >
+    <id column="exam_suite_id" property="examSuiteId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="exam_suite_name" property="examSuiteName" jdbcType="VARCHAR" />
+    <result column="exam_suite_name_eng" property="examSuiteNameEng" jdbcType="VARCHAR" />
+    <result column="exam_suite_code" property="examSuiteCode" jdbcType="VARCHAR" />
+    <result column="exam_suite_price" property="examSuitePrice" jdbcType="DECIMAL" />
+    <result column="exam_suite_discount_price" property="examSuiteDiscountPrice" jdbcType="DECIMAL" />
+    <result column="exam_suite_in_price" property="examSuiteInPrice" jdbcType="DECIMAL" />
+    <result column="exam_suite_male" property="examSuiteMale" jdbcType="INTEGER" />
+    <result column="exam_suite_female" property="examSuiteFemale" jdbcType="INTEGER" />
+    <result column="exam_suite_warn_people" property="examSuiteWarnPeople" jdbcType="INTEGER" />
+    <result column="exam_suite_limit_people" property="examSuiteLimitPeople" jdbcType="INTEGER" />
+    <result column="exam_suite_warn_amount" property="examSuiteWarnAmount" jdbcType="DECIMAL" />
+    <result column="exam_suite_limit_amount" property="examSuiteLimitAmount" jdbcType="DECIMAL" />
+    <result column="exam_suite_img_url" property="examSuiteImgUrl" jdbcType="VARCHAR" />
+    <result column="exam_suite_input_code" property="examSuiteInputCode" jdbcType="VARCHAR" />
+    <result column="exam_suite_disp_order" property="examSuiteDispOrder" jdbcType="INTEGER" />
+    <result column="exam_suite_note" property="examSuiteNote" jdbcType="VARCHAR" />
+    <result column="exam_suite_status" property="examSuiteStatus" jdbcType="INTEGER" />
+    <result column="exam_suite_create_time" property="examSuiteCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_suite_edit_time" property="examSuiteEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.suite.OrganizationExamSuite" extends="BaseResultMap" >
+    <result column="exam_suite_summary" property="examSuiteSummary" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_suite_id, org_id, exam_suite_name, exam_suite_name_eng, exam_suite_code, exam_suite_price, 
+    exam_suite_discount_price, exam_suite_in_price, exam_suite_male, exam_suite_female, 
+    exam_suite_warn_people, exam_suite_limit_people, exam_suite_warn_amount, exam_suite_limit_amount, 
+    exam_suite_img_url, exam_suite_input_code, exam_suite_disp_order, exam_suite_note, 
+    exam_suite_status, exam_suite_create_time, exam_suite_edit_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    exam_suite_summary
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.suite.OrganizationExamSuiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from organization_exam_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.suite.OrganizationExamSuiteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from organization_exam_suite
+    where exam_suite_id = #{examSuiteId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_suite
+    where exam_suite_id = #{examSuiteId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteExample" >
+    delete from organization_exam_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.suite.OrganizationExamSuite" >
+    insert into organization_exam_suite (exam_suite_id, org_id, exam_suite_name, 
+      exam_suite_name_eng, exam_suite_code, exam_suite_price, 
+      exam_suite_discount_price, exam_suite_in_price, 
+      exam_suite_male, exam_suite_female, exam_suite_warn_people, 
+      exam_suite_limit_people, exam_suite_warn_amount, 
+      exam_suite_limit_amount, exam_suite_img_url, 
+      exam_suite_input_code, exam_suite_disp_order, 
+      exam_suite_note, exam_suite_status, exam_suite_create_time, 
+      exam_suite_edit_time, exam_suite_summary
+      )
+    values (#{examSuiteId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{examSuiteName,jdbcType=VARCHAR}, 
+      #{examSuiteNameEng,jdbcType=VARCHAR}, #{examSuiteCode,jdbcType=VARCHAR}, #{examSuitePrice,jdbcType=DECIMAL}, 
+      #{examSuiteDiscountPrice,jdbcType=DECIMAL}, #{examSuiteInPrice,jdbcType=DECIMAL}, 
+      #{examSuiteMale,jdbcType=INTEGER}, #{examSuiteFemale,jdbcType=INTEGER}, #{examSuiteWarnPeople,jdbcType=INTEGER}, 
+      #{examSuiteLimitPeople,jdbcType=INTEGER}, #{examSuiteWarnAmount,jdbcType=DECIMAL}, 
+      #{examSuiteLimitAmount,jdbcType=DECIMAL}, #{examSuiteImgUrl,jdbcType=VARCHAR}, 
+      #{examSuiteInputCode,jdbcType=VARCHAR}, #{examSuiteDispOrder,jdbcType=INTEGER}, 
+      #{examSuiteNote,jdbcType=VARCHAR}, #{examSuiteStatus,jdbcType=INTEGER}, #{examSuiteCreateTime,jdbcType=TIMESTAMP}, 
+      #{examSuiteEditTime,jdbcType=TIMESTAMP}, #{examSuiteSummary,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.suite.OrganizationExamSuite" >
+    insert into organization_exam_suite
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examSuiteId != null" >
+        exam_suite_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name,
+      </if>
+      <if test="examSuiteNameEng != null" >
+        exam_suite_name_eng,
+      </if>
+      <if test="examSuiteCode != null" >
+        exam_suite_code,
+      </if>
+      <if test="examSuitePrice != null" >
+        exam_suite_price,
+      </if>
+      <if test="examSuiteDiscountPrice != null" >
+        exam_suite_discount_price,
+      </if>
+      <if test="examSuiteInPrice != null" >
+        exam_suite_in_price,
+      </if>
+      <if test="examSuiteMale != null" >
+        exam_suite_male,
+      </if>
+      <if test="examSuiteFemale != null" >
+        exam_suite_female,
+      </if>
+      <if test="examSuiteWarnPeople != null" >
+        exam_suite_warn_people,
+      </if>
+      <if test="examSuiteLimitPeople != null" >
+        exam_suite_limit_people,
+      </if>
+      <if test="examSuiteWarnAmount != null" >
+        exam_suite_warn_amount,
+      </if>
+      <if test="examSuiteLimitAmount != null" >
+        exam_suite_limit_amount,
+      </if>
+      <if test="examSuiteImgUrl != null" >
+        exam_suite_img_url,
+      </if>
+      <if test="examSuiteInputCode != null" >
+        exam_suite_input_code,
+      </if>
+      <if test="examSuiteDispOrder != null" >
+        exam_suite_disp_order,
+      </if>
+      <if test="examSuiteNote != null" >
+        exam_suite_note,
+      </if>
+      <if test="examSuiteStatus != null" >
+        exam_suite_status,
+      </if>
+      <if test="examSuiteCreateTime != null" >
+        exam_suite_create_time,
+      </if>
+      <if test="examSuiteEditTime != null" >
+        exam_suite_edit_time,
+      </if>
+      <if test="examSuiteSummary != null" >
+        exam_suite_summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examSuiteId != null" >
+        #{examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteNameEng != null" >
+        #{examSuiteNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteCode != null" >
+        #{examSuiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuitePrice != null" >
+        #{examSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteDiscountPrice != null" >
+        #{examSuiteDiscountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteInPrice != null" >
+        #{examSuiteInPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteMale != null" >
+        #{examSuiteMale,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteFemale != null" >
+        #{examSuiteFemale,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteWarnPeople != null" >
+        #{examSuiteWarnPeople,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteLimitPeople != null" >
+        #{examSuiteLimitPeople,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteWarnAmount != null" >
+        #{examSuiteWarnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteLimitAmount != null" >
+        #{examSuiteLimitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteImgUrl != null" >
+        #{examSuiteImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteInputCode != null" >
+        #{examSuiteInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteDispOrder != null" >
+        #{examSuiteDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteNote != null" >
+        #{examSuiteNote,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteStatus != null" >
+        #{examSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteCreateTime != null" >
+        #{examSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examSuiteEditTime != null" >
+        #{examSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examSuiteSummary != null" >
+        #{examSuiteSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_suite
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_suite
+    <set >
+      <if test="record.examSuiteId != null" >
+        exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteName != null" >
+        exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteNameEng != null" >
+        exam_suite_name_eng = #{record.examSuiteNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteCode != null" >
+        exam_suite_code = #{record.examSuiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuitePrice != null" >
+        exam_suite_price = #{record.examSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examSuiteDiscountPrice != null" >
+        exam_suite_discount_price = #{record.examSuiteDiscountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examSuiteInPrice != null" >
+        exam_suite_in_price = #{record.examSuiteInPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examSuiteMale != null" >
+        exam_suite_male = #{record.examSuiteMale,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteFemale != null" >
+        exam_suite_female = #{record.examSuiteFemale,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteWarnPeople != null" >
+        exam_suite_warn_people = #{record.examSuiteWarnPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteLimitPeople != null" >
+        exam_suite_limit_people = #{record.examSuiteLimitPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteWarnAmount != null" >
+        exam_suite_warn_amount = #{record.examSuiteWarnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examSuiteLimitAmount != null" >
+        exam_suite_limit_amount = #{record.examSuiteLimitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.examSuiteImgUrl != null" >
+        exam_suite_img_url = #{record.examSuiteImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteInputCode != null" >
+        exam_suite_input_code = #{record.examSuiteInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteDispOrder != null" >
+        exam_suite_disp_order = #{record.examSuiteDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteNote != null" >
+        exam_suite_note = #{record.examSuiteNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examSuiteStatus != null" >
+        exam_suite_status = #{record.examSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examSuiteCreateTime != null" >
+        exam_suite_create_time = #{record.examSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examSuiteEditTime != null" >
+        exam_suite_edit_time = #{record.examSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examSuiteSummary != null" >
+        exam_suite_summary = #{record.examSuiteSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update organization_exam_suite
+    set exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      exam_suite_name_eng = #{record.examSuiteNameEng,jdbcType=VARCHAR},
+      exam_suite_code = #{record.examSuiteCode,jdbcType=VARCHAR},
+      exam_suite_price = #{record.examSuitePrice,jdbcType=DECIMAL},
+      exam_suite_discount_price = #{record.examSuiteDiscountPrice,jdbcType=DECIMAL},
+      exam_suite_in_price = #{record.examSuiteInPrice,jdbcType=DECIMAL},
+      exam_suite_male = #{record.examSuiteMale,jdbcType=INTEGER},
+      exam_suite_female = #{record.examSuiteFemale,jdbcType=INTEGER},
+      exam_suite_warn_people = #{record.examSuiteWarnPeople,jdbcType=INTEGER},
+      exam_suite_limit_people = #{record.examSuiteLimitPeople,jdbcType=INTEGER},
+      exam_suite_warn_amount = #{record.examSuiteWarnAmount,jdbcType=DECIMAL},
+      exam_suite_limit_amount = #{record.examSuiteLimitAmount,jdbcType=DECIMAL},
+      exam_suite_img_url = #{record.examSuiteImgUrl,jdbcType=VARCHAR},
+      exam_suite_input_code = #{record.examSuiteInputCode,jdbcType=VARCHAR},
+      exam_suite_disp_order = #{record.examSuiteDispOrder,jdbcType=INTEGER},
+      exam_suite_note = #{record.examSuiteNote,jdbcType=VARCHAR},
+      exam_suite_status = #{record.examSuiteStatus,jdbcType=INTEGER},
+      exam_suite_create_time = #{record.examSuiteCreateTime,jdbcType=TIMESTAMP},
+      exam_suite_edit_time = #{record.examSuiteEditTime,jdbcType=TIMESTAMP},
+      exam_suite_summary = #{record.examSuiteSummary,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_suite
+    set exam_suite_id = #{record.examSuiteId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      exam_suite_name = #{record.examSuiteName,jdbcType=VARCHAR},
+      exam_suite_name_eng = #{record.examSuiteNameEng,jdbcType=VARCHAR},
+      exam_suite_code = #{record.examSuiteCode,jdbcType=VARCHAR},
+      exam_suite_price = #{record.examSuitePrice,jdbcType=DECIMAL},
+      exam_suite_discount_price = #{record.examSuiteDiscountPrice,jdbcType=DECIMAL},
+      exam_suite_in_price = #{record.examSuiteInPrice,jdbcType=DECIMAL},
+      exam_suite_male = #{record.examSuiteMale,jdbcType=INTEGER},
+      exam_suite_female = #{record.examSuiteFemale,jdbcType=INTEGER},
+      exam_suite_warn_people = #{record.examSuiteWarnPeople,jdbcType=INTEGER},
+      exam_suite_limit_people = #{record.examSuiteLimitPeople,jdbcType=INTEGER},
+      exam_suite_warn_amount = #{record.examSuiteWarnAmount,jdbcType=DECIMAL},
+      exam_suite_limit_amount = #{record.examSuiteLimitAmount,jdbcType=DECIMAL},
+      exam_suite_img_url = #{record.examSuiteImgUrl,jdbcType=VARCHAR},
+      exam_suite_input_code = #{record.examSuiteInputCode,jdbcType=VARCHAR},
+      exam_suite_disp_order = #{record.examSuiteDispOrder,jdbcType=INTEGER},
+      exam_suite_note = #{record.examSuiteNote,jdbcType=VARCHAR},
+      exam_suite_status = #{record.examSuiteStatus,jdbcType=INTEGER},
+      exam_suite_create_time = #{record.examSuiteCreateTime,jdbcType=TIMESTAMP},
+      exam_suite_edit_time = #{record.examSuiteEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.suite.OrganizationExamSuite" >
+    update organization_exam_suite
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteName != null" >
+        exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteNameEng != null" >
+        exam_suite_name_eng = #{examSuiteNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteCode != null" >
+        exam_suite_code = #{examSuiteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuitePrice != null" >
+        exam_suite_price = #{examSuitePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteDiscountPrice != null" >
+        exam_suite_discount_price = #{examSuiteDiscountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteInPrice != null" >
+        exam_suite_in_price = #{examSuiteInPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteMale != null" >
+        exam_suite_male = #{examSuiteMale,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteFemale != null" >
+        exam_suite_female = #{examSuiteFemale,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteWarnPeople != null" >
+        exam_suite_warn_people = #{examSuiteWarnPeople,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteLimitPeople != null" >
+        exam_suite_limit_people = #{examSuiteLimitPeople,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteWarnAmount != null" >
+        exam_suite_warn_amount = #{examSuiteWarnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteLimitAmount != null" >
+        exam_suite_limit_amount = #{examSuiteLimitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="examSuiteImgUrl != null" >
+        exam_suite_img_url = #{examSuiteImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteInputCode != null" >
+        exam_suite_input_code = #{examSuiteInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteDispOrder != null" >
+        exam_suite_disp_order = #{examSuiteDispOrder,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteNote != null" >
+        exam_suite_note = #{examSuiteNote,jdbcType=VARCHAR},
+      </if>
+      <if test="examSuiteStatus != null" >
+        exam_suite_status = #{examSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examSuiteCreateTime != null" >
+        exam_suite_create_time = #{examSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examSuiteEditTime != null" >
+        exam_suite_edit_time = #{examSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examSuiteSummary != null" >
+        exam_suite_summary = #{examSuiteSummary,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where exam_suite_id = #{examSuiteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.suite.OrganizationExamSuite" >
+    update organization_exam_suite
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      exam_suite_name_eng = #{examSuiteNameEng,jdbcType=VARCHAR},
+      exam_suite_code = #{examSuiteCode,jdbcType=VARCHAR},
+      exam_suite_price = #{examSuitePrice,jdbcType=DECIMAL},
+      exam_suite_discount_price = #{examSuiteDiscountPrice,jdbcType=DECIMAL},
+      exam_suite_in_price = #{examSuiteInPrice,jdbcType=DECIMAL},
+      exam_suite_male = #{examSuiteMale,jdbcType=INTEGER},
+      exam_suite_female = #{examSuiteFemale,jdbcType=INTEGER},
+      exam_suite_warn_people = #{examSuiteWarnPeople,jdbcType=INTEGER},
+      exam_suite_limit_people = #{examSuiteLimitPeople,jdbcType=INTEGER},
+      exam_suite_warn_amount = #{examSuiteWarnAmount,jdbcType=DECIMAL},
+      exam_suite_limit_amount = #{examSuiteLimitAmount,jdbcType=DECIMAL},
+      exam_suite_img_url = #{examSuiteImgUrl,jdbcType=VARCHAR},
+      exam_suite_input_code = #{examSuiteInputCode,jdbcType=VARCHAR},
+      exam_suite_disp_order = #{examSuiteDispOrder,jdbcType=INTEGER},
+      exam_suite_note = #{examSuiteNote,jdbcType=VARCHAR},
+      exam_suite_status = #{examSuiteStatus,jdbcType=INTEGER},
+      exam_suite_create_time = #{examSuiteCreateTime,jdbcType=TIMESTAMP},
+      exam_suite_edit_time = #{examSuiteEditTime,jdbcType=TIMESTAMP},
+      exam_suite_summary = #{examSuiteSummary,jdbcType=LONGVARCHAR}
+    where exam_suite_id = #{examSuiteId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.suite.OrganizationExamSuite" >
+    update organization_exam_suite
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      exam_suite_name = #{examSuiteName,jdbcType=VARCHAR},
+      exam_suite_name_eng = #{examSuiteNameEng,jdbcType=VARCHAR},
+      exam_suite_code = #{examSuiteCode,jdbcType=VARCHAR},
+      exam_suite_price = #{examSuitePrice,jdbcType=DECIMAL},
+      exam_suite_discount_price = #{examSuiteDiscountPrice,jdbcType=DECIMAL},
+      exam_suite_in_price = #{examSuiteInPrice,jdbcType=DECIMAL},
+      exam_suite_male = #{examSuiteMale,jdbcType=INTEGER},
+      exam_suite_female = #{examSuiteFemale,jdbcType=INTEGER},
+      exam_suite_warn_people = #{examSuiteWarnPeople,jdbcType=INTEGER},
+      exam_suite_limit_people = #{examSuiteLimitPeople,jdbcType=INTEGER},
+      exam_suite_warn_amount = #{examSuiteWarnAmount,jdbcType=DECIMAL},
+      exam_suite_limit_amount = #{examSuiteLimitAmount,jdbcType=DECIMAL},
+      exam_suite_img_url = #{examSuiteImgUrl,jdbcType=VARCHAR},
+      exam_suite_input_code = #{examSuiteInputCode,jdbcType=VARCHAR},
+      exam_suite_disp_order = #{examSuiteDispOrder,jdbcType=INTEGER},
+      exam_suite_note = #{examSuiteNote,jdbcType=VARCHAR},
+      exam_suite_status = #{examSuiteStatus,jdbcType=INTEGER},
+      exam_suite_create_time = #{examSuiteCreateTime,jdbcType=TIMESTAMP},
+      exam_suite_edit_time = #{examSuiteEditTime,jdbcType=TIMESTAMP}
+    where exam_suite_id = #{examSuiteId,jdbcType=VARCHAR}
+  </update>
+</mapper>

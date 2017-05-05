@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.branch.OrganizationBranchRestMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.branch.OrganizationBranchRest" >
+    <id column="branch_rest_id" property="branchRestId" jdbcType="VARCHAR" />
+    <result column="branch_id" property="branchId" jdbcType="VARCHAR" />
+    <result column="branch_rest_type" property="branchRestType" jdbcType="INTEGER" />
+    <result column="branch_rest_value" property="branchRestValue" jdbcType="VARCHAR" />
+    <result column="branch_rest_status" property="branchRestStatus" jdbcType="INTEGER" />
+    <result column="branch_rest_create_time" property="branchRestCreateTime" jdbcType="TIMESTAMP" />
+    <result column="branch_rest_edit_time" property="branchRestEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    branch_rest_id, branch_id, branch_rest_type, branch_rest_value, branch_rest_status, 
+    branch_rest_create_time, branch_rest_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.branch.OrganizationBranchRestExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_branch_rest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_branch_rest
+    where branch_rest_id = #{branchRestId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_branch_rest
+    where branch_rest_id = #{branchRestId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.branch.OrganizationBranchRestExample" >
+    delete from organization_branch_rest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.branch.OrganizationBranchRest" >
+    insert into organization_branch_rest (branch_rest_id, branch_id, branch_rest_type, 
+      branch_rest_value, branch_rest_status, branch_rest_create_time, 
+      branch_rest_edit_time)
+    values (#{branchRestId,jdbcType=VARCHAR}, #{branchId,jdbcType=VARCHAR}, #{branchRestType,jdbcType=INTEGER}, 
+      #{branchRestValue,jdbcType=VARCHAR}, #{branchRestStatus,jdbcType=INTEGER}, #{branchRestCreateTime,jdbcType=TIMESTAMP}, 
+      #{branchRestEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.branch.OrganizationBranchRest" >
+    insert into organization_branch_rest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="branchRestId != null" >
+        branch_rest_id,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="branchRestType != null" >
+        branch_rest_type,
+      </if>
+      <if test="branchRestValue != null" >
+        branch_rest_value,
+      </if>
+      <if test="branchRestStatus != null" >
+        branch_rest_status,
+      </if>
+      <if test="branchRestCreateTime != null" >
+        branch_rest_create_time,
+      </if>
+      <if test="branchRestEditTime != null" >
+        branch_rest_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="branchRestId != null" >
+        #{branchRestId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchRestType != null" >
+        #{branchRestType,jdbcType=INTEGER},
+      </if>
+      <if test="branchRestValue != null" >
+        #{branchRestValue,jdbcType=VARCHAR},
+      </if>
+      <if test="branchRestStatus != null" >
+        #{branchRestStatus,jdbcType=INTEGER},
+      </if>
+      <if test="branchRestCreateTime != null" >
+        #{branchRestCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="branchRestEditTime != null" >
+        #{branchRestEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.branch.OrganizationBranchRestExample" resultType="java.lang.Integer" >
+    select count(*) from organization_branch_rest
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_branch_rest
+    <set >
+      <if test="record.branchRestId != null" >
+        branch_rest_id = #{record.branchRestId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchRestType != null" >
+        branch_rest_type = #{record.branchRestType,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchRestValue != null" >
+        branch_rest_value = #{record.branchRestValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchRestStatus != null" >
+        branch_rest_status = #{record.branchRestStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchRestCreateTime != null" >
+        branch_rest_create_time = #{record.branchRestCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.branchRestEditTime != null" >
+        branch_rest_edit_time = #{record.branchRestEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_branch_rest
+    set branch_rest_id = #{record.branchRestId,jdbcType=VARCHAR},
+      branch_id = #{record.branchId,jdbcType=VARCHAR},
+      branch_rest_type = #{record.branchRestType,jdbcType=INTEGER},
+      branch_rest_value = #{record.branchRestValue,jdbcType=VARCHAR},
+      branch_rest_status = #{record.branchRestStatus,jdbcType=INTEGER},
+      branch_rest_create_time = #{record.branchRestCreateTime,jdbcType=TIMESTAMP},
+      branch_rest_edit_time = #{record.branchRestEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.branch.OrganizationBranchRest" >
+    update organization_branch_rest
+    <set >
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchRestType != null" >
+        branch_rest_type = #{branchRestType,jdbcType=INTEGER},
+      </if>
+      <if test="branchRestValue != null" >
+        branch_rest_value = #{branchRestValue,jdbcType=VARCHAR},
+      </if>
+      <if test="branchRestStatus != null" >
+        branch_rest_status = #{branchRestStatus,jdbcType=INTEGER},
+      </if>
+      <if test="branchRestCreateTime != null" >
+        branch_rest_create_time = #{branchRestCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="branchRestEditTime != null" >
+        branch_rest_edit_time = #{branchRestEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where branch_rest_id = #{branchRestId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.branch.OrganizationBranchRest" >
+    update organization_branch_rest
+    set branch_id = #{branchId,jdbcType=VARCHAR},
+      branch_rest_type = #{branchRestType,jdbcType=INTEGER},
+      branch_rest_value = #{branchRestValue,jdbcType=VARCHAR},
+      branch_rest_status = #{branchRestStatus,jdbcType=INTEGER},
+      branch_rest_create_time = #{branchRestCreateTime,jdbcType=TIMESTAMP},
+      branch_rest_edit_time = #{branchRestEditTime,jdbcType=TIMESTAMP}
+    where branch_rest_id = #{branchRestId,jdbcType=VARCHAR}
+  </update>
+</mapper>

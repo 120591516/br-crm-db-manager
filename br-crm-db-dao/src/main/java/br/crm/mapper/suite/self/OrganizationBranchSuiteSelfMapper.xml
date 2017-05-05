@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.suite.self.OrganizationBranchSuiteSelfMapper" >
+ <resultMap id="BaseResultMap" type="br.crm.pojo.suite.OrganizationExamSuite" >
+    <id column="exam_suite_id" property="examSuiteId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="BIGINT" />
+    <result column="exam_suite_name" property="examSuiteName" jdbcType="VARCHAR" />
+    <result column="exam_suite_name_eng" property="examSuiteNameEng" jdbcType="VARCHAR" />
+    <result column="exam_suite_code" property="examSuiteCode" jdbcType="VARCHAR" />
+    <result column="exam_suite_price" property="examSuitePrice" jdbcType="DECIMAL" />
+    <result column="exam_suite_discount_price" property="examSuiteDiscountPrice" jdbcType="DECIMAL" />
+    <result column="exam_suite_in_price" property="examSuiteInPrice" jdbcType="DECIMAL" />
+  	<result column="exam_suite_male" property="examSuiteMale" jdbcType="INTEGER" />
+    <result column="exam_suite_female" property="examSuiteFemale" jdbcType="INTEGER" />
+    <result column="exam_suite_warn_people" property="examSuiteWarnPeople" jdbcType="INTEGER" />
+    <result column="exam_suite_limit_people" property="examSuiteLimitPeople" jdbcType="INTEGER" />
+    <result column="exam_suite_warn_amount" property="examSuiteWarnAmount" jdbcType="DECIMAL" />
+    <result column="exam_suite_limit_amount" property="examSuiteLimitAmount" jdbcType="DECIMAL" />
+    <result column="exam_suite_img_url" property="examSuiteImgUrl" jdbcType="VARCHAR" />
+    <result column="exam_suite_input_code" property="examSuiteInputCode" jdbcType="VARCHAR" />
+    <result column="exam_suite_disp_order" property="examSuiteDispOrder" jdbcType="INTEGER" />
+    <result column="exam_suite_note" property="examSuiteNote" jdbcType="VARCHAR" />
+    <result column="exam_suite_status" property="examSuiteStatus" jdbcType="INTEGER" />
+    <result column="exam_suite_create_time" property="examSuiteCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_suite_edit_time" property="examSuiteEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.suite.OrganizationExamSuite" extends="BaseResultMap" >
+    <result column="exam_suite_summary" property="examSuiteSummary" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapOrgBranchSuite" type="br.crm.vo.suite.OrgExamSuiteVo" extends="ResultMapWithBLOBs" >
+    <result column="org_short_name" property="orgName" jdbcType="VARCHAR" />
+    <result column="branch_suite_id" property="branchSuiteId" jdbcType="BIGINT" />
+    <collection property="orgExamSuiteTypeVo" column="exam_suite_id" select="br.crm.mapper.suite.self.OrganizationExamSuiteSelfMapper.getOrgExamSuiteTypeBySuiteId"/>
+    <collection property="orgExamSuiteHidVo" column="exam_suite_id" select="br.crm.mapper.suite.self.OrganizationExamSuiteSelfMapper.getOrgExamSuiteHidBySuiteId"/>
+  </resultMap>
+  <select id="selectByParam"  resultMap="ResultMapOrgBranchSuite" parameterType="br.crm.vo.suite.OrgExamSuiteQu">
+  	  SELECT DISTINCT
+			oex.exam_suite_name,
+			oex.exam_suite_id,
+			oex.org_id,
+			oex.exam_suite_name_eng,
+			oex.exam_suite_code,
+			oex.exam_suite_price,
+			oex.exam_suite_male,
+			oex.exam_suite_female,
+			(case when oex.exam_suite_male=0 and  oex.exam_suite_female=0 then 0
+			when oex.exam_suite_male=0 and  oex.exam_suite_female!=0 then 1
+			when oex.exam_suite_male!=0 and  oex.exam_suite_female=0 then 2
+ 			end)orgExamSuiteSexId,
+			oex.exam_suite_input_code,
+			o.org_short_name,
+			obs.branch_suite_id,
+			oex.exam_suite_note
+		FROM  organization_branch_suite AS obs
+		LEFT JOIN organization_exam_suite AS oex ON obs.suite_id = oex.exam_suite_id AND oex.exam_suite_status = 0
+		LEFT JOIN organization AS o ON oex.org_id = o.org_id AND o.org_status = 0
+		LEFT JOIN organization_exam_suite_type AS oest ON oest.exam_suite_id = oex.exam_suite_id AND oest.exam_suite_type_status = 0
+		WHERE oex.exam_suite_status = 0 AND obs.branch_id = #{branchId} and obs.status=0
+			<if test="orgId!=null"> AND oex.org_id =#{orgId}</if>
+			<if test="inputCode!=null">AND oex.exam_suite_input_code = #{inputCode} </if>
+			<if test="examSuiteCode!=null">AND oex.exam_suite_code = #{examSuiteCode} </if>
+			<choose>
+				<when test="examSuiteSex==0">AND oex.exam_suite_male = 0 AND oex.exam_suite_female = 0 </when>
+				<when test="examSuiteSex==1">AND oex.exam_suite_male = 0 </when>
+				<when test="examSuiteSex==2">AND oex.exam_suite_female = 0 </when>
+				<otherwise></otherwise>
+			</choose>
+			<if test="priceStart!=null"> AND oex.exam_suite_price &gt;= #{priceStart} </if>
+			<if test="priceEnd!=null"> AND oex.exam_suite_price &lt;= #{priceEnd} </if>
+			<if test="examSuiteName!=null"> AND oex.exam_suite_name LIKE '%${examSuiteName}%'</if>
+			<if test="orgName!=null"> AND o.org_short_name LIKE '%${orgName}%'</if>
+			<if test="suiteTypeId!=null"> AND oest.exam_type_id=#{suiteTypeId}</if>
+			ORDER BY
+				<choose>
+				<when test="examSuiteSex==1">(case when oex.exam_suite_male=0 and  oex.exam_suite_female=0 then 0
+					when oex.exam_suite_male=0 and  oex.exam_suite_female!=0 then 1
+ 					end) DESC, </when>
+				<when test="examSuiteSex==2">(case when oex.exam_suite_male=0 and  oex.exam_suite_female=0 then 0
+					when oex.exam_suite_male!=0 and  oex.exam_suite_female=0 then 1
+		 			end) DESC ,</when>
+				<otherwise></otherwise>
+			</choose>
+			obs.createtime DESC
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapOrgBranchSuite" >
+    SELECT DISTINCT
+			oex.exam_suite_name,
+			oex.exam_suite_id,
+			oex.org_id,
+			oex.exam_suite_name_eng,
+			oex.exam_suite_code,
+			oex.exam_suite_price,
+			oex.exam_suite_discount_price,
+			oex.exam_suite_in_price,
+			oex.exam_suite_male,
+			oex.exam_suite_female,
+			(case when oex.exam_suite_male=0 and  oex.exam_suite_female=0 then 0
+			when oex.exam_suite_male=0 and  oex.exam_suite_female!=0 then 1
+			when oex.exam_suite_male!=0 and  oex.exam_suite_female=0 then 2
+ 			end)orgExamSuiteSexId,
+			oex.exam_suite_warn_people,
+			oex.exam_suite_limit_people,
+			oex.exam_suite_warn_amount,
+			oex.exam_suite_limit_amount,
+			oex.exam_suite_img_url,
+			oex.exam_suite_input_code,
+			oex.exam_suite_disp_order,
+			oex.exam_suite_note,
+			oex.exam_suite_summary,
+			oex.exam_suite_status,
+			oex.exam_suite_create_time,
+			oex.exam_suite_edit_time,
+			o.org_short_name,
+			obs.branch_suite_id 
+			FROM  organization_branch_suite AS obs
+		LEFT JOIN organization_exam_suite AS oex ON obs.suite_id = oex.exam_suite_id AND oex.exam_suite_status = 0
+		LEFT JOIN organization AS o ON oex.org_id = o.org_id AND o.org_status = 0
+		LEFT JOIN organization_exam_suite_type AS oest ON oest.exam_suite_id = oex.exam_suite_id AND oest.exam_suite_type_status = 0
+		WHERE obs.branch_suite_id =#{orgBranchSuiteId} and  obs.status=0
+  </select>
+  <select id="getSelectSuiteByBranchId" resultType="java.lang.String">
+  		SELECT DISTINCT
+			organization_branch_suite.suite_id
+		FROM
+			organization_branch_suite
+		WHERE
+			organization_branch_suite.status = 0
+		AND organization_branch_suite.branch_id = #{branchId}
+  </select> 
+  </mapper>
+  

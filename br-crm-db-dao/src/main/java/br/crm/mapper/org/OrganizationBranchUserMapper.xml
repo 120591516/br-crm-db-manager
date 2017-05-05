@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationBranchUserMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationBranchUser" >
+    <id column="org_branch_user_id" property="orgBranchUserId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_branch_id" property="orgBranchId" jdbcType="VARCHAR" />
+    <result column="org_user_id" property="orgUserId" jdbcType="VARCHAR" />
+    <result column="org_branch_user_status" property="orgBranchUserStatus" jdbcType="INTEGER" />
+    <result column="org_branch_user_create_time" property="orgBranchUserCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_branch_user_edit_time" property="orgBranchUserEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_branch_user_id, org_id, org_branch_id, org_user_id, org_branch_user_status, org_branch_user_create_time, 
+    org_branch_user_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationBranchUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_branch_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_branch_user
+    where org_branch_user_id = #{orgBranchUserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_branch_user
+    where org_branch_user_id = #{orgBranchUserId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationBranchUserExample" >
+    delete from organization_branch_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationBranchUser" >
+    insert into organization_branch_user (org_branch_user_id, org_id, org_branch_id, 
+      org_user_id, org_branch_user_status, org_branch_user_create_time, 
+      org_branch_user_edit_time)
+    values (#{orgBranchUserId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{orgBranchId,jdbcType=VARCHAR}, 
+      #{orgUserId,jdbcType=VARCHAR}, #{orgBranchUserStatus,jdbcType=INTEGER}, #{orgBranchUserCreateTime,jdbcType=TIMESTAMP}, 
+      #{orgBranchUserEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationBranchUser" >
+    insert into organization_branch_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgBranchUserId != null" >
+        org_branch_user_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgBranchId != null" >
+        org_branch_id,
+      </if>
+      <if test="orgUserId != null" >
+        org_user_id,
+      </if>
+      <if test="orgBranchUserStatus != null" >
+        org_branch_user_status,
+      </if>
+      <if test="orgBranchUserCreateTime != null" >
+        org_branch_user_create_time,
+      </if>
+      <if test="orgBranchUserEditTime != null" >
+        org_branch_user_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgBranchUserId != null" >
+        #{orgBranchUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBranchId != null" >
+        #{orgBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUserId != null" >
+        #{orgUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBranchUserStatus != null" >
+        #{orgBranchUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgBranchUserCreateTime != null" >
+        #{orgBranchUserCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgBranchUserEditTime != null" >
+        #{orgBranchUserEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationBranchUserExample" resultType="java.lang.Integer" >
+    select count(*) from organization_branch_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_branch_user
+    <set >
+      <if test="record.orgBranchUserId != null" >
+        org_branch_user_id = #{record.orgBranchUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgBranchId != null" >
+        org_branch_id = #{record.orgBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgUserId != null" >
+        org_user_id = #{record.orgUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgBranchUserStatus != null" >
+        org_branch_user_status = #{record.orgBranchUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgBranchUserCreateTime != null" >
+        org_branch_user_create_time = #{record.orgBranchUserCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgBranchUserEditTime != null" >
+        org_branch_user_edit_time = #{record.orgBranchUserEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_branch_user
+    set org_branch_user_id = #{record.orgBranchUserId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_branch_id = #{record.orgBranchId,jdbcType=VARCHAR},
+      org_user_id = #{record.orgUserId,jdbcType=VARCHAR},
+      org_branch_user_status = #{record.orgBranchUserStatus,jdbcType=INTEGER},
+      org_branch_user_create_time = #{record.orgBranchUserCreateTime,jdbcType=TIMESTAMP},
+      org_branch_user_edit_time = #{record.orgBranchUserEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationBranchUser" >
+    update organization_branch_user
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBranchId != null" >
+        org_branch_id = #{orgBranchId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgUserId != null" >
+        org_user_id = #{orgUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBranchUserStatus != null" >
+        org_branch_user_status = #{orgBranchUserStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgBranchUserCreateTime != null" >
+        org_branch_user_create_time = #{orgBranchUserCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgBranchUserEditTime != null" >
+        org_branch_user_edit_time = #{orgBranchUserEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_branch_user_id = #{orgBranchUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationBranchUser" >
+    update organization_branch_user
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_branch_id = #{orgBranchId,jdbcType=VARCHAR},
+      org_user_id = #{orgUserId,jdbcType=VARCHAR},
+      org_branch_user_status = #{orgBranchUserStatus,jdbcType=INTEGER},
+      org_branch_user_create_time = #{orgBranchUserCreateTime,jdbcType=TIMESTAMP},
+      org_branch_user_edit_time = #{orgBranchUserEditTime,jdbcType=TIMESTAMP}
+    where org_branch_user_id = #{orgBranchUserId,jdbcType=VARCHAR}
+  </update>
+</mapper>

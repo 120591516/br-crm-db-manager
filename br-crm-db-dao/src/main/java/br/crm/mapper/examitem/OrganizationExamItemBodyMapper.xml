@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examitem.OrganizationExamItemBodyMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.examitem.OrganizationExamItemBody" >
+    <id column="exam_item_body_id" property="examItemBodyId" jdbcType="VARCHAR" />
+    <result column="exam_item_id" property="examItemId" jdbcType="VARCHAR" />
+    <result column="body_part_id" property="bodyPartId" jdbcType="VARCHAR" />
+    <result column="exam_item_body_isdefault" property="examItemBodyIsdefault" jdbcType="INTEGER" />
+    <result column="exam_item_body_status" property="examItemBodyStatus" jdbcType="INTEGER" />
+    <result column="exam_item_body_create_time" property="examItemBodyCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_item_body_edit_time" property="examItemBodyEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_item_body_id, exam_item_id, body_part_id, exam_item_body_isdefault, exam_item_body_status, 
+    exam_item_body_create_time, exam_item_body_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.examitem.OrganizationExamItemBodyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_item_body
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_item_body
+    where exam_item_body_id = #{examItemBodyId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_item_body
+    where exam_item_body_id = #{examItemBodyId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.examitem.OrganizationExamItemBodyExample" >
+    delete from organization_exam_item_body
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.examitem.OrganizationExamItemBody" >
+    insert into organization_exam_item_body (exam_item_body_id, exam_item_id, body_part_id, 
+      exam_item_body_isdefault, exam_item_body_status, 
+      exam_item_body_create_time, exam_item_body_edit_time
+      )
+    values (#{examItemBodyId,jdbcType=VARCHAR}, #{examItemId,jdbcType=VARCHAR}, #{bodyPartId,jdbcType=VARCHAR}, 
+      #{examItemBodyIsdefault,jdbcType=INTEGER}, #{examItemBodyStatus,jdbcType=INTEGER}, 
+      #{examItemBodyCreateTime,jdbcType=TIMESTAMP}, #{examItemBodyEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.examitem.OrganizationExamItemBody" >
+    insert into organization_exam_item_body
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examItemBodyId != null" >
+        exam_item_body_id,
+      </if>
+      <if test="examItemId != null" >
+        exam_item_id,
+      </if>
+      <if test="bodyPartId != null" >
+        body_part_id,
+      </if>
+      <if test="examItemBodyIsdefault != null" >
+        exam_item_body_isdefault,
+      </if>
+      <if test="examItemBodyStatus != null" >
+        exam_item_body_status,
+      </if>
+      <if test="examItemBodyCreateTime != null" >
+        exam_item_body_create_time,
+      </if>
+      <if test="examItemBodyEditTime != null" >
+        exam_item_body_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examItemBodyId != null" >
+        #{examItemBodyId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemId != null" >
+        #{examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartId != null" >
+        #{bodyPartId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemBodyIsdefault != null" >
+        #{examItemBodyIsdefault,jdbcType=INTEGER},
+      </if>
+      <if test="examItemBodyStatus != null" >
+        #{examItemBodyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemBodyCreateTime != null" >
+        #{examItemBodyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examItemBodyEditTime != null" >
+        #{examItemBodyEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.examitem.OrganizationExamItemBodyExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_item_body
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_item_body
+    <set >
+      <if test="record.examItemBodyId != null" >
+        exam_item_body_id = #{record.examItemBodyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemId != null" >
+        exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bodyPartId != null" >
+        body_part_id = #{record.bodyPartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemBodyIsdefault != null" >
+        exam_item_body_isdefault = #{record.examItemBodyIsdefault,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemBodyStatus != null" >
+        exam_item_body_status = #{record.examItemBodyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemBodyCreateTime != null" >
+        exam_item_body_create_time = #{record.examItemBodyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.examItemBodyEditTime != null" >
+        exam_item_body_edit_time = #{record.examItemBodyEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_item_body
+    set exam_item_body_id = #{record.examItemBodyId,jdbcType=VARCHAR},
+      exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      body_part_id = #{record.bodyPartId,jdbcType=VARCHAR},
+      exam_item_body_isdefault = #{record.examItemBodyIsdefault,jdbcType=INTEGER},
+      exam_item_body_status = #{record.examItemBodyStatus,jdbcType=INTEGER},
+      exam_item_body_create_time = #{record.examItemBodyCreateTime,jdbcType=TIMESTAMP},
+      exam_item_body_edit_time = #{record.examItemBodyEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.examitem.OrganizationExamItemBody" >
+    update organization_exam_item_body
+    <set >
+      <if test="examItemId != null" >
+        exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartId != null" >
+        body_part_id = #{bodyPartId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemBodyIsdefault != null" >
+        exam_item_body_isdefault = #{examItemBodyIsdefault,jdbcType=INTEGER},
+      </if>
+      <if test="examItemBodyStatus != null" >
+        exam_item_body_status = #{examItemBodyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemBodyCreateTime != null" >
+        exam_item_body_create_time = #{examItemBodyCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examItemBodyEditTime != null" >
+        exam_item_body_edit_time = #{examItemBodyEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where exam_item_body_id = #{examItemBodyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.examitem.OrganizationExamItemBody" >
+    update organization_exam_item_body
+    set exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      body_part_id = #{bodyPartId,jdbcType=VARCHAR},
+      exam_item_body_isdefault = #{examItemBodyIsdefault,jdbcType=INTEGER},
+      exam_item_body_status = #{examItemBodyStatus,jdbcType=INTEGER},
+      exam_item_body_create_time = #{examItemBodyCreateTime,jdbcType=TIMESTAMP},
+      exam_item_body_edit_time = #{examItemBodyEditTime,jdbcType=TIMESTAMP}
+    where exam_item_body_id = #{examItemBodyId,jdbcType=VARCHAR}
+  </update>
+</mapper>

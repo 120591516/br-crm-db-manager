@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.suite.OrganizationExamSuiteImgMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.suite.OrganizationExamSuiteImg" >
+    <id column="org_exam_suite_img_id" property="orgExamSuiteImgId" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_exam_suite_id" property="orgExamSuiteId" jdbcType="VARCHAR" />
+    <result column="dict_img_id" property="dictImgId" jdbcType="BIGINT" />
+    <result column="org_exam_suite_create_time" property="orgExamSuiteCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_exam_suite_edit_time" property="orgExamSuiteEditTime" jdbcType="TIMESTAMP" />
+    <result column="org_exam_suite_status" property="orgExamSuiteStatus" jdbcType="INTEGER" />
+    <result column="org_exam_suite_img_type" property="orgExamSuiteImgType" jdbcType="INTEGER" />
+    <result column="org_exam_suite_img_node" property="orgExamSuiteImgNode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_exam_suite_img_id, org_id, org_exam_suite_id, dict_img_id, org_exam_suite_create_time, 
+    org_exam_suite_edit_time, org_exam_suite_status, org_exam_suite_img_type, org_exam_suite_img_node
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_exam_suite_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_exam_suite_img
+    where org_exam_suite_img_id = #{orgExamSuiteImgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_exam_suite_img
+    where org_exam_suite_img_id = #{orgExamSuiteImgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImgExample" >
+    delete from organization_exam_suite_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImg" >
+    insert into organization_exam_suite_img (org_exam_suite_img_id, org_id, org_exam_suite_id, 
+      dict_img_id, org_exam_suite_create_time, org_exam_suite_edit_time, 
+      org_exam_suite_status, org_exam_suite_img_type, 
+      org_exam_suite_img_node)
+    values (#{orgExamSuiteImgId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{orgExamSuiteId,jdbcType=VARCHAR}, 
+      #{dictImgId,jdbcType=BIGINT}, #{orgExamSuiteCreateTime,jdbcType=TIMESTAMP}, #{orgExamSuiteEditTime,jdbcType=TIMESTAMP}, 
+      #{orgExamSuiteStatus,jdbcType=INTEGER}, #{orgExamSuiteImgType,jdbcType=INTEGER}, 
+      #{orgExamSuiteImgNode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImg" >
+    insert into organization_exam_suite_img
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgExamSuiteImgId != null" >
+        org_exam_suite_img_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgExamSuiteId != null" >
+        org_exam_suite_id,
+      </if>
+      <if test="dictImgId != null" >
+        dict_img_id,
+      </if>
+      <if test="orgExamSuiteCreateTime != null" >
+        org_exam_suite_create_time,
+      </if>
+      <if test="orgExamSuiteEditTime != null" >
+        org_exam_suite_edit_time,
+      </if>
+      <if test="orgExamSuiteStatus != null" >
+        org_exam_suite_status,
+      </if>
+      <if test="orgExamSuiteImgType != null" >
+        org_exam_suite_img_type,
+      </if>
+      <if test="orgExamSuiteImgNode != null" >
+        org_exam_suite_img_node,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgExamSuiteImgId != null" >
+        #{orgExamSuiteImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgExamSuiteId != null" >
+        #{orgExamSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictImgId != null" >
+        #{dictImgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgExamSuiteCreateTime != null" >
+        #{orgExamSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgExamSuiteEditTime != null" >
+        #{orgExamSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgExamSuiteStatus != null" >
+        #{orgExamSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgExamSuiteImgType != null" >
+        #{orgExamSuiteImgType,jdbcType=INTEGER},
+      </if>
+      <if test="orgExamSuiteImgNode != null" >
+        #{orgExamSuiteImgNode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImgExample" resultType="java.lang.Integer" >
+    select count(*) from organization_exam_suite_img
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_exam_suite_img
+    <set >
+      <if test="record.orgExamSuiteImgId != null" >
+        org_exam_suite_img_id = #{record.orgExamSuiteImgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgExamSuiteId != null" >
+        org_exam_suite_id = #{record.orgExamSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictImgId != null" >
+        dict_img_id = #{record.dictImgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgExamSuiteCreateTime != null" >
+        org_exam_suite_create_time = #{record.orgExamSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgExamSuiteEditTime != null" >
+        org_exam_suite_edit_time = #{record.orgExamSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgExamSuiteStatus != null" >
+        org_exam_suite_status = #{record.orgExamSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgExamSuiteImgType != null" >
+        org_exam_suite_img_type = #{record.orgExamSuiteImgType,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgExamSuiteImgNode != null" >
+        org_exam_suite_img_node = #{record.orgExamSuiteImgNode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_exam_suite_img
+    set org_exam_suite_img_id = #{record.orgExamSuiteImgId,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_exam_suite_id = #{record.orgExamSuiteId,jdbcType=VARCHAR},
+      dict_img_id = #{record.dictImgId,jdbcType=BIGINT},
+      org_exam_suite_create_time = #{record.orgExamSuiteCreateTime,jdbcType=TIMESTAMP},
+      org_exam_suite_edit_time = #{record.orgExamSuiteEditTime,jdbcType=TIMESTAMP},
+      org_exam_suite_status = #{record.orgExamSuiteStatus,jdbcType=INTEGER},
+      org_exam_suite_img_type = #{record.orgExamSuiteImgType,jdbcType=INTEGER},
+      org_exam_suite_img_node = #{record.orgExamSuiteImgNode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImg" >
+    update organization_exam_suite_img
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgExamSuiteId != null" >
+        org_exam_suite_id = #{orgExamSuiteId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictImgId != null" >
+        dict_img_id = #{dictImgId,jdbcType=BIGINT},
+      </if>
+      <if test="orgExamSuiteCreateTime != null" >
+        org_exam_suite_create_time = #{orgExamSuiteCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgExamSuiteEditTime != null" >
+        org_exam_suite_edit_time = #{orgExamSuiteEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgExamSuiteStatus != null" >
+        org_exam_suite_status = #{orgExamSuiteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgExamSuiteImgType != null" >
+        org_exam_suite_img_type = #{orgExamSuiteImgType,jdbcType=INTEGER},
+      </if>
+      <if test="orgExamSuiteImgNode != null" >
+        org_exam_suite_img_node = #{orgExamSuiteImgNode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where org_exam_suite_img_id = #{orgExamSuiteImgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.suite.OrganizationExamSuiteImg" >
+    update organization_exam_suite_img
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_exam_suite_id = #{orgExamSuiteId,jdbcType=VARCHAR},
+      dict_img_id = #{dictImgId,jdbcType=BIGINT},
+      org_exam_suite_create_time = #{orgExamSuiteCreateTime,jdbcType=TIMESTAMP},
+      org_exam_suite_edit_time = #{orgExamSuiteEditTime,jdbcType=TIMESTAMP},
+      org_exam_suite_status = #{orgExamSuiteStatus,jdbcType=INTEGER},
+      org_exam_suite_img_type = #{orgExamSuiteImgType,jdbcType=INTEGER},
+      org_exam_suite_img_node = #{orgExamSuiteImgNode,jdbcType=VARCHAR}
+    where org_exam_suite_img_id = #{orgExamSuiteImgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

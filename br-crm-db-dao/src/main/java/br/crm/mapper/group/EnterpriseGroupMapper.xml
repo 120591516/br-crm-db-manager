@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.group.EnterpriseGroupMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.group.EnterpriseGroup" >
+    <id column="enterprise_group_id" property="enterpriseGroupId" jdbcType="VARCHAR" />
+    <result column="enterprise_reservation_id" property="enterpriseReservationId" jdbcType="VARCHAR" />
+    <result column="enterprise_id" property="enterpriseId" jdbcType="VARCHAR" />
+    <result column="enterprise_full_name" property="enterpriseFullName" jdbcType="VARCHAR" />
+    <result column="enterprise_group_type_id" property="enterpriseGroupTypeId" jdbcType="VARCHAR" />
+    <result column="enterprise_group_name" property="enterpriseGroupName" jdbcType="VARCHAR" />
+    <result column="enterprise_group_planned_time" property="enterpriseGroupPlannedTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_group_instruction" property="enterpriseGroupInstruction" jdbcType="VARCHAR" />
+    <result column="patient_class_id" property="patientClassId" jdbcType="VARCHAR" />
+    <result column="sex_id" property="sexId" jdbcType="INTEGER" />
+    <result column="enterprise_group_min_age" property="enterpriseGroupMinAge" jdbcType="INTEGER" />
+    <result column="enterprise_group_max_age" property="enterpriseGroupMaxAge" jdbcType="INTEGER" />
+    <result column="enterprise_group_count_customer" property="enterpriseGroupCountCustomer" jdbcType="INTEGER" />
+    <result column="pay_way_id" property="payWayId" jdbcType="INTEGER" />
+    <result column="pay_way_name" property="payWayName" jdbcType="VARCHAR" />
+    <result column="enterprise_group_off_percent" property="enterpriseGroupOffPercent" jdbcType="INTEGER" />
+    <result column="enterprise_group_price_limit" property="enterpriseGroupPriceLimit" jdbcType="DECIMAL" />
+    <result column="confidential_level_id" property="confidentialLevelId" jdbcType="INTEGER" />
+    <result column="enterprise_group_note" property="enterpriseGroupNote" jdbcType="VARCHAR" />
+    <result column="enterprise_group_input_code" property="enterpriseGroupInputCode" jdbcType="VARCHAR" />
+    <result column="enterprise_group_order" property="enterpriseGroupOrder" jdbcType="INTEGER" />
+    <result column="enterprise_group_status" property="enterpriseGroupStatus" jdbcType="INTEGER" />
+    <result column="enterprise_group_edit_time" property="enterpriseGroupEditTime" jdbcType="TIMESTAMP" />
+    <result column="enterprise_group_create_time" property="enterpriseGroupCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    enterprise_group_id, enterprise_reservation_id, enterprise_id, enterprise_full_name, 
+    enterprise_group_type_id, enterprise_group_name, enterprise_group_planned_time, enterprise_group_instruction, 
+    patient_class_id, sex_id, enterprise_group_min_age, enterprise_group_max_age, enterprise_group_count_customer, 
+    pay_way_id, pay_way_name, enterprise_group_off_percent, enterprise_group_price_limit, 
+    confidential_level_id, enterprise_group_note, enterprise_group_input_code, enterprise_group_order, 
+    enterprise_group_status, enterprise_group_edit_time, enterprise_group_create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.group.EnterpriseGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from enterprise_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from enterprise_group
+    where enterprise_group_id = #{enterpriseGroupId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from enterprise_group
+    where enterprise_group_id = #{enterpriseGroupId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.group.EnterpriseGroupExample" >
+    delete from enterprise_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.group.EnterpriseGroup" >
+    insert into enterprise_group (enterprise_group_id, enterprise_reservation_id, 
+      enterprise_id, enterprise_full_name, enterprise_group_type_id, 
+      enterprise_group_name, enterprise_group_planned_time, 
+      enterprise_group_instruction, patient_class_id, 
+      sex_id, enterprise_group_min_age, enterprise_group_max_age, 
+      enterprise_group_count_customer, pay_way_id, 
+      pay_way_name, enterprise_group_off_percent, 
+      enterprise_group_price_limit, confidential_level_id, 
+      enterprise_group_note, enterprise_group_input_code, 
+      enterprise_group_order, enterprise_group_status, 
+      enterprise_group_edit_time, enterprise_group_create_time
+      )
+    values (#{enterpriseGroupId,jdbcType=VARCHAR}, #{enterpriseReservationId,jdbcType=VARCHAR}, 
+      #{enterpriseId,jdbcType=VARCHAR}, #{enterpriseFullName,jdbcType=VARCHAR}, #{enterpriseGroupTypeId,jdbcType=VARCHAR}, 
+      #{enterpriseGroupName,jdbcType=VARCHAR}, #{enterpriseGroupPlannedTime,jdbcType=TIMESTAMP}, 
+      #{enterpriseGroupInstruction,jdbcType=VARCHAR}, #{patientClassId,jdbcType=VARCHAR}, 
+      #{sexId,jdbcType=INTEGER}, #{enterpriseGroupMinAge,jdbcType=INTEGER}, #{enterpriseGroupMaxAge,jdbcType=INTEGER}, 
+      #{enterpriseGroupCountCustomer,jdbcType=INTEGER}, #{payWayId,jdbcType=INTEGER}, 
+      #{payWayName,jdbcType=VARCHAR}, #{enterpriseGroupOffPercent,jdbcType=INTEGER}, 
+      #{enterpriseGroupPriceLimit,jdbcType=DECIMAL}, #{confidentialLevelId,jdbcType=INTEGER}, 
+      #{enterpriseGroupNote,jdbcType=VARCHAR}, #{enterpriseGroupInputCode,jdbcType=VARCHAR}, 
+      #{enterpriseGroupOrder,jdbcType=INTEGER}, #{enterpriseGroupStatus,jdbcType=INTEGER}, 
+      #{enterpriseGroupEditTime,jdbcType=TIMESTAMP}, #{enterpriseGroupCreateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.group.EnterpriseGroup" >
+    insert into enterprise_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="enterpriseGroupId != null" >
+        enterprise_group_id,
+      </if>
+      <if test="enterpriseReservationId != null" >
+        enterprise_reservation_id,
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id,
+      </if>
+      <if test="enterpriseFullName != null" >
+        enterprise_full_name,
+      </if>
+      <if test="enterpriseGroupTypeId != null" >
+        enterprise_group_type_id,
+      </if>
+      <if test="enterpriseGroupName != null" >
+        enterprise_group_name,
+      </if>
+      <if test="enterpriseGroupPlannedTime != null" >
+        enterprise_group_planned_time,
+      </if>
+      <if test="enterpriseGroupInstruction != null" >
+        enterprise_group_instruction,
+      </if>
+      <if test="patientClassId != null" >
+        patient_class_id,
+      </if>
+      <if test="sexId != null" >
+        sex_id,
+      </if>
+      <if test="enterpriseGroupMinAge != null" >
+        enterprise_group_min_age,
+      </if>
+      <if test="enterpriseGroupMaxAge != null" >
+        enterprise_group_max_age,
+      </if>
+      <if test="enterpriseGroupCountCustomer != null" >
+        enterprise_group_count_customer,
+      </if>
+      <if test="payWayId != null" >
+        pay_way_id,
+      </if>
+      <if test="payWayName != null" >
+        pay_way_name,
+      </if>
+      <if test="enterpriseGroupOffPercent != null" >
+        enterprise_group_off_percent,
+      </if>
+      <if test="enterpriseGroupPriceLimit != null" >
+        enterprise_group_price_limit,
+      </if>
+      <if test="confidentialLevelId != null" >
+        confidential_level_id,
+      </if>
+      <if test="enterpriseGroupNote != null" >
+        enterprise_group_note,
+      </if>
+      <if test="enterpriseGroupInputCode != null" >
+        enterprise_group_input_code,
+      </if>
+      <if test="enterpriseGroupOrder != null" >
+        enterprise_group_order,
+      </if>
+      <if test="enterpriseGroupStatus != null" >
+        enterprise_group_status,
+      </if>
+      <if test="enterpriseGroupEditTime != null" >
+        enterprise_group_edit_time,
+      </if>
+      <if test="enterpriseGroupCreateTime != null" >
+        enterprise_group_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="enterpriseGroupId != null" >
+        #{enterpriseGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseReservationId != null" >
+        #{enterpriseReservationId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseFullName != null" >
+        #{enterpriseFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupTypeId != null" >
+        #{enterpriseGroupTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupName != null" >
+        #{enterpriseGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupPlannedTime != null" >
+        #{enterpriseGroupPlannedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseGroupInstruction != null" >
+        #{enterpriseGroupInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="patientClassId != null" >
+        #{patientClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="sexId != null" >
+        #{sexId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupMinAge != null" >
+        #{enterpriseGroupMinAge,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupMaxAge != null" >
+        #{enterpriseGroupMaxAge,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupCountCustomer != null" >
+        #{enterpriseGroupCountCustomer,jdbcType=INTEGER},
+      </if>
+      <if test="payWayId != null" >
+        #{payWayId,jdbcType=INTEGER},
+      </if>
+      <if test="payWayName != null" >
+        #{payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupOffPercent != null" >
+        #{enterpriseGroupOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupPriceLimit != null" >
+        #{enterpriseGroupPriceLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="confidentialLevelId != null" >
+        #{confidentialLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupNote != null" >
+        #{enterpriseGroupNote,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupInputCode != null" >
+        #{enterpriseGroupInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupOrder != null" >
+        #{enterpriseGroupOrder,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupStatus != null" >
+        #{enterpriseGroupStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupEditTime != null" >
+        #{enterpriseGroupEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseGroupCreateTime != null" >
+        #{enterpriseGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.group.EnterpriseGroupExample" resultType="java.lang.Integer" >
+    select count(*) from enterprise_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update enterprise_group
+    <set >
+      <if test="record.enterpriseGroupId != null" >
+        enterprise_group_id = #{record.enterpriseGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseReservationId != null" >
+        enterprise_reservation_id = #{record.enterpriseReservationId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseId != null" >
+        enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseFullName != null" >
+        enterprise_full_name = #{record.enterpriseFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupTypeId != null" >
+        enterprise_group_type_id = #{record.enterpriseGroupTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupName != null" >
+        enterprise_group_name = #{record.enterpriseGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupPlannedTime != null" >
+        enterprise_group_planned_time = #{record.enterpriseGroupPlannedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseGroupInstruction != null" >
+        enterprise_group_instruction = #{record.enterpriseGroupInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientClassId != null" >
+        patient_class_id = #{record.patientClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sexId != null" >
+        sex_id = #{record.sexId,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupMinAge != null" >
+        enterprise_group_min_age = #{record.enterpriseGroupMinAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupMaxAge != null" >
+        enterprise_group_max_age = #{record.enterpriseGroupMaxAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupCountCustomer != null" >
+        enterprise_group_count_customer = #{record.enterpriseGroupCountCustomer,jdbcType=INTEGER},
+      </if>
+      <if test="record.payWayId != null" >
+        pay_way_id = #{record.payWayId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payWayName != null" >
+        pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupOffPercent != null" >
+        enterprise_group_off_percent = #{record.enterpriseGroupOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupPriceLimit != null" >
+        enterprise_group_price_limit = #{record.enterpriseGroupPriceLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.confidentialLevelId != null" >
+        confidential_level_id = #{record.confidentialLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupNote != null" >
+        enterprise_group_note = #{record.enterpriseGroupNote,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupInputCode != null" >
+        enterprise_group_input_code = #{record.enterpriseGroupInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterpriseGroupOrder != null" >
+        enterprise_group_order = #{record.enterpriseGroupOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupStatus != null" >
+        enterprise_group_status = #{record.enterpriseGroupStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.enterpriseGroupEditTime != null" >
+        enterprise_group_edit_time = #{record.enterpriseGroupEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enterpriseGroupCreateTime != null" >
+        enterprise_group_create_time = #{record.enterpriseGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update enterprise_group
+    set enterprise_group_id = #{record.enterpriseGroupId,jdbcType=VARCHAR},
+      enterprise_reservation_id = #{record.enterpriseReservationId,jdbcType=VARCHAR},
+      enterprise_id = #{record.enterpriseId,jdbcType=VARCHAR},
+      enterprise_full_name = #{record.enterpriseFullName,jdbcType=VARCHAR},
+      enterprise_group_type_id = #{record.enterpriseGroupTypeId,jdbcType=VARCHAR},
+      enterprise_group_name = #{record.enterpriseGroupName,jdbcType=VARCHAR},
+      enterprise_group_planned_time = #{record.enterpriseGroupPlannedTime,jdbcType=TIMESTAMP},
+      enterprise_group_instruction = #{record.enterpriseGroupInstruction,jdbcType=VARCHAR},
+      patient_class_id = #{record.patientClassId,jdbcType=VARCHAR},
+      sex_id = #{record.sexId,jdbcType=INTEGER},
+      enterprise_group_min_age = #{record.enterpriseGroupMinAge,jdbcType=INTEGER},
+      enterprise_group_max_age = #{record.enterpriseGroupMaxAge,jdbcType=INTEGER},
+      enterprise_group_count_customer = #{record.enterpriseGroupCountCustomer,jdbcType=INTEGER},
+      pay_way_id = #{record.payWayId,jdbcType=INTEGER},
+      pay_way_name = #{record.payWayName,jdbcType=VARCHAR},
+      enterprise_group_off_percent = #{record.enterpriseGroupOffPercent,jdbcType=INTEGER},
+      enterprise_group_price_limit = #{record.enterpriseGroupPriceLimit,jdbcType=DECIMAL},
+      confidential_level_id = #{record.confidentialLevelId,jdbcType=INTEGER},
+      enterprise_group_note = #{record.enterpriseGroupNote,jdbcType=VARCHAR},
+      enterprise_group_input_code = #{record.enterpriseGroupInputCode,jdbcType=VARCHAR},
+      enterprise_group_order = #{record.enterpriseGroupOrder,jdbcType=INTEGER},
+      enterprise_group_status = #{record.enterpriseGroupStatus,jdbcType=INTEGER},
+      enterprise_group_edit_time = #{record.enterpriseGroupEditTime,jdbcType=TIMESTAMP},
+      enterprise_group_create_time = #{record.enterpriseGroupCreateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.group.EnterpriseGroup" >
+    update enterprise_group
+    <set >
+      <if test="enterpriseReservationId != null" >
+        enterprise_reservation_id = #{enterpriseReservationId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null" >
+        enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseFullName != null" >
+        enterprise_full_name = #{enterpriseFullName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupTypeId != null" >
+        enterprise_group_type_id = #{enterpriseGroupTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupName != null" >
+        enterprise_group_name = #{enterpriseGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupPlannedTime != null" >
+        enterprise_group_planned_time = #{enterpriseGroupPlannedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseGroupInstruction != null" >
+        enterprise_group_instruction = #{enterpriseGroupInstruction,jdbcType=VARCHAR},
+      </if>
+      <if test="patientClassId != null" >
+        patient_class_id = #{patientClassId,jdbcType=VARCHAR},
+      </if>
+      <if test="sexId != null" >
+        sex_id = #{sexId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupMinAge != null" >
+        enterprise_group_min_age = #{enterpriseGroupMinAge,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupMaxAge != null" >
+        enterprise_group_max_age = #{enterpriseGroupMaxAge,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupCountCustomer != null" >
+        enterprise_group_count_customer = #{enterpriseGroupCountCustomer,jdbcType=INTEGER},
+      </if>
+      <if test="payWayId != null" >
+        pay_way_id = #{payWayId,jdbcType=INTEGER},
+      </if>
+      <if test="payWayName != null" >
+        pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupOffPercent != null" >
+        enterprise_group_off_percent = #{enterpriseGroupOffPercent,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupPriceLimit != null" >
+        enterprise_group_price_limit = #{enterpriseGroupPriceLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="confidentialLevelId != null" >
+        confidential_level_id = #{confidentialLevelId,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupNote != null" >
+        enterprise_group_note = #{enterpriseGroupNote,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupInputCode != null" >
+        enterprise_group_input_code = #{enterpriseGroupInputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseGroupOrder != null" >
+        enterprise_group_order = #{enterpriseGroupOrder,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupStatus != null" >
+        enterprise_group_status = #{enterpriseGroupStatus,jdbcType=INTEGER},
+      </if>
+      <if test="enterpriseGroupEditTime != null" >
+        enterprise_group_edit_time = #{enterpriseGroupEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterpriseGroupCreateTime != null" >
+        enterprise_group_create_time = #{enterpriseGroupCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where enterprise_group_id = #{enterpriseGroupId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.group.EnterpriseGroup" >
+    update enterprise_group
+    set enterprise_reservation_id = #{enterpriseReservationId,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=VARCHAR},
+      enterprise_full_name = #{enterpriseFullName,jdbcType=VARCHAR},
+      enterprise_group_type_id = #{enterpriseGroupTypeId,jdbcType=VARCHAR},
+      enterprise_group_name = #{enterpriseGroupName,jdbcType=VARCHAR},
+      enterprise_group_planned_time = #{enterpriseGroupPlannedTime,jdbcType=TIMESTAMP},
+      enterprise_group_instruction = #{enterpriseGroupInstruction,jdbcType=VARCHAR},
+      patient_class_id = #{patientClassId,jdbcType=VARCHAR},
+      sex_id = #{sexId,jdbcType=INTEGER},
+      enterprise_group_min_age = #{enterpriseGroupMinAge,jdbcType=INTEGER},
+      enterprise_group_max_age = #{enterpriseGroupMaxAge,jdbcType=INTEGER},
+      enterprise_group_count_customer = #{enterpriseGroupCountCustomer,jdbcType=INTEGER},
+      pay_way_id = #{payWayId,jdbcType=INTEGER},
+      pay_way_name = #{payWayName,jdbcType=VARCHAR},
+      enterprise_group_off_percent = #{enterpriseGroupOffPercent,jdbcType=INTEGER},
+      enterprise_group_price_limit = #{enterpriseGroupPriceLimit,jdbcType=DECIMAL},
+      confidential_level_id = #{confidentialLevelId,jdbcType=INTEGER},
+      enterprise_group_note = #{enterpriseGroupNote,jdbcType=VARCHAR},
+      enterprise_group_input_code = #{enterpriseGroupInputCode,jdbcType=VARCHAR},
+      enterprise_group_order = #{enterpriseGroupOrder,jdbcType=INTEGER},
+      enterprise_group_status = #{enterpriseGroupStatus,jdbcType=INTEGER},
+      enterprise_group_edit_time = #{enterpriseGroupEditTime,jdbcType=TIMESTAMP},
+      enterprise_group_create_time = #{enterpriseGroupCreateTime,jdbcType=TIMESTAMP}
+    where enterprise_group_id = #{enterpriseGroupId,jdbcType=VARCHAR}
+  </update>
+</mapper>

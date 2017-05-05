@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictpaywayMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictpayway" >
+    <id column="ID_PayWay" property="idPayway" jdbcType="BIGINT" />
+    <result column="PayWay_Name" property="paywayName" jdbcType="VARCHAR" />
+    <result column="PayWay_Code" property="paywayCode" jdbcType="VARCHAR" />
+    <result column="KeyPayWay" property="keypayway" jdbcType="VARCHAR" />
+    <result column="PayWayCodeX" property="paywaycodex" jdbcType="VARCHAR" />
+    <result column="F_IsCash" property="fIscash" jdbcType="INTEGER" />
+    <result column="F_IsOffLine" property="fIsoffline" jdbcType="INTEGER" />
+    <result column="F_ApplyToAccountOnly" property="fApplytoaccountonly" jdbcType="INTEGER" />
+    <result column="F_ApplyTo_Outp" property="fApplytoOutp" jdbcType="INTEGER" />
+    <result column="F_ApplyTo_Inp" property="fApplytoInp" jdbcType="INTEGER" />
+    <result column="F_ApplyTo_Org" property="fApplytoOrg" jdbcType="INTEGER" />
+    <result column="F_ApplyTo_Person" property="fApplytoPerson" jdbcType="INTEGER" />
+    <result column="F_ReturnToCash" property="fReturntocash" jdbcType="INTEGER" />
+    <result column="F_BuiltIn" property="fBuiltin" jdbcType="INTEGER" />
+    <result column="F_Disabled" property="fDisabled" jdbcType="INTEGER" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="ID_ReceiptType_Org" property="idReceipttypeOrg" jdbcType="INTEGER" />
+    <result column="ID_ReceiptType_Person" property="idReceipttypePerson" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_PayWay, PayWay_Name, PayWay_Code, KeyPayWay, PayWayCodeX, F_IsCash, F_IsOffLine, 
+    F_ApplyToAccountOnly, F_ApplyTo_Outp, F_ApplyTo_Inp, F_ApplyTo_Org, F_ApplyTo_Person, 
+    F_ReturnToCash, F_BuiltIn, F_Disabled, Input_Code, Note, ID_ReceiptType_Org, ID_ReceiptType_Person, 
+    status, create_time, edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictpaywayExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictPayWay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictPayWay
+    where ID_PayWay = #{idPayway,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from DictPayWay
+    where ID_PayWay = #{idPayway,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictpaywayExample" >
+    delete from DictPayWay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictpayway" useGeneratedKeys="true" keyProperty="idPayway" >
+    insert into DictPayWay (ID_PayWay, PayWay_Name, PayWay_Code, 
+      KeyPayWay, PayWayCodeX, F_IsCash, 
+      F_IsOffLine, F_ApplyToAccountOnly, F_ApplyTo_Outp, 
+      F_ApplyTo_Inp, F_ApplyTo_Org, F_ApplyTo_Person, 
+      F_ReturnToCash, F_BuiltIn, F_Disabled, 
+      Input_Code, Note, ID_ReceiptType_Org, 
+      ID_ReceiptType_Person, status, create_time, 
+      edit_time)
+    values (#{idPayway,jdbcType=BIGINT}, #{paywayName,jdbcType=VARCHAR}, #{paywayCode,jdbcType=VARCHAR}, 
+      #{keypayway,jdbcType=VARCHAR}, #{paywaycodex,jdbcType=VARCHAR}, #{fIscash,jdbcType=INTEGER}, 
+      #{fIsoffline,jdbcType=INTEGER}, #{fApplytoaccountonly,jdbcType=INTEGER}, #{fApplytoOutp,jdbcType=INTEGER}, 
+      #{fApplytoInp,jdbcType=INTEGER}, #{fApplytoOrg,jdbcType=INTEGER}, #{fApplytoPerson,jdbcType=INTEGER}, 
+      #{fReturntocash,jdbcType=INTEGER}, #{fBuiltin,jdbcType=INTEGER}, #{fDisabled,jdbcType=INTEGER}, 
+      #{inputCode,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{idReceipttypeOrg,jdbcType=INTEGER}, 
+      #{idReceipttypePerson,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{editTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictpayway" useGeneratedKeys="true" keyProperty="idPayway" >
+    insert into DictPayWay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idPayway != null" >
+        ID_PayWay,
+      </if>
+      <if test="paywayName != null" >
+        PayWay_Name,
+      </if>
+      <if test="paywayCode != null" >
+        PayWay_Code,
+      </if>
+      <if test="keypayway != null" >
+        KeyPayWay,
+      </if>
+      <if test="paywaycodex != null" >
+        PayWayCodeX,
+      </if>
+      <if test="fIscash != null" >
+        F_IsCash,
+      </if>
+      <if test="fIsoffline != null" >
+        F_IsOffLine,
+      </if>
+      <if test="fApplytoaccountonly != null" >
+        F_ApplyToAccountOnly,
+      </if>
+      <if test="fApplytoOutp != null" >
+        F_ApplyTo_Outp,
+      </if>
+      <if test="fApplytoInp != null" >
+        F_ApplyTo_Inp,
+      </if>
+      <if test="fApplytoOrg != null" >
+        F_ApplyTo_Org,
+      </if>
+      <if test="fApplytoPerson != null" >
+        F_ApplyTo_Person,
+      </if>
+      <if test="fReturntocash != null" >
+        F_ReturnToCash,
+      </if>
+      <if test="fBuiltin != null" >
+        F_BuiltIn,
+      </if>
+      <if test="fDisabled != null" >
+        F_Disabled,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="idReceipttypeOrg != null" >
+        ID_ReceiptType_Org,
+      </if>
+      <if test="idReceipttypePerson != null" >
+        ID_ReceiptType_Person,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="editTime != null" >
+        edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idPayway != null" >
+        #{idPayway,jdbcType=BIGINT},
+      </if>
+      <if test="paywayName != null" >
+        #{paywayName,jdbcType=VARCHAR},
+      </if>
+      <if test="paywayCode != null" >
+        #{paywayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keypayway != null" >
+        #{keypayway,jdbcType=VARCHAR},
+      </if>
+      <if test="paywaycodex != null" >
+        #{paywaycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="fIscash != null" >
+        #{fIscash,jdbcType=INTEGER},
+      </if>
+      <if test="fIsoffline != null" >
+        #{fIsoffline,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoaccountonly != null" >
+        #{fApplytoaccountonly,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoOutp != null" >
+        #{fApplytoOutp,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoInp != null" >
+        #{fApplytoInp,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoOrg != null" >
+        #{fApplytoOrg,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoPerson != null" >
+        #{fApplytoPerson,jdbcType=INTEGER},
+      </if>
+      <if test="fReturntocash != null" >
+        #{fReturntocash,jdbcType=INTEGER},
+      </if>
+      <if test="fBuiltin != null" >
+        #{fBuiltin,jdbcType=INTEGER},
+      </if>
+      <if test="fDisabled != null" >
+        #{fDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="idReceipttypeOrg != null" >
+        #{idReceipttypeOrg,jdbcType=INTEGER},
+      </if>
+      <if test="idReceipttypePerson != null" >
+        #{idReceipttypePerson,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        #{editTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictpaywayExample" resultType="java.lang.Integer" >
+    select count(*) from DictPayWay
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictPayWay
+    <set >
+      <if test="record.idPayway != null" >
+        ID_PayWay = #{record.idPayway,jdbcType=BIGINT},
+      </if>
+      <if test="record.paywayName != null" >
+        PayWay_Name = #{record.paywayName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paywayCode != null" >
+        PayWay_Code = #{record.paywayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keypayway != null" >
+        KeyPayWay = #{record.keypayway,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paywaycodex != null" >
+        PayWayCodeX = #{record.paywaycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fIscash != null" >
+        F_IsCash = #{record.fIscash,jdbcType=INTEGER},
+      </if>
+      <if test="record.fIsoffline != null" >
+        F_IsOffLine = #{record.fIsoffline,jdbcType=INTEGER},
+      </if>
+      <if test="record.fApplytoaccountonly != null" >
+        F_ApplyToAccountOnly = #{record.fApplytoaccountonly,jdbcType=INTEGER},
+      </if>
+      <if test="record.fApplytoOutp != null" >
+        F_ApplyTo_Outp = #{record.fApplytoOutp,jdbcType=INTEGER},
+      </if>
+      <if test="record.fApplytoInp != null" >
+        F_ApplyTo_Inp = #{record.fApplytoInp,jdbcType=INTEGER},
+      </if>
+      <if test="record.fApplytoOrg != null" >
+        F_ApplyTo_Org = #{record.fApplytoOrg,jdbcType=INTEGER},
+      </if>
+      <if test="record.fApplytoPerson != null" >
+        F_ApplyTo_Person = #{record.fApplytoPerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.fReturntocash != null" >
+        F_ReturnToCash = #{record.fReturntocash,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBuiltin != null" >
+        F_BuiltIn = #{record.fBuiltin,jdbcType=INTEGER},
+      </if>
+      <if test="record.fDisabled != null" >
+        F_Disabled = #{record.fDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idReceipttypeOrg != null" >
+        ID_ReceiptType_Org = #{record.idReceipttypeOrg,jdbcType=INTEGER},
+      </if>
+      <if test="record.idReceipttypePerson != null" >
+        ID_ReceiptType_Person = #{record.idReceipttypePerson,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.editTime != null" >
+        edit_time = #{record.editTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictPayWay
+    set ID_PayWay = #{record.idPayway,jdbcType=BIGINT},
+      PayWay_Name = #{record.paywayName,jdbcType=VARCHAR},
+      PayWay_Code = #{record.paywayCode,jdbcType=VARCHAR},
+      KeyPayWay = #{record.keypayway,jdbcType=VARCHAR},
+      PayWayCodeX = #{record.paywaycodex,jdbcType=VARCHAR},
+      F_IsCash = #{record.fIscash,jdbcType=INTEGER},
+      F_IsOffLine = #{record.fIsoffline,jdbcType=INTEGER},
+      F_ApplyToAccountOnly = #{record.fApplytoaccountonly,jdbcType=INTEGER},
+      F_ApplyTo_Outp = #{record.fApplytoOutp,jdbcType=INTEGER},
+      F_ApplyTo_Inp = #{record.fApplytoInp,jdbcType=INTEGER},
+      F_ApplyTo_Org = #{record.fApplytoOrg,jdbcType=INTEGER},
+      F_ApplyTo_Person = #{record.fApplytoPerson,jdbcType=INTEGER},
+      F_ReturnToCash = #{record.fReturntocash,jdbcType=INTEGER},
+      F_BuiltIn = #{record.fBuiltin,jdbcType=INTEGER},
+      F_Disabled = #{record.fDisabled,jdbcType=INTEGER},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      ID_ReceiptType_Org = #{record.idReceipttypeOrg,jdbcType=INTEGER},
+      ID_ReceiptType_Person = #{record.idReceipttypePerson,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      edit_time = #{record.editTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictpayway" >
+    update DictPayWay
+    <set >
+      <if test="paywayName != null" >
+        PayWay_Name = #{paywayName,jdbcType=VARCHAR},
+      </if>
+      <if test="paywayCode != null" >
+        PayWay_Code = #{paywayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="keypayway != null" >
+        KeyPayWay = #{keypayway,jdbcType=VARCHAR},
+      </if>
+      <if test="paywaycodex != null" >
+        PayWayCodeX = #{paywaycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="fIscash != null" >
+        F_IsCash = #{fIscash,jdbcType=INTEGER},
+      </if>
+      <if test="fIsoffline != null" >
+        F_IsOffLine = #{fIsoffline,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoaccountonly != null" >
+        F_ApplyToAccountOnly = #{fApplytoaccountonly,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoOutp != null" >
+        F_ApplyTo_Outp = #{fApplytoOutp,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoInp != null" >
+        F_ApplyTo_Inp = #{fApplytoInp,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoOrg != null" >
+        F_ApplyTo_Org = #{fApplytoOrg,jdbcType=INTEGER},
+      </if>
+      <if test="fApplytoPerson != null" >
+        F_ApplyTo_Person = #{fApplytoPerson,jdbcType=INTEGER},
+      </if>
+      <if test="fReturntocash != null" >
+        F_ReturnToCash = #{fReturntocash,jdbcType=INTEGER},
+      </if>
+      <if test="fBuiltin != null" >
+        F_BuiltIn = #{fBuiltin,jdbcType=INTEGER},
+      </if>
+      <if test="fDisabled != null" >
+        F_Disabled = #{fDisabled,jdbcType=INTEGER},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="idReceipttypeOrg != null" >
+        ID_ReceiptType_Org = #{idReceipttypeOrg,jdbcType=INTEGER},
+      </if>
+      <if test="idReceipttypePerson != null" >
+        ID_ReceiptType_Person = #{idReceipttypePerson,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editTime != null" >
+        edit_time = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID_PayWay = #{idPayway,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictpayway" >
+    update DictPayWay
+    set PayWay_Name = #{paywayName,jdbcType=VARCHAR},
+      PayWay_Code = #{paywayCode,jdbcType=VARCHAR},
+      KeyPayWay = #{keypayway,jdbcType=VARCHAR},
+      PayWayCodeX = #{paywaycodex,jdbcType=VARCHAR},
+      F_IsCash = #{fIscash,jdbcType=INTEGER},
+      F_IsOffLine = #{fIsoffline,jdbcType=INTEGER},
+      F_ApplyToAccountOnly = #{fApplytoaccountonly,jdbcType=INTEGER},
+      F_ApplyTo_Outp = #{fApplytoOutp,jdbcType=INTEGER},
+      F_ApplyTo_Inp = #{fApplytoInp,jdbcType=INTEGER},
+      F_ApplyTo_Org = #{fApplytoOrg,jdbcType=INTEGER},
+      F_ApplyTo_Person = #{fApplytoPerson,jdbcType=INTEGER},
+      F_ReturnToCash = #{fReturntocash,jdbcType=INTEGER},
+      F_BuiltIn = #{fBuiltin,jdbcType=INTEGER},
+      F_Disabled = #{fDisabled,jdbcType=INTEGER},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      ID_ReceiptType_Org = #{idReceipttypeOrg,jdbcType=INTEGER},
+      ID_ReceiptType_Person = #{idReceipttypePerson,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      edit_time = #{editTime,jdbcType=TIMESTAMP}
+    where ID_PayWay = #{idPayway,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.patient.examItem.PatientExamItemMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.patient.examItem.PatientExamItem" >
+    <id column="patient_exam_item_id" property="patientExamItemId" jdbcType="VARCHAR" />
+    <result column="patient_exam_depart_id" property="patientExamDepartId" jdbcType="VARCHAR" />
+    <result column="patient_fee_item_id" property="patientFeeItemId" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_id" property="examFeeItemId" jdbcType="VARCHAR" />
+    <result column="exam_item_id" property="examItemId" jdbcType="VARCHAR" />
+    <result column="exam_item_name" property="examItemName" jdbcType="VARCHAR" />
+    <result column="exam_item_code" property="examItemCode" jdbcType="VARCHAR" />
+    <result column="body_part_id" property="bodyPartId" jdbcType="INTEGER" />
+    <result column="body_part_name" property="bodyPartName" jdbcType="VARCHAR" />
+    <result column="exam_item_value_id" property="examItemValueId" jdbcType="VARCHAR" />
+    <result column="severe_degree_id" property="severeDegreeId" jdbcType="INTEGER" />
+    <result column="patient_exam_item_ref_range" property="patientExamItemRefRange" jdbcType="VARCHAR" />
+    <result column="exam_item_values_short" property="examItemValuesShort" jdbcType="VARCHAR" />
+    <result column="exam_item_values_number" property="examItemValuesNumber" jdbcType="REAL" />
+    <result column="patient_exam_item_labItem_flag" property="patientExamItemLabitemFlag" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_labItem_normal" property="patientExamItemLabitemNormal" jdbcType="BIT" />
+    <result column="exam_item_values_number2" property="examItemValuesNumber2" jdbcType="REAL" />
+    <result column="exam_item_values_number3" property="examItemValuesNumber3" jdbcType="REAL" />
+    <result column="patient_exam_item_order" property="patientExamItemOrder" jdbcType="VARCHAR" />
+    <result column="patient_exam_item_create_time" property="patientExamItemCreateTime" jdbcType="TIMESTAMP" />
+    <result column="patient_exam_item_edit_time" property="patientExamItemEditTime" jdbcType="TIMESTAMP" />
+    <result column="patient_exam_item_status" property="patientExamItemStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="br.crm.pojo.patient.examItem.PatientExamItemWithBLOBs" extends="BaseResultMap" >
+    <result column="exam_item_values" property="examItemValues" jdbcType="LONGVARCHAR" />
+    <result column="exam_item_values_text" property="examItemValuesText" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    patient_exam_item_id, patient_exam_depart_id, patient_fee_item_id, exam_fee_item_id, 
+    exam_item_id, exam_item_name, exam_item_code, body_part_id, body_part_name, exam_item_value_id, 
+    severe_degree_id, patient_exam_item_ref_range, exam_item_values_short, exam_item_values_number, 
+    patient_exam_item_labItem_flag, patient_exam_item_labItem_normal, exam_item_values_number2, 
+    exam_item_values_number3, patient_exam_item_order, patient_exam_item_create_time, 
+    patient_exam_item_edit_time, patient_exam_item_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    exam_item_values, exam_item_values_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="br.crm.pojo.patient.examItem.PatientExamItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_exam_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.patient.examItem.PatientExamItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from patient_exam_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from patient_exam_item
+    where patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from patient_exam_item
+    where patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.patient.examItem.PatientExamItemExample" >
+    delete from patient_exam_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.patient.examItem.PatientExamItemWithBLOBs" >
+    insert into patient_exam_item (patient_exam_item_id, patient_exam_depart_id, 
+      patient_fee_item_id, exam_fee_item_id, exam_item_id, 
+      exam_item_name, exam_item_code, body_part_id, 
+      body_part_name, exam_item_value_id, severe_degree_id, 
+      patient_exam_item_ref_range, exam_item_values_short, 
+      exam_item_values_number, patient_exam_item_labItem_flag, 
+      patient_exam_item_labItem_normal, exam_item_values_number2, 
+      exam_item_values_number3, patient_exam_item_order, 
+      patient_exam_item_create_time, patient_exam_item_edit_time, 
+      patient_exam_item_status, exam_item_values, 
+      exam_item_values_text)
+    values (#{patientExamItemId,jdbcType=VARCHAR}, #{patientExamDepartId,jdbcType=VARCHAR}, 
+      #{patientFeeItemId,jdbcType=VARCHAR}, #{examFeeItemId,jdbcType=VARCHAR}, #{examItemId,jdbcType=VARCHAR}, 
+      #{examItemName,jdbcType=VARCHAR}, #{examItemCode,jdbcType=VARCHAR}, #{bodyPartId,jdbcType=INTEGER}, 
+      #{bodyPartName,jdbcType=VARCHAR}, #{examItemValueId,jdbcType=VARCHAR}, #{severeDegreeId,jdbcType=INTEGER}, 
+      #{patientExamItemRefRange,jdbcType=VARCHAR}, #{examItemValuesShort,jdbcType=VARCHAR}, 
+      #{examItemValuesNumber,jdbcType=REAL}, #{patientExamItemLabitemFlag,jdbcType=VARCHAR}, 
+      #{patientExamItemLabitemNormal,jdbcType=BIT}, #{examItemValuesNumber2,jdbcType=REAL}, 
+      #{examItemValuesNumber3,jdbcType=REAL}, #{patientExamItemOrder,jdbcType=VARCHAR}, 
+      #{patientExamItemCreateTime,jdbcType=TIMESTAMP}, #{patientExamItemEditTime,jdbcType=TIMESTAMP}, 
+      #{patientExamItemStatus,jdbcType=INTEGER}, #{examItemValues,jdbcType=LONGVARCHAR}, 
+      #{examItemValuesText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.patient.examItem.PatientExamItemWithBLOBs" >
+    insert into patient_exam_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="patientExamItemId != null" >
+        patient_exam_item_id,
+      </if>
+      <if test="patientExamDepartId != null" >
+        patient_exam_depart_id,
+      </if>
+      <if test="patientFeeItemId != null" >
+        patient_fee_item_id,
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id,
+      </if>
+      <if test="examItemId != null" >
+        exam_item_id,
+      </if>
+      <if test="examItemName != null" >
+        exam_item_name,
+      </if>
+      <if test="examItemCode != null" >
+        exam_item_code,
+      </if>
+      <if test="bodyPartId != null" >
+        body_part_id,
+      </if>
+      <if test="bodyPartName != null" >
+        body_part_name,
+      </if>
+      <if test="examItemValueId != null" >
+        exam_item_value_id,
+      </if>
+      <if test="severeDegreeId != null" >
+        severe_degree_id,
+      </if>
+      <if test="patientExamItemRefRange != null" >
+        patient_exam_item_ref_range,
+      </if>
+      <if test="examItemValuesShort != null" >
+        exam_item_values_short,
+      </if>
+      <if test="examItemValuesNumber != null" >
+        exam_item_values_number,
+      </if>
+      <if test="patientExamItemLabitemFlag != null" >
+        patient_exam_item_labItem_flag,
+      </if>
+      <if test="patientExamItemLabitemNormal != null" >
+        patient_exam_item_labItem_normal,
+      </if>
+      <if test="examItemValuesNumber2 != null" >
+        exam_item_values_number2,
+      </if>
+      <if test="examItemValuesNumber3 != null" >
+        exam_item_values_number3,
+      </if>
+      <if test="patientExamItemOrder != null" >
+        patient_exam_item_order,
+      </if>
+      <if test="patientExamItemCreateTime != null" >
+        patient_exam_item_create_time,
+      </if>
+      <if test="patientExamItemEditTime != null" >
+        patient_exam_item_edit_time,
+      </if>
+      <if test="patientExamItemStatus != null" >
+        patient_exam_item_status,
+      </if>
+      <if test="examItemValues != null" >
+        exam_item_values,
+      </if>
+      <if test="examItemValuesText != null" >
+        exam_item_values_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="patientExamItemId != null" >
+        #{patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamDepartId != null" >
+        #{patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemId != null" >
+        #{patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemId != null" >
+        #{examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemName != null" >
+        #{examItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCode != null" >
+        #{examItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartId != null" >
+        #{bodyPartId,jdbcType=INTEGER},
+      </if>
+      <if test="bodyPartName != null" >
+        #{bodyPartName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueId != null" >
+        #{examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="severeDegreeId != null" >
+        #{severeDegreeId,jdbcType=INTEGER},
+      </if>
+      <if test="patientExamItemRefRange != null" >
+        #{patientExamItemRefRange,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValuesShort != null" >
+        #{examItemValuesShort,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValuesNumber != null" >
+        #{examItemValuesNumber,jdbcType=REAL},
+      </if>
+      <if test="patientExamItemLabitemFlag != null" >
+        #{patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemLabitemNormal != null" >
+        #{patientExamItemLabitemNormal,jdbcType=BIT},
+      </if>
+      <if test="examItemValuesNumber2 != null" >
+        #{examItemValuesNumber2,jdbcType=REAL},
+      </if>
+      <if test="examItemValuesNumber3 != null" >
+        #{examItemValuesNumber3,jdbcType=REAL},
+      </if>
+      <if test="patientExamItemOrder != null" >
+        #{patientExamItemOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemCreateTime != null" >
+        #{patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemEditTime != null" >
+        #{patientExamItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemStatus != null" >
+        #{patientExamItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValues != null" >
+        #{examItemValues,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="examItemValuesText != null" >
+        #{examItemValuesText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.patient.examItem.PatientExamItemExample" resultType="java.lang.Integer" >
+    select count(*) from patient_exam_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update patient_exam_item
+    <set >
+      <if test="record.patientExamItemId != null" >
+        patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamDepartId != null" >
+        patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientFeeItemId != null" >
+        patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examFeeItemId != null" >
+        exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemId != null" >
+        exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemName != null" >
+        exam_item_name = #{record.examItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemCode != null" >
+        exam_item_code = #{record.examItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bodyPartId != null" >
+        body_part_id = #{record.bodyPartId,jdbcType=INTEGER},
+      </if>
+      <if test="record.bodyPartName != null" >
+        body_part_name = #{record.bodyPartName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValueId != null" >
+        exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.severeDegreeId != null" >
+        severe_degree_id = #{record.severeDegreeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientExamItemRefRange != null" >
+        patient_exam_item_ref_range = #{record.patientExamItemRefRange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValuesShort != null" >
+        exam_item_values_short = #{record.examItemValuesShort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examItemValuesNumber != null" >
+        exam_item_values_number = #{record.examItemValuesNumber,jdbcType=REAL},
+      </if>
+      <if test="record.patientExamItemLabitemFlag != null" >
+        patient_exam_item_labItem_flag = #{record.patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemLabitemNormal != null" >
+        patient_exam_item_labItem_normal = #{record.patientExamItemLabitemNormal,jdbcType=BIT},
+      </if>
+      <if test="record.examItemValuesNumber2 != null" >
+        exam_item_values_number2 = #{record.examItemValuesNumber2,jdbcType=REAL},
+      </if>
+      <if test="record.examItemValuesNumber3 != null" >
+        exam_item_values_number3 = #{record.examItemValuesNumber3,jdbcType=REAL},
+      </if>
+      <if test="record.patientExamItemOrder != null" >
+        patient_exam_item_order = #{record.patientExamItemOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.patientExamItemCreateTime != null" >
+        patient_exam_item_create_time = #{record.patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientExamItemEditTime != null" >
+        patient_exam_item_edit_time = #{record.patientExamItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.patientExamItemStatus != null" >
+        patient_exam_item_status = #{record.patientExamItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.examItemValues != null" >
+        exam_item_values = #{record.examItemValues,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.examItemValuesText != null" >
+        exam_item_values_text = #{record.examItemValuesText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update patient_exam_item
+    set patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      exam_item_name = #{record.examItemName,jdbcType=VARCHAR},
+      exam_item_code = #{record.examItemCode,jdbcType=VARCHAR},
+      body_part_id = #{record.bodyPartId,jdbcType=INTEGER},
+      body_part_name = #{record.bodyPartName,jdbcType=VARCHAR},
+      exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      severe_degree_id = #{record.severeDegreeId,jdbcType=INTEGER},
+      patient_exam_item_ref_range = #{record.patientExamItemRefRange,jdbcType=VARCHAR},
+      exam_item_values_short = #{record.examItemValuesShort,jdbcType=VARCHAR},
+      exam_item_values_number = #{record.examItemValuesNumber,jdbcType=REAL},
+      patient_exam_item_labItem_flag = #{record.patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      patient_exam_item_labItem_normal = #{record.patientExamItemLabitemNormal,jdbcType=BIT},
+      exam_item_values_number2 = #{record.examItemValuesNumber2,jdbcType=REAL},
+      exam_item_values_number3 = #{record.examItemValuesNumber3,jdbcType=REAL},
+      patient_exam_item_order = #{record.patientExamItemOrder,jdbcType=VARCHAR},
+      patient_exam_item_create_time = #{record.patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_edit_time = #{record.patientExamItemEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_status = #{record.patientExamItemStatus,jdbcType=INTEGER},
+      exam_item_values = #{record.examItemValues,jdbcType=LONGVARCHAR},
+      exam_item_values_text = #{record.examItemValuesText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update patient_exam_item
+    set patient_exam_item_id = #{record.patientExamItemId,jdbcType=VARCHAR},
+      patient_exam_depart_id = #{record.patientExamDepartId,jdbcType=VARCHAR},
+      patient_fee_item_id = #{record.patientFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{record.examFeeItemId,jdbcType=VARCHAR},
+      exam_item_id = #{record.examItemId,jdbcType=VARCHAR},
+      exam_item_name = #{record.examItemName,jdbcType=VARCHAR},
+      exam_item_code = #{record.examItemCode,jdbcType=VARCHAR},
+      body_part_id = #{record.bodyPartId,jdbcType=INTEGER},
+      body_part_name = #{record.bodyPartName,jdbcType=VARCHAR},
+      exam_item_value_id = #{record.examItemValueId,jdbcType=VARCHAR},
+      severe_degree_id = #{record.severeDegreeId,jdbcType=INTEGER},
+      patient_exam_item_ref_range = #{record.patientExamItemRefRange,jdbcType=VARCHAR},
+      exam_item_values_short = #{record.examItemValuesShort,jdbcType=VARCHAR},
+      exam_item_values_number = #{record.examItemValuesNumber,jdbcType=REAL},
+      patient_exam_item_labItem_flag = #{record.patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      patient_exam_item_labItem_normal = #{record.patientExamItemLabitemNormal,jdbcType=BIT},
+      exam_item_values_number2 = #{record.examItemValuesNumber2,jdbcType=REAL},
+      exam_item_values_number3 = #{record.examItemValuesNumber3,jdbcType=REAL},
+      patient_exam_item_order = #{record.patientExamItemOrder,jdbcType=VARCHAR},
+      patient_exam_item_create_time = #{record.patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_edit_time = #{record.patientExamItemEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_status = #{record.patientExamItemStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.patient.examItem.PatientExamItemWithBLOBs" >
+    update patient_exam_item
+    <set >
+      <if test="patientExamDepartId != null" >
+        patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR},
+      </if>
+      <if test="patientFeeItemId != null" >
+        patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examFeeItemId != null" >
+        exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemId != null" >
+        exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemName != null" >
+        exam_item_name = #{examItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemCode != null" >
+        exam_item_code = #{examItemCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bodyPartId != null" >
+        body_part_id = #{bodyPartId,jdbcType=INTEGER},
+      </if>
+      <if test="bodyPartName != null" >
+        body_part_name = #{bodyPartName,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValueId != null" >
+        exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR},
+      </if>
+      <if test="severeDegreeId != null" >
+        severe_degree_id = #{severeDegreeId,jdbcType=INTEGER},
+      </if>
+      <if test="patientExamItemRefRange != null" >
+        patient_exam_item_ref_range = #{patientExamItemRefRange,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValuesShort != null" >
+        exam_item_values_short = #{examItemValuesShort,jdbcType=VARCHAR},
+      </if>
+      <if test="examItemValuesNumber != null" >
+        exam_item_values_number = #{examItemValuesNumber,jdbcType=REAL},
+      </if>
+      <if test="patientExamItemLabitemFlag != null" >
+        patient_exam_item_labItem_flag = #{patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemLabitemNormal != null" >
+        patient_exam_item_labItem_normal = #{patientExamItemLabitemNormal,jdbcType=BIT},
+      </if>
+      <if test="examItemValuesNumber2 != null" >
+        exam_item_values_number2 = #{examItemValuesNumber2,jdbcType=REAL},
+      </if>
+      <if test="examItemValuesNumber3 != null" >
+        exam_item_values_number3 = #{examItemValuesNumber3,jdbcType=REAL},
+      </if>
+      <if test="patientExamItemOrder != null" >
+        patient_exam_item_order = #{patientExamItemOrder,jdbcType=VARCHAR},
+      </if>
+      <if test="patientExamItemCreateTime != null" >
+        patient_exam_item_create_time = #{patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemEditTime != null" >
+        patient_exam_item_edit_time = #{patientExamItemEditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="patientExamItemStatus != null" >
+        patient_exam_item_status = #{patientExamItemStatus,jdbcType=INTEGER},
+      </if>
+      <if test="examItemValues != null" >
+        exam_item_values = #{examItemValues,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="examItemValuesText != null" >
+        exam_item_values_text = #{examItemValuesText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="br.crm.pojo.patient.examItem.PatientExamItemWithBLOBs" >
+    update patient_exam_item
+    set patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR},
+      patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      exam_item_name = #{examItemName,jdbcType=VARCHAR},
+      exam_item_code = #{examItemCode,jdbcType=VARCHAR},
+      body_part_id = #{bodyPartId,jdbcType=INTEGER},
+      body_part_name = #{bodyPartName,jdbcType=VARCHAR},
+      exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR},
+      severe_degree_id = #{severeDegreeId,jdbcType=INTEGER},
+      patient_exam_item_ref_range = #{patientExamItemRefRange,jdbcType=VARCHAR},
+      exam_item_values_short = #{examItemValuesShort,jdbcType=VARCHAR},
+      exam_item_values_number = #{examItemValuesNumber,jdbcType=REAL},
+      patient_exam_item_labItem_flag = #{patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      patient_exam_item_labItem_normal = #{patientExamItemLabitemNormal,jdbcType=BIT},
+      exam_item_values_number2 = #{examItemValuesNumber2,jdbcType=REAL},
+      exam_item_values_number3 = #{examItemValuesNumber3,jdbcType=REAL},
+      patient_exam_item_order = #{patientExamItemOrder,jdbcType=VARCHAR},
+      patient_exam_item_create_time = #{patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_edit_time = #{patientExamItemEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_status = #{patientExamItemStatus,jdbcType=INTEGER},
+      exam_item_values = #{examItemValues,jdbcType=LONGVARCHAR},
+      exam_item_values_text = #{examItemValuesText,jdbcType=LONGVARCHAR}
+    where patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.patient.examItem.PatientExamItem" >
+    update patient_exam_item
+    set patient_exam_depart_id = #{patientExamDepartId,jdbcType=VARCHAR},
+      patient_fee_item_id = #{patientFeeItemId,jdbcType=VARCHAR},
+      exam_fee_item_id = #{examFeeItemId,jdbcType=VARCHAR},
+      exam_item_id = #{examItemId,jdbcType=VARCHAR},
+      exam_item_name = #{examItemName,jdbcType=VARCHAR},
+      exam_item_code = #{examItemCode,jdbcType=VARCHAR},
+      body_part_id = #{bodyPartId,jdbcType=INTEGER},
+      body_part_name = #{bodyPartName,jdbcType=VARCHAR},
+      exam_item_value_id = #{examItemValueId,jdbcType=VARCHAR},
+      severe_degree_id = #{severeDegreeId,jdbcType=INTEGER},
+      patient_exam_item_ref_range = #{patientExamItemRefRange,jdbcType=VARCHAR},
+      exam_item_values_short = #{examItemValuesShort,jdbcType=VARCHAR},
+      exam_item_values_number = #{examItemValuesNumber,jdbcType=REAL},
+      patient_exam_item_labItem_flag = #{patientExamItemLabitemFlag,jdbcType=VARCHAR},
+      patient_exam_item_labItem_normal = #{patientExamItemLabitemNormal,jdbcType=BIT},
+      exam_item_values_number2 = #{examItemValuesNumber2,jdbcType=REAL},
+      exam_item_values_number3 = #{examItemValuesNumber3,jdbcType=REAL},
+      patient_exam_item_order = #{patientExamItemOrder,jdbcType=VARCHAR},
+      patient_exam_item_create_time = #{patientExamItemCreateTime,jdbcType=TIMESTAMP},
+      patient_exam_item_edit_time = #{patientExamItemEditTime,jdbcType=TIMESTAMP},
+      patient_exam_item_status = #{patientExamItemStatus,jdbcType=INTEGER}
+    where patient_exam_item_id = #{patientExamItemId,jdbcType=VARCHAR}
+  </update>
+</mapper>

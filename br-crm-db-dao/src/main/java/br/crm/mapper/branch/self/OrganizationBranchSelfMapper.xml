@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.branch.self.OrganizationBranchSelfMapper">
+	<resultMap type="br.crm.vo.branch.OrganizationBranchVo" id="BaseResultMap">
+		<id column="branch_id" property="branchId" jdbcType="VARCHAR" />
+	    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+	    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+	    <result column="branch_code" property="branchCode" jdbcType="VARCHAR" />
+	   <result column="branch_province_id" property="branchProvinceId" jdbcType="INTEGER" />
+    	<result column="branch_city_id" property="branchCityId" jdbcType="INTEGER" />	
+	    <result column="branch_area_id" property="branchAreaId" jdbcType="INTEGER" />
+	    <result column="branch_address" property="branchAddress" jdbcType="VARCHAR" />
+	    <result column="exam_start_time" property="examStartTime" jdbcType="VARCHAR" />
+	    <result column="exam_end_time" property="examEndTime" jdbcType="VARCHAR" />
+	    <result column="split_suite" property="splitSuite" jdbcType="INTEGER" />
+	    <result column="warn_people" property="warnPeople" jdbcType="INTEGER" />
+	    <result column="limit_people" property="limitPeople" jdbcType="INTEGER" />
+	    <result column="warn_amount" property="warnAmount" jdbcType="DECIMAL" />
+	    <result column="limit_amount" property="limitAmount" jdbcType="DECIMAL" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	    <result column="summary" property="summary" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+	    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+		<collection property="img" ofType="br.crm.pojo.dict.DictImg">
+			<id column="img_id" property="imgId" jdbcType="BIGINT" />
+			<result column="img_name" property="imgName" jdbcType="VARCHAR" />
+			<result column="img_size" property="imgSize" jdbcType="BIGINT" />
+			<result column="img_location" property="imgLocation" jdbcType="VARCHAR" />
+			<result column="img_type" property="imgType" jdbcType="VARCHAR" />
+			<result column="img_note" property="imgNote" jdbcType="VARCHAR" />
+			<result column="img_status" property="imgStatus" jdbcType="INTEGER" />
+			<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+			<result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+		</collection>
+	</resultMap>
+	<!-- 根据门店id查询详细信息 -->
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap">
+		SELECT
+		b.branch_id,
+		b.branch_name,
+		b.org_id,
+		b.branch_code,
+		b.branch_area_id,
+		b.exam_start_time,
+		b.exam_end_time,
+		b.split_suite,
+		b.warn_people,
+		b.limit_people,
+		b.warn_amount,
+		b.limit_amount,
+		b.note,
+		b.summary,
+		b. STATUS,
+		b.createtime,
+		b.edittime,
+		c.province_id,
+		c.city_id,
+		b.branch_address
+		FROM organization_branch b LEFT JOIN dict_area c
+		ON b.branch_area_id = c.id
+		WHERE
+		b.branch_id = #{id}
+	</select>
+	<resultMap type="br.crm.vo.branch.OrganizationBranchVo" id="baseMap">
+		<id column="branch_id" property="branchId" jdbcType="VARCHAR" />
+	    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+	    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+	    <result column="branch_code" property="branchCode" jdbcType="VARCHAR" />
+	     <result column="branch_province_id" property="branchProvinceId" jdbcType="INTEGER" />
+   	 	<result column="branch_city_id" property="branchCityId" jdbcType="INTEGER" />
+   		 <result column="branch_area_id" property="branchAreaId" jdbcType="INTEGER" />
+	    <result column="branch_address" property="branchAddress" jdbcType="VARCHAR" />
+	    <result column="exam_start_time" property="examStartTime" jdbcType="VARCHAR" />
+	    <result column="exam_end_time" property="examEndTime" jdbcType="VARCHAR" />
+	    <result column="split_suite" property="splitSuite" jdbcType="INTEGER" />
+	    <result column="warn_people" property="warnPeople" jdbcType="INTEGER" />
+	    <result column="limit_people" property="limitPeople" jdbcType="INTEGER" />
+	    <result column="warn_amount" property="warnAmount" jdbcType="DECIMAL" />
+	    <result column="limit_amount" property="limitAmount" jdbcType="DECIMAL" />
+	    <result column="note" property="note" jdbcType="VARCHAR" />
+	    <result column="summary" property="summary" jdbcType="VARCHAR" />
+	    <result column="status" property="status" jdbcType="INTEGER" />
+	    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+	    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+		<result column="org_short_name" property="orgShortName"	jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 根据条件查询门店 -->
+	<select id="selectByCondition" parameterType="br.crm.vo.branch.OrganizationBranchVo" resultMap="baseMap">
+		select
+		b.branch_id,
+		b.branch_name,
+		b.org_id,
+		b.branch_code,
+		b.branch_province_id,
+		b.branch_city_id,
+		b.branch_area_id,
+		b.exam_start_time,
+		b.exam_end_time,
+		b.split_suite,
+		b.warn_people,
+		b.limit_people,
+		b.warn_amount,
+		b.limit_amount,
+		b.branch_address,
+		b.note,
+		b.summary,
+		b.status,
+		b.createtime,
+		b.edittime,
+		c.org_short_name
+		from organization_branch b
+		LEFT JOIN organization c
+		ON b.org_id = c.org_id
+		<where>
+			<if test="organizationBranchVo.orgId!=null">
+				and c.org_id=#{organizationBranchVo.orgId}
+			</if>
+			<if test="organizationBranchVo.status!=null and organizationBranchVo.status !=-1">
+				and b.status=#{organizationBranchVo.status}
+			</if>
+			<if test="organizationBranchVo.splitSuite!=null and organizationBranchVo.splitSuite !=-1">
+				and b.split_suite=#{organizationBranchVo.splitSuite}
+			</if>
+			<if test="organizationBranchVo.branchName!=null ">
+				and b.branch_name like concat(concat('%', #{organizationBranchVo.branchName}), '%')
+			</if>
+			<if test="organizationBranchVo.branchCode!=null ">
+				and b.branch_code like concat(concat('%', #{organizationBranchVo.branchCode}), '%')
+			</if>
+			<if test="organizationBranchVo.branchAreaId!=null ">
+				and b.branch_area_id like concat(concat('%', #{organizationBranchVo.branchAreaId}), '%')
+			</if>
+			<if test="organizationBranchVo.branchAddress !=null">
+				and b.branch_address like concat(concat('%', #{organizationBranchVo.branchAddress}), '%')
+			</if>
+		</where>
+	</select>
+</mapper>

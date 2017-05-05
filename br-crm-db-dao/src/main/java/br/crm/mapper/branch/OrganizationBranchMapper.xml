@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.branch.OrganizationBranchMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.branch.OrganizationBranch" >
+    <id column="branch_id" property="branchId" jdbcType="VARCHAR" />
+    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="branch_code" property="branchCode" jdbcType="VARCHAR" />
+    <result column="branch_province_id" property="branchProvinceId" jdbcType="INTEGER" />
+    <result column="branch_city_id" property="branchCityId" jdbcType="INTEGER" />
+    <result column="branch_area_id" property="branchAreaId" jdbcType="INTEGER" />
+    <result column="branch_address" property="branchAddress" jdbcType="VARCHAR" />
+    <result column="exam_start_time" property="examStartTime" jdbcType="VARCHAR" />
+    <result column="exam_end_time" property="examEndTime" jdbcType="VARCHAR" />
+    <result column="split_suite" property="splitSuite" jdbcType="INTEGER" />
+    <result column="warn_people" property="warnPeople" jdbcType="INTEGER" />
+    <result column="limit_people" property="limitPeople" jdbcType="INTEGER" />
+    <result column="warn_amount" property="warnAmount" jdbcType="DECIMAL" />
+    <result column="limit_amount" property="limitAmount" jdbcType="DECIMAL" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="edittime" property="edittime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    branch_id, branch_name, org_id, branch_code, branch_province_id, branch_city_id, 
+    branch_area_id, branch_address, exam_start_time, exam_end_time, split_suite, warn_people, 
+    limit_people, warn_amount, limit_amount, note, summary, status, createtime, edittime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.branch.OrganizationBranchExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_branch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_branch
+    where branch_id = #{branchId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from organization_branch
+    where branch_id = #{branchId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.branch.OrganizationBranchExample" >
+    delete from organization_branch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.branch.OrganizationBranch" >
+    insert into organization_branch (branch_id, branch_name, org_id, 
+      branch_code, branch_province_id, branch_city_id, 
+      branch_area_id, branch_address, exam_start_time, 
+      exam_end_time, split_suite, warn_people, 
+      limit_people, warn_amount, limit_amount, 
+      note, summary, status, 
+      createtime, edittime)
+    values (#{branchId,jdbcType=VARCHAR}, #{branchName,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{branchCode,jdbcType=VARCHAR}, #{branchProvinceId,jdbcType=INTEGER}, #{branchCityId,jdbcType=INTEGER}, 
+      #{branchAreaId,jdbcType=INTEGER}, #{branchAddress,jdbcType=VARCHAR}, #{examStartTime,jdbcType=VARCHAR}, 
+      #{examEndTime,jdbcType=VARCHAR}, #{splitSuite,jdbcType=INTEGER}, #{warnPeople,jdbcType=INTEGER}, 
+      #{limitPeople,jdbcType=INTEGER}, #{warnAmount,jdbcType=DECIMAL}, #{limitAmount,jdbcType=DECIMAL}, 
+      #{note,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{edittime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.branch.OrganizationBranch" useGeneratedKeys="true" keyProperty="branchId">
+    insert into organization_branch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="branchName != null" >
+        branch_name,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="branchCode != null" >
+        branch_code,
+      </if>
+      <if test="branchProvinceId != null" >
+        branch_province_id,
+      </if>
+      <if test="branchCityId != null" >
+        branch_city_id,
+      </if>
+      <if test="branchAreaId != null" >
+        branch_area_id,
+      </if>
+      <if test="branchAddress != null" >
+        branch_address,
+      </if>
+      <if test="examStartTime != null" >
+        exam_start_time,
+      </if>
+      <if test="examEndTime != null" >
+        exam_end_time,
+      </if>
+      <if test="splitSuite != null" >
+        split_suite,
+      </if>
+      <if test="warnPeople != null" >
+        warn_people,
+      </if>
+      <if test="limitPeople != null" >
+        limit_people,
+      </if>
+      <if test="warnAmount != null" >
+        warn_amount,
+      </if>
+      <if test="limitAmount != null" >
+        limit_amount,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="edittime != null" >
+        edittime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="branchId != null" >
+        #{branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null" >
+        #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null" >
+        #{branchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchProvinceId != null" >
+        #{branchProvinceId,jdbcType=INTEGER},
+      </if>
+      <if test="branchCityId != null" >
+        #{branchCityId,jdbcType=INTEGER},
+      </if>
+      <if test="branchAreaId != null" >
+        #{branchAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="branchAddress != null" >
+        #{branchAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="examStartTime != null" >
+        #{examStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="examEndTime != null" >
+        #{examEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="splitSuite != null" >
+        #{splitSuite,jdbcType=INTEGER},
+      </if>
+      <if test="warnPeople != null" >
+        #{warnPeople,jdbcType=INTEGER},
+      </if>
+      <if test="limitPeople != null" >
+        #{limitPeople,jdbcType=INTEGER},
+      </if>
+      <if test="warnAmount != null" >
+        #{warnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="limitAmount != null" >
+        #{limitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.branch.OrganizationBranchExample" resultType="java.lang.Integer" >
+    select count(*) from organization_branch
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_branch
+    <set >
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchName != null" >
+        branch_name = #{record.branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchCode != null" >
+        branch_code = #{record.branchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchProvinceId != null" >
+        branch_province_id = #{record.branchProvinceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchCityId != null" >
+        branch_city_id = #{record.branchCityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchAreaId != null" >
+        branch_area_id = #{record.branchAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchAddress != null" >
+        branch_address = #{record.branchAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examStartTime != null" >
+        exam_start_time = #{record.examStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examEndTime != null" >
+        exam_end_time = #{record.examEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.splitSuite != null" >
+        split_suite = #{record.splitSuite,jdbcType=INTEGER},
+      </if>
+      <if test="record.warnPeople != null" >
+        warn_people = #{record.warnPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.limitPeople != null" >
+        limit_people = #{record.limitPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.warnAmount != null" >
+        warn_amount = #{record.warnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.limitAmount != null" >
+        limit_amount = #{record.limitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.summary != null" >
+        summary = #{record.summary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.edittime != null" >
+        edittime = #{record.edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_branch
+    set branch_id = #{record.branchId,jdbcType=VARCHAR},
+      branch_name = #{record.branchName,jdbcType=VARCHAR},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      branch_code = #{record.branchCode,jdbcType=VARCHAR},
+      branch_province_id = #{record.branchProvinceId,jdbcType=INTEGER},
+      branch_city_id = #{record.branchCityId,jdbcType=INTEGER},
+      branch_area_id = #{record.branchAreaId,jdbcType=INTEGER},
+      branch_address = #{record.branchAddress,jdbcType=VARCHAR},
+      exam_start_time = #{record.examStartTime,jdbcType=VARCHAR},
+      exam_end_time = #{record.examEndTime,jdbcType=VARCHAR},
+      split_suite = #{record.splitSuite,jdbcType=INTEGER},
+      warn_people = #{record.warnPeople,jdbcType=INTEGER},
+      limit_people = #{record.limitPeople,jdbcType=INTEGER},
+      warn_amount = #{record.warnAmount,jdbcType=DECIMAL},
+      limit_amount = #{record.limitAmount,jdbcType=DECIMAL},
+      note = #{record.note,jdbcType=VARCHAR},
+      summary = #{record.summary,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      edittime = #{record.edittime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.branch.OrganizationBranch" >
+    update organization_branch
+    <set >
+      <if test="branchName != null" >
+        branch_name = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCode != null" >
+        branch_code = #{branchCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchProvinceId != null" >
+        branch_province_id = #{branchProvinceId,jdbcType=INTEGER},
+      </if>
+      <if test="branchCityId != null" >
+        branch_city_id = #{branchCityId,jdbcType=INTEGER},
+      </if>
+      <if test="branchAreaId != null" >
+        branch_area_id = #{branchAreaId,jdbcType=INTEGER},
+      </if>
+      <if test="branchAddress != null" >
+        branch_address = #{branchAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="examStartTime != null" >
+        exam_start_time = #{examStartTime,jdbcType=VARCHAR},
+      </if>
+      <if test="examEndTime != null" >
+        exam_end_time = #{examEndTime,jdbcType=VARCHAR},
+      </if>
+      <if test="splitSuite != null" >
+        split_suite = #{splitSuite,jdbcType=INTEGER},
+      </if>
+      <if test="warnPeople != null" >
+        warn_people = #{warnPeople,jdbcType=INTEGER},
+      </if>
+      <if test="limitPeople != null" >
+        limit_people = #{limitPeople,jdbcType=INTEGER},
+      </if>
+      <if test="warnAmount != null" >
+        warn_amount = #{warnAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="limitAmount != null" >
+        limit_amount = #{limitAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="edittime != null" >
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where branch_id = #{branchId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.branch.OrganizationBranch" >
+    update organization_branch
+    set branch_name = #{branchName,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      branch_code = #{branchCode,jdbcType=VARCHAR},
+      branch_province_id = #{branchProvinceId,jdbcType=INTEGER},
+      branch_city_id = #{branchCityId,jdbcType=INTEGER},
+      branch_area_id = #{branchAreaId,jdbcType=INTEGER},
+      branch_address = #{branchAddress,jdbcType=VARCHAR},
+      exam_start_time = #{examStartTime,jdbcType=VARCHAR},
+      exam_end_time = #{examEndTime,jdbcType=VARCHAR},
+      split_suite = #{splitSuite,jdbcType=INTEGER},
+      warn_people = #{warnPeople,jdbcType=INTEGER},
+      limit_people = #{limitPeople,jdbcType=INTEGER},
+      warn_amount = #{warnAmount,jdbcType=DECIMAL},
+      limit_amount = #{limitAmount,jdbcType=DECIMAL},
+      note = #{note,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      edittime = #{edittime,jdbcType=TIMESTAMP}
+    where branch_id = #{branchId,jdbcType=VARCHAR}
+  </update>
+</mapper>

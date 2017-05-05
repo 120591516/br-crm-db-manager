@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictDeptTypeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.DictDeptType" >
+    <id column="dict_dept_type_id" property="dictDeptTypeId" jdbcType="VARCHAR" />
+    <result column="dict_dept_type_name" property="dictDeptTypeName" jdbcType="VARCHAR" />
+    <result column="dict_dept_type_status" property="dictDeptTypeStatus" jdbcType="INTEGER" />
+    <result column="dict_dept_type_create_time" property="dictDeptTypeCreateTime" jdbcType="TIMESTAMP" />
+    <result column="dict_dept_type_edit_time" property="dictDeptTypeEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    dict_dept_type_id, dict_dept_type_name, dict_dept_type_status, dict_dept_type_create_time, 
+    dict_dept_type_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictDeptTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dict_dept_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from dict_dept_type
+    where dict_dept_type_id = #{dictDeptTypeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from dict_dept_type
+    where dict_dept_type_id = #{dictDeptTypeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictDeptTypeExample" >
+    delete from dict_dept_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.DictDeptType" >
+    insert into dict_dept_type (dict_dept_type_id, dict_dept_type_name, 
+      dict_dept_type_status, dict_dept_type_create_time, 
+      dict_dept_type_edit_time)
+    values (#{dictDeptTypeId,jdbcType=VARCHAR}, #{dictDeptTypeName,jdbcType=VARCHAR}, 
+      #{dictDeptTypeStatus,jdbcType=INTEGER}, #{dictDeptTypeCreateTime,jdbcType=TIMESTAMP}, 
+      #{dictDeptTypeEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.DictDeptType" useGeneratedKeys="true" keyProperty="dictDeptTypeId" >
+    insert into dict_dept_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictDeptTypeId != null" >
+        dict_dept_type_id,
+      </if>
+      <if test="dictDeptTypeName != null" >
+        dict_dept_type_name,
+      </if>
+      <if test="dictDeptTypeStatus != null" >
+        dict_dept_type_status,
+      </if>
+      <if test="dictDeptTypeCreateTime != null" >
+        dict_dept_type_create_time,
+      </if>
+      <if test="dictDeptTypeEditTime != null" >
+        dict_dept_type_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictDeptTypeId != null" >
+        #{dictDeptTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDeptTypeName != null" >
+        #{dictDeptTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDeptTypeStatus != null" >
+        #{dictDeptTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dictDeptTypeCreateTime != null" >
+        #{dictDeptTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictDeptTypeEditTime != null" >
+        #{dictDeptTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictDeptTypeExample" resultType="java.lang.Integer" >
+    select count(*) from dict_dept_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dict_dept_type
+    <set >
+      <if test="record.dictDeptTypeId != null" >
+        dict_dept_type_id = #{record.dictDeptTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictDeptTypeName != null" >
+        dict_dept_type_name = #{record.dictDeptTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictDeptTypeStatus != null" >
+        dict_dept_type_status = #{record.dictDeptTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.dictDeptTypeCreateTime != null" >
+        dict_dept_type_create_time = #{record.dictDeptTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.dictDeptTypeEditTime != null" >
+        dict_dept_type_edit_time = #{record.dictDeptTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dict_dept_type
+    set dict_dept_type_id = #{record.dictDeptTypeId,jdbcType=VARCHAR},
+      dict_dept_type_name = #{record.dictDeptTypeName,jdbcType=VARCHAR},
+      dict_dept_type_status = #{record.dictDeptTypeStatus,jdbcType=INTEGER},
+      dict_dept_type_create_time = #{record.dictDeptTypeCreateTime,jdbcType=TIMESTAMP},
+      dict_dept_type_edit_time = #{record.dictDeptTypeEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.DictDeptType" >
+    update dict_dept_type
+    <set >
+      <if test="dictDeptTypeName != null" >
+        dict_dept_type_name = #{dictDeptTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictDeptTypeStatus != null" >
+        dict_dept_type_status = #{dictDeptTypeStatus,jdbcType=INTEGER},
+      </if>
+      <if test="dictDeptTypeCreateTime != null" >
+        dict_dept_type_create_time = #{dictDeptTypeCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dictDeptTypeEditTime != null" >
+        dict_dept_type_edit_time = #{dictDeptTypeEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dict_dept_type_id = #{dictDeptTypeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.DictDeptType" >
+    update dict_dept_type
+    set dict_dept_type_name = #{dictDeptTypeName,jdbcType=VARCHAR},
+      dict_dept_type_status = #{dictDeptTypeStatus,jdbcType=INTEGER},
+      dict_dept_type_create_time = #{dictDeptTypeCreateTime,jdbcType=TIMESTAMP},
+      dict_dept_type_edit_time = #{dictDeptTypeEditTime,jdbcType=TIMESTAMP}
+    where dict_dept_type_id = #{dictDeptTypeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

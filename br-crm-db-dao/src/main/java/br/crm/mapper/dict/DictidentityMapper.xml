@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictidentityMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictidentity" >
+    <id column="ID_Identity" property="idIdentity" jdbcType="INTEGER" />
+    <result column="Identity_Name" property="identityName" jdbcType="VARCHAR" />
+    <result column="Identity_Code" property="identityCode" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="Priority_Indicator" property="priorityIndicator" jdbcType="BIT" />
+    <result column="Military_Indicator" property="militaryIndicator" jdbcType="BIT" />
+    <result column="IdentityCodeX" property="identitycodex" jdbcType="VARCHAR" />
+    <result column="ID_Identity_createtime" property="idIdentityCreatetime" jdbcType="TIMESTAMP" />
+    <result column="ID_Identity_updatetime" property="idIdentityUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="ID_Identity_Status" property="idIdentityStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_Identity, Identity_Name, Identity_Code, Input_Code, Priority_Indicator, Military_Indicator, 
+    IdentityCodeX, ID_Identity_createtime, ID_Identity_updatetime, ID_Identity_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictidentityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictIdentity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictIdentity
+    where ID_Identity = #{idIdentity,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from DictIdentity
+    where ID_Identity = #{idIdentity,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictidentityExample" >
+    delete from DictIdentity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictidentity" >
+    insert into DictIdentity (ID_Identity, Identity_Name, Identity_Code, 
+      Input_Code, Priority_Indicator, Military_Indicator, 
+      IdentityCodeX, ID_Identity_createtime, 
+      ID_Identity_updatetime, ID_Identity_Status
+      )
+    values (#{idIdentity,jdbcType=INTEGER}, #{identityName,jdbcType=VARCHAR}, #{identityCode,jdbcType=VARCHAR}, 
+      #{inputCode,jdbcType=VARCHAR}, #{priorityIndicator,jdbcType=BIT}, #{militaryIndicator,jdbcType=BIT}, 
+      #{identitycodex,jdbcType=VARCHAR}, #{idIdentityCreatetime,jdbcType=TIMESTAMP}, 
+      #{idIdentityUpdatetime,jdbcType=TIMESTAMP}, #{idIdentityStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictidentity" >
+    insert into DictIdentity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idIdentity != null" >
+        ID_Identity,
+      </if>
+      <if test="identityName != null" >
+        Identity_Name,
+      </if>
+      <if test="identityCode != null" >
+        Identity_Code,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="priorityIndicator != null" >
+        Priority_Indicator,
+      </if>
+      <if test="militaryIndicator != null" >
+        Military_Indicator,
+      </if>
+      <if test="identitycodex != null" >
+        IdentityCodeX,
+      </if>
+      <if test="idIdentityCreatetime != null" >
+        ID_Identity_createtime,
+      </if>
+      <if test="idIdentityUpdatetime != null" >
+        ID_Identity_updatetime,
+      </if>
+      <if test="idIdentityStatus != null" >
+        ID_Identity_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idIdentity != null" >
+        #{idIdentity,jdbcType=INTEGER},
+      </if>
+      <if test="identityName != null" >
+        #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCode != null" >
+        #{identityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priorityIndicator != null" >
+        #{priorityIndicator,jdbcType=BIT},
+      </if>
+      <if test="militaryIndicator != null" >
+        #{militaryIndicator,jdbcType=BIT},
+      </if>
+      <if test="identitycodex != null" >
+        #{identitycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="idIdentityCreatetime != null" >
+        #{idIdentityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idIdentityUpdatetime != null" >
+        #{idIdentityUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idIdentityStatus != null" >
+        #{idIdentityStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictidentityExample" resultType="java.lang.Integer" >
+    select count(*) from DictIdentity
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictIdentity
+    <set >
+      <if test="record.idIdentity != null" >
+        ID_Identity = #{record.idIdentity,jdbcType=INTEGER},
+      </if>
+      <if test="record.identityName != null" >
+        Identity_Name = #{record.identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identityCode != null" >
+        Identity_Code = #{record.identityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priorityIndicator != null" >
+        Priority_Indicator = #{record.priorityIndicator,jdbcType=BIT},
+      </if>
+      <if test="record.militaryIndicator != null" >
+        Military_Indicator = #{record.militaryIndicator,jdbcType=BIT},
+      </if>
+      <if test="record.identitycodex != null" >
+        IdentityCodeX = #{record.identitycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idIdentityCreatetime != null" >
+        ID_Identity_createtime = #{record.idIdentityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.idIdentityUpdatetime != null" >
+        ID_Identity_updatetime = #{record.idIdentityUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.idIdentityStatus != null" >
+        ID_Identity_Status = #{record.idIdentityStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictIdentity
+    set ID_Identity = #{record.idIdentity,jdbcType=INTEGER},
+      Identity_Name = #{record.identityName,jdbcType=VARCHAR},
+      Identity_Code = #{record.identityCode,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      Priority_Indicator = #{record.priorityIndicator,jdbcType=BIT},
+      Military_Indicator = #{record.militaryIndicator,jdbcType=BIT},
+      IdentityCodeX = #{record.identitycodex,jdbcType=VARCHAR},
+      ID_Identity_createtime = #{record.idIdentityCreatetime,jdbcType=TIMESTAMP},
+      ID_Identity_updatetime = #{record.idIdentityUpdatetime,jdbcType=TIMESTAMP},
+      ID_Identity_Status = #{record.idIdentityStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictidentity" >
+    update DictIdentity
+    <set >
+      <if test="identityName != null" >
+        Identity_Name = #{identityName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCode != null" >
+        Identity_Code = #{identityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="priorityIndicator != null" >
+        Priority_Indicator = #{priorityIndicator,jdbcType=BIT},
+      </if>
+      <if test="militaryIndicator != null" >
+        Military_Indicator = #{militaryIndicator,jdbcType=BIT},
+      </if>
+      <if test="identitycodex != null" >
+        IdentityCodeX = #{identitycodex,jdbcType=VARCHAR},
+      </if>
+      <if test="idIdentityCreatetime != null" >
+        ID_Identity_createtime = #{idIdentityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idIdentityUpdatetime != null" >
+        ID_Identity_updatetime = #{idIdentityUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idIdentityStatus != null" >
+        ID_Identity_Status = #{idIdentityStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_Identity = #{idIdentity,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictidentity" >
+    update DictIdentity
+    set Identity_Name = #{identityName,jdbcType=VARCHAR},
+      Identity_Code = #{identityCode,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      Priority_Indicator = #{priorityIndicator,jdbcType=BIT},
+      Military_Indicator = #{militaryIndicator,jdbcType=BIT},
+      IdentityCodeX = #{identitycodex,jdbcType=VARCHAR},
+      ID_Identity_createtime = #{idIdentityCreatetime,jdbcType=TIMESTAMP},
+      ID_Identity_updatetime = #{idIdentityUpdatetime,jdbcType=TIMESTAMP},
+      ID_Identity_Status = #{idIdentityStatus,jdbcType=INTEGER}
+    where ID_Identity = #{idIdentity,jdbcType=INTEGER}
+  </update>
+</mapper>

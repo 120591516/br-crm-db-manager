@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.examitem.self.OrgExamItemSelfMapper">
+	<resultMap id="BaseResultMap" type="br.crm.vo.examitemvalue.OrgExamItemVo">
+		<id column="exam_item_id" property="examItemId" jdbcType="VARCHAR" />
+	    <result column="exam_item_name" property="examItemName" jdbcType="VARCHAR" />
+	    <result column="exam_item_name_abr" property="examItemNameAbr" jdbcType="VARCHAR" />
+	    <result column="exam_item_name_prn" property="examItemNamePrn" jdbcType="VARCHAR" />
+	    <result column="exam_item_name_eng" property="examItemNameEng" jdbcType="VARCHAR" />
+	    <result column="exam_item_name_eng_abr" property="examItemNameEngAbr" jdbcType="VARCHAR" />
+	    <result column="exam_item_code" property="examItemCode" jdbcType="VARCHAR" />
+	    <result column="exam_item_type_id" property="examItemTypeId" jdbcType="VARCHAR" />
+	    <result column="exam_item_value_type" property="examItemValueType" jdbcType="VARCHAR" />
+	    <result column="exam_item_value_unit" property="examItemValueUnit" jdbcType="VARCHAR" />
+	    <result column="exam_item_conclusion_level" property="examItemConclusionLevel" jdbcType="INTEGER" />
+	    <result column="exam_item_conclusion_title" property="examItemConclusionTitle" jdbcType="VARCHAR" />
+	    <result column="exam_item_increment" property="examItemIncrement" jdbcType="REAL" />
+	    <result column="exam_item_num_precision" property="examItemNumPrecision" jdbcType="INTEGER" />
+	    <result column="f_use_app_max_min" property="fUseAppMaxMin" jdbcType="INTEGER" />
+	    <result column="f_include_min" property="fIncludeMin" jdbcType="INTEGER" />
+	    <result column="f_include_max" property="fIncludeMax" jdbcType="INTEGER" />
+	    <result column="f_male" property="fMale" jdbcType="INTEGER" />
+	    <result column="male_value_def" property="maleValueDef" jdbcType="VARCHAR" />
+	    <result column="male_value_min" property="maleValueMin" jdbcType="REAL" />
+	    <result column="male_value_max" property="maleValueMax" jdbcType="REAL" />
+	    <result column="male_value_sever_up" property="maleValueSeverUp" jdbcType="REAL" />
+	    <result column="male_value_server_down" property="maleValueServerDown" jdbcType="REAL" />
+	    <result column="f_female" property="fFemale" jdbcType="INTEGER" />
+	    <result column="female_value_def" property="femaleValueDef" jdbcType="VARCHAR" />
+	    <result column="female_value_min" property="femaleValueMin" jdbcType="REAL" />
+	    <result column="female_value_max" property="femaleValueMax" jdbcType="REAL" />
+	    <result column="female_value_server_up" property="femaleValueServerUp" jdbcType="REAL" />
+	    <result column="female_value_server_down" property="femaleValueServerDown" jdbcType="REAL" />
+	    <result column="exam_item_note" property="examItemNote" jdbcType="VARCHAR" />
+	    <result column="exam_item_disp_order" property="examItemDispOrder" jdbcType="INTEGER" />
+	    <result column="exam_item_status" property="examItemStatus" jdbcType="INTEGER" />
+	    <result column="exam_item_create_time" property="examItemCreateTime" jdbcType="TIMESTAMP" />
+	    <result column="exam_item_edit_time" property="examItemEditTime" jdbcType="TIMESTAMP" />
+		<result column="exam_item_type_name" property="examItemTypeName" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		DISTINCT
+		oei.exam_item_id,
+		oei.exam_item_name,
+		oei.exam_item_name_abr,
+		oei.exam_item_name_prn,
+		oei.exam_item_name_eng,
+		oei.exam_item_name_eng_abr,
+		oei.exam_item_code,
+		oei.exam_item_type_id,
+		oei.exam_item_value_type,
+		oei.exam_item_value_unit,
+		oei.exam_item_conclusion_level,
+		oei.exam_item_conclusion_title,
+		oei.exam_item_increment,
+		oei.exam_item_num_precision,
+		oei.f_use_app_max_min,
+		oei.f_include_min,
+		oei.f_include_max,
+		oei.f_male,
+		oei.male_value_def,
+		oei.male_value_min,
+		oei.male_value_max,
+		oei.male_value_sever_up,
+		oei.male_value_server_down,
+		oei.f_female,
+		oei.female_value_def,
+		oei.female_value_min,
+		oei.female_value_max,
+		oei.female_value_server_up,
+		oei.female_value_server_down,
+		oei.exam_item_note,
+		oei.exam_item_disp_order,
+		oei.exam_item_status,
+		oei.exam_item_create_time,
+		oei.exam_item_edit_time,
+		oeit.exam_item_type_name
+		FROM organization_exam_item oei LEFT JOIN
+		organization_exam_item_type oeit ON
+		oei.exam_item_type_id=oeit.exam_item_type_id
+		where oei.exam_item_id =
+		#{examItemId}
+	</select>
+
+	<resultMap id="BaseResultMap1" type="br.crm.vo.examitem.OrgExamItemDetailVo">
+		<id column="exam_item_id" property="examItemId" jdbcType="VARCHAR" />
+    <result column="exam_item_name" property="examItemName" jdbcType="VARCHAR" />
+    <result column="exam_item_name_abr" property="examItemNameAbr" jdbcType="VARCHAR" />
+    <result column="exam_item_name_prn" property="examItemNamePrn" jdbcType="VARCHAR" />
+    <result column="exam_item_name_eng" property="examItemNameEng" jdbcType="VARCHAR" />
+    <result column="exam_item_name_eng_abr" property="examItemNameEngAbr" jdbcType="VARCHAR" />
+    <result column="exam_item_code" property="examItemCode" jdbcType="VARCHAR" />
+    <result column="exam_item_type_id" property="examItemTypeId" jdbcType="VARCHAR" />
+    <result column="exam_item_value_type" property="examItemValueType" jdbcType="VARCHAR" />
+    <result column="exam_item_value_unit" property="examItemValueUnit" jdbcType="VARCHAR" />
+    <result column="exam_item_conclusion_level" property="examItemConclusionLevel" jdbcType="INTEGER" />
+    <result column="exam_item_conclusion_title" property="examItemConclusionTitle" jdbcType="VARCHAR" />
+    <result column="exam_item_increment" property="examItemIncrement" jdbcType="REAL" />
+    <result column="exam_item_num_precision" property="examItemNumPrecision" jdbcType="INTEGER" />
+    <result column="f_use_app_max_min" property="fUseAppMaxMin" jdbcType="INTEGER" />
+    <result column="f_include_min" property="fIncludeMin" jdbcType="INTEGER" />
+    <result column="f_include_max" property="fIncludeMax" jdbcType="INTEGER" />
+    <result column="f_male" property="fMale" jdbcType="INTEGER" />
+    <result column="male_value_def" property="maleValueDef" jdbcType="VARCHAR" />
+    <result column="male_value_min" property="maleValueMin" jdbcType="REAL" />
+    <result column="male_value_max" property="maleValueMax" jdbcType="REAL" />
+    <result column="male_value_sever_up" property="maleValueSeverUp" jdbcType="REAL" />
+    <result column="male_value_server_down" property="maleValueServerDown" jdbcType="REAL" />
+    <result column="f_female" property="fFemale" jdbcType="INTEGER" />
+    <result column="female_value_def" property="femaleValueDef" jdbcType="VARCHAR" />
+    <result column="female_value_min" property="femaleValueMin" jdbcType="REAL" />
+    <result column="female_value_max" property="femaleValueMax" jdbcType="REAL" />
+    <result column="female_value_server_up" property="femaleValueServerUp" jdbcType="REAL" />
+    <result column="female_value_server_down" property="femaleValueServerDown" jdbcType="REAL" />
+    <result column="exam_item_note" property="examItemNote" jdbcType="VARCHAR" />
+    <result column="exam_item_disp_order" property="examItemDispOrder" jdbcType="INTEGER" />
+    <result column="exam_item_status" property="examItemStatus" jdbcType="INTEGER" />
+    <result column="exam_item_create_time" property="examItemCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_item_edit_time" property="examItemEditTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<!-- 	查询所有的体检项 -->
+	<select id="getAllExamItem" resultMap="BaseResultMap1">
+		SELECT DISTINCT
+			exam_item_id,
+            exam_item_name,
+            exam_item_name_abr,
+            exam_item_name_prn,
+            exam_item_name_eng,
+            exam_item_name_eng_abr,
+            exam_item_code,
+            exam_item_type_id,
+            exam_item_value_type,
+            exam_item_value_unit,
+            exam_item_conclusion_level,
+            exam_item_conclusion_title,
+            exam_item_increment,
+            exam_item_num_precision,
+            f_use_app_max_min,
+            f_include_min,
+            f_include_max,
+            f_male,
+            male_value_def,
+            male_value_min,
+            male_value_max,
+            male_value_sever_up,
+            male_value_server_down,
+            f_female,
+            female_value_def,
+            female_value_min,
+            female_value_max,
+            female_value_server_up,
+            female_value_server_down,
+            exam_item_note,
+            exam_item_disp_order,
+            exam_item_status,
+            exam_item_create_time,
+            exam_item_edit_time
+		FROM
+		organization_exam_item
+		WHERE exam_item_status=0
+	</select>
+	<!-- 	根据收费项id查询体检项 -->
+	<select id="getAllExamItemByFeeItemId" resultMap="BaseResultMap1"
+		parameterType="java.lang.String">
+SELECT DISTINCT
+	oei.exam_item_id,
+	oei.exam_item_name,
+	oei.exam_item_name_abr,
+	oei.exam_item_name_prn,
+	oei.exam_item_name_eng,
+	oei.exam_item_name_eng_abr,
+	oei.exam_item_code,
+	oei.exam_item_type_id,
+	oei.exam_item_value_type,
+	oei.exam_item_value_unit,
+	oei.exam_item_conclusion_level,
+	oei.exam_item_conclusion_title,
+	oei.exam_item_increment,
+	oei.exam_item_num_precision,
+	oei.f_use_app_max_min,
+	oei.f_include_min,
+	oei.f_include_max,
+	oei.f_male,
+	oei.male_value_def,
+	oei.male_value_min,
+	oei.male_value_max,
+	oei.male_value_sever_up,
+	oei.male_value_server_down,
+	oei.f_female,
+	oei.female_value_def,
+	oei.female_value_min,
+	oei.female_value_max,
+	oei.female_value_server_up,
+	oei.female_value_server_down,
+	oei.exam_item_expression,
+	oei.exam_item_note,
+	oei.exam_item_disp_order,
+	oei.exam_item_status,
+	oei.exam_item_create_time,
+	oei.exam_item_edit_time
+FROM
+	organization_exam_fee_item_detail AS oefid
+LEFT JOIN organization_exam_item AS oei ON oefid.exam_item_id = oei.exam_item_id
+WHERE
+	oefid.status = 0
+AND oefid.exam_item_id = #{id}
+	</select>
+	<resultMap id="BaseResultMap2" type="br.crm.vo.examitem.OrganizationExamItemVo" >
+    <id column="exam_item_id" property="examItemId" jdbcType="VARCHAR" />
+    <result column="exam_item_name" property="examItemName" jdbcType="VARCHAR" />
+    <result column="exam_fee_item_detail_id" property="examFeeItemDetailId" jdbcType="VARCHAR" />
+    <result column="exam_item_name_abr" property="examItemNameAbr" jdbcType="VARCHAR" />
+    <result column="exam_item_name_prn" property="examItemNamePrn" jdbcType="VARCHAR" />
+    <result column="exam_item_name_eng" property="examItemNameEng" jdbcType="VARCHAR" />
+    <result column="exam_item_name_eng_abr" property="examItemNameEngAbr" jdbcType="VARCHAR" />
+    <result column="exam_item_code" property="examItemCode" jdbcType="VARCHAR" />
+    <result column="exam_item_type_id" property="examItemTypeId" jdbcType="VARCHAR" />
+    <result column="exam_item_type_name" property="examItemTypeName" jdbcType="VARCHAR" />
+    <result column="exam_item_value_type" property="examItemValueType" jdbcType="VARCHAR" />
+    <result column="exam_item_value_unit" property="examItemValueUnit" jdbcType="VARCHAR" />
+    <result column="exam_item_conclusion_level" property="examItemConclusionLevel" jdbcType="INTEGER" />
+    <result column="exam_item_conclusion_title" property="examItemConclusionTitle" jdbcType="VARCHAR" />
+    <result column="exam_item_increment" property="examItemIncrement" jdbcType="REAL" />
+    <result column="exam_item_num_precision" property="examItemNumPrecision" jdbcType="INTEGER" />
+    <result column="f_use_app_max_min" property="fUseAppMaxMin" jdbcType="INTEGER" />
+    <result column="f_include_min" property="fIncludeMin" jdbcType="INTEGER" />
+    <result column="f_include_max" property="fIncludeMax" jdbcType="INTEGER" />
+    <result column="f_male" property="fMale" jdbcType="INTEGER" />
+    <result column="male_value_def" property="maleValueDef" jdbcType="VARCHAR" />
+    <result column="male_value_min" property="maleValueMin" jdbcType="REAL" />
+    <result column="male_value_max" property="maleValueMax" jdbcType="REAL" />
+    <result column="male_value_sever_up" property="maleValueSeverUp" jdbcType="REAL" />
+    <result column="male_value_server_down" property="maleValueServerDown" jdbcType="REAL" />
+    <result column="f_female" property="fFemale" jdbcType="INTEGER" />
+    <result column="female_value_def" property="femaleValueDef" jdbcType="VARCHAR" />
+    <result column="female_value_min" property="femaleValueMin" jdbcType="REAL" />
+    <result column="female_value_max" property="femaleValueMax" jdbcType="REAL" />
+    <result column="female_value_server_up" property="femaleValueServerUp" jdbcType="REAL" />
+    <result column="female_value_server_down" property="femaleValueServerDown" jdbcType="REAL" />
+    <result column="exam_item_note" property="examItemNote" jdbcType="VARCHAR" />
+    <result column="exam_item_disp_order" property="examItemDispOrder" jdbcType="INTEGER" />
+    <result column="exam_item_status" property="examItemStatus" jdbcType="INTEGER" />
+    <result column="exam_item_create_time" property="examItemCreateTime" jdbcType="TIMESTAMP" />
+    <result column="exam_item_edit_time" property="examItemEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>	
+	<select id="getExamItemByFeeItemId" resultMap="BaseResultMap2"
+		parameterType="java.lang.String">
+			SELECT DISTINCT
+			oei.exam_item_id,
+			oefi.exam_fee_item_detail_id,
+            oei.exam_item_name,
+            oei.exam_item_name_abr,
+            oei.exam_item_name_prn,
+            oei.exam_item_name_eng,
+            oei.exam_item_name_eng_abr,
+            oei.exam_item_code,
+            oei.exam_item_type_id,
+	    	oeit.exam_item_type_name,
+            oei.exam_item_value_type,
+            oei.exam_item_value_unit,
+            oei.exam_item_conclusion_level,
+            oei.exam_item_conclusion_title,
+            oei.exam_item_increment,
+            oei.exam_item_num_precision,
+            oei.f_use_app_max_min,
+            oei.f_include_min,
+            oei.f_include_max,
+            oei.f_male,
+            oei.male_value_def,
+            oei.male_value_min,
+            oei.male_value_max,
+            oei.male_value_sever_up,
+            oei.male_value_server_down,
+            oei.f_female,
+            oei.female_value_def,
+            oei.female_value_min,
+            oei.female_value_max,
+            oei.female_value_server_up,
+            oei.female_value_server_down,
+            oei.exam_item_note,
+            oei.exam_item_disp_order,
+            oei.exam_item_status,
+            oei.exam_item_create_time,
+            oei.exam_item_edit_time
+		FROM
+		organization_exam_fee_item_detail oefi LEFT JOIN
+		organization_exam_item oei ON oefi.exam_item_id=oei.exam_item_id
+		LEFT JOIN organization_exam_item_type oeit ON oei.exam_item_type_id=oeit.exam_item_type_id
+		WHERE  oefi.status=0 AND 
+		oefi.exam_fee_item_id=#{id}
+	</select>
+	<select id="selectByLike" resultMap="BaseResultMap" parameterType="br.crm.vo.examitem.OrgExamItemQu" >
+			SELECT DISTINCT
+				oei.exam_item_id,
+				oei.exam_item_name,
+				oei.exam_item_name_abr,
+				oei.exam_item_name_prn,
+				oei.exam_item_name_eng,
+				oei.exam_item_name_eng_abr,
+				oei.exam_item_code,
+				oei.exam_item_type_id,
+				oei.exam_item_value_type,
+				oei.exam_item_value_unit,
+				oei.exam_item_conclusion_level,
+				oei.exam_item_conclusion_title,
+				oei.exam_item_increment,
+				oei.exam_item_num_precision,
+				oei.f_use_app_max_min,
+				oei.f_include_min,
+				oei.f_include_max,
+				oei.f_male,
+				oei.male_value_def,
+				oei.male_value_min,
+				oei.male_value_max,
+				oei.male_value_sever_up,
+				oei.male_value_server_down,
+				oei.f_female,
+				oei.female_value_def,
+				oei.female_value_min,
+				oei.female_value_max,
+				oei.female_value_server_up,
+				oei.female_value_server_down,
+				oei.exam_item_note,
+				oei.exam_item_disp_order,
+				oei.exam_item_status,
+				oei.exam_item_create_time,
+				oei.exam_item_edit_time,
+				oeit.exam_item_type_name
+			FROM
+				organization_exam_item AS oei
+			LEFT JOIN organization_exam_item_type AS oeit ON oei.exam_item_type_id = oeit.exam_item_type_id
+			WHERE
+				oei.exam_item_status = 0
+		<if test="orgExamItemQu.examItemName!=null">
+			and oei.exam_item_name like concat(concat('%', #{orgExamItemQu.examItemName}), '%')
+		</if>
+		<if test="orgExamItemQu.examItemNameEng!=null">
+			and oei.exam_item_name_eng like concat(concat('%', #{orgExamItemQu.examItemNameEng}), '%')
+		</if>
+		<if test="orgExamItemQu.examItemCode!=null">
+			and oei.exam_item_code like concat(concat('%', #{orgExamItemQu.examItemCode}), '%')
+		</if>
+		<if test="orgExamItemQu.examItemTypeId!=null">
+			and oei.exam_item_type_id = #{orgExamItemQu.examItemTypeId}
+		</if>
+		<if test="orgExamItemQu.sex!=null">
+			<if test="orgExamItemQu.sex==0">
+				and oei.f_male = 0
+			</if>
+			<if test="orgExamItemQu.sex==1">
+				and oei.f_female = 0
+			</if>
+			<if test="orgExamItemQu.sex==2">
+				and oei.f_male = 0 and oei.f_female = 0
+			</if>
+		</if>
+		<if test="orgExamItemQu.userId!=null">and  exam_item_id not in(select organization_exam_item_id from organization_exam_item_user where organization_user_id=#{orgExamItemQu.userId})</if>
+  </select>	
+  
+  <!-- 体检项检查医生 -->
+  <resultMap type="br.crm.vo.permission.OrgUserVo" id="usetMap">
+  	<id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_login_name" property="userLoginName" jdbcType="VARCHAR" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_branch_id" property="orgBranchId" jdbcType="VARCHAR" />
+    <result column="org_branch_dept_id" property="orgBranchDeptId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
+    <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
+    <result column="user_idcard" property="userIdcard" jdbcType="VARCHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="INTEGER" />
+    <result column="user_create_time" property="userCreateTime" jdbcType="TIMESTAMP" />
+    <result column="user_edit_time" property="userEditTime" jdbcType="TIMESTAMP" />
+    <result column="user_edit_id" property="userEditId" jdbcType="BIGINT" />
+    <result column="user_edit_name" property="userEditName" jdbcType="VARCHAR" />
+    <result column="user_login_time" property="userLoginTime" jdbcType="TIMESTAMP" />
+    <result column="user_last_time" property="userLastTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <select id="getUserVoByItemId" resultMap="usetMap">
+  		SELECT
+		f.*
+		FROM
+	organization_exam_item b
+	LEFT JOIN organization_exam_fee_item_detail c ON b.exam_item_id = c.exam_item_id
+	LEFT JOIN organization_exam_fee_item d ON c.exam_fee_item_id = d.id
+	LEFT JOIN organization_dept e ON d.department_id = e.org_dept_id
+	LEFT JOIN organization_user f ON e.org_dept_id = f.org_branch_dept_id
+	WHERE
+	b.exam_item_id =#{id}
+  
+  </select>
+</mapper>

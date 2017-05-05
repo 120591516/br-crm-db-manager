@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.dict.DictreceipttypeMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.dict.Dictreceipttype" >
+    <id column="ID_ReceiptType" property="idReceipttype" jdbcType="BIGINT" />
+    <result column="ReceiptType_Name" property="receipttypeName" jdbcType="VARCHAR" />
+    <result column="ReceiptType_Code" property="receipttypeCode" jdbcType="VARCHAR" />
+    <result column="ReceiptType_Output" property="receipttypeOutput" jdbcType="VARCHAR" />
+    <result column="Input_Code" property="inputCode" jdbcType="VARCHAR" />
+    <result column="ReceiptTypeCodeX" property="receipttypecodex" jdbcType="VARCHAR" />
+    <result column="Note" property="note" jdbcType="VARCHAR" />
+    <result column="F_BuiltIn" property="fBuiltin" jdbcType="INTEGER" />
+    <result column="ReceiptType_createtime" property="receipttypeCreatetime" jdbcType="TIMESTAMP" />
+    <result column="ReceiptType_updatetime" property="receipttypeUpdatetime" jdbcType="TIMESTAMP" />
+    <result column="ReceiptType_Status" property="receipttypeStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID_ReceiptType, ReceiptType_Name, ReceiptType_Code, ReceiptType_Output, Input_Code, 
+    ReceiptTypeCodeX, Note, F_BuiltIn, ReceiptType_createtime, ReceiptType_updatetime, 
+    ReceiptType_Status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.dict.DictreceipttypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from DictReceiptType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from DictReceiptType
+    where ID_ReceiptType = #{idReceipttype,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from DictReceiptType
+    where ID_ReceiptType = #{idReceipttype,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.dict.DictreceipttypeExample" >
+    delete from DictReceiptType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.dict.Dictreceipttype" useGeneratedKeys="true" keyProperty="idReceipttype"  >
+    insert into DictReceiptType (ID_ReceiptType, ReceiptType_Name, ReceiptType_Code, 
+      ReceiptType_Output, Input_Code, ReceiptTypeCodeX, 
+      Note, F_BuiltIn, ReceiptType_createtime, 
+      ReceiptType_updatetime, ReceiptType_Status
+      )
+    values (#{idReceipttype,jdbcType=BIGINT}, #{receipttypeName,jdbcType=VARCHAR}, #{receipttypeCode,jdbcType=VARCHAR}, 
+      #{receipttypeOutput,jdbcType=VARCHAR}, #{inputCode,jdbcType=VARCHAR}, #{receipttypecodex,jdbcType=VARCHAR}, 
+      #{note,jdbcType=VARCHAR}, #{fBuiltin,jdbcType=INTEGER}, #{receipttypeCreatetime,jdbcType=TIMESTAMP}, 
+      #{receipttypeUpdatetime,jdbcType=TIMESTAMP}, #{receipttypeStatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.dict.Dictreceipttype" useGeneratedKeys="true" keyProperty="idReceipttype" >
+    insert into DictReceiptType
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="idReceipttype != null" >
+        ID_ReceiptType,
+      </if>
+      <if test="receipttypeName != null" >
+        ReceiptType_Name,
+      </if>
+      <if test="receipttypeCode != null" >
+        ReceiptType_Code,
+      </if>
+      <if test="receipttypeOutput != null" >
+        ReceiptType_Output,
+      </if>
+      <if test="inputCode != null" >
+        Input_Code,
+      </if>
+      <if test="receipttypecodex != null" >
+        ReceiptTypeCodeX,
+      </if>
+      <if test="note != null" >
+        Note,
+      </if>
+      <if test="fBuiltin != null" >
+        F_BuiltIn,
+      </if>
+      <if test="receipttypeCreatetime != null" >
+        ReceiptType_createtime,
+      </if>
+      <if test="receipttypeUpdatetime != null" >
+        ReceiptType_updatetime,
+      </if>
+      <if test="receipttypeStatus != null" >
+        ReceiptType_Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="idReceipttype != null" >
+        #{idReceipttype,jdbcType=BIGINT},
+      </if>
+      <if test="receipttypeName != null" >
+        #{receipttypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="receipttypeCode != null" >
+        #{receipttypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receipttypeOutput != null" >
+        #{receipttypeOutput,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receipttypecodex != null" >
+        #{receipttypecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuiltin != null" >
+        #{fBuiltin,jdbcType=INTEGER},
+      </if>
+      <if test="receipttypeCreatetime != null" >
+        #{receipttypeCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receipttypeUpdatetime != null" >
+        #{receipttypeUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receipttypeStatus != null" >
+        #{receipttypeStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.dict.DictreceipttypeExample" resultType="java.lang.Integer" >
+    select count(*) from DictReceiptType
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update DictReceiptType
+    <set >
+      <if test="record.idReceipttype != null" >
+        ID_ReceiptType = #{record.idReceipttype,jdbcType=BIGINT},
+      </if>
+      <if test="record.receipttypeName != null" >
+        ReceiptType_Name = #{record.receipttypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receipttypeCode != null" >
+        ReceiptType_Code = #{record.receipttypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receipttypeOutput != null" >
+        ReceiptType_Output = #{record.receipttypeOutput,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inputCode != null" >
+        Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receipttypecodex != null" >
+        ReceiptTypeCodeX = #{record.receipttypecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.note != null" >
+        Note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBuiltin != null" >
+        F_BuiltIn = #{record.fBuiltin,jdbcType=INTEGER},
+      </if>
+      <if test="record.receipttypeCreatetime != null" >
+        ReceiptType_createtime = #{record.receipttypeCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receipttypeUpdatetime != null" >
+        ReceiptType_updatetime = #{record.receipttypeUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receipttypeStatus != null" >
+        ReceiptType_Status = #{record.receipttypeStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update DictReceiptType
+    set ID_ReceiptType = #{record.idReceipttype,jdbcType=BIGINT},
+      ReceiptType_Name = #{record.receipttypeName,jdbcType=VARCHAR},
+      ReceiptType_Code = #{record.receipttypeCode,jdbcType=VARCHAR},
+      ReceiptType_Output = #{record.receipttypeOutput,jdbcType=VARCHAR},
+      Input_Code = #{record.inputCode,jdbcType=VARCHAR},
+      ReceiptTypeCodeX = #{record.receipttypecodex,jdbcType=VARCHAR},
+      Note = #{record.note,jdbcType=VARCHAR},
+      F_BuiltIn = #{record.fBuiltin,jdbcType=INTEGER},
+      ReceiptType_createtime = #{record.receipttypeCreatetime,jdbcType=TIMESTAMP},
+      ReceiptType_updatetime = #{record.receipttypeUpdatetime,jdbcType=TIMESTAMP},
+      ReceiptType_Status = #{record.receipttypeStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.dict.Dictreceipttype" >
+    update DictReceiptType
+    <set >
+      <if test="receipttypeName != null" >
+        ReceiptType_Name = #{receipttypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="receipttypeCode != null" >
+        ReceiptType_Code = #{receipttypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receipttypeOutput != null" >
+        ReceiptType_Output = #{receipttypeOutput,jdbcType=VARCHAR},
+      </if>
+      <if test="inputCode != null" >
+        Input_Code = #{inputCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receipttypecodex != null" >
+        ReceiptTypeCodeX = #{receipttypecodex,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        Note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuiltin != null" >
+        F_BuiltIn = #{fBuiltin,jdbcType=INTEGER},
+      </if>
+      <if test="receipttypeCreatetime != null" >
+        ReceiptType_createtime = #{receipttypeCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receipttypeUpdatetime != null" >
+        ReceiptType_updatetime = #{receipttypeUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receipttypeStatus != null" >
+        ReceiptType_Status = #{receipttypeStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID_ReceiptType = #{idReceipttype,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.dict.Dictreceipttype" >
+    update DictReceiptType
+    set ReceiptType_Name = #{receipttypeName,jdbcType=VARCHAR},
+      ReceiptType_Code = #{receipttypeCode,jdbcType=VARCHAR},
+      ReceiptType_Output = #{receipttypeOutput,jdbcType=VARCHAR},
+      Input_Code = #{inputCode,jdbcType=VARCHAR},
+      ReceiptTypeCodeX = #{receipttypecodex,jdbcType=VARCHAR},
+      Note = #{note,jdbcType=VARCHAR},
+      F_BuiltIn = #{fBuiltin,jdbcType=INTEGER},
+      ReceiptType_createtime = #{receipttypeCreatetime,jdbcType=TIMESTAMP},
+      ReceiptType_updatetime = #{receipttypeUpdatetime,jdbcType=TIMESTAMP},
+      ReceiptType_Status = #{receipttypeStatus,jdbcType=INTEGER}
+    where ID_ReceiptType = #{idReceipttype,jdbcType=BIGINT}
+  </update>
+</mapper>

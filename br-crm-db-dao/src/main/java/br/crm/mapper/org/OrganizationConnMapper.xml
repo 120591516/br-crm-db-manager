@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.org.OrganizationConnMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.org.OrganizationConn" >
+    <id column="org_conn_id" property="orgConnId" jdbcType="BIGINT" />
+    <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+    <result column="org_conn_name" property="orgConnName" jdbcType="VARCHAR" />
+    <result column="org_conn_post" property="orgConnPost" jdbcType="VARCHAR" />
+    <result column="org_conn_phone" property="orgConnPhone" jdbcType="VARCHAR" />
+    <result column="org_conn_email" property="orgConnEmail" jdbcType="VARCHAR" />
+    <result column="org_conn_call" property="orgConnCall" jdbcType="VARCHAR" />
+    <result column="org_conn_status" property="orgConnStatus" jdbcType="INTEGER" />
+    <result column="org_conn_create_time" property="orgConnCreateTime" jdbcType="TIMESTAMP" />
+    <result column="org_conn_edit_time" property="orgConnEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    org_conn_id, org_id, org_conn_name, org_conn_post, org_conn_phone, org_conn_email, 
+    org_conn_call, org_conn_status, org_conn_create_time, org_conn_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.org.OrganizationConnExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_conn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_conn
+    where org_conn_id = #{orgConnId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_conn
+    where org_conn_id = #{orgConnId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.org.OrganizationConnExample" >
+    delete from organization_conn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.org.OrganizationConn" >
+    insert into organization_conn (org_conn_id, org_id, org_conn_name, 
+      org_conn_post, org_conn_phone, org_conn_email, 
+      org_conn_call, org_conn_status, org_conn_create_time, 
+      org_conn_edit_time)
+    values (#{orgConnId,jdbcType=BIGINT}, #{orgId,jdbcType=VARCHAR}, #{orgConnName,jdbcType=VARCHAR}, 
+      #{orgConnPost,jdbcType=VARCHAR}, #{orgConnPhone,jdbcType=VARCHAR}, #{orgConnEmail,jdbcType=VARCHAR}, 
+      #{orgConnCall,jdbcType=VARCHAR}, #{orgConnStatus,jdbcType=INTEGER}, #{orgConnCreateTime,jdbcType=TIMESTAMP}, 
+      #{orgConnEditTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.org.OrganizationConn" useGeneratedKeys="true" keyProperty="orgConnId" >
+    insert into organization_conn
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgConnId != null" >
+        org_conn_id,
+      </if>
+      <if test="orgId != null" >
+        org_id,
+      </if>
+      <if test="orgConnName != null" >
+        org_conn_name,
+      </if>
+      <if test="orgConnPost != null" >
+        org_conn_post,
+      </if>
+      <if test="orgConnPhone != null" >
+        org_conn_phone,
+      </if>
+      <if test="orgConnEmail != null" >
+        org_conn_email,
+      </if>
+      <if test="orgConnCall != null" >
+        org_conn_call,
+      </if>
+      <if test="orgConnStatus != null" >
+        org_conn_status,
+      </if>
+      <if test="orgConnCreateTime != null" >
+        org_conn_create_time,
+      </if>
+      <if test="orgConnEditTime != null" >
+        org_conn_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgConnId != null" >
+        #{orgConnId,jdbcType=BIGINT},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnName != null" >
+        #{orgConnName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnPost != null" >
+        #{orgConnPost,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnPhone != null" >
+        #{orgConnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnEmail != null" >
+        #{orgConnEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnCall != null" >
+        #{orgConnCall,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnStatus != null" >
+        #{orgConnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgConnCreateTime != null" >
+        #{orgConnCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgConnEditTime != null" >
+        #{orgConnEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.org.OrganizationConnExample" resultType="java.lang.Integer" >
+    select count(*) from organization_conn
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_conn
+    <set >
+      <if test="record.orgConnId != null" >
+        org_conn_id = #{record.orgConnId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgId != null" >
+        org_id = #{record.orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgConnName != null" >
+        org_conn_name = #{record.orgConnName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgConnPost != null" >
+        org_conn_post = #{record.orgConnPost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgConnPhone != null" >
+        org_conn_phone = #{record.orgConnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgConnEmail != null" >
+        org_conn_email = #{record.orgConnEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgConnCall != null" >
+        org_conn_call = #{record.orgConnCall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgConnStatus != null" >
+        org_conn_status = #{record.orgConnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.orgConnCreateTime != null" >
+        org_conn_create_time = #{record.orgConnCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orgConnEditTime != null" >
+        org_conn_edit_time = #{record.orgConnEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_conn
+    set org_conn_id = #{record.orgConnId,jdbcType=BIGINT},
+      org_id = #{record.orgId,jdbcType=VARCHAR},
+      org_conn_name = #{record.orgConnName,jdbcType=VARCHAR},
+      org_conn_post = #{record.orgConnPost,jdbcType=VARCHAR},
+      org_conn_phone = #{record.orgConnPhone,jdbcType=VARCHAR},
+      org_conn_email = #{record.orgConnEmail,jdbcType=VARCHAR},
+      org_conn_call = #{record.orgConnCall,jdbcType=VARCHAR},
+      org_conn_status = #{record.orgConnStatus,jdbcType=INTEGER},
+      org_conn_create_time = #{record.orgConnCreateTime,jdbcType=TIMESTAMP},
+      org_conn_edit_time = #{record.orgConnEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.org.OrganizationConn" >
+    update organization_conn
+    <set >
+      <if test="orgId != null" >
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnName != null" >
+        org_conn_name = #{orgConnName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnPost != null" >
+        org_conn_post = #{orgConnPost,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnPhone != null" >
+        org_conn_phone = #{orgConnPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnEmail != null" >
+        org_conn_email = #{orgConnEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnCall != null" >
+        org_conn_call = #{orgConnCall,jdbcType=VARCHAR},
+      </if>
+      <if test="orgConnStatus != null" >
+        org_conn_status = #{orgConnStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orgConnCreateTime != null" >
+        org_conn_create_time = #{orgConnCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgConnEditTime != null" >
+        org_conn_edit_time = #{orgConnEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where org_conn_id = #{orgConnId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.org.OrganizationConn" >
+    update organization_conn
+    set org_id = #{orgId,jdbcType=VARCHAR},
+      org_conn_name = #{orgConnName,jdbcType=VARCHAR},
+      org_conn_post = #{orgConnPost,jdbcType=VARCHAR},
+      org_conn_phone = #{orgConnPhone,jdbcType=VARCHAR},
+      org_conn_email = #{orgConnEmail,jdbcType=VARCHAR},
+      org_conn_call = #{orgConnCall,jdbcType=VARCHAR},
+      org_conn_status = #{orgConnStatus,jdbcType=INTEGER},
+      org_conn_create_time = #{orgConnCreateTime,jdbcType=TIMESTAMP},
+      org_conn_edit_time = #{orgConnEditTime,jdbcType=TIMESTAMP}
+    where org_conn_id = #{orgConnId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="br.crm.mapper.permission.OrganizationUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="br.crm.pojo.permission.OrganizationUserRole" >
+    <id column="user_role_id" property="userRoleId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="BIGINT" />
+    <result column="user_role_status" property="userRoleStatus" jdbcType="INTEGER" />
+    <result column="user_role_create_time" property="userRoleCreateTime" jdbcType="TIMESTAMP" />
+    <result column="user_role_edit_time" property="userRoleEditTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_role_id, user_id, role_id, user_role_status, user_role_create_time, user_role_edit_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="br.crm.pojo.permission.OrganizationUserRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from organization_user_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization_user_role
+    where user_role_id = #{userRoleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from organization_user_role
+    where user_role_id = #{userRoleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="br.crm.pojo.permission.OrganizationUserRoleExample" >
+    delete from organization_user_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="br.crm.pojo.permission.OrganizationUserRole" >
+    insert into organization_user_role (user_role_id, user_id, role_id, 
+      user_role_status, user_role_create_time, user_role_edit_time
+      )
+    values (#{userRoleId,jdbcType=BIGINT}, #{userId,jdbcType=VARCHAR}, #{roleId,jdbcType=BIGINT}, 
+      #{userRoleStatus,jdbcType=INTEGER}, #{userRoleCreateTime,jdbcType=TIMESTAMP}, #{userRoleEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="br.crm.pojo.permission.OrganizationUserRole" >
+    insert into organization_user_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userRoleId != null" >
+        user_role_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="userRoleStatus != null" >
+        user_role_status,
+      </if>
+      <if test="userRoleCreateTime != null" >
+        user_role_create_time,
+      </if>
+      <if test="userRoleEditTime != null" >
+        user_role_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userRoleId != null" >
+        #{userRoleId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="userRoleStatus != null" >
+        #{userRoleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userRoleCreateTime != null" >
+        #{userRoleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRoleEditTime != null" >
+        #{userRoleEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="br.crm.pojo.permission.OrganizationUserRoleExample" resultType="java.lang.Integer" >
+    select count(*) from organization_user_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update organization_user_role
+    <set >
+      <if test="record.userRoleId != null" >
+        user_role_id = #{record.userRoleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userRoleStatus != null" >
+        user_role_status = #{record.userRoleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.userRoleCreateTime != null" >
+        user_role_create_time = #{record.userRoleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userRoleEditTime != null" >
+        user_role_edit_time = #{record.userRoleEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update organization_user_role
+    set user_role_id = #{record.userRoleId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      role_id = #{record.roleId,jdbcType=BIGINT},
+      user_role_status = #{record.userRoleStatus,jdbcType=INTEGER},
+      user_role_create_time = #{record.userRoleCreateTime,jdbcType=TIMESTAMP},
+      user_role_edit_time = #{record.userRoleEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="br.crm.pojo.permission.OrganizationUserRole" >
+    update organization_user_role
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="userRoleStatus != null" >
+        user_role_status = #{userRoleStatus,jdbcType=INTEGER},
+      </if>
+      <if test="userRoleCreateTime != null" >
+        user_role_create_time = #{userRoleCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userRoleEditTime != null" >
+        user_role_edit_time = #{userRoleEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_role_id = #{userRoleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="br.crm.pojo.permission.OrganizationUserRole" >
+    update organization_user_role
+    set user_id = #{userId,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=BIGINT},
+      user_role_status = #{userRoleStatus,jdbcType=INTEGER},
+      user_role_create_time = #{userRoleCreateTime,jdbcType=TIMESTAMP},
+      user_role_edit_time = #{userRoleEditTime,jdbcType=TIMESTAMP}
+    where user_role_id = #{userRoleId,jdbcType=BIGINT}
+  </update>
+</mapper>
